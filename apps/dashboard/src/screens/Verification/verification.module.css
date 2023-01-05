@@ -1,0 +1,48 @@
+.container {
+  height: 95vh;
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  background-color: #fff;
+  min-width: 288px;
+  width: 500px;
+  height: 400px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form img {
+  margin: 1rem auto;
+}
+
+.info_verification {
+  text-align: center;
+}
+
+.info_verification p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+}
+
+.info_verification span {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form_code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.form_code input {
+  text-align: center;
+}

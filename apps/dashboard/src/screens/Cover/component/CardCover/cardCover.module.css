@@ -1,0 +1,64 @@
+.container_cover {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 2rem;
+  min-height: 14rem;
+}
+
+.image_cover {
+  height: 14rem;
+  overflow: hidden;
+  width: 20rem;
+}
+
+.image_cover img {
+  height: 14rem;
+  width: 100%;
+  border-radius: 0.2rem;
+}
+
+.info_cover {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info_cover p {
+  font-size: 1.2rem;
+  text-align: justify;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.data_cover {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data_cover h2 {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.2rem;
+}
+
+.data_cover span {
+  font-size: 1.2rem;
+}
+
+.data_cover h5 {
+  color: var(--main-color);
+}
+
+.icon_cover {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon_cover button {
+  background-color: transparent;
+}
+
+.icon_cover button i {
+  color: rgba(0, 0, 0, 0.5);
+}

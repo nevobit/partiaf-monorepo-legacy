@@ -1,0 +1,160 @@
+.board_screen {
+    margin-left: 14rem;
+    padding: 2rem 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-areas:
+      ". . ."
+      ". . ."
+      ". list list"
+      "tasks list list"
+      "tasks . .";
+      overflow-y: scroll;
+      overflow-x: scroll;
+    /*
+    
+   
+      */
+  }
+  
+  .board_tasks {
+    grid-area: tasks;
+  }
+  
+  .board_card {
+    background-color: #fff;
+    width: 99%;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    position: relative;
+    z-index: -1;
+  }
+  
+  .board_card h3 {
+    color: var(--legacy-blue);
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  
+  .board_card h4 {
+    color: rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  
+  .board_card h2 {
+    font-size: 3rem;
+    color: var(--legacy-blue);
+    margin-top: 2rem;
+  }
+  
+  .board_flex {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .board_flex_column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .board_flex_column div {
+    height: 100%;
+  }
+  
+  .list {
+    grid-area: list;
+  }
+  
+  .board_banks {
+    text-align: center;
+  }
+  
+  .board_banks i {
+    font-size: 4rem;
+    color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .board_banks .title-center {
+    color: var(--main-color);
+    font-size: 1.6rem;
+  }
+  
+  .board_banks p {
+    font-size: 1.4rem;
+    max-width: 300px;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .board_bank_report ul {
+    margin-top: 12rem;
+  }
+  
+  .board_bank_report ul li {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .left {
+    position: absolute;
+    right: 2rem;
+  }
+  
+  .hei {
+    height: 200px;
+  }
+  
+  .label_month {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .costs_list {
+    list-style: none;
+  }
+  
+  .costs_list li {
+    margin-bottom: 2rem;
+  }
+  .costs_list li div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .costs_list .bar {
+    display: block;
+    width: 100%;
+    height: 1.3rem;
+    border-radius: 1rem;
+    background-color: #ccc;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .costs_list .bar div {
+    background-color: var(--main-color);
+    height: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    .board-screen {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+  
+    .board-flex {
+      flex-direction: column;
+    }
+  
+    .board-flex .board-card {
+      height: 150px;
+    }
+  }
+  

@@ -1,0 +1,46 @@
+.container {
+  height: 95vh;
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  background-color: #fff;
+  min-width: 288px;
+  width: 550px;
+  height: 460px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form img {
+  margin: 1rem auto;
+}
+
+.info_welcome {
+  text-align: center;
+}
+
+.info_welcome h1 {
+  font-size: 4.1rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
+}
+
+.info_welcome img {
+  border-radius: 10rem;
+  width: 10rem;
+  height: 10rem;
+  margin-bottom: 1.6rem;
+  object-fit: cover;
+}
+
+.info_welcome p {
+  margin-bottom: 2rem;
+}
+
+.info_welcome span {
+  font-size: 1.2rem;
+  font-weight: 200;
+}

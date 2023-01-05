@@ -1,0 +1,115 @@
+.screen {
+  margin-left: 17rem;
+  width: calc(100vw - 20rem);
+}
+
+.settings {
+  max-height: calc(100vh - 5rem);
+  position: relative;
+  margin: 0 auto;
+  overflow-y: scroll;
+  display: block;
+  scrollbar-color: var(--black) #ccd;
+  scrollbar-width: 20px;
+  overflow-y: auto;
+}
+
+.settings::-webkit-scrollbar {
+  width: 12px;
+  display: block;
+}
+.settings::-webkit-scrollbar-track {
+  display: block;
+  background-color: #ccd;
+  border-radius: 8px;
+}
+.settings::-webkit-scrollbar-thumb {
+  display: block;
+  border: 3px solid #ccd;
+  border-radius: 8px;
+  margin: 8px;
+  background-color: var(--black);
+}
+
+.header_setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.header_setting button {
+  background-color: var(--black);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.4rem;
+}
+
+.setting_grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.setting_grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  display: inline-block;
+  height: auto;
+}
+
+.card > div select {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  height: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  margin-top: 0;
+  outline: none;
+}
+
+.card_title {
+  font-weight: 600;
+  color: #333;
+}
+
+.colums_card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.select_disk {
+  display: flex;
+  flex-direction: column;
+}
+
+.width_input {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.no_image_text {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  width: 100%;
+}
+
+.image_input{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

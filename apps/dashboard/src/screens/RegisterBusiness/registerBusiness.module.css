@@ -1,0 +1,41 @@
+.container {
+  height: 95vh;
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  background-color: #fff;
+  min-width: 288px;
+  width: 600px;
+  height: 600px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form img {
+  margin: 1rem auto;
+}
+
+.info_registerBusiness {
+  padding-top: 2rem;
+}
+
+.info_registerBusiness p {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.container_form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.password_reg_business {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
