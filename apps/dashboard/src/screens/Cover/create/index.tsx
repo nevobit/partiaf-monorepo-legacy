@@ -5,7 +5,7 @@ import styles from "./createcover.module.css";
 const CreateCoverModal = (props: any) => {
   const { openModal, setOpenModal } = props;
   return (
-    <div className={openModal ? styles.open_modal : styles.closeModal}>
+    <div className={openModal ? styles.open_modal : styles.close_modal}>
       <div className={styles.container_form}>
         <div className={styles.form}>
           <div className={styles.header_cover_form}>

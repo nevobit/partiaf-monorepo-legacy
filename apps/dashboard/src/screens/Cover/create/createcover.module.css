@@ -10,6 +10,10 @@
   justify-content: center;
 }
 
+.close_modal{
+    display: none;
+}
+
 .container_form {
   display: flex;
   justify-content: center;
