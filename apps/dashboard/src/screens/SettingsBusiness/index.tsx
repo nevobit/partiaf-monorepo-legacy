@@ -99,7 +99,7 @@ const SettingsBusiness = () => {
             <div className={styles.image_input}>
               <h4 className={styles.card_title}>Subir imagen</h4>
               <ImageInput />
-              <p className={styles.no_image_text}>No hay imagenes, sube una!</p>
+              
             </div>
           </div>
         </div>

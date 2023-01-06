@@ -55,10 +55,27 @@
   gap: 1rem;
 }
 
-.icon_cover button {
+.card_btn_status_active{
+  width: 8rem;
+  background: #86C8BC;
+  padding: .6rem;
+  border-radius: .4rem;
+}
+
+.card_btn_status_inactive{
+  width: 8rem;
+  background: #9C254D;
+  padding: .6rem;
+  border-radius: .4rem;
+  color: #fff;
+}
+
+.btn_icon_card_cover {
   background-color: transparent;
 }
 
 .icon_cover button i {
   color: rgba(0, 0, 0, 0.5);
+  font-size: 1.8rem;
 }
+

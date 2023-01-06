@@ -61,9 +61,10 @@ const Settings = () => {
             </div>
           </div>
           <div>
-            <div className={`${styles.card} ${styles.card_logo}`}>
+          <div className={styles.image_input}>
               <h4 className={styles.card_title}>Subir imagen</h4>
               <ImageInput />
+              
             </div>
           </div>
         </div>
