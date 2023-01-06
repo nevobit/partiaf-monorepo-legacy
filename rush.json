@@ -330,8 +330,23 @@
       "reviewCategory": "apps"
     },
     {
+      "packageName": "api",
+      "projectFolder": "apps/api",
+      "reviewCategory": "apps"
+    },
+    {
       "packageName": "@partiaf/types",
       "projectFolder": "packages/types",
+      "reviewCategory": "packages"
+    },
+    {
+      "packageName": "@partiaf/business-logic",
+      "projectFolder": "packages/business-logic",
+      "reviewCategory": "packages"
+    },
+    {
+      "packageName": "@partiaf/constant-definitions",
+      "projectFolder": "packages/constant-definitions",
       "reviewCategory": "packages"
     }
     // {

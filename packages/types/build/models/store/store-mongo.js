@@ -1,33 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StoreSchemaMongo = void 0;
-const tslib_1 = require("tslib");
-const mongoose_1 = tslib_1.__importStar(require("mongoose"));
+const mongoose_1 = require("mongoose");
 exports.StoreSchemaMongo = new mongoose_1.Schema({
+    uuid: { type: String, unique: true },
     name: { type: String },
     description: { type: String },
     type: { type: String },
     nit: { type: String, unique: true },
     email: { type: String, unique: true },
-    password: { type: String },
-    phone: { type: Number },
-    location: [{
-            address: [{
-                    street: String,
-                    city: String,
-                    state: String,
-                    zipcode: String
-                }],
-            geo: [
-                {
-                    caract: String,
-                    longitud: String,
-                    latitud: String
-                }
-            ]
-        }],
+    password: { type: String, min: 5 },
+    phone: { type: Number, unique: true },
+    location: {
+        address: {
+            street: String,
+            city: String,
+            state: String,
+            zipcode: String
+        },
+        geo: {
+            caract: String,
+            longitud: String,
+            latitud: String
+        }
+    },
     limit: { type: Number },
-    photos: [{ type: String }],
+    photos: { type: [String] },
     employes: { type: String },
     status: { type: String, default: "inactive" },
     last_login: { type: Date, default: Date.now() },
@@ -39,6 +37,6 @@ exports.StoreSchemaMongo = new mongoose_1.Schema({
     youtube: { type: String },
     rating: { type: Number },
     employe_code: { type: Number },
-    admin: { type: mongoose_1.default.Types.ObjectId, ref: 'admin' }
+    admin: { type: String }
 });
 //# sourceMappingURL=store-mongo.js.map

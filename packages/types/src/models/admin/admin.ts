@@ -4,9 +4,9 @@ export interface Admin{
     lastname:string;
     email:string;
     identification_type:string;
-    identification:string;
-    age: string;
-    phone:string;
+    identification:number;
+    age: number;
+    phone:number;
     birthdate:string;
     gender:string;
     address:string;

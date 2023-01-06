@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import {User} from '@partiaf/types'
+import {Admin} from '@partiaf/types'
 
 export {}
 

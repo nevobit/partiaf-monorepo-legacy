@@ -1,33 +1,30 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema } from "mongoose";
 import { Store } from "./store";
 
-
 export const StoreSchemaMongo = new Schema<Store>({
+    uuid: {type: String, unique: true},
     name: {type: String},
     description: {type: String},
     type: {type: String},
     nit: {type: String,  unique: true},
     email: {type:String, unique: true},
-    password: {type:String},
-    phone: {type:Number},
-    location: [{
-        address: [{
+    password: {type:String, min:5},
+    phone: {type:Number, unique: true},
+    location: {
+        address: {
             street: String,
             city: String,
             state: String,
             zipcode: String
-        }],
-        geo:[
-            {
+        },
+        geo: {
                 caract:String,
                 longitud: String,
                 latitud: String
-
             }
-        ]
-    }],
+    },
     limit: {type:Number},
-    photos: [{type: String}],
+    photos: {type: [String]},
     employes: {type: String},
     status: {type: String, default: "inactive"},
     last_login: {type: Date, default: Date.now()},
@@ -39,5 +36,5 @@ export const StoreSchemaMongo = new Schema<Store>({
     youtube: {type: String},
     rating: {type: Number},
     employe_code: {type: Number},
-    admin: {type: mongoose.Types.ObjectId, ref: 'admin'}
+    admin: {type: String}
 })

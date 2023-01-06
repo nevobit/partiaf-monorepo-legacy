@@ -1,0 +1,21 @@
+{
+  "name": "@partiaf/constant-definitions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.build.json"
+  },
+  "keywords": [],
+  "author": "Nestor Mosquera",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
+  }
+}

@@ -6,7 +6,7 @@ type Address = {
 }
 
 type Geo = {
-    type: string,
+    caract: string,
     latitud: string,
     longitud: string
 }
@@ -16,38 +16,29 @@ interface Location {
     geo: Geo;
 }
 
-
-export interface Store{
+export interface Store {
+    uuid: string;
     name: string;
     description: string;
     type: string;
-    nit?: string;
+    nit: string | "";
     email: string;
     password: string;
     phone: number;
     location?: Location;
     limit: number;
-    photos: Array<String>;
+    photos: String[];
     status: string;
     verification_code: number;
-    last_login: any;
-    balance?: number;
-    website?: string;
-    facebook?: string;
-    instagram?: string;
-    tiktok?: string;
-    youtube?: string;
-    employes?: string;
-    rating: number;
+    last_login: Date;
+    balance: number | 0;
+    website: string | "";
+    facebook: string | "";
+    instagram: string | "";
+    tiktok: string | "";
+    youtube: string | "";
+    employes: string | 0;
+    rating: number | 0;
     employe_code: number;
-    admin: any;
-    
-    // staff: Staff[];
-    // bookings: Booking[];
-    // tables: Table[];
-    // comments: Comment[];
-    // menus: Menu[];
-    // buys: Buy[];
-    // covers: Cover[];
-
+    admin: string;
 }
