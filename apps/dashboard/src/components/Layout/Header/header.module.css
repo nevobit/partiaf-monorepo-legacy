@@ -2,7 +2,7 @@ header {
   position: relative;
   left: 16.2rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  width: calc(100% - 16.2rem);
+  width: calc(100% - 16.6rem);
   height: 5rem;
   padding: 1rem 2rem;
   display: flex;
@@ -145,6 +145,7 @@ nav {
   width: 200px;
   text-align: right;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .user_image {
@@ -152,4 +153,41 @@ nav {
   border-radius: 50rem;
   height: 4rem !important;
   width: 4rem !important;
+}
+
+.open_menu {
+  width: 20rem;
+  height: 16rem;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  top: 6rem;
+  bottom: 0;
+  border-radius: 0.4rem;
+  z-index: 9;
+}
+
+.menu_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu_content > button {
+  display: flex;
+  align-items: flex-start;
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  gap: 1rem;
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: 1rem;
+}
+
+.close_menu {
+  display: none;
 }

@@ -1,6 +1,7 @@
 .screen {
   margin-left: 17rem;
-  width: calc(100vw - 20rem);
+ 
+ 
 }
 
 .settings {
@@ -12,22 +13,25 @@
   scrollbar-color: var(--black) #ccd;
   scrollbar-width: 20px;
   overflow-y: auto;
+  padding-bottom: 4rem;
+  min-width: 100%;
 }
 
 .settings::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
   display: block;
+  
 }
 .settings::-webkit-scrollbar-track {
   display: block;
   background-color: #ccd;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .settings::-webkit-scrollbar-thumb {
   display: block;
   border: 3px solid #ccd;
-  border-radius: 8px;
-  margin: 8px;
+  border-radius: 4px;
+  margin: 4px;
   background-color: var(--black);
 }
 
@@ -81,12 +85,16 @@
 .card_title {
   font-weight: 600;
   color: #333;
+  margin-bottom: 1rem;
 }
 
 .colums_card {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  background-color: #fff;
+  padding: 0 2rem 2rem 2rem;
+  margin-top: 2rem;
 }
 
 .select_disk {
@@ -95,21 +103,19 @@
 }
 
 .width_input {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  margin-bottom: -3rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background-color: #fff;
+  padding: 0 2rem 2rem 2rem;
 }
 
-.no_image_text {
-  text-align: center;
-  color: #333;
-  font-weight: 600;
-  width: 100%;
-}
 
-.image_input{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+
+.image_input {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

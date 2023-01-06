@@ -1,35 +1,16 @@
 .screen {
   margin-left: 17rem;
-  width: calc(100vw - 20rem);
+  height: calc(100vh - 10rem);
+  overflow: hidden;
 }
 
 .settings {
-  max-height: calc(100vh - 5rem);
   position: relative;
   margin: 0 auto;
-  overflow-y: scroll;
   display: block;
-  scrollbar-color: var(--black) #ccd;
-  scrollbar-width: 20px;
-  overflow-y: auto;
 }
 
-.settings::-webkit-scrollbar {
-  width: 12px;
-  display: block;
-}
-.settings::-webkit-scrollbar-track {
-  display: block;
-  background-color: #ccd;
-  border-radius: 8px;
-}
-.settings::-webkit-scrollbar-thumb {
-  display: block;
-  border: 3px solid #ccd;
-  border-radius: 8px;
-  margin: 8px;
-  background-color: var(--black);
-}
+
 
 .header_setting {
   display: flex;
@@ -75,9 +56,6 @@
   border: none;
   height: 3rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
   margin-top: 0;
   outline: none;
 }
@@ -85,12 +63,17 @@
 .card_title {
   font-weight: 600;
   color: #333;
+  margin-bottom: 2rem;
 }
 
 .colums_card {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  padding: 0 2rem 2rem 2rem;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  margin-top: 2rem;
 }
 
 .card_columns {
@@ -121,3 +104,5 @@
   width: 350px;
   object-fit: cover;
 }
+
+

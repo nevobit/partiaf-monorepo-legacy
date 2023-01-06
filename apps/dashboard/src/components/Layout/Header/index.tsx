@@ -5,6 +5,8 @@ import perfil from "../../../assets/LS.jpg";
 
 const Header = () => {
   const [drop, setDrop] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <header>
       <nav>
@@ -15,21 +17,23 @@ const Header = () => {
             </div>
 
             <div className={styles.header_user_info}>
-              <h3 className={styles.user_name}>Usuario Partiaf</h3>
+              <h3
+                className={styles.user_name}
+                onClick={() => setOpenMenu(!openMenu)}
+              >
+                Usuario Partiaf
+              </h3>
               <img className={styles.user_image} src={perfil} alt="" />
             </div>
           </div>
 
-          <div className={styles.option}>
-            <Link className={styles.btn_menu} to="/settings">
-              Mi perfil
-            </Link>
-            <Link to="/settings-business" className={styles.btn_menu}>
-              Configurar negocio
-            </Link>
-
-            <button className={styles.btn_menu}>Cambiar de negocio</button>
-            <button className={styles.btn_menu}>Cerrar Sesion</button>
+          <div className={openMenu ? styles.open_menu : styles.close_menu}>
+            <div className={styles.menu_content}>
+              <Link to="/settings">Mi perfil</Link>
+              <Link to="/settings-business">Configurar negocio</Link>
+              <button>Cambiar de negocio</button>
+              <button>Cerrar Sesion</button>
+            </div>
           </div>
         </div>
       </nav>
