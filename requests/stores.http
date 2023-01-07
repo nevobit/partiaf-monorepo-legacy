@@ -1,0 +1,56 @@
+POST http://localhost:5000/api/v3/stores HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Jennilao Club",
+    "description": "La mejor discoteda de medellin para bailar y gozar",
+    "type": "Discoteca",
+    "nit": 1152472328,
+    "email": "yunsde26@gmail.com",
+    "password": "contra123",
+    "phone": 3226589914,
+    "location": {
+        "address": {
+            "street": "Carrera 81",
+            "city": "Medellin",
+            "state": "Antioquia",
+            "zipcode": "06005"
+        },
+        "geo": {
+            "caract": "medellin",
+            "longitud": "6.24591",
+            "latitud": "-75.58895"
+        }
+    },
+    "limit": 400,
+    "employes": "50",
+    "admin": "ff575e3c-64d3-43e5-9086-f5f81a2db8ea",
+    "status": "active",
+    "gender": "M",
+    "birthdate": "2015-08-22",
+    "address": "Carrera 84 #45C-97"
+}
+
+###
+
+GET http://localhost:5000/api/v3/stores/ff575e3c-64d3-43e5-9086-f5f81a2db8ea HTTP/1.1
+content-type: application/json
+
+###
+
+POST http://localhost:5000/api/v3/admin-activate HTTP/1.1
+content-type: application/json
+
+{
+    "code": "198479"
+}
+
+###
+
+POST http://localhost:5000/api/v3/store-signin HTTP/1.1
+content-type: application/json
+
+{
+    "uuid": "07d223c3-a4ec-4cdb-9bdc-c4c8f0acbc48",
+    "password": "gotvrf"
+}

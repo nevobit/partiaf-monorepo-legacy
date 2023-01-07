@@ -13,11 +13,12 @@ exports.AdminSchemaMongo = new mongoose_1.Schema({
     phone: { type: Number, unique: true },
     birthdate: { type: String },
     gender: { type: String },
+    status: { type: Boolean, default: false },
     address: { type: String },
     password: { type: String, min: 5 },
-    photo: { type: String },
-    verification_code: { type: Number },
-    last_login: { type: Date }
+    photo: { type: String, default: "" },
+    verification_code: { type: Number, default: 0 },
+    last_login: { type: Date, default: Date.now() }
 }, {
     versionKey: false,
     timestamps: true

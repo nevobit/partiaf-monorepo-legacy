@@ -14,11 +14,8 @@ const signupAdmins = async (data) => {
     const uuid = (0, uuid_1.v4)();
     const password = await bcrypt_1.default.hashSync(data.password || "", 10);
     const code = await (0, email_service_1.sendEmail)(data.email);
-<<<<<<< HEAD
-=======
     console.log("CODIGO ====> ", code);
->>>>>>> b07058b4b9098763529241d613d1277467d67f3e
-    const admin = await new model({ ...data, password, code, uuid });
+    const admin = await new model({ ...data, password, verification_code: code, uuid });
     if (!admin)
         return new Error('101');
     const token = await jsonwebtoken_1.default.sign({ uuid: admin.uuid }, JWT_SECRET_KEY, { expiresIn: '12h' });

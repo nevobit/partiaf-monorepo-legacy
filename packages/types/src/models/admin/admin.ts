@@ -8,10 +8,12 @@ export interface Admin{
     age: number;
     phone:number;
     birthdate:string;
+    status?: boolean;
     gender:string;
     address:string;
     password:string;
     photo:string;
     verification_code: number;
-    last_login: Date;
+    last_login?: Date;
+    notifications?: boolean;
 }

@@ -21,7 +21,7 @@ export const signupAdmins = async (data: AdminPartial): Promise<AdminSignup | Er
     const code = await sendEmail(data.email);
     console.log("CODIGO ====> ", code)
 
-    const admin = await new model({ ...data, password, code, uuid});
+    const admin = await new model({ ...data, password, verification_code: code, uuid});
 
     if (!admin) return new Error('101');
     const token = await jwt.sign({uuid: admin.uuid}, JWT_SECRET_KEY, {expiresIn: '12h'} )

@@ -1,0 +1,36 @@
+POST http://localhost:5000/api/v3/admin-signup HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Nestor",
+    "lastname": "Mosquera",
+    "identification_type": "CC",
+    "identification": 1152472328,
+    "email": "yunsde26@gmail.com",
+    "age": 24,
+    "password": "contra123",
+    "phone": 3226589914,
+    "gender": "M",
+    "birthdate": "2015-08-22",
+    "address": "Carrera 84 #45C-97"
+}
+
+
+###
+
+POST http://localhost:5000/api/v3/admin-signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "yunsde26@gmail.com",
+    "password": "contra123"
+}
+
+###
+
+POST http://localhost:5000/api/v3/admin-activate HTTP/1.1
+content-type: application/json
+
+{
+    "code": "198479"
+}

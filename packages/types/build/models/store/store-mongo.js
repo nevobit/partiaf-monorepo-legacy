@@ -38,5 +38,8 @@ exports.StoreSchemaMongo = new mongoose_1.Schema({
     rating: { type: Number },
     employe_code: { type: Number },
     admin: { type: String }
+}, {
+    versionKey: false,
+    timestamps: true
 });
 //# sourceMappingURL=store-mongo.js.map

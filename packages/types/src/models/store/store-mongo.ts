@@ -37,4 +37,7 @@ export const StoreSchemaMongo = new Schema<Store>({
     rating: {type: Number},
     employe_code: {type: Number},
     admin: {type: String}
+}, {
+    versionKey: false,
+    timestamps: true
 })

@@ -10,13 +10,14 @@ interface AdminSignup extends AdminPartial {
 
 export const activeEmail = async (code: string): Promise<AdminSignup | Error> => {
     const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
-    const admin = await model.findOne({ verification_code: code }) as Admin;
+    const admin = await model.findOne({ verification_code: code });
     
     if (!admin) { return new Error("106")}
 
-    // admin.
-    const token = jwt.sign({uuid: admin.uuid}, process.env.JWT_SIGNIN_KEY || "", {});
+    admin.status = true;
+    admin.verification_code = 0;
+    await admin.save();
+    const token = jwt.sign({uuid: admin.uuid}, process.env.JWT_SECRET_KEY || "", {});
 
-    return {token, ...admin};
-    
+    return {token, ...admin._doc};
 }
