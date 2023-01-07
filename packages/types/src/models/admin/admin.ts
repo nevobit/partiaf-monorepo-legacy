@@ -12,4 +12,6 @@ export interface Admin{
     address:string;
     password:string;
     photo:string;
+    verification_code: number;
+    last_login: Date;
 }

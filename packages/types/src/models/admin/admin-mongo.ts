@@ -1,7 +1,6 @@
 import { Schema } from "mongoose";
 import { Admin } from "./admin";
 
-
 export const AdminSchemaMongo = new Schema<Admin>({
     uuid: {type: String, unique:true},
     name: {type: String},
@@ -16,7 +15,8 @@ export const AdminSchemaMongo = new Schema<Admin>({
     address: {type: String},
     password: {type: String, min: 5},
     photo: {type: String},
-
+    verification_code: {type: Number},
+    last_login: {type: Date}
 }, {
     versionKey: false,
     timestamps: true

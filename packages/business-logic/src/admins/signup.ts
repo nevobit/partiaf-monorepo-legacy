@@ -3,6 +3,7 @@ import { Admin, AdminSchemaMongo } from "@partiaf/types";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import {v4 as UUID} from 'uuid';
+import { sendEmail } from "../helpers/email-service";
 
 type AdminPartial = Partial<Admin>;
 
@@ -16,13 +17,15 @@ export const signupAdmins = async (data: AdminPartial): Promise<AdminSignup | Er
     
     const uuid = UUID();
     const password = await bcrypt.hashSync(data.password || "", 10);
-    const admin = await new model({ ...data, password, uuid});
+
+    const code = await sendEmail(data.email);
+
+    const admin = await new model({ ...data, password, code, uuid});
 
     if (!admin) return new Error('101');
-
-    await admin.save();
-
     const token = await jwt.sign({uuid: admin.uuid}, JWT_SECRET_KEY, {expiresIn: '12h'} )
 
+    await admin.save();
+    
     return {token, ...admin._doc};
 }
