@@ -20,7 +20,7 @@ export const EmptyadminState: Admin = {
   last_login: new Date(),
 };
 
-export const adminKey = "admin";
+export const AdminKey = "admin";
 
 const initialState = {
   admin: localStorage.getItem("admin")
@@ -53,18 +53,7 @@ export const signup = createAsyncThunk(
   async (admin: Admin, thunkAPI) => {
     try {
       return await signupAdmin(
-        admin.name,
-        admin.lastname,
-        admin.email,
-        admin.identification_type,
-        admin.identification,
-        admin.age,
-        admin.phone,
-        admin.birthdate,
-        admin.gender,
-        admin.address,
-        admin.password,
-        admin.photo
+        admin
       );
     } catch (err: any) {
       const message = err;
@@ -82,10 +71,10 @@ export const adminsSlice: any = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      (state.loading = false),
-        (state.success = false),
-        (state.error = ""),
-        (state.admin = EmptyadminState);
+        state.loading = false,
+        state.success = false,
+        state.error = "",
+        state.admin = EmptyadminState;
     },
   },
 

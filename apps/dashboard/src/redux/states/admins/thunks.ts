@@ -1,36 +1,13 @@
 import { PARTIAF_API } from "@/api";
+import { Admin } from "@partiaf/types";
 
-export const signupAdmin = async (
-  name: string,
-  lastname: string,
-  email: string,
-  identification_type: string,
-  identification: number,
-  age: number,
-  phone: number,
-  birthdate: string,
-  gender: string,
-  address: string,
-  password: string,
-  photo: string
-) => {
-  const { data } = await PARTIAF_API.post("/admin-signup", {
-    name,
-    lastname,
-    email,
-    identification_type,
-    identification,
-    age,
-    phone,
-    birthdate,
-    gender,
-    address,
-    password,
-    photo,
-  });
+type PartialAdmin = Partial<Admin>;
+
+export const signupAdmin = async(admin: PartialAdmin) => {
+  const { data } = await PARTIAF_API.post("/admin-signup", admin);
   console.log(data);
   if (data) {
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("admin", JSON.stringify(data));
   }
   return data;
 };
@@ -42,11 +19,11 @@ export const signinAdmin = async (username: string, password: string) => {
   });
   console.log(data);
   if (data) {
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("admin", JSON.stringify(data));
   }
   return data;
 };
 
 export const logoutAdmin = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("admin");
 };

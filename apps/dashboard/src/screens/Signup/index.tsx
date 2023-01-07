@@ -4,72 +4,88 @@ import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
 import { PublicRoutes } from "@/constants-definitions/Routes";
 import { signupAdmin } from "@/redux/states/admins/thunks";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { AppStore } from "@/redux/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signin.module.css";
 
 const Signup = () => {
+
+  const {loading, admin: adminUser, success, error} = useSelector((state: AppStore) => state.admins)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [identification_type, setIdentification_type] = useState("CC");
-  const [identification, SetIdentification] = useState<any>();
-  const [age, SetAge] = useState<any>();
-  const [phone, SetPhone] = useState<any>();
-  const [birthdate, SetBirthdate] = useState("");
-  const [gender, SetGender] = useState("M");
-  const [address, SetAdress] = useState("");
-  const [password, SetPassword] = useState("");
-  const [photo, SetPhoto] = useState("");
 
-  const submitRegisterHandler = (e: any) => {
-    e.preventDefault();
-    dispatch(
-      signupAdmin(
-        name,
-        lastname,
-        email,
-        identification_type,
-        identification,
-        age,
-        phone,
-        birthdate,
-        gender,
-        address,
-        password,
-        photo
-      ) as any
-    );
+  const [admin, setAdmin] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    identification_type: "CC",
+    identification: 0,
+    password: "",
+    age: 0,
+    phone: 0,
+    birthdate: "",
+    gender: "M",
+    address: "",
+    photo: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setAdmin((prev) => ({...prev, [name]: value }));
   };
+
+  const submitRegisterHandler = async(e: any) => {
+    e.preventDefault();
+    try {
+      dispatch(signupAdmin(admin) as any);      
+    } catch (error) {
+      if(error instanceof Error){
+        console.log(error)
+      }
+    }
+    navigate('/verification', {replace: true})
+  };
+
+  console.log({success})
+  console.log({error})
+
+  // useEffect(() => {
+  //   if(success){
+  //     navigate('/verification', {replace: true})
+  //   }
+  // }, [admin, error, success, navigate, dispatch])
 
   return (
     <div className={styles.container}>
-      <div className={styles.form}>
+      <form className={styles.form} onSubmit={submitRegisterHandler}>
         <img src="/logo-parti.svg" alt="Log Partiaf" />
         <div className={styles.grid}>
           <div>
             <Field label="Nombre*">
               <Input
+                name="name"
                 placeholder="Introduce tu nombre"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={admin.name}
+                onChange={handleChange}
               />
             </Field>
             <Field label="Apellido*">
               <Input
+                name="lastname"
                 placeholder="ingresa tu apellido"
-                value={lastname}
-                onChange={(e) => setLastName(e.target.value)}
+                value={admin.lastname}
+                onChange={handleChange}
               />
             </Field>
             <Field label="Correo electronico*">
               <Input
+                name="email"
                 placeholder="Ingresa tu correo electronico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={admin.email}
+                onChange={handleChange}
               />
             </Field>
           </div>
@@ -82,9 +98,9 @@ const Signup = () => {
         <div className={styles.grid}>
           <Field label="Tipo de documento*">
             <select
-              name=""
+              name="identification_type"
               id=""
-              onChange={(e) => setIdentification_type(e.target.value)}
+              onChange={handleChange}
             >
               <option value="CC">Cedula de ciudadania</option>
               <option value="CE">Cedula de extranjeria</option>
@@ -93,40 +109,44 @@ const Signup = () => {
           </Field>
           <Field label="Documento*">
             <Input
+              name="identification"
               type="number"
               placeholder="Ingresa tu numero de documento"
-              value={identification}
-              onChange={(e) => SetIdentification(e.target.valueAsNumber)}
+              value={admin.identification}
+              onChange={handleChange}
             />
           </Field>
 
           <Field label="Edad*">
             <Input
+            name="age"
               type="number"
               placeholder="Ingresa tu edad"
-              value={age}
-              onChange={(e) => SetAge(e.target.valueAsNumber)}
+              value={admin.age}
+              onChange={handleChange}
             />
           </Field>
           <Field label="Telefono*">
             <Input
+            name="phone"
               type="number"
               placeholder="Ingresa tu telefono"
-              value={phone}
-              onChange={(e) => SetPhone(e.target.valueAsNumber)}
+              value={admin.phone}
+              onChange={handleChange}
             />
           </Field>
 
           <Field label="Fecha de nacimiento*">
             <Input
+            name="birthdate"
               type="date"
               placeholder="Contrasena"
-              value={birthdate}
-              onChange={(e) => SetBirthdate(e.target.value)}
+              value={admin.birthdate}
+              onChange={handleChange}
             />
           </Field>
           <Field label="Genero*">
-            <select name="" id="" onChange={(e) => SetGender(e.target.value)}>
+            <select name="" id="" onChange={handleChange}>
               <option value="M">Masculino</option>
               <option value="F">Femenino</option>
               <option value="O">Otro</option>
@@ -135,17 +155,19 @@ const Signup = () => {
         </div>
         <Field label="Direccion*">
           <Input
+          name="address"
             placeholder="Ingresa tu direccion"
-            value={address}
-            onChange={(e) => SetAdress(e.target.value)}
+            value={admin.address}
+            onChange={handleChange}
           />
         </Field>
         <div className={styles.grid}>
           <Field label="Ingresa una contrasena">
             <Input
+            name="password"
               placeholder="Contrasena"
-              value={password}
-              onChange={(e) => SetPassword(e.target.value)}
+              value={admin.password}
+              onChange={handleChange}
             />
           </Field>
           <Field label="Confirmar contrasena">
@@ -160,7 +182,7 @@ const Signup = () => {
             </Button>
           </Field>
           <Field>
-            <Button backgroundColor="#333" color="#f2f2f2" onClick={submitRegisterHandler} >
+            <Button backgroundColor="#333" color="#f2f2f2" >
               Registrarse
             </Button>
           </Field>
@@ -170,7 +192,7 @@ const Signup = () => {
           Al registrarse usted acepta los términos y condiciones del servicio de
           PARTIA
         </span>
-      </div>
+      </form>
     </div>
   );
 };
