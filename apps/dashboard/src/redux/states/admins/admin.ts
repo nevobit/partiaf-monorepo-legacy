@@ -16,6 +16,8 @@ export const EmptyadminState: Admin = {
   address: "",
   password: "",
   photo: "",
+  verification_code: 0,
+  last_login: new Date(),
 };
 
 export const adminKey = "admin";

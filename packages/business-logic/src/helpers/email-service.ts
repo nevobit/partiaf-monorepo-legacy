@@ -1,23 +1,27 @@
-import formData from 'form-data';
+import formData from "form-data";
 import Mailgun from "mailgun.js";
 import otp from "otp-generator";
 
 const mailgun = new Mailgun(formData);
-const DOMAIN = 'realvisionenterprise.com';
-const mg = mailgun.client({ username:'nevobit', key: 'd9ccea9dc3536d3c9366a12a2c993180-523596d9-45da8666' });
+const DOMAIN = "nevobit.com";
+const mg = mailgun.client({
+  username: "nevobit",
+  key: "ac76199118f70c0259504fd1dda1ee06-cc9b2d04-8b77b1e9",
+});
 
 export const sendEmail = async (email: string | undefined) => {
-
   const code = otp.generate(6, {
     lowerCaseAlphabets: false,
     upperCaseAlphabets: false,
     specialChars: false,
   });
 
+  console.log({ code });
+
   const data = {
     from: "noreply@partiaf.com",
     to: email,
-    subject: "no-reply",
+    subject: "Verificación del correo electrónico de Partiaf",
     text: "Verificación del correo electrónico de Partiaf",
     html: `
         <div style="width: 600px; background-color: #ffffff; margin: 2rem auto; font-family: sans-serif;">
@@ -41,9 +45,15 @@ export const sendEmail = async (email: string | undefined) => {
         `,
   };
 
-  mg.messages.create(DOMAIN, data).then((response) => {
-    console.log(response);
-  }).catch((error) => {
-    console.error(error);
-  })
+  mg.messages
+    .create(DOMAIN, data)
+    .then((response) => {
+      console.log(response);
+      return code;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+ 
 };

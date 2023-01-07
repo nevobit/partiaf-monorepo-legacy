@@ -16,6 +16,8 @@ exports.AdminSchemaMongo = new mongoose_1.Schema({
     address: { type: String },
     password: { type: String, min: 5 },
     photo: { type: String },
+    verification_code: { type: Number },
+    last_login: { type: Date }
 }, {
     versionKey: false,
     timestamps: true

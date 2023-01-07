@@ -15,12 +15,12 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [identification_type, setIdentification_type] = useState("");
+  const [identification_type, setIdentification_type] = useState("CC");
   const [identification, SetIdentification] = useState<any>();
   const [age, SetAge] = useState<any>();
   const [phone, SetPhone] = useState<any>();
   const [birthdate, SetBirthdate] = useState("");
-  const [gender, SetGender] = useState("");
+  const [gender, SetGender] = useState("M");
   const [address, SetAdress] = useState("");
   const [password, SetPassword] = useState("");
   const [photo, SetPhoto] = useState("");
