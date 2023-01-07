@@ -22,6 +22,7 @@
     "@fastify/cors": "^8.2.0",
     "fastify": "^4.11.0",
     "@partiaf/business-logic": "workspace:*",
-    "@partiaf/types": "workspace:*"
+    "@partiaf/types": "workspace:*",
+    "@partiaf/constant-definitions": "workspace:*"
   }
 }

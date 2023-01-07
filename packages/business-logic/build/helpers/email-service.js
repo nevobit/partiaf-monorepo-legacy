@@ -6,18 +6,34 @@ const form_data_1 = tslib_1.__importDefault(require("form-data"));
 const mailgun_js_1 = tslib_1.__importDefault(require("mailgun.js"));
 const otp_generator_1 = tslib_1.__importDefault(require("otp-generator"));
 const mailgun = new mailgun_js_1.default(form_data_1.default);
+<<<<<<< HEAD
 const DOMAIN = 'realvisionenterprise.com';
 const mg = mailgun.client({ username: 'nevobit', key: 'd9ccea9dc3536d3c9366a12a2c993180-523596d9-45da8666' });
+=======
+const DOMAIN = "nevobit.com";
+const mg = mailgun.client({
+    username: "nevobit",
+    key: "ac76199118f70c0259504fd1dda1ee06-cc9b2d04-8b77b1e9",
+});
+>>>>>>> b07058b4b9098763529241d613d1277467d67f3e
 const sendEmail = async (email) => {
     const code = otp_generator_1.default.generate(6, {
         lowerCaseAlphabets: false,
         upperCaseAlphabets: false,
         specialChars: false,
     });
+<<<<<<< HEAD
     const data = {
         from: "noreply@partiaf.com",
         to: email,
         subject: "no-reply",
+=======
+    console.log({ code });
+    const data = {
+        from: "noreply@partiaf.com",
+        to: email,
+        subject: "Verificación del correo electrónico de Partiaf",
+>>>>>>> b07058b4b9098763529241d613d1277467d67f3e
         text: "Verificación del correo electrónico de Partiaf",
         html: `
         <div style="width: 600px; background-color: #ffffff; margin: 2rem auto; font-family: sans-serif;">
@@ -40,9 +56,19 @@ const sendEmail = async (email) => {
 
         `,
     };
+<<<<<<< HEAD
     mg.messages.create(DOMAIN, data).then((response) => {
         console.log(response);
     }).catch((error) => {
+=======
+    mg.messages
+        .create(DOMAIN, data)
+        .then((response) => {
+        console.log(response);
+        return code;
+    })
+        .catch((error) => {
+>>>>>>> b07058b4b9098763529241d613d1277467d67f3e
         console.error(error);
     });
 };

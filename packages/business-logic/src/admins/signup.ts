@@ -19,6 +19,7 @@ export const signupAdmins = async (data: AdminPartial): Promise<AdminSignup | Er
     const password = await bcrypt.hashSync(data.password || "", 10);
 
     const code = await sendEmail(data.email);
+    console.log("CODIGO ====> ", code)
 
     const admin = await new model({ ...data, password, code, uuid});
 
@@ -28,4 +29,6 @@ export const signupAdmins = async (data: AdminPartial): Promise<AdminSignup | Er
     await admin.save();
     
     return {token, ...admin._doc};
+
+    
 }
