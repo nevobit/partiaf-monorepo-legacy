@@ -13,6 +13,7 @@ interface Props {
   width?: string;
   fontSize?: string;
   fontWeight?: string;
+  maxLength?: number;
 }
 
 const Input = ({
@@ -22,6 +23,7 @@ const Input = ({
   defaultValue,
   type = "text",
   name = "",
+  maxLength,
   className,
   onChange,
   width,
@@ -34,6 +36,7 @@ const Input = ({
       <input
         name={name}
         type={type}
+        maxLength={maxLength}
         defaultValue={defaultValue}
         onChange={onChange}
         style={{ fontSize: fontSize, fontWeight: fontWeight, width: width }}

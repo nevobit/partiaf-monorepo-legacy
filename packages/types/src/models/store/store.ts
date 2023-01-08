@@ -27,7 +27,7 @@ export interface Store {
     phone: number;
     location?: Location;
     limit: number;
-    photos: String[];
+    photos: string[];
     status: string;
     verification_code: number;
     last_login: Date;

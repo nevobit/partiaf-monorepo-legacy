@@ -1,12 +1,14 @@
 import Button from "@/components/shared/Button";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
+import { verification } from "@/redux/states/admins/admin";
 import { verificationCodeAdmin } from "@/redux/states/admins/thunks";
 import { AppStore } from "@/redux/store";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./verification.module.css";
+import { PrivateRoutes, PublicRoutes } from '../../constants-definitions/Routes/index';
 
 const Verification = () => {
   const dispatch = useDispatch();
@@ -14,19 +16,31 @@ const Verification = () => {
 
   const [verification_code, setVerificationCode] = useState("");
 
-  const { admin } = useSelector((state: AppStore) => state.admins);
+  const { admin, successVerification } = useSelector((state: AppStore) => state.admins);
 
   const submitActivateAdmin = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(verificationCodeAdmin(verification_code) as any);
+      dispatch(verification(verification_code) as any);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
       }
     }
-    navigate("/business", { replace: true });
   };
+
+
+  console.log({successVerification})
+
+  useEffect(() => {
+
+    if(admin == null || admin.email == ""){
+      navigate(PublicRoutes.SIGNIN, {replace: true});
+    }
+    if(successVerification){
+      navigate(PrivateRoutes.BUSINESS, {replace: true});
+    }
+  }, [successVerification, navigate])
 
   return (
     <div className={styles.container}>
@@ -42,6 +56,7 @@ const Verification = () => {
             <form className={styles.form_code}>
               <Input
                 type="number"
+                maxLength={6}
                 value={verification_code}
                 onChange={(e) => setVerificationCode(e.target.value)}
               />

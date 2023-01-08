@@ -1,5 +1,7 @@
 import { PrivateRoutes, PublicRoutes } from "@/constants-definitions/Routes";
+import { AppStore } from "@/redux/store";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 interface Props {
@@ -12,12 +14,9 @@ const PublicValidationFragment = (
 );
 
 const GuardRoute = ({ privateValidation }: Props) => {
-  //  const userState = useSelector((store: AppStore) => store.user);
-  const user = {
-    name: "user Partiaf",
-  };
+  const {admin} = useSelector((store: AppStore) => store.admins);
 
-  return user.name ? (
+  return admin.email ? (
     privateValidation ? (
       PrivateValidationFragment
     ) : (

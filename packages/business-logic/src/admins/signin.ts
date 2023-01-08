@@ -13,7 +13,9 @@ export const signinAdmins = async ({email, password}: AdminPartial): Promise<Adm
     const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || '';
     const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
     
-    const admin = await model.findOne({ email });
+    console.log({email})
+    const admin = await model.findOne({ email: email });
+    console.log({admin})
     if (!admin) return new Error('101');
 
     if(password == null) return new Error('102');

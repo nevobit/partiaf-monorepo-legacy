@@ -2,10 +2,34 @@ import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import perfil from "../../../assets/LS.jpg";
+import { logout } from "@/redux/states/admins/admin";
+import { useDispatch } from 'react-redux';
+import { logoutStore } from "@/redux/states/stores/thunks";
+import { logoutStoreSlice } from "@/redux/states/stores/storesSlice";
 
 const Header = () => {
   const [drop, setDrop] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const signoutHandler = () => {
+    try{
+      dispatch(logout() as any);
+    }catch(err){
+      console.log(err);
+
+    }
+  };
+
+  const changeBusiness = () => {
+    try{
+      dispatch(logoutStoreSlice() as any);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 
   return (
     <header>
@@ -31,8 +55,8 @@ const Header = () => {
             <div className={styles.menu_content}>
               <Link to="/settings">Mi perfil</Link>
               <Link to="/settings-business">Configurar negocio</Link>
-              <button>Cambiar de negocio</button>
-              <button>Cerrar Sesion</button>
+              <button onClick={changeBusiness} >Cambiar de negocio</button>
+              <button onClick={signoutHandler}>Cerrar Sesion</button>
             </div>
           </div>
         </div>

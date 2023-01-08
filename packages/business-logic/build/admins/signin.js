@@ -9,7 +9,9 @@ const bcrypt_1 = tslib_1.__importDefault(require("bcrypt"));
 const signinAdmins = async ({ email, password }) => {
     const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || '';
     const model = await (0, constant_definitions_1.getModel)(constant_definitions_1.Collection.ADMINS, types_1.AdminSchemaMongo);
-    const admin = await model.findOne({ email });
+    console.log({ email });
+    const admin = await model.findOne({ email: email });
+    console.log({ admin });
     if (!admin)
         return new Error('101');
     if (password == null)

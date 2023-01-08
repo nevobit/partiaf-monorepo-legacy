@@ -1,13 +1,37 @@
-.loading__circle{
+.loading_box{
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.loading_box div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading_circle{
     height: 3.5rem;
     width: 3.5rem;
     border: 1px solid #333;
     border-left: 1px solid transparent;
     margin-bottom: 1rem;
     border-radius: 5rem;
+    animation: loading .3s linear infinite;
 }
 
-.loading__text{
+.loading_text{
     color: #333;
     font-size: 1.2rem;
+}
+
+
+@keyframes loading {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }

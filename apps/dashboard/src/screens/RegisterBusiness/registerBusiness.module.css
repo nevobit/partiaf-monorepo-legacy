@@ -7,15 +7,15 @@
 .form {
   background-color: #fff;
   min-width: 288px;
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 640px;
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form img {
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
 .info_registerBusiness {
@@ -38,4 +38,58 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+.container_images{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.container_images .images{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 1.2rem;
+  height: 100%;
+  width: 100%;
+}
+
+.container_images .images img{
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  border-radius: .5rem;
+  object-fit: cover;
+}
+
+.img_item{
+  position: relative;
+}
+
+.img_item button{
+  height: 1.8rem;
+  width: 1.8rem !important;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+  display: grid;
+  place-items: center;
+  background-color: #CA0B00;
+  color: #f2f6fa;
+  position: absolute;
+  right: -.7rem;
+  top: -.7rem;
+}
+
+.store_text{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+  padding: 1rem;
+  height: 13rem;
+}
+
+.back{
+  background-color: transparent;
+  font-size: 2.2rem;
 }

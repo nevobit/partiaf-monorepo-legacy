@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Admin } from "@partiaf/types";
-import { logoutAdmin, signinAdmin, signupAdmin } from "./thunks";
+import { logoutAdmin, signinAdmin, signupAdmin, verificationCodeAdmin } from "./thunks";
 
 export const EmptyadminState: Admin = {
   uuid: "",
@@ -28,6 +28,8 @@ const initialState = {
     : EmptyadminState,
   error: "",
   success: false,
+  successSignup: false,
+  successVerification: false,
   loading: false,
 };
 
@@ -48,9 +50,11 @@ export const login = createAsyncThunk(
   }
 );
 
+type PartialAdmin = Partial<Admin>;
+
 export const signup = createAsyncThunk(
   "/signup",
-  async (admin: Admin, thunkAPI) => {
+  async (admin: PartialAdmin, thunkAPI) => {
     try {
       return await signupAdmin(
         admin
@@ -62,11 +66,26 @@ export const signup = createAsyncThunk(
   }
 );
 
+export const verification = createAsyncThunk(
+  "/verification",
+  async (code: string, thunkAPI) => {
+    try {
+      return await verificationCodeAdmin(
+        code
+      );
+    } catch (err: any) {
+      const message = err;
+      return thunkAPI.rejectWithValue(message.response.data.message);
+    }
+  }
+);
+
 export const logout = createAsyncThunk("/logout", async () => {
   await logoutAdmin();
+  document.location.href = "/";
 });
 
-export const adminsSlice: any = createSlice({
+export const adminsSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
@@ -93,9 +112,30 @@ export const adminsSlice: any = createSlice({
         state.error = String(action.payload);
         state.admin = null;
       })
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.loading = false;
+        state.successSignup = true;
+        state.admin = action.payload;
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.admin = null;
+      })
       .addCase(logout.fulfilled, (state) => {
         state.admin = null;
-      });
+      })
+      .addCase(verification.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verification.fulfilled, (state, action) => {
+        state.loading = false;
+        state.successVerification = true;
+        state.admin= action.payload;
+      })
   },
 });
 

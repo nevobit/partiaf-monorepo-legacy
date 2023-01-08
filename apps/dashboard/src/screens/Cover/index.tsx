@@ -77,15 +77,15 @@ const Cover = () => {
           <div className={styles.screen_header_principal}>
             <div className={styles.box}>
               <h3>Total Entradas</h3>
-              <p>40</p>
+              <p>0</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas Efectivas</h3>
-              <p>35</p>
+              <p>0</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas no Efectivas </h3>
-              <p>5</p>
+              <p>0</p>
             </div>
           </div>
           <div className={styles.screen_title}>
@@ -99,9 +99,9 @@ const Cover = () => {
           </div>
         </div>
         <div className={styles.container_card_cover}>
-          {dataCover?.map((cover) => (
+          {/* {dataCover?.map((cover) => (
             <CardCover props={cover} />
-          ))}
+          ))} */}
         </div>
       </div>
       <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />

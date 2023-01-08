@@ -12,9 +12,9 @@ export const signupAdmin = async (admin: PartialAdmin) => {
   return data;
 };
 
-export const signinAdmin = async (username: string, password: string) => {
+export const signinAdmin = async (email: string, password: string) => {
   const { data } = await PARTIAF_API.post("/admin-signin", {
-    username,
+    email,
     password,
   });
   console.log(data);

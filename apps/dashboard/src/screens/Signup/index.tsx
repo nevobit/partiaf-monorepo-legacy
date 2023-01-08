@@ -3,6 +3,7 @@ import Field from "@/components/shared/Field";
 import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
 import { PublicRoutes } from "@/constants-definitions/Routes";
+import { signup } from "@/redux/states/admins/admin";
 import { signupAdmin } from "@/redux/states/admins/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -12,7 +13,7 @@ import styles from "./Signin.module.css";
 
 const Signup = () => {
 
-  const {loading, admin: adminUser, success, error} = useSelector((state: AppStore) => state.admins)
+  const {loading, admin: adminUser, successSignup, error} = useSelector((state: AppStore) => state.admins)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,23 +41,22 @@ const Signup = () => {
   const submitRegisterHandler = async(e: any) => {
     e.preventDefault();
     try {
-      dispatch(signupAdmin(admin) as any);      
+      dispatch(signup(admin) as any);      
     } catch (error) {
       if(error instanceof Error){
         console.log(error)
       }
     }
-    navigate('/verification', {replace: true})
   };
 
-  console.log({success})
+  console.log({successSignup})
   console.log({error})
 
-  // useEffect(() => {
-  //   if(success){
-  //     navigate('/verification', {replace: true})
-  //   }
-  // }, [admin, error, success, navigate, dispatch])
+  useEffect(() => {
+    if(successSignup){
+      navigate('/verification', {replace: true})
+    }
+  }, [admin, successSignup, navigate])
 
   return (
     <div className={styles.container}>

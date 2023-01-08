@@ -3,9 +3,12 @@ import styles from "./loader.module.css";
 
 const Loader = () => {
   return (
-    <div className={styles.loading__box}>
-      <div className={styles.loading__circle}></div>
-      <h2 className={styles.loading__text}>Cargando...</h2>
+    <div className={styles.loading_box}>
+      <div>
+      <div className={styles.loading_circle}></div>
+      <h2 className={styles.loading_text}>Cargando...</h2>
+      </div>
+
     </div>
   );
 };
