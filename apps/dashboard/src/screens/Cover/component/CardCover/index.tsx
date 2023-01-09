@@ -17,13 +17,7 @@ const CardCover = ({ props }: any) => {
         <div className={styles.data_cover}>
           <h2>{name_business}</h2>
           <div className={styles.icon_cover}>
-            <button className={styles.btn_icon_card_cover}>
-              <i className="bx bxs-pencil"></i>
-            </button>
-            <button className={styles.btn_icon_card_cover}>
-              <i className="bx bx-x-circle"></i>
-            </button>
-            <button
+          <button
               className={
                 status
                   ? styles.card_btn_status_active
@@ -33,6 +27,13 @@ const CardCover = ({ props }: any) => {
             >
               {status ? "activo" : "inactivo"}
             </button>
+            <button className={styles.btn_icon_card_cover}>
+              <i className="bx bxs-pencil"></i>
+            </button>
+            <button className={styles.btn_icon_card_cover}>
+              <i className="bx bx-x-circle"></i>
+            </button>
+       
           </div>
         </div>
         <h4>{name_cover}</h4>

@@ -25,8 +25,8 @@ const sendEmail = async (email) => {
         text: "Verificación del correo electrónico de Partiaf",
         html: `
         <div style="width: 600px; background-color: #ffffff; margin: 2rem auto; font-family: sans-serif;">
-        <div style="margin: 0 auto; border: 1px solid rgba(0, 0, 0, .1); display: flex; align-items: center; justify-content: center;  padding: 1rem 2rem;">
-            <img src="https://i.postimg.cc/ZYdg63tH/logo-part.png" alt="">
+        <div style="margin: 0 auto; border: 1px solid rgba(0, 0, 0, .1); display: flex; align-items: center; justify-content: center;  padding: 1rem 2rem; width:88%">
+            <img src="https://i.postimg.cc/RCJDSLMR/logo-partiaf.png" width="250" alt="">
         </div>
         <div style=" padding: 1rem 2rem;">
             <h3 style="font-size: 1.2rem; color: rgba(0,0,0, 0.8);">Verificar la direccion de correo electronico</h3>
