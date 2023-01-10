@@ -1,0 +1,47 @@
+POST http://localhost:5000/api/v3/covers HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Migthnigth Club",
+    "description": "La mejor discoteda de medellin para bailar y gozar",
+    "type": "Discoteca",
+    "nit": 1004010670,
+    "email": "yunsde18@gmail.com",
+    "password": "contra123",
+    "phone": 3226589944,
+    "location": {
+        "address": {
+            "street": "Carrera 81",
+            "city": "Medellin",
+            "state": "Antioquia",
+            "zipcode": "06005"
+        },
+        "geo": {
+            "caract": "medellin",
+            "longitud": "6.24591",
+            "latitud": "-75.58895"
+        }
+    },
+    "limit": 400,
+    "employes": "50",
+    "admin": "55414d50-277d-48d5-a4fa-1e7cd6e1c669",
+    "status": "active",
+    "address": "Carrera 84 #45C-97"
+}
+
+###
+
+GET http://localhost:5000/api/v3/covers/ff575e3c-64d3-43e5-9086-f5f81a2db8ea HTTP/1.1
+content-type: application/json
+
+###
+
+PUT http://localhost:5000/api/v3/covers HTTP/1.1
+content-type: application/json
+
+{
+    "uuid": "07d223c3-a4ec-4cdb-9bdc-c4c8f0acbc48",
+    "data": {
+        
+    }
+}

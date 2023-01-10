@@ -74,7 +74,6 @@ const RegisterBusiness = () => {
           console.log(image);
           const images = store.photos || [];
           images.push(image);
-          console.log(images);
           setStore((prev) => ({...prev, ["photos"]: images}));
         })
         .catch((err) => console.log(err));
