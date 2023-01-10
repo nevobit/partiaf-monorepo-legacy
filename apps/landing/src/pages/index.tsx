@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation'
 export default function Home() {
 
   const {t} = useTranslation();
-   const {locale, locales, defaultLocale} = useRouter();
+  const {locale, locales, defaultLocale} = useRouter();
 
   return (
     <Layout title={t("common:home")} description={t("common:banner-description")} >
