@@ -1,16 +1,16 @@
 import { gql } from "@apollo/client";
 
 export const GET_STORES = gql `
-query Query {
-  getStores {
-    uuid
+query {
+  getAllStores {
     name
-    description
     type
-    email
-    phone
+    uuid
+    status
     photos
-    createdAt
+    phone
+    description
   }
 }
+
 `

@@ -1,6 +1,6 @@
 import {LogBox} from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
 
 export const App = () => {

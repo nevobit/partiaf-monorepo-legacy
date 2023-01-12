@@ -11,23 +11,15 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
 import Store from "../../components/Store";
-
-const stores = [
-  {
-    uuid: "45g45-gr54g45-g4545",
-    name: "Jenylao Club",
-    type: "Disocteca",
-    photos: [],
-  },
-  {
-    uuid: "h5g45-nr54g45-o4545",
-    name: "Mithnught Club",
-    type: "Disocteca",
-    photos: [],
-  },
-];
+import { useQuery } from "@apollo/client";
+import { GET_STORES } from "../../graphql/queries/stores";
 
 const Home = () => {
+
+  const {data, loading} = useQuery(GET_STORES)
+  
+    console.log({data})
+  console.log({loading})
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <StatusBar animated={true} />
@@ -59,9 +51,8 @@ const Home = () => {
           </TouchableOpacity>
         </View>
       </View>
-
       <ScrollView>
-        {stores.map((store: IStore) => {
+        {data?.getStores.map((store: IStore) => {
           return (
             <View key={store.uuid}>
               <Store
