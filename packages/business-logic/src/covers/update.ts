@@ -11,7 +11,7 @@ export const updateCover = async(uuid: string, data: PartialCover): Promise<Cove
     
     const dataToUpdate = {...data};
 
-    await cover.update(dataToUpdate);
+    await cover.updateOne(dataToUpdate);
     
     return {...cover.doc};
 }  

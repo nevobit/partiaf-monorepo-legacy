@@ -3,7 +3,7 @@ import { RouteOptions } from "fastify";
 
 export const getCoverByIdRoute: RouteOptions = {
   method: "GET",
-  url: "/covers/:uuid",
+  url: "/cover/:uuid",
   handler: async (request, reply) => {
     const { params } = request;
     const { uuid } = params as { uuid: string };

@@ -1,9 +1,46 @@
 import { Button, Field, ImageInput, Input } from "@/components/shared";
-import React from "react";
+import { createCover } from "@/redux/states/covers/thunks";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./createcover.module.css";
 
 const CreateCoverModal = (props: any) => {
+  const dispatch = useDispatch();
   const { openModal, setOpenModal } = props;
+
+  const [cover, setCover] = useState({
+    name: "",
+    type: "",
+    price: 0,
+    date: new Date(),
+    limit: 0,
+    initial_limit: 0,
+    hour: "",
+    description: "",
+    image: "",
+    peoples: "",
+    store: "",
+    status: false,
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setCover((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const submitCreateHandler = async (e: any) => {
+    e.preventDefault();
+    try {
+      dispatch(createCover(cover) as any);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className={openModal ? styles.open_modal : styles.close_modal}>
       <div className={styles.container_form}>

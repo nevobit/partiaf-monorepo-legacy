@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAdminRoute = void 0;
+exports.getCoverByIdRoute = void 0;
 const business_logic_1 = require("@partiaf/business-logic");
-exports.updateAdminRoute = {
-    method: 'PUT',
-    url: '/admins',
+exports.getCoverByIdRoute = {
+    method: "GET",
+    url: "/cover/:uuid",
     handler: async (request, reply) => {
-        const { body } = request;
-        const { uuid, data } = body;
+        const { params } = request;
+        const { uuid } = params;
         try {
-            const admin = await (0, business_logic_1.updateStore)(uuid, data);
-            reply.status(200).send(admin);
+            const obj = await (0, business_logic_1.getCoverById)(uuid);
+            reply.status(200).send(obj);
         }
         catch (err) {
             if (err instanceof Error) {
@@ -18,6 +18,6 @@ exports.updateAdminRoute = {
                 reply.status(500).send(err);
             }
         }
-    }
+    },
 };
-//# sourceMappingURL=update.js.map
+//# sourceMappingURL=get-one.js.map

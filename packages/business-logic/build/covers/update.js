@@ -11,7 +11,7 @@ const updateCover = async (uuid, data) => {
     }
     ;
     const dataToUpdate = { ...data };
-    await cover.update(dataToUpdate);
+    await cover.updateOne(dataToUpdate);
     return { ...cover.doc };
 };
 exports.updateCover = updateCover;

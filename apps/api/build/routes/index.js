@@ -4,10 +4,12 @@ exports.registerRoutes = void 0;
 const health_check_1 = require("./health-check");
 const admins_1 = require("./admins");
 const stores_1 = require("./stores");
+const covers_1 = require("./covers");
 const routes = [
     health_check_1.healthCheckRoute,
     ...admins_1.adminsRoutes,
-    ...stores_1.storeRoutes
+    ...stores_1.storeRoutes,
+    ...covers_1.coverRoutes,
 ];
 const registerRoutes = (fastify) => {
     fastify.log.warn("Registering routes", routes);

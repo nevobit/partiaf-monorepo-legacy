@@ -1,10 +1,15 @@
+import { AppStore } from "@/redux/store";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardCover from "./component/CardCover";
 import styles from "./cover.module.css";
 import CreateCoverModal from "./create";
 
 const Cover = () => {
+  const { covers, loading } = useSelector((state: AppStore) => state.covers);
+  console.log(covers);
+
   const [openModal, setOpenModal] = useState(false);
   console.log(openModal);
 
@@ -101,7 +106,7 @@ const Cover = () => {
         <div className={styles.container_card_cover}>
           {dataCover?.map((cover) => (
             <CardCover props={cover} />
-          ))} 
+          ))}
         </div>
       </div>
       <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />

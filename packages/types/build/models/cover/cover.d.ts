@@ -9,7 +9,6 @@ export interface Cover {
     hour: string;
     description: string;
     image: string;
-    peoples: any;
     store: string;
     status: boolean;
 }
