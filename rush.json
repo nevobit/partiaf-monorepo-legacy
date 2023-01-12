@@ -335,6 +335,11 @@
       "reviewCategory": "apps"
     },
     {
+      "packageName": "api-graphql",
+      "projectFolder": "apps/api-graphql",
+      "reviewCategory": "apps"
+    },
+    {
       "packageName": "@partiaf/types",
       "projectFolder": "packages/types",
       "reviewCategory": "packages"

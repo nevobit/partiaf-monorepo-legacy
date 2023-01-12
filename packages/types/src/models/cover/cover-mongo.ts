@@ -14,6 +14,7 @@ export const CoverSchemaMongo = new Schema<Cover>({
     hour: {type: String},
     price: {type: Number},
     date: {type: Date},
+    status: {type: Boolean}
 }, {
     versionKey: false,
     timestamps: true
