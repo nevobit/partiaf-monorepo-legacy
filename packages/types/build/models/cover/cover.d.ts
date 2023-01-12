@@ -3,7 +3,7 @@ export interface Cover {
     name: string;
     type: string;
     price: number;
-    date: Date;
+    date: string;
     limit: number;
     initial_limit: number;
     hour: string;

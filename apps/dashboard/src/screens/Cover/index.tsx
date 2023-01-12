@@ -24,56 +24,6 @@ const Cover = () => {
       hour: "08:00 Pm",
       cost: "50,000",
     },
-    // {
-    //   name_business: "Discotk Medellin",
-    //   name_cover: "Fiesta navideña",
-    //   description:
-    //     "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-    //   cupo: 200,
-    //   date: "24/12/2022",
-    //   hour: "08:00 Pm",
-    //   cost: "50,000",
-    // },
-    // {
-    //   name_business: "Discotk Medellin",
-    //   name_cover: "Fiesta navideña",
-    //   description:
-    //     "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-    //   cupo: 200,
-    //   date: "24/12/2022",
-    //   hour: "08:00 Pm",
-    //   cost: "50,000",
-    // },
-    // {
-    //   name_business: "Discotk Medellin",
-    //   name_cover: "Fiesta navideña",
-    //   description:
-    //     "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-    //   cupo: 200,
-    //   date: "24/12/2022",
-    //   hour: "08:00 Pm",
-    //   cost: "50,000",
-    // },
-    // {
-    //   name_business: "Discotk Medellin",
-    //   name_cover: "Fiesta navideña",
-    //   description:
-    //     "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-    //   cupo: 200,
-    //   date: "24/12/2022",
-    //   hour: "08:00 Pm",
-    //   cost: "50,000",
-    // },
-    // {
-    //   name_business: "Discotk Medellin",
-    //   name_cover: "Fiesta navideña",
-    //   description:
-    //     "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-    //   cupo: 200,
-    //   date: "24/12/2022",
-    //   hour: "08:00 Pm",
-    //   cost: "50,000",
-    // },
   ];
   return (
     <>

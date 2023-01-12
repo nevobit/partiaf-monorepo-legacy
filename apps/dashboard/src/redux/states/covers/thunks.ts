@@ -9,10 +9,16 @@ export const createCover = async (info: PartialCover) => {
   return data;
 };
 
-export const getStoresById = (uuid: string) => async (dispatch: any) => {
+export const getCoverById = (uuid: string) => async (dispatch: any) => {
   dispatch(loadingCoversById());
   const { data } = await PARTIAF_API.get(`/covers/${uuid}`);
-  dispatch(setCoversById({ stores: data }));
+  dispatch(setCoversById({ cover: data }));
+};
+
+export const getAllCovers = () => async (dispatch: any) => {
+  dispatch(loadingCoversById());
+  const { data } = await PARTIAF_API.get(`/covers`);
+  dispatch(setCoversById({ covers: data }));
 };
 
 export const updateCover = async (uuid: string, info: PartialCover) => {

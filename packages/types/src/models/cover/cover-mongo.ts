@@ -13,7 +13,7 @@ export const CoverSchemaMongo = new Schema<Cover>({
     store: {type: String},
     hour: {type: String},
     price: {type: Number},
-    date: {type: Date},
+    date: {type: String},
     status: {type: Boolean}
 }, {
     versionKey: false,

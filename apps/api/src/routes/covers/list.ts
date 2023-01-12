@@ -1,14 +1,13 @@
-import { getCoverById } from "@partiaf/business-logic";
+import { getAllCovers } from "@partiaf/business-logic";
 import { RouteOptions } from "fastify";
 
-export const getCoverByIdRoute: RouteOptions = {
+export const getAllCoversRoute: RouteOptions = {
   method: "GET",
-  url: "/cover/:uuid",
+  url: "/covers",
   handler: async (request, reply) => {
     const { params } = request;
-    const { uuid } = params as { uuid: string };
     try {
-      const obj = await getCoverById(uuid);
+      const obj = await getAllCovers();
       reply.status(200).send(obj);
     } catch (err) {
       if (err instanceof Error) {

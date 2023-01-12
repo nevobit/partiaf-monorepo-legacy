@@ -1,4 +1,5 @@
 import { Button, Field, ImageInput, Input } from "@/components/shared";
+import { CreateCover } from "@/redux/states/covers/covers";
 import { createCover } from "@/redux/states/covers/thunks";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -10,21 +11,22 @@ const CreateCoverModal = (props: any) => {
 
   const [cover, setCover] = useState({
     name: "",
-    type: "",
+    type: "General",
     price: 0,
-    date: new Date(),
+    date: "",
     limit: 0,
     initial_limit: 0,
     hour: "",
     description: "",
     image: "",
-    peoples: "",
     store: "",
     status: false,
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
@@ -33,7 +35,7 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(createCover(cover) as any);
+      dispatch(CreateCover(cover) as any);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -61,36 +63,53 @@ const CreateCoverModal = (props: any) => {
             </Field>
             <div className={styles.data_fields}>
               <Field label="Cupo total">
-                <Input />
+                <Input
+                  name="limit"
+                  value={cover.limit}
+                  onChange={handleChange}
+                />
               </Field>
               <Field label="Precio">
-                <Input />
+                <Input
+                  name="price"
+                  value={cover.price}
+                  onChange={handleChange}
+                />
               </Field>
               <Field label="Fecha">
-                <Input />
+                <Input type="date" name="date" onChange={handleChange} />
               </Field>
             </div>
             <div className={styles.data_fields}>
               <Field label="Hora">
-                <Input />
+                <Input
+                  type="time"
+                  name="hour"
+                  value={cover.hour}
+                  onChange={handleChange}
+                />
               </Field>
               <Field label="General">
-                <Input />
-              </Field>
-              <Field label="VIP">
-                <Input />
+                <select name="type" onChange={handleChange}>
+                  <option value="VIP">VIP</option>
+                  <option value="General">General</option>
+                </select>
               </Field>
             </div>
             <div className={styles.description_form}>
               <Field label="Descripcion">
-                <textarea></textarea>
+                <textarea
+                  name="description"
+                  value={cover.description}
+                  onChange={handleChange}
+                ></textarea>
               </Field>
               <Field>
                 <ImageInput />
               </Field>
             </div>
           </div>
-          <Button>Crear Cover</Button>
+          <Button onClick={submitCreateHandler}>Crear Cover</Button>
         </div>
       </div>
     </div>
