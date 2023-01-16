@@ -1,47 +1,46 @@
-import { Seo } from '@/types/seo';
-import { NextPage } from 'next';
-import Head from 'next/head';
+import { Seo } from "@/types/seo";
+import { NextPage } from "next";
+import Head from "next/head";
 
 const SEO: NextPage<Seo> = ({ description, author, title, meta = [] }: Seo) => {
   const metadata = [
     {
-      name: 'description',
+      name: "description",
       content: description,
     },
     {
-      name: 'og:title',
+      name: "og:title",
       content: title,
     },
     {
-      name: 'og:description',
+      name: "og:description",
       content: description,
     },
     {
-      name: 'og:type',
-      content: 'website',
+      name: "og:type",
+      content: "website",
     },
     {
-      name: 'author',
+      name: "author",
       content: author,
     },
   ].concat(meta);
 
   return (
     <Head>
-      <title>{title} - Nevobit</title>
+      <title>{title} - Partiaf</title>
 
       {metadata.map(({ name, content }, i) => (
         <meta key={i} name={name} content={content} />
       ))}
 
       <link rel="icon" href="/favicon.ico" />
-      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
     </Head>
   );
 };
 
 SEO.defaultProps = {
-  lang: 'en',
+  lang: "en",
   meta: [],
 };
 

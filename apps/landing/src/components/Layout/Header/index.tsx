@@ -1,42 +1,30 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
-import styles from './Header.module.css'
-import useTranslation from 'next-translate/useTranslation'
+import Image from "next/legacy/image";
 
 const Header = () => {
-  const {t} = useTranslation();
-
-  const {push, pathname, locales, asPath} = useRouter();
-
-  const changeLanguage = (e: any) => {
-    const locale = e.target.value;
-    push(pathname, asPath, {locale});
-  }
   return (
-    <header className={styles.header}>
-      <Link href="/"><Image src="/logo.svg" width={160} height={55} alt="Logo nevobit" /></Link>
-      <nav>
-        <ul>
-           
-            <li><Link href="/">{t('common:services')}</Link></li>
-            <li><Link href="/">{t('common:solutions')}</Link></li>
-            <li><Link href="/">{t('common:work')}</Link></li>
-            <li><Link href="/">{t('common:methodology')}</Link></li>
-            <li><Link href="/">{t('common:about')}</Link></li>
-            <li><Link href="/">BLOG</Link></li>
-            <li className={styles.language_container}>
-              <select onChange={changeLanguage} className={styles.language}>
-                {locales?.map((locale) => (
-                <option key={locale} value={locale} >{locale}</option>
-                ))}
-              </select>
-            </li>
-        </ul>
-      </nav>
-    </header>
-  )
-}
+    <div className="flex flex-col items-center justify-center absolute w-full z-10">
+      <div className="navbar bg-transparent w-11/12">
+        <div className="flex-1">
+          <Image
+            src="/icons/logo-partiaf.svg"
+            width={179.14}
+            height={39}
+            alt="Partiaf icon"
+          />
+        </div>
+        <div className="flex-none">
+          <button>
+            <Image
+              src="/icons/burguerIcon.svg"
+              width={19.17}
+              height={13}
+              alt="Menu icon"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Header
+export default Header;
