@@ -2,7 +2,7 @@ import { Store } from "@partiaf/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createStore, logoutStore, signinStore } from "./thunks";
 
-export type PartialStore= Partial<Store>;
+export type PartialStore = Partial<Store>;
 
 const EmptyStoresState: PartialStore[] =[ 
   {

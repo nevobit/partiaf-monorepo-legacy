@@ -1,30 +1,24 @@
+import { getCoverById } from "@/redux/states/covers/thunks";
 import { AppStore } from "@/redux/store";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardCover from "./component/CardCover";
 import styles from "./cover.module.css";
 import CreateCoverModal from "./create";
 
 const Cover = () => {
+  const dispatch = useDispatch();
   const { covers, loading } = useSelector((state: AppStore) => state.covers);
-  console.log(covers);
+  console.log("COVERSSSSS =====>", covers);
 
   const [openModal, setOpenModal] = useState(false);
   console.log(openModal);
 
-  const dataCover = [
-    {
-      name_business: "Discotk Medellin",
-      name_cover: "Fiesta navideña",
-      description:
-        "Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf, Fiesta de navidad organizada por partiaf",
-      cupo: 200,
-      date: "24/12/2022",
-      hour: "08:00 Pm",
-      cost: "50,000",
-    },
-  ];
+  useEffect(() => {
+    dispatch(getCoverById("3120273d-0598-4708-9917-c6e03a314967") as any);
+  }, []);
+
   return (
     <>
       <div className={styles.screen}>
@@ -54,8 +48,8 @@ const Cover = () => {
           </div>
         </div>
         <div className={styles.container_card_cover}>
-          {dataCover?.map((cover) => (
-            <CardCover props={cover} />
+          {covers?.map((obj) => (
+            <CardCover cover={{...obj}} />
           ))}
         </div>
       </div>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
+import { Cover } from "@partiaf/types";
 
-const CardCover = ({ props }: any) => {
-  const { name_business, name_cover, description, cupo, date, hour, cost } =
-    props;
-
+const CardCover = (cover: any) => {
+  console.log("DATA", cover);
+  const { name, description, limit, date, hour, price } = cover.cover;
+  console.log("name", name);
   const [status, setStatus] = useState(false);
 
   return (
@@ -15,9 +16,8 @@ const CardCover = ({ props }: any) => {
       </div>
       <div className={styles.info_cover}>
         <div className={styles.data_cover}>
-          <h2>{name_business}</h2>
           <div className={styles.icon_cover}>
-          <button
+            <button
               className={
                 status
                   ? styles.card_btn_status_active
@@ -33,19 +33,19 @@ const CardCover = ({ props }: any) => {
             <button className={styles.btn_icon_card_cover}>
               <i className="bx bx-x-circle"></i>
             </button>
-       
           </div>
         </div>
-        <h4>{name_cover}</h4>
+     
+        <h4 className={styles.name_cover}>{cover.name}</h4>
         <p>{description}</p>
         <div className={styles.data_cover}>
-          <span>Cupos: {cupo}</span>
+          <span>Cupos: {limit}</span>
           <span>Fecha: {date}</span>
           <span>Hora: {hour}</span>
         </div>
         <div className={styles.data_cover}>
           <h5>VIP</h5>
-          <h4> ${cost}</h4>
+          <h4> ${price}</h4>
         </div>
       </div>
     </div>

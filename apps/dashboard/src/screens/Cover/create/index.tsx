@@ -1,13 +1,22 @@
 import { Button, Field, ImageInput, Input } from "@/components/shared";
-import { CreateCover } from "@/redux/states/covers/covers";
-import { createCover } from "@/redux/states/covers/thunks";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { createCover } from "@/redux/states/covers/covers";
+import { getStoresById } from "@/redux/states/stores/thunks";
+import { AppStore } from "@/redux/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
 
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();
   const { openModal, setOpenModal } = props;
+
+  const { admin, loading } = useSelector((state: AppStore) => state.admins);
+
+  const {
+    loading: loadingStores,
+    stores,
+    successSignin,
+  } = useSelector((state: AppStore) => state.stores);
 
   const [cover, setCover] = useState({
     name: "",
@@ -15,11 +24,11 @@ const CreateCoverModal = (props: any) => {
     price: 0,
     date: "",
     limit: 0,
-    initial_limit: 0,
+    initial_limit: 200,
     hour: "",
     description: "",
-    image: "",
-    store: "",
+    image: "imagen.jpg",
+    store: stores[0].uuid,
     status: false,
   });
 
@@ -35,13 +44,17 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(CreateCover(cover) as any);
+      dispatch(createCover(cover) as any);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
       }
     }
   };
+
+  useEffect(() => {
+    dispatch(getStoresById(admin.uuid) as any);
+  }, []);
 
   return (
     <div className={openModal ? styles.open_modal : styles.close_modal}>
@@ -59,7 +72,7 @@ const CreateCoverModal = (props: any) => {
           </div>
           <div className={styles.container_fields}>
             <Field label="Nombre del evento">
-              <Input></Input>
+              <Input name="name" value={cover.name} onChange={handleChange} />
             </Field>
             <div className={styles.data_fields}>
               <Field label="Cupo total">

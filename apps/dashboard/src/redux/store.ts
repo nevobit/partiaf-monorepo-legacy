@@ -11,7 +11,7 @@ import { PartialCover } from "./states/covers/thunks";
 import { coversSlice } from "./states/covers/covers";
 
 interface StoresSlice {
-  stores: PartialStore[];
+  stores:   PartialStore[];
   store: StoreInfo;
   loading: boolean;
   success: boolean;

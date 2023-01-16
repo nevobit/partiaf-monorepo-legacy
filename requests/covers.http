@@ -37,7 +37,7 @@ content-type: application/json
 
 ###
 
-DELETE   http://localhost:5000/api/v3/covers/68ab6421-277e-4304-812a-beb7335ea798
+DELETE   http://localhost:5000/api/v3/covers/0cd995b8-9cc3-4207-acbe-cb32e0b3e7bd
 
 
 
