@@ -3,11 +3,11 @@ import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
 import { useDispatch } from "react-redux";
 import { deleteCover } from "@/redux/states/covers/covers";
+import { DivisaFormater } from "@/utils/DivisaFormater";
 
 const CardCover = (cover: any) => {
   const dispatch = useDispatch();
-  const { name, description, limit, date, hour, price, uuid } = cover.cover;
-  const [status, setStatus] = useState(false);
+  const { name, description, limit, date, hour, price, uuid, status } = cover.cover;
 
   const submitDeleteHandler = async (e: any) => {
     e.preventDefault();
@@ -32,13 +32,12 @@ const CardCover = (cover: any) => {
           <div className={styles.icon_cover}>
             <button
               className={
-                cover.status
+                status
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
-              onClick={() => setStatus(!status)}
             >
-              {cover.status ? "activo" : "inactivo"}
+              {status ? "activo" : "inactivo"}
             </button>
             <button className={styles.btn_icon_card_cover}>
               <i className="bx bxs-pencil"></i>
@@ -60,7 +59,7 @@ const CardCover = (cover: any) => {
         </div>
         <div className={styles.data_cover}>
           <h5>VIP</h5>
-          <h4> ${price}</h4>
+          <h4> {DivisaFormater(price)}</h4>
         </div>
       </div>
     </div>

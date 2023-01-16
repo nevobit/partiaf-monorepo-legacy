@@ -14,6 +14,7 @@ const Cover = () => {
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
 
+  console.log({covers})
   useEffect(() => {
       dispatch(getCoverById(store.uuid) as any);
   }, [dispatch,store, success]);

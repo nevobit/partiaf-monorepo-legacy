@@ -65,6 +65,7 @@ importers:
       '@types/react': ^18.0.24
       '@types/react-dom': ^18.0.8
       '@types/react-geocode': ^0.2.1
+      '@types/sweetalert': ~2.0.4
       '@vitejs/plugin-react': ^2.2.0
       axios: ^1.2.0
       google-map-react: ^2.2.0
@@ -75,11 +76,15 @@ importers:
       react-google-maps: ^9.4.5
       react-redux: ^8.0.5
       react-router-dom: ^6.4.4
+      react-sweetalert2: ~0.5.2
+      sweetalert: ~2.1.2
+      sweetalert2: ~11.7.0
       typescript: ^4.6.4
       vite: ^3.2.3
     dependencies:
       '@partiaf/types': link:../../packages/types
       '@reduxjs/toolkit': 1.9.1_react-redux@8.0.5+react@18.2.0
+      '@types/sweetalert': 2.0.4
       axios: 1.2.2
       google-map-react: 2.2.0_react-dom@18.2.0+react@18.2.0
       react: 18.2.0
@@ -89,6 +94,9 @@ importers:
       react-google-maps: 9.4.5_4076cec502acd4bd096bfc1f1d17cbac
       react-redux: 8.0.5_413fd22576863b93ee6b19a7f7967615
       react-router-dom: 6.6.2_react-dom@18.2.0+react@18.2.0
+      react-sweetalert2: 0.5.2_react-dom@18.2.0+react@18.2.0
+      sweetalert: 2.1.2
+      sweetalert2: 11.7.0
     devDependencies:
       '@types/google-map-react': 2.1.7
       '@types/react': 18.0.26
@@ -1819,6 +1827,13 @@ packages:
     resolution: {integrity: sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==}
     dev: true
 
+  /@types/sweetalert/2.0.4:
+    resolution: {integrity: sha512-BSO9bAIUh/h1mfQgyMLniwTjysCV5Ktmy5JULmantIJBuZtHilIWNuM+O6myboyyHNv9uASXTc7Unh9GGp4srg==}
+    deprecated: This is a stub types definition for SweetAlert (https://github.com/t4t5/sweetalert/). SweetAlert provides its own type definitions, so you don't need @types/sweetalert installed!
+    dependencies:
+      sweetalert: 2.1.2
+    dev: false
+
   /@types/use-sync-external-store/0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
     dev: false
@@ -2547,6 +2562,10 @@ packages:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
     dependencies:
       iconv-lite: 0.6.3
+    dev: false
+
+  /es6-object-assign/1.1.0:
+    resolution: {integrity: sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw==}
     dev: false
 
   /es6-promise/4.2.8:
@@ -3861,6 +3880,10 @@ packages:
     engines: {node: '>= 0.6.0'}
     dev: false
 
+  /promise-polyfill/6.1.0:
+    resolution: {integrity: sha512-g0LWaH0gFsxovsU7R5LrrhHhWAWiHRnh1GPrhXnPgYsDkIqjRYUYSZEsej/wtleDrz5xVSIDbeKfidztp2XHFQ==}
+    dev: false
+
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
     dependencies:
@@ -4059,6 +4082,17 @@ packages:
     dependencies:
       '@remix-run/router': 1.2.1
       react: 18.2.0
+    dev: false
+
+  /react-sweetalert2/0.5.2_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-6BxyApbQT1prCG5KUBTkc3+64CWpKAJCjd0Bvv+pmwEGYI9QeaDoH/sP8NeM4cMZgEplFsq6B/8noHoF1w/nzA==}
+    peerDependencies:
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      sweetalert2: 11.7.0
     dev: false
 
   /react/18.2.0:
@@ -4470,6 +4504,17 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /sweetalert/2.1.2:
+    resolution: {integrity: sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA==}
+    dependencies:
+      es6-object-assign: 1.1.0
+      promise-polyfill: 6.1.0
+    dev: false
+
+  /sweetalert2/11.7.0:
+    resolution: {integrity: sha512-ICeeGhIsmzCwRD/XjZrBYk+SDQzwfGvIdxkeSpPFgkPwbnoaGnaZ4cOb7AD/iC5o50snQUF6w23MfFAGk1+J7A==}
+    dev: false
 
   /symbol-observable/1.2.0:
     resolution: {integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==}

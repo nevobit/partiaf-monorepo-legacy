@@ -1,10 +1,27 @@
 import Field from "@/components/shared/Field";
 import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
-import React from "react";
+import { AppStore } from "@/redux/store";
+import { Admin } from "@partiaf/types";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./settings.module.css";
 
 const Settings = () => {
+
+  const {admin} = useSelector((state: AppStore) => state.admins);
+
+  const [adminUpdate, setAdminUpdate] = useState<Partial<Admin>>({
+    name: admin.name,
+    lastname: admin.lastname,
+    identification: admin.identification,
+    email: admin.email,
+    phone: admin.phone,
+    age: admin.age,
+    address: admin.address,
+    notifications: admin.notifications
+  })
+
   return (
     <div className={styles.screen}>
       <div className={styles.settings}>
@@ -19,25 +36,25 @@ const Settings = () => {
               <h4 className={styles.card_title}>Datos personales</h4>
               <div className={styles.colums_card}>
                 <Field label="Nombre">
-                  <Input />
+                  <Input value={adminUpdate.name} />
                 </Field>
                 <Field label="Apellido">
-                  <Input />
+                  <Input value={adminUpdate.lastname} />
                 </Field>
                 <Field label="Numero de identificacion">
-                  <Input />
+                  <Input value={adminUpdate.identification} />
                 </Field>
                 <Field label="Correo Electronico">
-                  <Input />
+                  <Input value={adminUpdate.email} />
                 </Field>
                 <Field label="Telefono">
-                  <Input />
+                  <Input value={adminUpdate.phone} />
                 </Field>
                 <Field label="Edad">
-                  <Input />
+                  <Input value={adminUpdate.age} />
                 </Field>
                 <Field label="Direccion">
-                  <Input />
+                  <Input value={adminUpdate.address} />
                 </Field>
               </div>
             </div>
