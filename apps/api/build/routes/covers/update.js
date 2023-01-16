@@ -7,9 +7,9 @@ exports.updateCoverRoute = {
     url: "/covers",
     handler: async (request, reply) => {
         const { body } = request;
-        const { uuid, data } = body;
+        const { data } = body;
         try {
-            const obj = await (0, business_logic_1.updateCover)(uuid, data);
+            const obj = await (0, business_logic_1.updateCover)(data);
             reply.status(200).send(obj);
         }
         catch (err) {

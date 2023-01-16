@@ -7,9 +7,9 @@ export const updateCoverRoute: RouteOptions = {
   url: "/covers",
   handler: async (request, reply) => {
     const { body } = request;
-    const { uuid, data } = body as { uuid: string; data: Cover };
+    const { data } = body as { data: Cover };
     try {
-      const obj = await updateCover(uuid, data);
+      const obj = await updateCover(data);
       reply.status(200).send(obj);
     } catch (err) {
       if (err instanceof Error) {
