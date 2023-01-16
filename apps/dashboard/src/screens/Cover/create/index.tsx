@@ -1,5 +1,5 @@
 import { Button, Field, ImageInput, Input } from "@/components/shared";
-import { createCover } from "@/redux/states/covers/covers";
+import { createCover, reset } from "@/redux/states/covers/covers";
 import { getStoresById } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -11,12 +11,9 @@ const CreateCoverModal = (props: any) => {
   const { openModal, setOpenModal } = props;
 
   const { admin, loading } = useSelector((state: AppStore) => state.admins);
-
-  const {
-    loading: loadingStores,
-    stores,
-    successSignin,
-  } = useSelector((state: AppStore) => state.stores);
+  const { store } = useSelector((state: AppStore) => state.stores);
+  const { success } = useSelector((state: AppStore) => state.covers);
+  console.log({success})
 
   const [cover, setCover] = useState({
     name: "",
@@ -24,13 +21,14 @@ const CreateCoverModal = (props: any) => {
     price: 0,
     date: "",
     limit: 0,
-    initial_limit: 200,
+    initial_limit: 0,
     hour: "",
     description: "",
     image: "imagen.jpg",
-    store: stores[0].uuid,
-    status: false,
+    store: store.uuid,
+    status: true,
   });
+
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -39,6 +37,7 @@ const CreateCoverModal = (props: any) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
+    setCover((prev) => ({ ...prev, "initial_limit": prev.limit }))
   };
 
   const submitCreateHandler = async (e: any) => {
@@ -53,8 +52,11 @@ const CreateCoverModal = (props: any) => {
   };
 
   useEffect(() => {
-    dispatch(getStoresById(admin.uuid) as any);
-  }, []);
+    if(success){
+      dispatch(reset() as any);
+      setOpenModal(false);
+    }
+  }, [dispatch, success]);
 
   return (
     <div className={openModal ? styles.open_modal : styles.close_modal}>
@@ -102,7 +104,7 @@ const CreateCoverModal = (props: any) => {
                   onChange={handleChange}
                 />
               </Field>
-              <Field label="General">
+              <Field label="Tipo">
                 <select name="type" onChange={handleChange}>
                   <option value="VIP">VIP</option>
                   <option value="General">General</option>

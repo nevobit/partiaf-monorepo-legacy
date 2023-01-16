@@ -3,13 +3,16 @@ import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import perfil from "../../../assets/LS.jpg";
 import { logout } from "@/redux/states/admins/admin";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutStore } from "@/redux/states/stores/thunks";
 import { logoutStoreSlice } from "@/redux/states/stores/storesSlice";
+import { AppStore } from "@/redux/store";
 
 const Header = () => {
   const [drop, setDrop] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+
+  const {admin} = useSelector((state: AppStore) => state.admins);
 
   const dispatch = useDispatch();
 
@@ -45,9 +48,9 @@ const Header = () => {
                 className={styles.user_name}
                 onClick={() => setOpenMenu(!openMenu)}
               >
-                Usuario Partiaf
+                {admin.name} {admin.lastname}
               </h3>
-              <img className={styles.user_image} src={perfil} alt="" />
+              <img className={styles.user_image} src={admin.photo? admin.photo : '/default.jpg' } alt="" />
             </div>
           </div>
 

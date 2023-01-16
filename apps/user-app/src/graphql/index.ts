@@ -6,7 +6,7 @@ const httpLink = createHttpLink({
 
 const client = new ApolloClient({
     // connectToDevTools: true,
-    uri: "http://localhost:7000/",
+    uri: "http://192.168.1.1:7000/",
     cache: new InMemoryCache(),
 });
 

@@ -9,6 +9,6 @@ export const createCoverThunks = async (info: PartialCover) => {
 export const getCoverById = (uuid: string) => async (dispatch: any) => {
   dispatch(loadingCoversById());
   const { data } = await PARTIAF_API.get(`/covers/${uuid}`);
-  console.log({ data });
   dispatch(setCoversById({ covers: data }));
+  return data;
 };

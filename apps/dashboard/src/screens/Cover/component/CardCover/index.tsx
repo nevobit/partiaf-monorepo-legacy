@@ -4,9 +4,7 @@ import fiesta from "../../../../assets/fiesta.webp";
 import { Cover } from "@partiaf/types";
 
 const CardCover = (cover: any) => {
-  console.log("DATA", cover);
   const { name, description, limit, date, hour, price } = cover.cover;
-  console.log("name", name);
   const [status, setStatus] = useState(false);
 
   return (
@@ -19,13 +17,13 @@ const CardCover = (cover: any) => {
           <div className={styles.icon_cover}>
             <button
               className={
-                status
+                cover.status
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
               onClick={() => setStatus(!status)}
             >
-              {status ? "activo" : "inactivo"}
+              {cover.status ? "activo" : "inactivo"}
             </button>
             <button className={styles.btn_icon_card_cover}>
               <i className="bx bxs-pencil"></i>

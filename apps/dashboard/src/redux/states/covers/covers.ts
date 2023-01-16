@@ -1,6 +1,6 @@
 import { Cover } from "@partiaf/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createCoverThunks } from "./thunks";
+import { createCoverThunks, getCoverById } from './thunks';
 
 export type PartialCover = Partial<Cover>;
 
@@ -48,6 +48,7 @@ export const createCover = createAsyncThunk(
   }
 );
 
+
 export const coversSlice = createSlice({
   name: "covers",
   initialState: {
@@ -55,13 +56,11 @@ export const coversSlice = createSlice({
     cover: EmptyCoverState,
     loading: false,
     success: false,
-    successSignin: false,
     error: "",
   },
   reducers: {
     reset: (state) => {
-      (state.loading = false),
-        (state.successSignin = false),
+        (state.loading = false),
         (state.success = false),
         (state.error = "");
     },

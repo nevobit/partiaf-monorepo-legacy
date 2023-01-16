@@ -1,3 +1,4 @@
+import { reset } from "@/redux/states/covers/covers";
 import { getCoverById } from "@/redux/states/covers/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -10,15 +11,16 @@ import CreateCoverModal from "./create";
 const Cover = () => {
   const dispatch = useDispatch();
   const { covers, loading } = useSelector((state: AppStore) => state.covers);
-  console.log("COVERSSSSS =====>", covers);
-
+  const { store, stores, success } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
-  console.log(openModal);
 
   useEffect(() => {
-    dispatch(getCoverById("3120273d-0598-4708-9917-c6e03a314967") as any);
-  }, []);
-
+    if(success){
+      dispatch(reset() as any);
+      setOpenModal(false);
+    }
+      dispatch(getCoverById(store.uuid) as any);
+  }, [dispatch,store, success]);
   return (
     <>
       <div className={styles.screen}>
@@ -48,8 +50,8 @@ const Cover = () => {
           </div>
         </div>
         <div className={styles.container_card_cover}>
-          {covers?.map((obj) => (
-            <CardCover cover={{...obj}} />
+          {!loading && covers.map((obj) => (
+            <CardCover key={obj.uuid} cover={{...obj}} />
           ))}
         </div>
       </div>

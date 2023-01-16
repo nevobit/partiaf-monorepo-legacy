@@ -5,4 +5,5 @@ tslib_1.__exportStar(require("./admins"), exports);
 tslib_1.__exportStar(require("./covers"), exports);
 tslib_1.__exportStar(require("./helpers/email-service"), exports);
 tslib_1.__exportStar(require("./stores"), exports);
+tslib_1.__exportStar(require("./users"), exports);
 //# sourceMappingURL=index.js.map

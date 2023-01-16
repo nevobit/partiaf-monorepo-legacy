@@ -13,9 +13,21 @@ import { IStore } from "../../types";
 import Store from "../../components/Store";
 import { useQuery } from "@apollo/client";
 import { GET_STORES } from "../../graphql/queries/stores";
+import { RootStackParamList } from "../../navigation/AppNavigator";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-const Home = () => {
+type HomeScreenNavigationProp = StackNavigationProp<
+RootStackParamList
+>;
 
+type Props = {
+navigation: HomeScreenNavigationProp;
+};
+
+
+const Home = ({navigation}: Props) => {
+
+ 
   const {data, loading} = useQuery(GET_STORES)
   
     console.log({data})
@@ -52,15 +64,15 @@ const Home = () => {
         </View>
       </View>
       <ScrollView>
-        {data?.getStores.map((store: IStore) => {
+        {data?.getAllStores?.map((store: IStore) => {
           return (
-            <View key={store.uuid}>
+            <TouchableOpacity key={store.uuid}  onPress={() => navigation.navigate("Store", {store: store.uuid})}>
               <Store
                 photos={store.photos}
                 name={store.name}
                 type={store.type}
               />
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>

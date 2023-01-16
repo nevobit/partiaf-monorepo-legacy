@@ -20,7 +20,6 @@ export const signinStore = async (uuid: string, password: string) => {
   const { data } = await PARTIAF_API.post("/store-signin", {
     uuid, password,
   });
-  console.log(data);
   if (data) {
     localStorage.setItem("store", JSON.stringify(data));
   }
