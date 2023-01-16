@@ -10,15 +10,11 @@ import CreateCoverModal from "./create";
 
 const Cover = () => {
   const dispatch = useDispatch();
-  const { covers, loading } = useSelector((state: AppStore) => state.covers);
-  const { store, stores, success } = useSelector((state: AppStore) => state.stores);
+  const { covers = [], success, loading } = useSelector((state: AppStore) => state.covers);
+  const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    if(success){
-      dispatch(reset() as any);
-      setOpenModal(false);
-    }
       dispatch(getCoverById(store.uuid) as any);
   }, [dispatch,store, success]);
   return (
@@ -28,7 +24,7 @@ const Cover = () => {
           <div className={styles.screen_header_principal}>
             <div className={styles.box}>
               <h3>Total Entradas</h3>
-              <p>0</p>
+              <p>{covers.length}</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas Efectivas</h3>
@@ -50,7 +46,7 @@ const Cover = () => {
           </div>
         </div>
         <div className={styles.container_card_cover}>
-          {!loading && covers.map((obj) => (
+          {covers.map((obj) => (
             <CardCover key={obj.uuid} cover={{...obj}} />
           ))}
         </div>

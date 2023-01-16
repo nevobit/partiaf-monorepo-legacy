@@ -71,6 +71,10 @@ export const coversSlice = createSlice({
       state.loading = false;
       state.covers = action.payload.covers;
     },
+    setCovers: (state, action) => {
+      state.loading = false;
+      state.covers = action.payload.covers;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -90,4 +94,4 @@ export const coversSlice = createSlice({
 });
 
 export const { reset } = coversSlice.actions;
-export const { loadingCoversById, setCoversById } = coversSlice.actions;
+export const { loadingCoversById, setCoversById, setCovers } = coversSlice.actions;

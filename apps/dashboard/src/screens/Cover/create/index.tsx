@@ -53,10 +53,10 @@ const CreateCoverModal = (props: any) => {
 
   useEffect(() => {
     if(success){
-      dispatch(reset() as any);
       setOpenModal(false);
+      dispatch(reset());
     }
-  }, [dispatch, success]);
+  }, [success]);
 
   return (
     <div className={openModal ? styles.open_modal : styles.close_modal}>
