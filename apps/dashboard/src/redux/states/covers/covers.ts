@@ -94,17 +94,10 @@ export const coversSlice = createSlice({
       state.loading = false;
       state.covers = action.payload.covers;
     },
-<<<<<<< HEAD
-    setCovers: (state, action) => {
-      state.loading = false;
-      state.covers = action.payload.covers;
-    }
-=======
     deleteCoverReducer: (state, action) => {
       state.loading = false;
       state.covers = action.payload.covers;
     },
->>>>>>> af1d52d462c5c500d7e6c795f9b22449f0501502
   },
   extraReducers: (builder) => {
     builder
@@ -136,9 +129,5 @@ export const coversSlice = createSlice({
 });
 
 export const { reset } = coversSlice.actions;
-<<<<<<< HEAD
-export const { loadingCoversById, setCoversById, setCovers } = coversSlice.actions;
-=======
 export const { loadingCoversById, setCoversById, deleteCoverReducer } =
   coversSlice.actions;
->>>>>>> af1d52d462c5c500d7e6c795f9b22449f0501502
