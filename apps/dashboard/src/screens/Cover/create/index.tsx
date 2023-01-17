@@ -1,3 +1,4 @@
+import InputImage from "@/components/Layout/CloudinaryUpload";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { createCover, reset } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
@@ -12,6 +13,12 @@ const CreateCoverModal = (props: any) => {
 
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
+<<<<<<< HEAD
+=======
+
+  const [imageUrl, setImageUrl] = useState("");
+  console.log("update", imageUrl)
+>>>>>>> 784242077736840bc9417e2e68182191f2583cec
 
   const [cover, setCover] = useState({
     name: "",
@@ -22,7 +29,7 @@ const CreateCoverModal = (props: any) => {
     initial_limit: 0,
     hour: "",
     description: "",
-    image: "imagen.jpg",
+    image: imageUrl,
     store: store.uuid,
     status: true,
   });
@@ -35,6 +42,7 @@ const CreateCoverModal = (props: any) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
     setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
+    setCover((prev) => ({ ...prev, image: imageUrl }));
   };
 
   const submitCreateHandler = async (e: any) => {
@@ -118,11 +126,10 @@ const CreateCoverModal = (props: any) => {
                   name="description"
                   value={cover.description}
                   onChange={handleChange}
+                  className={styles.text_area_cover}
                 ></textarea>
               </Field>
-              <Field>
-                <ImageInput />
-              </Field>
+              <InputImage setImageUrl={setImageUrl} />
             </div>
           </div>
           <Button onClick={submitCreateHandler}>Crear Cover</Button>

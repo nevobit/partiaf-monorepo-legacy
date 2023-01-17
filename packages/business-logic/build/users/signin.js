@@ -19,11 +19,18 @@ const userSignin = async ({ username, password }) => {
     const token = jsonwebtoken_1.default.sign({ uuid: user.uuid, name: user.name, username: user.username, pin: user.pin }, process.env.JWT_SECRET_KEY || "", { expiresIn: "24h" });
     return {
         token,
-        uuid: user.uuid,
-        username: user.username,
-        name: user.name,
-        events: user.events,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        photo: user.photo,
         balance: user.balance,
+        events: user.events,
+        uuid: user.uuid,
+        email: user.email,
+        biography: user.biography,
+        username: user.username,
+        gender: user.gender,
+        phone: user.phone,
+        pin: user.pin
     };
 };
 exports.userSignin = userSignin;

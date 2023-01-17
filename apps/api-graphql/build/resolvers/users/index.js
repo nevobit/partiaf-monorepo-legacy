@@ -14,7 +14,9 @@ exports.default = {
     Mutation: {
         userSignin(_, { username, password }, context) {
             return __awaiter(this, void 0, void 0, function* () {
+                console.log(username, password);
                 const user = yield (0, business_logic_1.userSignin)({ username, password });
+                console.log({ user });
                 return user;
             });
         },

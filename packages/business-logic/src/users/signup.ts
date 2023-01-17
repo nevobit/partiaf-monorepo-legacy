@@ -32,11 +32,7 @@ export const userSignup = async ({firstname, lastname, username, phone, password
 
         return {
             token,
-            name: user.name,
-            username: user.username,
-            phone: user.phone,
-            uuid: user.uuid,
-            createdAt: user.createdAt
+            ...user._doc
         };
         
     }

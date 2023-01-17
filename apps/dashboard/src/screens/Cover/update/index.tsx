@@ -1,28 +1,37 @@
+import InputImage from "@/components/Layout/CloudinaryUpload";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
-import { createCover, reset } from "@/redux/states/covers/covers";
+import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
+import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
 
-const CreateCoverModal = (props: any) => {
+interface Props {
+  openModal: boolean;
+  setOpenModal: Function;
+  Cover: Cover;
+}
+
+const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const dispatch = useDispatch();
-  const { openModal, setOpenModal } = props;
 
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
-  console.log({ success });
+
+  const [imageUrl, setImageUrl] = useState("");
 
   const [cover, setCover] = useState({
-    name: "",
+    uuid: Cover.uuid,
+    name: Cover?.name,
     type: "General",
-    price: 0,
-    date: "",
-    limit: 0,
-    initial_limit: 0,
-    hour: "",
-    description: "",
-    image: "imagen.jpg",
+    price: Cover?.price,
+    date: Cover?.date,
+    limit: Cover?.limit,
+    initial_limit: Cover?.limit,
+    hour: Cover?.hour,
+    description: Cover?.description,
+    image: imageUrl,
     store: store.uuid,
     status: true,
   });
@@ -34,13 +43,15 @@ const CreateCoverModal = (props: any) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
-    setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
+    setCover((prev) => ({ ...prev, image: imageUrl }));
+    //setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
   };
 
-  const submitCreateHandler = async (e: any) => {
+  const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(createCover(cover) as any);
+      dispatch(updateCover(cover) as any);
+      setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -51,7 +62,6 @@ const CreateCoverModal = (props: any) => {
   useEffect(() => {
     if (success) {
       dispatch(reset() as any);
-      setOpenModal(false);
     }
   }, [dispatch, success]);
 
@@ -116,16 +126,14 @@ const CreateCoverModal = (props: any) => {
                   onChange={handleChange}
                 ></textarea>
               </Field>
-              <Field>
-                <ImageInput />
-              </Field>
+              <InputImage setImageUrl={setImageUrl} />
             </div>
           </div>
-          <Button onClick={submitCreateHandler}>Crear Cover</Button>
+          <Button onClick={submitUpdateHandler}>Actualizar Cover</Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default CreateCoverModal;
+export default EditCoverModal;

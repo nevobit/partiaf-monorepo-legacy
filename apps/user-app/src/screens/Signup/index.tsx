@@ -2,8 +2,17 @@ import React from "react";
 import { Text, View, TouchableOpacity, TextInput, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {KeyboardAvoidingView} from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AuthStackParamList, RootStackParamList } from '../../navigation/AppNavigator';
+type HomeScreenNavigationProp = StackNavigationProp<
+AuthStackParamList
+>;
 
-const Signin = () => {
+type Props = {
+  navigation: HomeScreenNavigationProp;
+  };
+
+const Signup = ({navigation}: Props) => {
   return (
 
     <View
@@ -35,7 +44,7 @@ const Signin = () => {
           fontSize: 20,
           color: '#333',
           marginTop: 15,
-        }} >Inicia sesion para continuar explorando</Text>
+        }} >Registrate para continuar explorando</Text>
       </View>
 
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10, marginTop: 100 }}>
@@ -92,6 +101,28 @@ const Signin = () => {
       </View>
 
       <View>
+      <View
+          style={{
+            height: 50,
+            width: "100%",
+            padding: 10,
+            marginBottom: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            borderRadius: 5,
+            backgroundColor: "#fff",
+          }}
+        >
+          <Ionicons
+            name="ios-person-outline"
+            style={{ fontSize: 18, color: "#000", marginRight: 10 }}
+          />
+          <TextInput
+            style={{ width: "100%", height: 40 }}
+            placeholder="Nombre Completo"
+          />
+        </View>
         <View
           style={{
             height: 50,
@@ -112,6 +143,28 @@ const Signin = () => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Usuario"
+          />
+        </View>
+        <View
+          style={{
+            height: 50,
+            width: "100%",
+            padding: 10,
+            marginBottom: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            borderRadius: 5,
+            backgroundColor: "#fff",
+          }}
+        >
+          <Ionicons
+            name="ios-person-outline"
+            style={{ fontSize: 18, color: "#000", marginRight: 10 }}
+          />
+          <TextInput
+            style={{ width: "100%", height: 40 }}
+            placeholder="Telefono"
           />
         </View>
         <View
@@ -147,10 +200,10 @@ const Signin = () => {
         fontSize: 18,
         marginTop: 40
       }}>
-        Aun no tienes una cuenta? <Text>Registrate aqui</Text>
+        Ya tienes una cuenta? <TouchableOpacity onPress={() => navigation.navigate('Signin')}><Text>Inicia sesión</Text></TouchableOpacity>
       </Text>
     </View>
   );
 };
 
-export default Signin;
+export default Signup;

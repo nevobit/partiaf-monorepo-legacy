@@ -4,12 +4,24 @@ import { Ionicons } from "@expo/vector-icons";
 import {KeyboardAvoidingView} from 'react-native';
 import { LOGIN_USER } from "../../graphql/queries/user";
 import { useMutation } from "@apollo/client";
-import { useDispatch } from 'react-redux';
-import { loginUser } from "../../redux/states/user";
+// import { useDispatch } from 'react-redux';
+// import { loginUser } from "../../redux/states/user";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AuthStackParamList, RootStackParamList } from '../../navigation/AppNavigator';
+import { useDispatch } from "react-redux";
+import { signin } from "../../features/auth";
+type HomeScreenNavigationProp = StackNavigationProp<
+AuthStackParamList
+>;
 
-const Signin = () => {
+type Props = {
+  navigation: HomeScreenNavigationProp;
+  };
 
-  // const [login] = useMutation(LOGIN_USER);
+
+const Signin = ({navigation}: Props) => {
+
+  const [login] = useMutation(LOGIN_USER);
 
   const [error, setError] = useState("");
   const [user, setUser] = useState({
@@ -19,23 +31,17 @@ const Signin = () => {
 
   const dispatch = useDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      // const { data } = await login({
-      //   variables: {
-      //     username: user.username,
-      //     password: user.password,
-      //   },
-      // });
+       const { data } = await login({
+         variables: {
+           username: user.username,
+           password: user.password,
+         },
+       });
 
-      // console.log({data});
-
-      // dispatch(loginUser({ ...data.userSignin }));
+      dispatch(signin({ ...data.userSignin }));
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -46,12 +52,11 @@ const Signin = () => {
   if (error.length > 0) {
     setTimeout(() => {
       setError("");
-    }, 4000);
+    }, 10000);
   }
 
 
   return (
-
     <View
       style={{
         height: '90%',
@@ -83,7 +88,8 @@ const Signin = () => {
           marginTop: 15,
         }} >Inicia sesion para continuar explorando</Text>
       </View>
-
+<Text>{user.username}</Text>
+<Text>{user.password}</Text>
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10, marginTop: 100 }}>
         <TouchableOpacity
           style={{
@@ -158,9 +164,10 @@ const Signin = () => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Usuario"
+            value={user.username}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['username']: text }))}
           />
         </View>
-        <Text>{error}</Text>
         <View
           style={{
             height: 50,
@@ -181,10 +188,14 @@ const Signin = () => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Contrasena"
+            secureTextEntry={true}
+            value={user.password}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['password']: text }))}
           />
         </View>
 
       </View>
+      <Text>{error}</Text>
       
       <TouchableOpacity style={{marginTop: 20, borderRadius: 5, width: '105%', height: 50, backgroundColor: '#FFE243'}} onPress={onSubmit}>
           <Text style={{width: '105%', marginTop: 10, fontSize: 20, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
@@ -194,7 +205,7 @@ const Signin = () => {
         fontSize: 18,
         marginTop: 40
       }}>
-        Aun no tienes una cuenta? <Text>Registrate aqui</Text>
+        Aun no tienes una cuenta? <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text>Registrate aqui</Text></TouchableOpacity>
       </Text>
     </View>
   );

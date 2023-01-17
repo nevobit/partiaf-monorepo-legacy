@@ -4,14 +4,16 @@ import { Cover, CoverSchemaMongo } from "@partiaf/types";
 type PartialCover = Partial<Cover>;
 
 export const updateCover = async (
+  uuid: string,
   data: PartialCover
 ): Promise<Cover | Error> => {
   const model = await getModel(Collection.COVERS, CoverSchemaMongo);
-  const { uuid } = data;
+  console.log("DATA EN BUSSINESSS", data);
+  // const { uuid } = data;
   const cover = await model.findOne({ uuid });
 
   if (!cover) {
-    throw new Error("602");
+    throw new Error("NO SE ENCUENTRA EL COVER");
   }
 
   const dataToUpdate = { ...data };

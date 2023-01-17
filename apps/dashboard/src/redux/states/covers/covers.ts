@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createCoverThunks,
   deleteCoverByIdThunks,
-  getCoverById,
   updateCoverThunks,
 } from "./thunks";
 
@@ -65,11 +64,11 @@ export const deleteCover = createAsyncThunk(
 
 export const updateCover = createAsyncThunk(
   "covers/update",
-  async (data: PartialCover, thunkAPI) => {
+  async (data: Cover, thunkAPI) => {
     try {
-      return await updateCoverThunks(data);
+      return await updateCoverThunks(data?.uuid, data);
     } catch (err) {
-      console.log(err);
+      console.log("COVER ERROR", err);
     }
   }
 );
@@ -95,6 +94,10 @@ export const coversSlice = createSlice({
       state.covers = action.payload.covers;
     },
     deleteCoverReducer: (state, action) => {
+      state.loading = false;
+      state.covers = action.payload.covers;
+    },
+    updateCoverReducer: (state, action) => {
       state.loading = false;
       state.covers = action.payload.covers;
     },
@@ -129,5 +132,9 @@ export const coversSlice = createSlice({
 });
 
 export const { reset } = coversSlice.actions;
-export const { loadingCoversById, setCoversById, deleteCoverReducer } =
-  coversSlice.actions;
+export const {
+  loadingCoversById,
+  setCoversById,
+  deleteCoverReducer,
+  updateCoverReducer,
+} = coversSlice.actions;

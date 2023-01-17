@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserInfo } from "../../types/user/UserInfo";
-import { clearLocalStorage, persistLocalStorage } from "../../utilities/localStorage";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const EmptyUserState: UserInfo = {
     uuid: "",
@@ -13,21 +13,21 @@ export const EmptyUserState: UserInfo = {
 
 export const UserKey = 'user';
 
-export const userSlice = createSlice({
-    name: 'user',
-    initialState: localStorage.getItem('user') ?JSON.parse(localStorage.getItem('user') as string) : EmptyUserState,
-    reducers: {
-        loginUser: (state, action) => {
-            persistLocalStorage<UserInfo>(UserKey, action.payload);
-            return action.payload;
-        },
-        resetUser: () => {
-            clearLocalStorage(UserKey);
-            return EmptyUserState;
-        }
-    }
-})
+// export const userSlice = async() => createSlice({
+//     name: 'user',
+//     initialState: await AsyncStorage.getItem('user') ?JSON.parse(await AsyncStorage.getItem('user') as string) : EmptyUserState,
+//     reducers: {
+//         loginUser: async (state, action) => {
+//             await AsyncStorage.setItem(UserKey, action.payload);
+//             return action.payload;
+//         },
+//         resetUser: async () => {
+//             await AsyncStorage.removeItem(UserKey);
+//             return EmptyUserState;
+//         }
+//     }
+// })
 
-export const {loginUser, resetUser} = userSlice.actions;
+// export const {loginUser, resetUser} = userSlice.actions;
 
-export default userSlice.reducer;
+// export default userSlice.reducer;
