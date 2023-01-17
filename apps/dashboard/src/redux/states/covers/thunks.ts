@@ -18,9 +18,7 @@ export const deleteCoverByIdThunks = (uuid: string) => {
   return true;
 };
 
-export const updateCoverThunks =
-  (info: PartialCover) => async (dispatch: any) => {
-    const { data } = await PARTIAF_API.put(`/covers/${info.uuid}`, { ...info });
-    dispatch(setCoversById({ covers: data }));
-    return data;
-  };
+export const updateCoverThunks = async (uuid: string, info: PartialCover) => {
+  const { data } = await PARTIAF_API.put(`/covers/${uuid}`, { data: info });
+  return data;
+};

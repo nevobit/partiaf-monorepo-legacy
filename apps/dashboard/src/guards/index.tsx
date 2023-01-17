@@ -15,7 +15,7 @@ const PublicValidationFragment = (
 
 const GuardRoute = ({ privateValidation }: Props) => {
   const { admin } = useSelector((store: AppStore) => store.admins);
-  console.log("admin", admin);
+  
 
   return admin.email ? (
     privateValidation ? (

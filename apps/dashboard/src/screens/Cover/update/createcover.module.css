@@ -11,8 +11,8 @@
   z-index: 99999999999;
 }
 
-.close_modal{
-    display: none;
+.close_modal {
+  display: none;
 }
 
 .container_form {
@@ -42,11 +42,11 @@
   height: 2rem;
 }
 
-.header_cover_form button{
-    background-color: var(--black);
-    color: #FFF;
-    padding: .6rem;
-    border-radius: .4rem;
+.header_cover_form button {
+  background-color: var(--black);
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
 }
 
 .data_fields {
@@ -64,4 +64,5 @@
   border: 1px solid rgba(0, 0, 0, 0.07);
   height: 19rem;
   padding: 1rem;
+  width: 96%;
 }

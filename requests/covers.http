@@ -22,16 +22,15 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5000/api/v3/covers HTTP/1.1
+PUT http://localhost:5000/api/v3/covers/35697bb0-bdeb-40d0-bfca-410645aeac18 HTTP/1.1
 content-type: application/json
 
 {
-    "uuid": "68ab6421-277e-4304-812a-beb7335ea798",
     "data": 
         {
-            "uuid": "68ab6421-277e-4304-812a-beb7335ea798",
-    "type": "VIP",
-    "image": "imagendeprueba.png"
+            "name": "editado23",
+            "type": "VIP",
+            "image": "imagendeprueba.png"
     }
 }
 
