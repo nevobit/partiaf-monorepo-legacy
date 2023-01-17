@@ -1,4 +1,4 @@
-import InputImage from "@/components/Layout/CloudinaryUpload";
+import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { createCover, reset } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
@@ -14,7 +14,7 @@ const CreateCoverModal = (props: any) => {
   const { success } = useSelector((state: AppStore) => state.covers);
 
   const [imageUrl, setImageUrl] = useState("");
-  console.log("update", imageUrl)
+  console.log("create", imageUrl);
 
   const [cover, setCover] = useState({
     name: "",
@@ -121,7 +121,9 @@ const CreateCoverModal = (props: any) => {
                   className={styles.text_area_cover}
                 ></textarea>
               </Field>
-              <InputImage setImageUrl={setImageUrl} />
+              <Field >
+                <InputCloudinary   idInput="file" setImageUrl={setImageUrl} />
+              </Field>
             </div>
           </div>
           <Button onClick={submitCreateHandler}>Crear Cover</Button>

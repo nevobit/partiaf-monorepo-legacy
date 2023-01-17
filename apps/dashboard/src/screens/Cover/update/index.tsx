@@ -1,4 +1,4 @@
-import InputImage from "@/components/Layout/CloudinaryUpload";
+import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
@@ -19,7 +19,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [Urlimage, setUrlImage] = useState("");
 
   const [cover, setCover] = useState({
     uuid: Cover.uuid,
@@ -31,7 +31,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     initial_limit: Cover?.limit,
     hour: Cover?.hour,
     description: Cover?.description,
-    image: imageUrl,
+    image: Urlimage,
     store: store.uuid,
     status: true,
   });
@@ -43,7 +43,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
-    setCover((prev) => ({ ...prev, image: imageUrl }));
+    setCover((prev) => ({ ...prev, image: Urlimage }));
     //setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
   };
 
@@ -124,9 +124,15 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
                   name="description"
                   value={cover.description}
                   onChange={handleChange}
+                  className={styles.text_area_cover}
                 ></textarea>
               </Field>
-              <InputImage setImageUrl={setImageUrl} />
+              <Field>
+                <InputCloudinary
+                  idInput="file-update"
+                  setImageUrl={setUrlImage}
+                />
+              </Field>
             </div>
           </div>
           <Button onClick={submitUpdateHandler}>Actualizar Cover</Button>

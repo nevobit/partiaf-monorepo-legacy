@@ -13,7 +13,7 @@ class CloudinaryUploader {
 
     const formData = new FormData();
     formData.append("file", this.file);
-    formData.append("upload_preset", "r9rqkvzr"); // Replace with your own upload preset
+    formData.append("upload_preset", "r9rqkvzr");
 
     try {
       const res = await axios.post(

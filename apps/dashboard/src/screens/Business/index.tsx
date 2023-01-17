@@ -14,7 +14,7 @@ import { loginStore, PartialStore } from "@/redux/states/stores/storesSlice";
 const Bussiness = () => {
   const { admin, loading } = useSelector((state: AppStore) => state.admins);
 
-  console.log("ADMIN =======> ", admin)
+
 
   const {
     loading: loadingStores,
