@@ -2,7 +2,7 @@ import formData from "form-data";
 import Mailgun from "mailgun.js";
 import otp from "otp-generator";
 
-const MAILGUL_KEY = process.env.MAILGUL_KEY || "";
+const MAILGUL_KEY = process.env.MAILGUL_KEY || "anymailgunparameter";
 const mailgun = new Mailgun(formData);
 const DOMAIN = "partiaf-api.xyz";
 const mg = mailgun.client({
