@@ -5,11 +5,12 @@ const tslib_1 = require("tslib");
 const form_data_1 = tslib_1.__importDefault(require("form-data"));
 const mailgun_js_1 = tslib_1.__importDefault(require("mailgun.js"));
 const otp_generator_1 = tslib_1.__importDefault(require("otp-generator"));
+const MAILGUL_KEY = process.env.MAILGUL_KEY || "";
 const mailgun = new mailgun_js_1.default(form_data_1.default);
-const DOMAIN = "nevobit.com";
+const DOMAIN = "partiaf-api.xyz";
 const mg = mailgun.client({
-    username: "nevobit",
-    key: "ac76199118f70c0259504fd1dda1ee06-cc9b2d04-8b77b1e9",
+    username: "Partiaf",
+    key: MAILGUL_KEY,
 });
 const sendEmail = async (email) => {
     const code = otp_generator_1.default.generate(6, {
