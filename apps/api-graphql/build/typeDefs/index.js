@@ -35,7 +35,7 @@ type AuthPayload {
     lastname: String
     email: String
     phone: String
-    photo: String
+    photo: [String]
     gender: String
     biography: String
     followers: [String]
