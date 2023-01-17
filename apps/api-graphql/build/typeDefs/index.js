@@ -29,6 +29,20 @@ type Query {
 
 type AuthPayload {
     token: String
+    uuid: String
+    username: String
+    firstname: String
+    lastname: String
+    email: String
+    phone: String
+    photo: [String]
+    gender: String
+    biography: String
+    followers: [String]
+    following: [String]
+    events: String
+    balance: String
+    pin: String
     error: String
 }
 

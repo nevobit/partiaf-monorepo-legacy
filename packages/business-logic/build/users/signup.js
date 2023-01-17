@@ -30,11 +30,7 @@ const userSignup = async ({ firstname, lastname, username, phone, password }) =>
         const token = jsonwebtoken_1.default.sign({ uuid: uuid, firstname: firstname, lastname: lastname, username: username, phone: phone }, process.env.JWT_SECRET_KEY || "", { expiresIn: "24h" });
         return {
             token,
-            name: user.name,
-            username: user.username,
-            phone: user.phone,
-            uuid: user.uuid,
-            createdAt: user.createdAt
+            ...user._doc
         };
     }
 };

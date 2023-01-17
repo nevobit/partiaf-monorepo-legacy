@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./dashboard.module.css";
+import { AppStore } from '../../redux/store';
+import { getCoverById } from "@/redux/states/covers/thunks";
 
 export const DivisaFormater = (value: any) => {
   const formaterMoney = Intl.NumberFormat("es-CO", {
@@ -12,6 +15,10 @@ export const DivisaFormater = (value: any) => {
 };
 
 const Dashboard = () => {
+
+  const {covers, success} = useSelector((state: AppStore) => state.covers);
+  const {store} = useSelector((state: AppStore) => state.stores);
+
   let monthsList = [
     { label: "Enero", value: "01", dataset: 0 },
     { label: "Febrero", value: "02", dataset: 0 },
@@ -87,35 +94,39 @@ const Dashboard = () => {
       ? "0" + (date.getMonth() + 1)
       : date.getMonth() + 1;
 
+      const dispatch = useDispatch();
+    
+      useEffect(() => {
+          dispatch(getCoverById(store.uuid) as any);
+      }, [dispatch,store, success]);
   return (
     <>
       <div className={styles.board_screen}>
         <div className={styles.board_flex}>
           <div className={styles.board_card}>
-            <h3 className={styles.title}>Ventas</h3>
-            <h4 className={styles.time}>AÑO ACTUAL</h4>
-            <h2 className={styles.left}>{DivisaFormater(9000000)}</h2>
+            <h3 className={styles.title}>Covers</h3>
+            <h4 className={styles.time}>MES ACTUAL</h4>
+            <h2 className={styles.left}>{covers.length}</h2>
           </div>
           <div className={styles.board_card}>
-            <h3 className={styles.title}>Gastos</h3>
-            <h4 className={styles.time}>AÑO ACTUAL</h4>
+            <h3 className={styles.title}>Total Valor en Covers</h3>
+            <h4 className={styles.time}>MES ACTUAL</h4>
 
-            <h2 className={styles.left}>{DivisaFormater(75000000)}</h2>
+            <h2 className={styles.left}>{DivisaFormater(covers.reduce((a, c) => a + Number(c.price) * Number(c.limit), 0))}</h2>
           </div>
         </div>
 
         <div className={styles.board_card}>
-          <h3 className={styles.title}>Ganacia bruta</h3>
+          <h3 className={styles.title}>Covers Efectivos</h3>
           <h4 className={styles.time}>AÑO ACTUAL</h4>
 
-          <h2>{DivisaFormater(-20000000)}</h2>
+          <h2>{DivisaFormater(0)}</h2>
         </div>
         <div className={`${styles.board_card} ${styles.board_banks}`}>
           <i className="bx bxs-bank"></i>
-          <h3 className={styles.title_center}>No hay bancos</h3>
+          <h3 className={styles.title_center}>Balance</h3>
           <p>
-            Conecta Helebba a tus bancos para relacionar y tener control total
-            sobre tus movimientos.
+            {DivisaFormater(store.balance)}
           </p>
         </div>
         <div className={`${styles.board_card} ${styles.span_2}`}>
@@ -129,34 +140,24 @@ const Dashboard = () => {
         </div>
         <div className={styles.board_flex_column}>
           <div className={styles.board_card}>
-            <h3 className={styles.title}>Ganancia neta</h3>
-            <h4 className={styles.time}>AÑO ACTUAL</h4>
-
-            <h2>{DivisaFormater(40000000)}</h2>
+            <h3 className={styles.title}>En lista de espera (Covers)</h3>
+            <h4 className={styles.time}>Ultimo Cover</h4>
+            <h2>{0}</h2>
           </div>
           <div className={styles.board_card}>
-            <h3 className={styles.title}>Costos fijos</h3>
-            <h4 className={styles.time}>MES ACTUAL</h4>
-            <h2>{DivisaFormater(3000000)}</h2>
+            <h3 className={styles.title}>Salidas</h3>
+            <h4 className={styles.time}>Ultimo Cover</h4>
+            <h2>{0}</h2>
           </div>
         </div>
 
         <div className={`${styles.board_card} ${styles.board_bank_report}`}>
-          <h3 className={styles.title}>Entradas y salidas de banco</h3>
-          <h4 className={styles.time}>MES ACTUAL</h4>
+          <h3 className={styles.title}>Lista de espera (Covers)</h3>
+          <h4 className={styles.time}>Ultimo Covers</h4>
           <ul>
-            <li>
-              <p>Entradas</p> <span>0</span>
-            </li>
-            <li>
-              <p>Salidas</p> <span>0</span>
-            </li>
-            <li>
-              <p>Saldo</p> <span>0</span>
-            </li>
           </ul>
         </div>
-        <div className={styles.board_card}>
+        {/* <div className={styles.board_card}>
           <h3 className={styles.title}>Resumen de gastos</h3>
           <h4 className={styles.time}>ÚLTIMOS 12 MESES</h4>
           <h2>
@@ -165,8 +166,8 @@ const Dashboard = () => {
           <span className={styles.label_month}>
             {monthsListExpense[Number(month) - 1].label.toUpperCase()} 2022
           </span>
-        </div>
-        <div className={`${styles.board_card} ${styles.list}`}>
+        </div> */}
+        {/* <div className={`${styles.board_card} ${styles.list}`}>
           <h3 className={styles.title}>Cuentas de gasto</h3>
           <h4 className={styles.time}>AÑO ACTUAL</h4>
           <h2>{DivisaFormater(65000000)}</h2>
@@ -177,9 +178,6 @@ const Dashboard = () => {
                 <p>{DivisaFormater(45600000)}</p>{" "}
               </div>
               <span className={styles.bar}>
-                {/* {console.log("CALCUL", Math.trunc(expenses?.filter((expense) => expense.status == 'active').reduce((a,c) => a + Number(c.total_price) * 1, 0) / (expenses
-                  ?.filter((expense) => expense.status == "active")
-                  .reduce((a, c) => a + Number(c.total_price) * 1, 0) + costs?.reduce((a,c) => a + Number(c.price), 0)) * 100))} */}
               </span>
             </li>
             <li>
@@ -188,9 +186,6 @@ const Dashboard = () => {
                 <p>{DivisaFormater(50000000)}</p>{" "}
               </div>
               <span className={styles.bar}>
-                {/* {console.log("CALCUL", Math.trunc(expenses?.filter((expense) => expense.status == 'active').reduce((a,c) => a + Number(c.total_price) * 1, 0) / (expenses
-                  ?.filter((expense) => expense.status == "active")
-                  .reduce((a, c) => a + Number(c.total_price) * 1, 0) + costs?.reduce((a,c) => a + Number(c.price), 0)) * 100))} */}
               </span>
             </li>
             <li>
@@ -199,19 +194,16 @@ const Dashboard = () => {
                 <p>{DivisaFormater(33000000)}</p>{" "}
               </div>
               <span className={styles.bar}>
-                {/* {console.log("CALCUL", Math.trunc(expenses?.filter((expense) => expense.status == 'active').reduce((a,c) => a + Number(c.total_price) * 1, 0) / (expenses
-                  ?.filter((expense) => expense.status == "active")
-                  .reduce((a, c) => a + Number(c.total_price) * 1, 0) + costs?.reduce((a,c) => a + Number(c.price), 0)) * 100))} */}
               </span>
             </li>
           </ul>
-        </div>
-        <div className={`${styles.board_card} ${styles.board_tasks}`}>
+        </div> */}
+        {/* <div className={`${styles.board_card} ${styles.board_tasks}`}>
           <h3 className={styles.title}>Mis tareas</h3>
           <h4 className={styles.time}>TODOS LOS PROYECTOS</h4>
           <h3 className={styles.title_center}>No hay tareas asignadas</h3>
-        </div>
-        <div className={`${styles.board_card} ${styles.board_banks}`}>
+        </div> */}
+        {/* <div className={`${styles.board_card} ${styles.board_banks}`}>
           <i className="bx bx-envelope"></i>
           <h3 className={styles.title_center}>
             No hay correos electronicos sin leer
@@ -220,10 +212,10 @@ const Dashboard = () => {
             Envia facturas y presupuestos por correo electronico y podras saber
             si han sido leidos.
           </p>
-        </div>
-        <div className={styles.board_card}>
+        </div> */}
+        {/* <div className={styles.board_card}>
           <h4 className={styles.time}>Contactos</h4>
-        </div>
+        </div> */}
       </div>
     </>
   );

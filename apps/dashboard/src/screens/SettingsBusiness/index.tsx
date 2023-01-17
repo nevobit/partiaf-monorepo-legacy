@@ -1,10 +1,28 @@
 import Field from "@/components/shared/Field";
 import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
-import React from "react";
+import { AppStore } from "@/redux/store";
+import { Store } from "@partiaf/types";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./settingsBusiness.module.css";
 
 const SettingsBusiness = () => {
+
+  const {store} = useSelector((state: AppStore) => state.stores);
+
+  const [storeUpdate, setStoreUpdate] = useState<Partial<Store>>({
+    name: store.name,
+    nit: store.nit,
+    email: store.email,
+    phone: store.phone,
+    limit: store.limit,
+    type: store.type,
+    photos: store.photos
+  });
+
+  console.log({store})
+
   return (
     <div className={styles.screen}>
       <div className={styles.settings}>
@@ -19,26 +37,26 @@ const SettingsBusiness = () => {
               <h4 className={styles.card_title}>Detalles del negocio</h4>
               <div className={styles.colums_card}>
                 <Field label="Nombre del negocio">
-                  <Input />
+                  <Input value={storeUpdate.name} />
                 </Field>
                 <Field label="Numero de identificacion">
-                  <Input />
+                  <Input value={storeUpdate.nit} />
                 </Field>
 
                 <Field label="Correo Electronico">
-                  <Input />
+                  <Input value={storeUpdate.email} />
                 </Field>
 
                 <Field label="Telefono">
-                  <Input />
+                  <Input value={storeUpdate.phone} />
                 </Field>
 
                 <Field label="Capacidad del negocio">
-                  <Input />
+                  <Input value={storeUpdate.limit} />
                 </Field>
 
                 <Field label="Tipo discoteca">
-                  <select name="" id="" required>
+                  <select name="" id="" required value={storeUpdate.type} >
                     <option value="Discoteca">Discoteca</option>
                     <option value="Bar">Bar</option>
                     <option value="Gastrobar">Gastrobar</option>
@@ -69,29 +87,12 @@ const SettingsBusiness = () => {
                 <Field label="Pais">
                   <Input />
                 </Field>
-                <Field label="Tipo de regimen">
-                  <Input />
-                </Field>
-                <Field label="Tipo de factura">
-                  <Input />
-                </Field>
               </div>
             </div>
             <div className={styles.card}>
               <h4 className={styles.card_title}>Terminos y condiciones</h4>
               <div className={styles.colums_card}>
-                <Field label="Nombre del negocio">
-                  <Input />
-                </Field>
-                <Field label="Numero de identificacion">
-                  <Input />
-                </Field>
-                <Field label="Correo Electronico">
-                  <Input />
-                </Field>
-                <Field label="Telefono">
-                  <Input />
-                </Field>
+                
               </div>
             </div>
           </div>
@@ -101,7 +102,13 @@ const SettingsBusiness = () => {
               <ImageInput />
               
             </div>
+            <div className={styles.image_input_list}>
+              {storeUpdate?.photos?.map((photo) => (
+                <img src={photo} alt="" />
+              ))}
+            </div>
           </div>
+          
         </div>
       </div>
     </div>

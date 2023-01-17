@@ -10,6 +10,7 @@ import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Map from "../Map";
 import styles from "./Signin.module.css";
 
 const Signup = () => {

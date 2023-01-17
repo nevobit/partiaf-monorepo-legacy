@@ -13,9 +13,20 @@ mutation UserSignup($name: String, $phone: String, $username: String, $password:
 `;
 
 export const LOGIN_USER = gql `
-mutation UserSignin($username: String, $password: String) {
+mutation Mutation($username: String!, $password: String!) {
   userSignin(username: $username, password: $password) {
     token
+    balance
+    uuid
+    username
+    biography
+    email
+    events
+    firstname
+    gender
+    lastname
+    phone
+    photo
   }
 }
 `

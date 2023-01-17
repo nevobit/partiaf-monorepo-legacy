@@ -5,6 +5,7 @@ import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
+import swal from "sweetalert";
 
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
+      if(cover.limit > store.limit){
+       
+       
+      }
       dispatch(createCover(cover) as any);
     } catch (error) {
       if (error instanceof Error) {

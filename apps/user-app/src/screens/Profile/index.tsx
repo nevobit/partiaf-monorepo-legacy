@@ -1,13 +1,23 @@
 import React from 'react'
 import { Text, View, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
+import { signout } from '../../features/auth';
+import { useDispatch } from 'react-redux';
 
 const Profile = () => {
+
+    const {user} = useSelector((state:any) => state.auth);
+
+    const dispatch = useDispatch();
+    const exit = () => {
+        dispatch(signout());
+    }
   return (
     <View>
       <StatusBar animated={true} />
       <View style={styles.header}>
-                <Text style={{fontWeight: '600', fontSize: 23}}>yunsde</Text>
+                <Text style={{fontWeight: '600', fontSize: 23}}>@{user.username}</Text>
                 <View style={styles.header_left}>
                 <Ionicons name={'ios-qr-code-outline'} style={{ fontWeight: '100', fontSize: 23, marginRight: 7}} />
                 <TouchableOpacity>
@@ -29,6 +39,8 @@ const Profile = () => {
             <View style={{display: 'flex', paddingTop: 10, alignItems: 'center', justifyContent:'center'}}>
                 <Text style={{fontWeight: '700', color: '#111111', fontSize: 20, marginBottom: 5}}>Nestor Mosquera</Text>
                 <Text>Click para anadir una biografia</Text>
+                <Text>{JSON.stringify(user)}</Text>
+
             </View>
 
             <View style={{display: 'flex', flexDirection: 'row',justifyContent: 'center',  alignItems: 'center', marginTop: 30}}>
@@ -39,6 +51,10 @@ const Profile = () => {
                    <Image source={{uri: 'https://i.postimg.cc/Hn6R798t/instagram.png'}} style={{height: 25, width: 25, resizeMode: 'cover'}} />
                 </TouchableOpacity>
             </View>
+
+            <TouchableOpacity onPress={exit}  style={{ marginRight: 10, backgroundColor: 'rgba(0,0,0,.005)', borderColor: 'rgba(0,0,0,.1)', borderWidth:1, width: 150, borderRadius: 5, height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center'}} >
+                    <Text style={{fontWeight: '500', fontSize:16}}>Salir de la cuenta</Text>
+                </TouchableOpacity>
     </View>
   )
 }

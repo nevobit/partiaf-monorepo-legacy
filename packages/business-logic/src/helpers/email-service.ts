@@ -2,11 +2,12 @@ import formData from "form-data";
 import Mailgun from "mailgun.js";
 import otp from "otp-generator";
 
+const MAILGUL_KEY = process.env.MAILGUL_KEY || "anymailgunparameter";
 const mailgun = new Mailgun(formData);
-const DOMAIN = "nevobit.com";
+const DOMAIN = "partiaf-api.xyz";
 const mg = mailgun.client({
-  username: "nevobit",
-  key: "ac76199118f70c0259504fd1dda1ee06-cc9b2d04-8b77b1e9",
+  username: "Partiaf",
+  key: MAILGUL_KEY,
 });
 
 export const sendEmail = async (email: string | undefined): Promise<string | Error> => {

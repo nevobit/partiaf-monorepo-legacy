@@ -27,10 +27,17 @@ export const userSignin = async ({username, password}: PartialUser): Promise<Use
 
     return {
         token,
-        uuid: user.uuid,
-        username: user.username,
-        name: user.name,
-        events: user.events,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        photo: user.photo,
         balance: user.balance,
+        events: user.events,
+        uuid: user.uuid,
+        email: user.email,
+        biography: user.biography,
+        username: user.username,
+        gender: user.gender,
+        phone: user.phone,
+        pin: user.pin
     };
 }
