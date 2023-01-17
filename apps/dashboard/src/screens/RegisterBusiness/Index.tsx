@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./registerBusiness.module.css";
 import { PrivateRoutes } from '../../constants-definitions/Routes/index';
-import WrappedMap from "@/components/shared/Map";
-import Map from "@/components/shared/Map";
 import { createStore } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
 

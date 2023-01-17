@@ -28,6 +28,11 @@ export const logoutAdmin = () => {
   localStorage.removeItem("admin");
 };
 
+export const updateAdminThunks = async (uuid: string, info: PartialAdmin) => {
+  const { data } = await PARTIAF_API.put(`/admins/${uuid}`, { data: info });
+  return data;
+};
+
 export const verificationCodeAdmin = async (code: string) => {
   const { data } = await PARTIAF_API.post("/admin-activate", { code });
   console.log(data);

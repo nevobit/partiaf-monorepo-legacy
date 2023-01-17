@@ -5,7 +5,7 @@ import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
-import swal from "sweetalert";
+
 
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();

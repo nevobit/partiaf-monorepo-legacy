@@ -3,15 +3,20 @@ import { Admin, AdminSchemaMongo } from "@partiaf/types";
 
 type PartialAdmin = Partial<Admin>;
 
-export const updateAdmin = async(uuid: string, data: PartialAdmin): Promise<Admin | Error> => {
-    const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
-    const admin = await model.findOne({uuid: data.uuid});
+export const updateAdmin = async (
+  uuid: string,
+  data: PartialAdmin
+): Promise<Admin | Error> => {
+  const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
+  const admin = await model.findOne({ uuid });
 
-    if(!admin) { throw new Error("602")};
-    
-    const dataToUpdate = {...data};
+  if (!admin) {
+    throw new Error("602");
+  }
 
-    await admin.update(dataToUpdate);
-    
-    return {...admin.doc};
-}  
+  const dataToUpdate = { ...data };
+
+  await admin.updateOne(dataToUpdate);
+
+  return { ...admin.doc };
+};

@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Admin } from "@partiaf/types";
-import { logoutAdmin, signinAdmin, signupAdmin, verificationCodeAdmin } from "./thunks";
+import {
+  logoutAdmin,
+  signinAdmin,
+  signupAdmin,
+  updateAdminThunks,
+  verificationCodeAdmin,
+} from "./thunks";
 
 export const EmptyadminState: Admin = {
   uuid: "",
@@ -56,9 +62,7 @@ export const signup = createAsyncThunk(
   "/signup",
   async (admin: PartialAdmin, thunkAPI) => {
     try {
-      return await signupAdmin(
-        admin
-      );
+      return await signupAdmin(admin);
     } catch (err: any) {
       const message = err;
       return thunkAPI.rejectWithValue(message.response.data.message);
@@ -70,9 +74,7 @@ export const verification = createAsyncThunk(
   "/verification",
   async (code: string, thunkAPI) => {
     try {
-      return await verificationCodeAdmin(
-        code
-      );
+      return await verificationCodeAdmin(code);
     } catch (err: any) {
       const message = err;
       return thunkAPI.rejectWithValue(message.response.data.message);
@@ -85,15 +87,26 @@ export const logout = createAsyncThunk("/logout", async () => {
   document.location.href = "/";
 });
 
+export const updateAdmin = createAsyncThunk(
+  "admins/update",
+  async (data: Admin, thunkAPI) => {
+    try {
+      return await updateAdminThunks(data?.uuid, data);
+    } catch (err) {
+      console.log("ADMIN ERROR", err);
+    }
+  }
+);
+
 export const adminsSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
     reset: (state) => {
-        state.loading = false,
-        state.success = false,
-        state.error = "",
-        state.admin = EmptyadminState;
+      (state.loading = false),
+        (state.success = false),
+        (state.error = ""),
+        (state.admin = EmptyadminState);
     },
   },
 
@@ -134,8 +147,8 @@ export const adminsSlice = createSlice({
       .addCase(verification.fulfilled, (state, action) => {
         state.loading = false;
         state.successVerification = true;
-        state.admin= action.payload;
-      })
+        state.admin = action.payload;
+      });
   },
 });
 
