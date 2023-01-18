@@ -330,6 +330,11 @@
       "reviewCategory": "apps"
     },
     {
+      "packageName": "landing",
+      "projectFolder": "apps/landing",
+      "reviewCategory": "apps"
+    },
+    {
       "packageName": "api",
       "projectFolder": "apps/api",
       "reviewCategory": "apps"
