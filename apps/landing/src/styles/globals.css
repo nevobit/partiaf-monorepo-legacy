@@ -37,18 +37,12 @@ button{
 }
 
 input, textarea, select, optgroup{
-    outline: none;
+    outline: none !important;
     border: none;
     width: 100%;
 }
 ul{
     list-style: none;
-}
-
-img,
-picture{
-    max-width: 100%;
-    display: block;
 }
 
 @media (prefers-reduced-motion: reduce){
