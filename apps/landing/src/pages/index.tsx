@@ -9,7 +9,7 @@ import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   return (
-    <Layout title="home" description="home">
+    <Layout title="Incio" description="Conecta con las personas que están cerca y hacen parte de la comunidad partiaf, ¡Una solución segura y exclusiva donde lo conectamos con los sitios de 'Restaurantes, Bares y Discotecas' que mas les guste!">
       <div className="w-full h-auto relative flex flex-col items-center">
         <Image
           className="absolute left-0 top-0  mix-blend-exclusion md:hidden"
