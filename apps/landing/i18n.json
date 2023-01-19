@@ -1,9 +1,0 @@
-{
-    "locales": ["en", "es", "fr"],
-    "defaultLocale": "en",
-    "pages": {
-      "*": ["common"],
-      "seo": ["title"],
-      "/about": [""]
-    }
-  }

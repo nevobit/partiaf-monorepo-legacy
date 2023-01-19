@@ -5,6 +5,7 @@ export default function AboutUsSection() {
   return (
     <section className="relative w-11/12 lg:w-4/5 h-full flex flex-col justify-items-center items-center my-28 gap-9 lg:flex-row">
       <div className="max-w-[552px]">
+        <div id="quienesSomos" />
         <p className="text-base-300 text-2xl">QUIENES SOMOS</p>
         <p className="text-3xl font-medium leading-[48px]">
           ¡Somos una <span className="bg-primary"> Startup </span>con un modelo

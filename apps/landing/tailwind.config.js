@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/pages/**/*.{js,ts,jsx,tsx}",
-  "./src/components/**/*.{js,ts,jsx,tsx}"],
+  "./src/components/**/*.{js,ts,jsx,tsx}",
+  "./src/forms/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors:{
@@ -27,6 +28,7 @@ module.exports = {
           "base-200":"#DBDBDB",
           "base-300":"#9C9C9C",
           "base-content":"#333333",
+          "error": "#FF5481",
 
           "--rounded-box": "0.75rem",
           "--rounded-badge": "0.75rem",

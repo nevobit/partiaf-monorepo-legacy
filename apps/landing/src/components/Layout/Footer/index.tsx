@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Shape from "/public/shapes/footerShape.png";
 import ShapeDeskTop from "/public/shapes/footerShadowDesktop.png";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,16 +9,16 @@ export default function Footer() {
       <Image
         src={Shape}
         alt="shape"
-        className="absolute h-full w-full mix-blend-exclusion lg:hidden"
+        className="absolute h-full w-full mix-blend-exclusion md:hidden"
       />
       <Image
         src={ShapeDeskTop}
         alt="shape"
-        className="absolute h-full w-full mix-blend-exclusion hidden lg:block"
+        className="absolute h-full w-full mix-blend-exclusion hidden md:block"
       />
-      <div className="bg-[url('/images/bg_gradient.jpg')] lg:bg-[url('/images/bg_gradient_footer.jpg')] flex justify-center bg-no-repeat bg-co w-full h-[680px] lg:h-[479px]">
-        <div className="w-11/12 lg:w-4/5 h-full lg:justify-between flex flex-col items-center lg:flex-row ">
-          <section className="mt-12 w-4/12 ">
+      <div className="bg-[url('/images/bg_gradient.jpg')] bg-cover md:bg-[url('/images/bg_gradient_footer.jpg')] flex justify-center bg-no-repeat bg-co w-full h-auto min-h-[680px] md:h-[479px]">
+        <div className="w-11/12 md:w-4/5 h-full md:justify-between flex flex-col md:items-center md:flex-row gap-7 z-30">
+          <section className="mt-12 md:w-4/12 ">
             <Image
               src="/icons/partiafLogoWhite.svg"
               alt="partiaf icon"
@@ -29,34 +30,42 @@ export default function Footer() {
               actualización y novedades Suscríbase a nuestro boletín para
               recibir.
             </p>
-            <div className="flex justify-around mb-11">
-              <Image
-                src="/icons/facebookIconWhite.svg"
-                alt="facebook icon"
-                width={13.58}
-                height={29.23}
-              />
-              <Image
-                src="/icons/twitterIconWhite.svg"
-                alt="facebook icon"
-                width={28.91}
-                height={23.41}
-              />
-              <Image
-                src="/icons/instagramIconWhite.svg"
-                alt="facebook icon"
-                width={30.57}
-                height={30.57}
-              />
-              <Image
-                src="/icons/youtubeIconWhite.svg"
-                alt="facebook icon"
-                width={29.41}
-                height={20.69}
-              />
+            <div className="flex justify-around items-center mb-11 z-30">
+              <Link href="/#">
+                <Image
+                  src="/icons/facebookIconWhite.svg"
+                  alt="facebook icon"
+                  width={13.58}
+                  height={29.23}
+                />
+              </Link>
+              <Link href="#">
+                <Image
+                  src="/icons/twitterIconWhite.svg"
+                  alt="facebook icon"
+                  width={28.91}
+                  height={23.41}
+                />
+              </Link>
+              <Link href="/#">
+                <Image
+                  src="/icons/instagramIconWhite.svg"
+                  alt="facebook icon"
+                  width={30.57}
+                  height={30.57}
+                />
+              </Link>
+              <Link href="/#">
+                <Image
+                  src="/icons/youtubeIconWhite.svg"
+                  alt="facebook icon"
+                  width={29.41}
+                  height={20.69}
+                />
+              </Link>
             </div>
           </section>
-          <section className="w-4/12 ">
+          <section className="md:w-4/12">
             <p className="mb-5">Dirección de la oficina</p>
             <div className="flex flex-col gap-5 mb-7">
               <div className="flex items-center gap-2 ">
@@ -88,7 +97,7 @@ export default function Footer() {
               </div>
             </div>
           </section>
-          <section className="w-4/12">
+          <section className="md:w-4/12 mb-4 md:mb-0">
             <p>Newsletter</p>
             <p className="text-[15px] leading-6 my-3">
               Suscríbase a nuestro boletín para recibir nuestra última
@@ -98,7 +107,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Email address"
-                className="w-full h-full overflow-hidden input bg-secondary/10 backdrop-opacity-[0.08] placeholder:text-secondary text-secondary"
+                className="w-full h-full overflow-hidden input bg-secondary/10 backdrop-opacity-[0.08] placeholder:text-secondary text-secondary pr-20"
               />
               <button className="btn btn-primary absolute right-0 top-0 bottom-0 h-full w-[68px]">
                 <Image
