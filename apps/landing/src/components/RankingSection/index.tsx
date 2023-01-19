@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 export default function RankingSection() {
   return (
     <section className="w-full h-[487px] bg-gradient-to-b from-[#221B00] to-[#4E3D00] z-10">
-      <div className="w-full h-full grid grid-cols-autoColumn gap-6 items-center justify-center px-1">
+      <div className="container w-full h-full grid grid-cols-autoColumn gap-6 items-center justify-center px-1">
         <div className="flex flex-col gap-4">
           <div className="bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center">
             <Image

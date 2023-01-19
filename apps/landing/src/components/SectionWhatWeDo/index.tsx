@@ -3,7 +3,7 @@ import Party from "/public/images/party.png";
 
 export default function SectionWhatWeDo() {
   return (
-    <section className="relative w-11/12 h-full grid lg:grid-cols-2 justify-items-center items-center my-28 gap-9 lg:gap-0">
+    <section className="container relative w-11/12 h-full grid lg:grid-cols-2 justify-items-center items-center my-28 gap-9 lg:gap-0">
       <div>
         <div id="queHacemos" />
         <p className="text-base-300 text-2xl">QUE HACEMOS</p>

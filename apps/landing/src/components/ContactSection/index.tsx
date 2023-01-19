@@ -26,7 +26,7 @@ export default function ContactSection() {
   const onSubmit = () => console.log("data");
 
   return (
-    <section className="w-11/12 h-full my-28 gap-9 flex flex-col lg:flex lg:flex-row-reverse justify-center items-center z-20">
+    <section className="container w-11/12 h-full my-28 gap-9 flex flex-col lg:flex lg:flex-row-reverse justify-center items-center z-20">
       <div className="mb-8 max-w-[617px] w-full">
         <div id="contacto" />
         <p className="text-base-300 text-2xl text-left mb-3">CONTACTO</p>

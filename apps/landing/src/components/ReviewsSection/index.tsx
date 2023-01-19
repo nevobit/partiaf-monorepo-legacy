@@ -23,7 +23,7 @@ export default function ReviewsSection() {
     ]
   );
   return (
-    <section className="relative  w-11/12  md:w-4/5 h-full grid justify-items-center items-center my-11 md:gap-9">
+    <section className="container relative  w-11/12  md:w-4/5 h-full grid justify-items-center items-center my-11 md:gap-9">
       <div className="w-full h-full overflow-hidden">
         <p className="text-base-300 text-2xl text-center">CLIENTES</p>
         <p className="text-3xl font-medium leading-[48px] md:text-center">

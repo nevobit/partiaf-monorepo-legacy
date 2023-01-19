@@ -46,6 +46,11 @@ ul{
     list-style: none;
 }
 
+.container{
+    max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+}
 @media (prefers-reduced-motion: reduce){
     html:focus-within {
         scroll-behavior: auto;
