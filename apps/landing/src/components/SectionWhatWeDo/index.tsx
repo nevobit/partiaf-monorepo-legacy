@@ -5,6 +5,7 @@ export default function SectionWhatWeDo() {
   return (
     <section className="relative w-11/12 h-full grid lg:grid-cols-2 justify-items-center items-center my-28 gap-9 lg:gap-0">
       <div>
+        <div id="queHacemos" />
         <p className="text-base-300 text-2xl">QUE HACEMOS</p>
         <p className="text-3xl font-medium leading-[48px]">
           <span className="bg-primary">Conecta </span>con las personas que están

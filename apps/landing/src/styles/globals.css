@@ -13,6 +13,7 @@
         line-height: 0.71rem;
         -webkit-text-size-adjust: 100%;    
         max-width: 100vw;
+        scroll-behavior: smooth;
     }
     
     html:focus-within {
