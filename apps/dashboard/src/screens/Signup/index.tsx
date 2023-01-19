@@ -184,7 +184,6 @@ const Signup = () => {
             <Input placeholder="Confirmar contrasena" />
           </Field>
         </div>
-
         <div className={styles.grid}>
           <Field>
             <Button>
