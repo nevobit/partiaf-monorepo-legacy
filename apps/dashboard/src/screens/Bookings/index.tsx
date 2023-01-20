@@ -71,11 +71,6 @@ const Bookings = () => {
       <div className={styles.right__screen}>
         {dataBooking.map((booking) => (
           <button key={booking.id} className={styles.button__none}>
-            {/* <CardBooking
-              key={booking.id}
-              name={booking.name}
-              number={booking.number}
-            /> */}
           </button>
         ))}
       </div>
