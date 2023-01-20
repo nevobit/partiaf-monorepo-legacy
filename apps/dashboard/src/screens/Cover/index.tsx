@@ -22,7 +22,7 @@ const Cover = () => {
 
   console.log({covers})
   useEffect(() => {
-    dispatch(getCoverById(store.uuid) as any);
+    dispatch(getCoverById(store.uuid || "") as any);
   }, [dispatch, store, success]);
   return (
     <>
