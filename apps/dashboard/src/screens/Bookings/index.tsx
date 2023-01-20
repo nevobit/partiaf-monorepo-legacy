@@ -24,17 +24,7 @@ const Bookings = () => {
       day: "31/12/2022",
       number: "2",
       state: true,
-    },
-    {
-      id: "3",
-      name: "Mesa para 2",
-      peoples: "200",
-      type: "Evento",
-      hour: "10:00",
-      day: "24/12/2022",
-      number: "3",
-      state: true,
-    },
+    }
   ];
   return (
     <div className={styles.screen}>
@@ -57,7 +47,6 @@ const Bookings = () => {
             <p>0</p>
           </div>
         </div>
-
         <div className={styles.flex}>
           <div className={styles.right_buttons}>
             <button>
@@ -65,7 +54,6 @@ const Bookings = () => {
             </button>
           </div>
         </div>
-
         <BookingList dataBooking={dataBooking} />
       </div>
       <div className={styles.right__screen}>
