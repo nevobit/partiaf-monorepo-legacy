@@ -21,7 +21,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   const [Urlimage, setUrlImage] = useState("");
 
-  const [cover, setCover] = useState({
+  const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
     name: Cover?.name,
     type: "General",
@@ -32,7 +32,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     hour: Cover?.hour,
     description: Cover?.description,
     image: Urlimage,
-    store: store.uuid,
+    store: store.uuid || "",
     status: true,
   });
 
