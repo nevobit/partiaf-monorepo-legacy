@@ -1,42 +1,74 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
-import styles from './Header.module.css'
-import useTranslation from 'next-translate/useTranslation'
+import { useCallback, useEffect, useState } from "react";
+import Image from "next/legacy/image";
+import Link from "next/link";
+import MenuMobile from "@/components/MenuMobile";
 
-const Header = () => {
-  const {t} = useTranslation();
+export default function Header() {
+  const [showModal, setShowModal] = useState(false);
 
-  const {push, pathname, locales, asPath} = useRouter();
+  const disableScroll = useCallback(() => {
+    document.getElementsByTagName("html")[0].style.overflow = "hidden";
+  }, []);
 
-  const changeLanguage = (e: any) => {
-    const locale = e.target.value;
-    push(pathname, asPath, {locale});
-  }
+  const enableScroll = useCallback(() => {
+    document.getElementsByTagName("html")[0].style.overflow = "auto";
+  }, []);
+
+  const handledModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  useEffect(() => {
+    showModal ? disableScroll() : enableScroll();
+  }, [showModal]);
+
   return (
-    <header className={styles.header}>
-      <Link href="/"><Image src="/logo.svg" width={160} height={55} alt="Logo nevobit" /></Link>
-      <nav>
-        <ul>
-           
-            <li><Link href="/">{t('common:services')}</Link></li>
-            <li><Link href="/">{t('common:solutions')}</Link></li>
-            <li><Link href="/">{t('common:work')}</Link></li>
-            <li><Link href="/">{t('common:methodology')}</Link></li>
-            <li><Link href="/">{t('common:about')}</Link></li>
-            <li><Link href="/">BLOG</Link></li>
-            <li className={styles.language_container}>
-              <select onChange={changeLanguage} className={styles.language}>
-                {locales?.map((locale) => (
-                <option key={locale} value={locale} >{locale}</option>
-                ))}
-              </select>
-            </li>
-        </ul>
-      </nav>
-    </header>
-  )
+    <>
+      {showModal && <MenuMobile onMenuClick={handledModal} />}
+      <div className="flex flex-col items-center justify-center absolute w-full z-10">
+        <div className="navbar bg-transparent w-11/12 h-28">
+          <div className="flex-1 lg:flex-none">
+            <Image
+              src="/icons/logo-partiaf.svg"
+              width={179.14}
+              height={39}
+              alt="Partiaf icon"
+            />
+          </div>
+          <div className="flex-1 justify-end  hidden lg:flex">
+            <ul className="flex text-secondary text-base gap-24">
+              <li>
+                <Link href="/">INICIO</Link>
+              </li>
+              <li>
+                <Link href="#queHacemos" scroll={false}>
+                  QUE HACEMOS
+                </Link>
+              </li>
+              <li>
+                <Link href="#quienesSomos" scroll={false}>
+                  QUIENES SOMOS
+                </Link>
+              </li>
+              <li>
+                <Link href="#contacto" scroll={false}>
+                  CONTACTO
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="flex-none z-50 lg:hidden">
+            <button onClick={() => setShowModal((prev) => !prev)}>
+              <Image
+                src="/icons/burguerIcon.svg"
+                width={19.17}
+                height={13}
+                alt="Menu icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
-
-export default Header
