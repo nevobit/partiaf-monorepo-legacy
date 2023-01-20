@@ -3,10 +3,8 @@ import { Admin, AdminSchemaMongo } from "@partiaf/types";
 
 type PartialAdmin = Partial<Admin>;
 
-export const updateAdmin = async (
-  uuid: string,
-  data: PartialAdmin
-): Promise<Admin | Error> => {
+export const updateAdmin = async ( uuid: string, data: PartialAdmin ): Promise<Admin | Error> => {
+  
   const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
   const admin = await model.findOne({ uuid });
 
@@ -16,7 +14,8 @@ export const updateAdmin = async (
 
   const dataToUpdate = { ...data };
 
-  await admin.updateOne(dataToUpdate);
+  await admin.update(dataToUpdate);
 
-  return { ...admin.doc };
+  return { ...admin._doc };
+  
 };

@@ -30,6 +30,8 @@ export const logoutAdmin = () => {
 
 export const updateAdminThunks = async (uuid: string, info: PartialAdmin) => {
   const { data } = await PARTIAF_API.put(`/admins/${uuid}`, { data: info });
+  localStorage.setItem("admin", JSON.stringify(data));
+  window.location.reload();
   return data;
 };
 

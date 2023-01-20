@@ -3,10 +3,12 @@ import { createStoreRoute } from "./create";
 import { getStoresByIdRoute } from "./get-by-id";
 import { getStoreByIdRoute } from "./get-one";
 import { signinStoreRoute } from "./signin";
+import { updateStoreRoute } from "./update";
 
 export const storeRoutes: RouteOptions[] = [
     createStoreRoute,
     getStoresByIdRoute,
     getStoreByIdRoute,
-    signinStoreRoute
+    signinStoreRoute,
+    updateStoreRoute
 ]

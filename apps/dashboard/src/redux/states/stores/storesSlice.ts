@@ -1,54 +1,57 @@
 import { Store } from "@partiaf/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createStore, logoutStore, signinStore } from "./thunks";
+import {
+  createStore,
+  logoutStore,
+  signinStore,
+  updateStoreThunks,
+} from "./thunks";
 
 export type PartialStore = Partial<Store>;
 
-const EmptyStoresState: PartialStore[] =[ 
+const EmptyStoresState: PartialStore[] = [
   {
     uuid: "",
     name: "",
     description: "",
     type: "",
-    nit:"",
+    nit: "",
     email: "",
     phone: 0,
     password: "",
     limit: 0,
     photos: [],
-    balance: 0
-  }
-]
+    balance: 0,
+  },
+];
 
-export interface StoreInfo{
+export interface StoreInfo {
+  uuid: "";
+  name: "";
+  description: "";
+  type: "";
+  nit: "";
+  email: "";
+  phone: 0;
+  password: "";
+  limit: 0;
+  photos: [];
+  balance: 0;
+}
+
+const EmptyStoreState: StoreInfo = {
   uuid: "",
   name: "",
   description: "",
   type: "",
-  nit:"",
+  nit: "",
   email: "",
   phone: 0,
   password: "",
   limit: 0,
   photos: [],
-  balance: 0
-}
-
-const EmptyStoreState: StoreInfo = 
-  {
-    uuid: "",
-    name: "",
-    description: "",
-    type: "",
-    nit:"",
-    email: "",
-    phone: 0,
-    password: "",
-    limit: 0,
-    photos: [],
-    balance: 0
-  }
-
+  balance: 0,
+};
 
 export const createStoreSlice = createAsyncThunk(
   "/stores/create",
@@ -67,7 +70,6 @@ interface Props {
   password: string;
 }
 
-
 export const loginStore = createAsyncThunk(
   "/stores/signin",
   async (store: Props, thunkAPI) => {
@@ -85,24 +87,35 @@ export const logoutStoreSlice = createAsyncThunk("/stores/logout", async () => {
   document.location.href = "/business";
 });
 
+export const updateStore = createAsyncThunk(
+  "stores/update",
+  async (data: PartialStore, thunkAPI) => {
+    try {
+      return await updateStoreThunks(data?.uuid, data);
+    } catch (err) {
+      console.log("STORES ERROR", err);
+    }
+  }
+);
+
 export const storesSlice = createSlice({
   name: "stores",
   initialState: {
-    store:  localStorage.getItem("store")
-    ? JSON.parse(localStorage.getItem("store") as string)
-    : EmptyStoreState,
+    store: localStorage.getItem("store")
+      ? JSON.parse(localStorage.getItem("store") as string)
+      : EmptyStoreState,
     stores: EmptyStoresState,
     loading: false,
     success: false,
     successSignin: false,
-    error: ""
+    error: "",
   },
   reducers: {
     reset: (state) => {
-      state.loading = false,
-      state.successSignin = false,
-      state.success = false,
-      state.error = ''
+      (state.loading = false),
+        (state.successSignin = false),
+        (state.success = false),
+        (state.error = "");
     },
     loadingStoresById: (state) => {
       state.loading = true;
@@ -115,19 +128,19 @@ export const storesSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-    .addCase(loginStore.pending, (state) => {
-      state.loading = true;
-    })
-    .addCase(loginStore.fulfilled, (state, action) => {
-      state.loading = false;
-      state.successSignin = true;
-      state.store = action.payload;
-    })
-    .addCase(loginStore.rejected, (state, action) => {
-      state.loading = false;
-      state.error = String(action.payload);
-      state.store = {};
-    })
+      .addCase(loginStore.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loginStore.fulfilled, (state, action) => {
+        state.loading = false;
+        state.successSignin = true;
+        state.store = action.payload;
+      })
+      .addCase(loginStore.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.store = {};
+      })
       .addCase(createStoreSlice.pending, (state) => {
         state.loading = true;
       })
@@ -140,9 +153,21 @@ export const storesSlice = createSlice({
         state.error = String(action.payload);
         state.stores = [];
       })
+      .addCase(updateStore.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateStore.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(updateStore.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.store = {};
+      })
       .addCase(logoutStoreSlice.fulfilled, (state) => {
         state.store = null;
-      })
+      });
   },
 });
 

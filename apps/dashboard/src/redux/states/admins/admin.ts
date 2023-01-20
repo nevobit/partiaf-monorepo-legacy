@@ -105,8 +105,8 @@ export const adminsSlice = createSlice({
     reset: (state) => {
       (state.loading = false),
         (state.success = false),
-        (state.error = ""),
-        (state.admin = EmptyadminState);
+        (state.error = "")
+      //  (state.admin = EmptyadminState);
     },
   },
 
@@ -138,9 +138,6 @@ export const adminsSlice = createSlice({
         state.error = String(action.payload);
         state.admin = null;
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.admin = null;
-      })
       .addCase(verification.pending, (state) => {
         state.loading = true;
       })
@@ -148,6 +145,21 @@ export const adminsSlice = createSlice({
         state.loading = false;
         state.successVerification = true;
         state.admin = action.payload;
+      })
+      .addCase(updateAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(updateAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.admin = {};
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.admin = null;
       });
   },
 });

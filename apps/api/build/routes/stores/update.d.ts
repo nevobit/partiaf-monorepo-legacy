@@ -1,2 +1,2 @@
 import { RouteOptions } from "fastify";
-export declare const updateAdminRoute: RouteOptions;
+export declare const updateStoreRoute: RouteOptions;

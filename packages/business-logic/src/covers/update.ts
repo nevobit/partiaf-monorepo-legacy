@@ -3,10 +3,8 @@ import { Cover, CoverSchemaMongo } from "@partiaf/types";
 
 type PartialCover = Partial<Cover>;
 
-export const updateCover = async (
-  uuid: string,
-  data: PartialCover
-): Promise<Cover | Error> => {
+export const updateCover = async ( uuid: string, data: PartialCover ): Promise<Cover | Error> => {
+  
   const model = await getModel(Collection.COVERS, CoverSchemaMongo);
   console.log("DATA EN BUSSINESSS", data);
   // const { uuid } = data;

@@ -1,7 +1,7 @@
 import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
-import { reset, updateAdmin } from "@/redux/states/admins/admin";
+import { login, reset, updateAdmin } from "@/redux/states/admins/admin";
 import { AppStore } from "@/redux/store";
 import { Admin } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
@@ -17,6 +17,8 @@ const Settings = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
+  console.log("IMAGEN", imageUrl);
+
   const [adminUpdate, setAdminUpdate] = useState({
     uuid: admin.uuid,
     name: admin.name,
@@ -26,13 +28,15 @@ const Settings = () => {
     phone: admin.phone,
     age: admin.age,
     address: admin.address,
-    photo: admin.photo,
+    photo: imageUrl,
     identification_type: admin.identification_type,
     birthdate: admin.birthdate,
     gender: admin.gender,
     password: admin.password,
     verification_code: admin.verification_code,
   });
+
+  console.log(adminUpdate);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -41,13 +45,13 @@ const Settings = () => {
   ) => {
     const { name, value } = e.target;
     setAdminUpdate((prev) => ({ ...prev, [name]: value }));
-    setAdminUpdate((prev) => ({ ...prev, photo: imageUrl }));
+    setAdminUpdate((prev) => ({ ...prev, ["photo"]: imageUrl }));
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateAdmin(adminUpdate) as any);
+      dispatch(updateAdmin({ ...adminUpdate, photo: imageUrl }) as any);
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
@@ -111,7 +115,11 @@ const Settings = () => {
                   />
                 </Field>
                 <Field label="Edad">
-                  <Input name="age" value={adminUpdate.age} onChange={handleChange} />
+                  <Input
+                    name="age"
+                    value={adminUpdate.age}
+                    onChange={handleChange}
+                  />
                 </Field>
                 <Field label="Direccion">
                   <Input
@@ -123,23 +131,7 @@ const Settings = () => {
               </div>
             </div>
 
-            <div className={styles.card}>
-              <h4 className={styles.card_title}>Seguridad</h4>
-              <div className={styles.colums_card}>
-                <Field label="Contraseña">
-                  <Input />
-                </Field>
-                <Field label="Confirmar Contraseña">
-                  <Input />
-                </Field>
-
-                <div>
-                  <label htmlFor="">Notificaciones</label>
-                  <input type="checkbox" />
-                  {/* checked={notification == "active"? true : false} */}
-                </div>
-              </div>
-            </div>
+          
           </div>
           <div>
             <div className={styles.image_input}>

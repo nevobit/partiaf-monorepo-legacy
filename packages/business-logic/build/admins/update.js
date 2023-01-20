@@ -10,8 +10,8 @@ const updateAdmin = async (uuid, data) => {
         throw new Error("602");
     }
     const dataToUpdate = { ...data };
-    await admin.updateOne(dataToUpdate);
-    return { ...admin.doc };
+    await admin.update(dataToUpdate);
+    return { ...admin._doc };
 };
 exports.updateAdmin = updateAdmin;
 //# sourceMappingURL=update.js.map

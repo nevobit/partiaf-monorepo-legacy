@@ -1,38 +1,31 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
-import perfil from "../../../assets/LS.jpg";
 import { logout } from "@/redux/states/admins/admin";
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutStore } from "@/redux/states/stores/thunks";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutStoreSlice } from "@/redux/states/stores/storesSlice";
 import { AppStore } from "@/redux/store";
 
 const Header = () => {
-  const [drop, setDrop] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-
-  const {admin} = useSelector((state: AppStore) => state.admins);
-
+  const { admin } = useSelector((state: AppStore) => state.admins);
   const dispatch = useDispatch();
 
   const signoutHandler = () => {
-    try{
+    try {
       dispatch(logout() as any);
-    }catch(err){
+    } catch (err) {
       console.log(err);
-
     }
   };
 
   const changeBusiness = () => {
-    try{
+    try {
       dispatch(logoutStoreSlice() as any);
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
-
+  };
 
   return (
     <header>
@@ -50,7 +43,11 @@ const Header = () => {
               >
                 {admin.name} {admin.lastname}
               </h3>
-              <img className={styles.user_image} src={admin.photo? admin.photo : '/default.jpg' } alt="" />
+              <img
+                className={styles.user_image}
+                src={admin.photo ? admin.photo : "/default.jpg"}
+                alt=""
+              />
             </div>
           </div>
 
@@ -58,7 +55,7 @@ const Header = () => {
             <div className={styles.menu_content}>
               <Link to="/settings">Mi perfil</Link>
               <Link to="/settings-business">Configurar negocio</Link>
-              <button onClick={changeBusiness} >Cambiar de negocio</button>
+              <button onClick={changeBusiness}>Cambiar de negocio</button>
               <button onClick={signoutHandler}>Cerrar Sesion</button>
             </div>
           </div>

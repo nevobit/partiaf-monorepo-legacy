@@ -34,3 +34,14 @@ content-type: application/json
 {
     "code": "151605"
 }
+
+###
+PUT http://localhost:5000/api/v3/admins/05a15631-7a63-4edd-934e-e17065b9793a HTTP/1.1
+content-type: application/json
+
+{
+    
+    "lastname": "MATOS33",
+    "name": "EDGAR" 
+    
+}

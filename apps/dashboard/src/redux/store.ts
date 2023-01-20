@@ -1,5 +1,4 @@
 import { AdminInfo } from "@/types/admin/AdminInfo";
-import { Admin, Cover, Store } from "@partiaf/types";
 import { configureStore } from "@reduxjs/toolkit";
 import { adminsSlice } from "./states/admins/admin";
 import {
@@ -11,7 +10,7 @@ import { coversSlice, PartialCover } from "./states/covers/covers";
 
 interface StoresSlice {
   stores:   PartialStore[];
-  store: StoreInfo;
+  store: PartialStore;
   loading: boolean;
   success: boolean;
   successSignin: boolean;

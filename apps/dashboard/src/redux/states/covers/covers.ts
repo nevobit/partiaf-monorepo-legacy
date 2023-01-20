@@ -116,6 +116,18 @@ export const coversSlice = createSlice({
         state.error = String(action.payload);
         state.cover = {};
       })
+      .addCase(updateCover.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateCover.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(updateCover.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.cover = {};
+      })
       .addCase(deleteCover.pending, (state) => {
         state.loading = true;
       })

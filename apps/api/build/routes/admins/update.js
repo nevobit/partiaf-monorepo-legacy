@@ -2,10 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAdminRoute = void 0;
 const business_logic_1 = require("@partiaf/business-logic");
-exports.updateAdminRoute = {
-    method: "PUT",
-    url: "/admins/:uuid",
-    handler: async (request, reply) => {
+exports.updateAdminRoute = { method: "PUT", url: "/admins/:uuid", handler: async (request, reply) => {
         const { params, body } = request;
         const { uuid } = params;
         const { data } = body;

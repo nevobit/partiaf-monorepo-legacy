@@ -18,7 +18,8 @@ export const logoutStore = () => {
 
 export const signinStore = async (uuid: string, password: string) => {
   const { data } = await PARTIAF_API.post("/store-signin", {
-    uuid, password,
+    uuid,
+    password,
   });
   if (data) {
     localStorage.setItem("store", JSON.stringify(data));
@@ -26,16 +27,9 @@ export const signinStore = async (uuid: string, password: string) => {
   return data;
 };
 
-
-// export const editBrand = async (
-//   uuid: string | undefined,
-//   info: PartialBrand
-// ) => {
-//   const { data } = await rvApi.put(`brands/${uuid}`, { ...info });
-//   return data;
-// };
-
-// export const deleteBrand = async (uuid: string) => {
-//   const { data } = await rvApi.delete(`brands/${uuid}`);
-//   return data;
-// };
+export const updateStoreThunks = async (uuid: string | undefined, info: PartialStore) => {
+  const { data } = await PARTIAF_API.put(`/stores/${uuid}`, { data: info });
+ // localStorage.setItem("store", JSON.stringify(data));
+  window.location.reload();
+  return data;
+};
