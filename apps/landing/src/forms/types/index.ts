@@ -1,17 +1,18 @@
 import { Control } from "react-hook-form";
+import { FormValues } from "@/components/ContactSection";
 
 export interface InputProps {
-    name: string;
-    control: Control<any>;
-    placeholder: string;
-    errorStyle:string;
-    type: string;
-    className: string;
-  }
+  name: "firstName" | "lastName" | "message" | "email";
+  control: Control<FormValues>;
+  placeholder: string;
+  errorStyle: string;
+  type: string;
+  className: string;
+}
 
 export interface TextareaProps {
-    name: string;
-    control: Control<any>;
-    placeholder: string;
-    className: string;
-  }
+  name: "firstName" | "lastName" | "message" | "email";
+  control: Control<FormValues>;
+  placeholder: string;
+  className: string;
+}

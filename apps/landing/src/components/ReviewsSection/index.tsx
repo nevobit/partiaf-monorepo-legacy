@@ -1,10 +1,10 @@
-import { useKeenSlider } from "keen-slider/react";
-import ReviewCard from "../ReviewCard";
-import Arrow from "../Arrow";
-import "keen-slider/keen-slider.min.css";
 import { useState } from "react";
+import Arrow from "../Arrow";
+import ReviewCard from "../ReviewCard";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
-export default function ReviewsSection() {
+export default function ReviewsSection(): JSX.Element {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
@@ -23,10 +23,10 @@ export default function ReviewsSection() {
     ]
   );
   return (
-    <section className="relative  w-11/12  md:w-4/5 h-full grid justify-items-center items-center my-11 md:gap-9">
+    <section className="relative  w-11/12 md:w-10/12 max-w-7xl h-full grid justify-items-center items-center my-11 md:gap-9">
       <div className="w-full h-full overflow-hidden">
-        <p className="text-base-300 text-2xl text-center">CLIENTES</p>
-        <p className="text-3xl font-medium leading-[48px] md:text-center">
+        <p className="sectionTitle text-center">CLIENTES</p>
+        <p className="sectionDescription md:text-center">
           Reseñas de clientes sobre nuestra
         </p>
         <>
@@ -41,20 +41,16 @@ export default function ReviewsSection() {
               <ReviewCard />
             </div>
           </div>
-          {loaded && instanceRef.current && (
+          {loaded && instanceRef.current != null && (
             <>
               <Arrow
-                left
-                onClick={(e: any) =>
-                  e.stopPropagation() || instanceRef.current?.prev()
-                }
+                left={true}
+                onClick={() => instanceRef.current?.prev()}
                 disabled={currentSlide === 0}
               />
 
               <Arrow
-                onClick={(e: any) =>
-                  e.stopPropagation() || instanceRef.current?.next()
-                }
+                onClick={() => instanceRef.current?.next()}
                 disabled={
                   currentSlide ===
                   instanceRef.current.track.details.slides.length - 1
@@ -64,6 +60,7 @@ export default function ReviewsSection() {
           )}
         </>
       </div>
+      <div id="contacto" />
     </section>
   );
 }
