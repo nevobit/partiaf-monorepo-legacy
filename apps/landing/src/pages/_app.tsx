@@ -7,7 +7,7 @@ const inter = Poppins({
   subsets: ["latin"],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <div className={inter.className}>
       <Component {...pageProps} />

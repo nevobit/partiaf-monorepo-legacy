@@ -1,4 +1,4 @@
-import { Seo } from "@/types/seo";
+import { Seo } from "@/shared/interfaces/seo";
 import { NextPage } from "next";
 import Head from "next/head";
 

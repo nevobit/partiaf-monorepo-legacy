@@ -3,23 +3,28 @@ import Image from "next/image";
 interface ArrowProps {
   disabled: boolean;
   left?: boolean;
-  onClick: (e: any) => void;
+  onClick: () => void;
 }
 
-export default function Arrow({ disabled, left, onClick }: ArrowProps) {
+export default function Arrow({
+  disabled,
+  left = false,
+  onClick,
+}: ArrowProps): JSX.Element {
   return (
     <button
       disabled={disabled}
-      className={`hidden md:flex  bg-primary rounded-full justify-center items-center w-14 h-14 absolute ${
-        left ? "left-0" : "right-0"
-      } top-1/2 mt-2 ${left && "rotate-180"} `}
+      data-left={left}
+      data-disabled={disabled}
+      className="btn-primary data-[disabled=true]:bg-primary/80  hidden md:flex rounded-full justify-center items-center w-12 h-12 absolute
+      data-[left=true]:left-0 data-[left=false]:right-0 top-1/2 mt-2 data-[left=true]:rotate-180 "
       onClick={onClick}
     >
       <Image
         src="/icons/arrowIcon.svg"
         alt="arrow icon"
-        width={19.3}
-        height={31.25}
+        width={14.3}
+        height={26.25}
       />
     </button>
   );

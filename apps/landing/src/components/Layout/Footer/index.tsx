@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Shape from "/public/shapes/footerShape.png";
-import ShapeDeskTop from "/public/shapes/footerShadowDesktop.png";
+import Shape from "public/shapes/footerShape.png";
+import ShapeDeskTop from "public/shapes/footerShadowDesktop.png";
 import Link from "next/link";
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   return (
     <footer className="h-auto w-full flex flex-col relative text-secondary">
       <Image
@@ -16,21 +16,21 @@ export default function Footer() {
         alt="shape"
         className="absolute h-full w-full mix-blend-exclusion hidden md:block"
       />
-      <div className="bg-[url('/images/bg_gradient.jpg')] bg-cover md:bg-[url('/images/bg_gradient_footer.jpg')] flex justify-center bg-no-repeat bg-co w-full h-auto min-h-[680px] md:h-[479px]">
-        <div className="w-11/12 md:w-4/5 h-full md:justify-between flex flex-col md:items-center md:flex-row gap-7 z-30">
-          <section className="mt-12 md:w-4/12 ">
+      <div className="bg-footer-mobile bg-cover md:bg-footer-destop flex justify-center items-center pb-4 pt-12 bg-no-repeat bg-co w-full h-auto min-h-[680px] md:h-[479px]">
+        <div className="w-11/12 md:w-4/5 h-min md:justify-between flex flex-col  md:flex-row gap-x-7  z-30">
+          <section className="md:w-4/12 ">
             <Image
               src="/icons/partiafLogoWhite.svg"
               alt="partiaf icon"
               width={241.6}
               height={52.6}
             />
-            <p className="text-lg my-6">
+            <p className="text-lg my-7">
               Suscríbase a nuestro boletín para recibir nuestra última
               actualización y novedades Suscríbase a nuestro boletín para
               recibir.
             </p>
-            <div className="flex justify-around items-center mb-11 z-30">
+            <div className="flex justify-around  md:justify-between items-center mb-11 z-30 pr-5">
               <Link href="/#">
                 <Image
                   src="/icons/facebookIconWhite.svg"
@@ -65,8 +65,8 @@ export default function Footer() {
               </Link>
             </div>
           </section>
-          <section className="md:w-4/12">
-            <p className="mb-5">Dirección de la oficina</p>
+          <section className="md:w-4/12 md:mt-5 text-base">
+            <p className="mb-5 text-lg">Dirección de la oficina</p>
             <div className="flex flex-col gap-5 mb-7">
               <div className="flex items-center gap-2 ">
                 <Image
@@ -81,6 +81,7 @@ export default function Footer() {
                 <Image
                   src="/icons/locationIcon.svg"
                   alt="phone icon"
+                  className="w-auto h-auto"
                   width={22}
                   height={29}
                 />
@@ -92,14 +93,15 @@ export default function Footer() {
                   alt="phone icon"
                   width={22}
                   height={29}
+                  className="w-auto h-auto"
                 />
-                <p className="flex-1">info@partiaf.com</p>
+                <p className="flex-1 ">info@partiaf.com</p>
               </div>
             </div>
           </section>
-          <section className="md:w-4/12 mb-4 md:mb-0">
-            <p>Newsletter</p>
-            <p className="text-[15px] leading-6 my-3">
+          <section className="md:w-4/12 md:mt-5">
+            <p className="text-lg">Newsletter</p>
+            <p className="text-base leading-6 my-3">
               Suscríbase a nuestro boletín para recibir nuestra última
               actualización y novedades.
             </p>
@@ -107,7 +109,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Email address"
-                className="w-full h-full overflow-hidden input bg-secondary/10 backdrop-opacity-[0.08] placeholder:text-secondary text-secondary pr-20"
+                className="w-full text-base font-light h-full overflow-hidden input bg-secondary/10 backdrop-opacity-[0.08] placeholder:text-secondary placeholder:font-light text-secondary pr-20"
               />
               <button className="btn btn-primary absolute right-0 top-0 bottom-0 h-full w-[68px]">
                 <Image

@@ -1,13 +1,12 @@
 import Image from "next/legacy/image";
-import Party from "/public/images/party.png";
+import Party from "public/images/party.png";
 
-export default function SectionWhatWeDo() {
+export default function SectionWhatWeDo(): JSX.Element {
   return (
-    <section className="relative w-11/12 h-full grid lg:grid-cols-2 justify-items-center items-center my-28 gap-9 lg:gap-0">
+    <section className="relative w-11/12 min-h-screen h-full grid lg:grid-cols-2 justify-items-center items-center my-28 gap-9 lg:gap-0">
       <div>
-        <div id="queHacemos" />
-        <p className="text-base-300 text-2xl">QUE HACEMOS</p>
-        <p className="text-3xl font-medium leading-[48px]">
+        <p className="sectionTitle">QUE HACEMOS</p>
+        <p className="sectionDescription">
           <span className="bg-primary">Conecta </span>con las personas que están
           cerca y hacen parte de la comunidad partiaf
         </p>
@@ -15,7 +14,7 @@ export default function SectionWhatWeDo() {
       <div className="lg:grid  lg:row-start-1 lg:row-end-3 lg:col-span-1">
         <Image src={Party} alt="party" />
       </div>
-      <div className="text-2xl w-auto lg:justify-self-start lg:self-start">
+      <div className="text-2xl 2xl:text-4xl w-auto lg:justify-self-start lg:self-start">
         <div className="flex items-center gap-1">
           <Image
             src="/icons/checkIcon.svg"

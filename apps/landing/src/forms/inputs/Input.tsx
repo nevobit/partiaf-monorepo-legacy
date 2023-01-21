@@ -9,10 +9,10 @@ export default function Input({
   errorStyle,
   className,
   ...rest
-}: InputProps) {
+}: InputProps): JSX.Element {
   const { field, fieldState } = useController({ name, control });
 
-  const isError = fieldState.error && fieldState.isTouched;
+  const isError = fieldState.error != null && fieldState.isTouched;
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function Input({
       />
       {isError && (
         <div className={errorStyle}>
-          <p className="text-red-600 w-full">{fieldState.error?.message}</p>
+          <p className="text-error w-full">{fieldState.error?.message}</p>
         </div>
       )}
     </>

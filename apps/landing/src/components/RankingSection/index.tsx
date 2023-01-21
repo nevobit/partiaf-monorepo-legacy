@@ -1,11 +1,11 @@
 import Image from "next/legacy/image";
 
-export default function RankingSection() {
+export default function RankingSection(): JSX.Element {
   return (
     <section className="w-full h-[487px] bg-gradient-to-b from-[#221B00] to-[#4E3D00] z-10">
-      <div className="w-full h-full grid grid-cols-autoColumn gap-6 items-center justify-center px-1">
-        <div className="flex flex-col gap-4">
-          <div className="bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center">
+      <div className="w-full h-full grid grid-cols-autoColumn items-center justify-center p-3 gap-y-6 gap-x-1 lg:gap-x-20">
+        <div className="ratingContainer">
+          <div className="ratingImageContainer ">
             <Image
               src="/icons/downloadIcon.svg"
               alt="download icon"
@@ -13,13 +13,13 @@ export default function RankingSection() {
               height={37.5}
             />
           </div>
-          <div className="text-white text-left">
-            <p className="font-bold text-4xl mb-2">1800+</p>
-            <p className="text-xl font-light leading-5">Descargas</p>
+          <div className="ratingTextContainer">
+            <p className="rating">1800+</p>
+            <p className="ratingTitle">Descargas</p>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <div className="bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center">
+        <div className="ratingContainer">
+          <div className="ratingImageContainer ">
             <Image
               src="/icons/heartIcon.svg"
               alt="download icon"
@@ -27,13 +27,13 @@ export default function RankingSection() {
               height={37.5}
             />
           </div>
-          <div className="text-white text-left">
-            <p className="font-bold text-4xl mb-2">1500+</p>
-            <p className="text-xl font-light leading-5">Clientes Felices</p>
+          <div className="ratingTextContainer">
+            <p className="rating">1500+</p>
+            <p className="ratingTitle">Clientes Felices</p>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <div className="bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center">
+        <div className="ratingContainer">
+          <div className="ratingImageContainer ">
             <Image
               src="/icons/usersIcon.svg"
               alt="download icon"
@@ -41,13 +41,13 @@ export default function RankingSection() {
               height={37.5}
             />
           </div>
-          <div className="text-white text-left">
-            <p className="font-bold text-4xl mb-2">7000+</p>
-            <p className="text-xl font-light leading-5">Usuarios Activos</p>
+          <div className="ratingTextContainer">
+            <p className="rating">7000+</p>
+            <p className="ratingTitle">Usuarios Activos</p>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <div className="bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center">
+        <div className="ratingContainer">
+          <div className="ratingImageContainer ">
             <Image
               src="/icons/starIcon.svg"
               alt="download icon"
@@ -55,12 +55,13 @@ export default function RankingSection() {
               height={37.5}
             />
           </div>
-          <div className="text-white text-left">
-            <p className="font-bold text-4xl mb-2">1200+</p>
-            <p className="text-xl font-light leading-5">Testimonios</p>
+          <div className="ratingTextContainer">
+            <p className="rating">1200+</p>
+            <p className="ratingTitle">Testimonios</p>
           </div>
         </div>
       </div>
+      <div id="quienesSomos" />
     </section>
   );
 }

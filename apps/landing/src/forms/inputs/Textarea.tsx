@@ -6,10 +6,10 @@ export default function Textarea({
   control,
   placeholder,
   className,
-}: TextareaProps) {
+}: TextareaProps): JSX.Element {
   const { field, fieldState } = useController({ name, control });
 
-  const isError = fieldState.error && fieldState.isTouched;
+  const isError = fieldState.error != null && fieldState.isTouched;
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Textarea({
       ></textarea>
       {isError && (
         <div className="mb-3 w-full col-span-2">
-          <p className="text-red-600 w-full">{fieldState.error?.message}</p>
+          <p className="text-error w-full">{fieldState.error?.message}</p>
         </div>
       )}
     </>
