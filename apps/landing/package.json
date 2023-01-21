@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "eslint:fix": "eslint --fix .",
-    "prepare": "husky install",
-    "prettier:write":" prettier --write"
+    "prettier:write": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -50,12 +49,5 @@
     "prettier": "^2.8.3",
     "tailwindcss": "^3.2.4",
     "typescript": "*"
-  },
-  "lint-staged": {
-    "**/*.{tsx,ts}": [
-      "pnpm run prettier:write",
-      "pnpm run eslint:fix",
-      "git add "
-    ]
   }
 }
