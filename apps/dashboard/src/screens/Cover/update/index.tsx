@@ -21,13 +21,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   const [Urlimage, setUrlImage] = useState("");
 
-<<<<<<< HEAD
-  console.log("URL IMAGE", Urlimage);
-
-  const [cover, setCover] = useState({
-=======
   const [cover, setCover] = useState<Cover>({
->>>>>>> 287601ca85e2e96d263937a9677bafcf81e913b0
     uuid: Cover.uuid,
     name: Cover?.name,
     type: "General",
