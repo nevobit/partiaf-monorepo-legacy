@@ -21,6 +21,8 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   const [Urlimage, setUrlImage] = useState("");
 
+  console.log("URL IMAGE", Urlimage);
+
   const [cover, setCover] = useState({
     uuid: Cover.uuid,
     name: Cover?.name,
@@ -43,14 +45,21 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
-    setCover((prev) => ({ ...prev, image: Urlimage }));
     //setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateCover(cover) as any);
+      if (Urlimage === "") {
+        setUrlImage(Cover.image);
+      }
+      dispatch(
+        updateCover({
+          ...cover,
+          image: Urlimage === "" ? Cover.image : Urlimage,
+        }) as any
+      );
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
@@ -129,7 +138,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
               </Field>
               <Field>
                 <InputCloudinary
-                  idInput="file-update"
+                  idInput="file-update-cover"
                   setImageUrl={setUrlImage}
                 />
               </Field>

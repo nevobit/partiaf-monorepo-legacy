@@ -7,10 +7,11 @@ import {
   storesSlice,
 } from "./states/stores/storesSlice";
 import { coversSlice, PartialCover } from "./states/covers/covers";
+import { Store } from "@partiaf/types";
 
 interface StoresSlice {
   stores:   PartialStore[];
-  store: PartialStore;
+  store: Store;
   loading: boolean;
   success: boolean;
   successSignin: boolean;

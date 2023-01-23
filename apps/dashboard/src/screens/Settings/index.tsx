@@ -45,13 +45,13 @@ const Settings = () => {
   ) => {
     const { name, value } = e.target;
     setAdminUpdate((prev) => ({ ...prev, [name]: value }));
-    setAdminUpdate((prev) => ({ ...prev, ["photo"]: imageUrl }));
+   
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateAdmin({ ...adminUpdate, photo: imageUrl }) as any);
+      dispatch(updateAdmin({ ...adminUpdate, photo: imageUrl === "" ? admin.photo : imageUrl }) as any);
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {

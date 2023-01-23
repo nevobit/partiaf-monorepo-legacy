@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
 
-
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();
   const { openModal, setOpenModal } = props;
@@ -45,9 +44,7 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      if(cover.limit > store.limit){
-       
-       
+      if (cover.limit > store.limit) {
       }
       dispatch(createCover(cover) as any);
     } catch (error) {
@@ -126,8 +123,11 @@ const CreateCoverModal = (props: any) => {
                   className={styles.text_area_cover}
                 ></textarea>
               </Field>
-              <Field >
-                <InputCloudinary   idInput="file" setImageUrl={setImageUrl} />
+              <Field>
+                <InputCloudinary
+                  idInput="file-create-cover"
+                  setImageUrl={setImageUrl}
+                />
               </Field>
             </div>
           </div>
