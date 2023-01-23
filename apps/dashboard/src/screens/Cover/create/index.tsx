@@ -52,6 +52,10 @@ const CreateCoverModal = (props: any) => {
     }
   };
 
+  const resetCloudinaryImage = () => {
+    setImageUrl("");
+  };
+
   useEffect(() => {
     if (success) {
       setOpenModal(false);
@@ -67,7 +71,10 @@ const CreateCoverModal = (props: any) => {
             <img src="/logo-parti.svg" alt="Log Partiaf" />
             <button
               className={styles.btn_header_cover}
-              onClick={() => setOpenModal(!openModal)}
+              onClick={() => {
+                setOpenModal(!openModal);
+                reset();
+              }}
             >
               {" "}
               Cerrar

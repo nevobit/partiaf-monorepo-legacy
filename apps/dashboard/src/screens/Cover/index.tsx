@@ -7,6 +7,7 @@ import styles from "./cover.module.css";
 import CreateCoverModal from "./create";
 
 const Cover = () => {
+  
   const dispatch = useDispatch();
   const {
     covers = [],
@@ -15,8 +16,6 @@ const Cover = () => {
   } = useSelector((state: AppStore) => state.covers);
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
-
- 
 
   console.log({ covers });
   useEffect(() => {

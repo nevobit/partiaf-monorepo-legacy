@@ -20,6 +20,12 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const { success } = useSelector((state: AppStore) => state.covers);
 
   const [Urlimage, setUrlImage] = useState("");
+  const [imageSelected, setImageSelected] = useState(false);
+
+const handleImageChange = (imageUrl: string) => {
+  setUrlImage(imageUrl);
+  setImageSelected(true);
+}
 
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
@@ -68,6 +74,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   useEffect(() => {
     if (success) {
+      setUrlImage(""); 
       dispatch(reset() as any);
     }
   }, [dispatch, success]);

@@ -45,19 +45,28 @@ const Settings = () => {
   ) => {
     const { name, value } = e.target;
     setAdminUpdate((prev) => ({ ...prev, [name]: value }));
-   
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateAdmin({ ...adminUpdate, photo: imageUrl === "" ? admin.photo : imageUrl }) as any);
+      dispatch(
+        updateAdmin({
+          ...adminUpdate,
+          photo: imageUrl === "" ? admin.photo : imageUrl,
+        }) as any
+      );
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
       }
     }
+  };
+
+  const [view, setView] = useState(true);
+  const handleRemove = () => {
+    setImageUrl("cargando");
   };
 
   useEffect(() => {
@@ -130,19 +139,30 @@ const Settings = () => {
                 </Field>
               </div>
             </div>
-
-          
           </div>
           <div>
             <div className={styles.image_input}>
               <h4 className={styles.card_title}>Subir imagen</h4>
-              {admin.photo === "" ? (
-                <InputCloudinary
-                  idInput="file-settings"
-                  setImageUrl={setImageUrl}
-                />
+
+              {view ? (
+                <>
+                  <img src={admin.photo} alt="profile picture" />
+                  <button onClick={() => setView(false)}>Cambiar</button>
+                </>
               ) : (
-                <img src={admin.photo} alt="profile picture" />
+                <>
+                  <InputCloudinary
+                    idInput="file-settings"
+                    setImageUrl={setImageUrl}
+                  />
+                  {imageUrl != "" ? (
+                    ""
+                  ) : (
+                    <button onClick={() => setView(true)}>
+                      Ver imagen actual
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>

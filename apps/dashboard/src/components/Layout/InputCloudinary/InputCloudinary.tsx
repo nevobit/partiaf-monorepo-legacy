@@ -27,6 +27,13 @@ const InputCloudinary = ({ idInput, setImageUrl }: Props) => {
     await uploader.upload();
     setUploadedUrl(uploader.getUrl());
   };
+
+  const handleChangeImage = () => {
+    setFile(null);
+    setUploadedUrl(null);
+  };
+
+
   return (
     <div className={styles.container_input_cloudinary}>
       {uploadedUrl ? (
@@ -37,6 +44,7 @@ const InputCloudinary = ({ idInput, setImageUrl }: Props) => {
               alt="Uploaded Image"
               style={{ objectFit: "cover" }}
             />
+             <button onClick={handleChangeImage}>Remover</button>
           </div>
         </>
       ) : (

@@ -105,4 +105,25 @@
   object-fit: cover;
 }
 
+.image_input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_input button{
+  background-color: #333;
+  margin-top: 1rem;
+  width: 100%;
+  border-radius: .4rem;
+  color: #fff;
+  padding: 1rem;
+}
+
+.image_input img{
+  border-radius: 50%;
+  height: 19.9rem;
+}
+
 
