@@ -44,8 +44,11 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       if (cover.limit > store.limit) {
       }
+=======
+>>>>>>> 287601ca85e2e96d263937a9677bafcf81e913b0
       dispatch(createCover(cover) as any);
     } catch (error) {
       if (error instanceof Error) {

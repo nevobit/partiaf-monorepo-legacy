@@ -17,7 +17,6 @@ const Application = () => {
         <Route path={PublicRoutes.SIGNUP} element={<Signup />} />
         <Route path={PrivateRoutes.VERIFICATION} element={<Verification />} />
         <Route path={PrivateRoutes.BUSINESS} element={<Business />} />
-   
         <Route
           path={PrivateRoutes.REGISTER_BUSINESS}
           element={<RegisterBusiness />}

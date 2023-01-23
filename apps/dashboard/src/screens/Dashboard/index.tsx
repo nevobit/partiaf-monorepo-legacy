@@ -97,7 +97,7 @@ const Dashboard = () => {
       const dispatch = useDispatch();
     
       useEffect(() => {
-          dispatch(getCoverById(store.uuid) as any);
+          dispatch(getCoverById(store.uuid || "") as any);
       }, [dispatch,store, success]);
   return (
     <>
