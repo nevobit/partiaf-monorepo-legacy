@@ -1,9 +1,8 @@
 import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
-import { login, reset, updateAdmin } from "@/redux/states/admins/admin";
+import { reset, updateAdmin } from "@/redux/states/admins/admin";
 import { AppStore } from "@/redux/store";
-import { Admin } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./settings.module.css";
@@ -65,9 +64,6 @@ const Settings = () => {
   };
 
   const [view, setView] = useState(true);
-  const handleRemove = () => {
-    setImageUrl("cargando");
-  };
 
   useEffect(() => {
     if (success) {
