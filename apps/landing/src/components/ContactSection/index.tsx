@@ -93,7 +93,7 @@ export default function ContactSection(): JSX.Element {
       <Image
         src={WomenDeskTop}
         alt="women"
-        className="hidden lg:block lg:w-1/2 max-h-[500px]"
+        className="hidden lg:block lg:w-1/2 max-h-[572px] 2xl:w-[822px] 2xl:h-[572px]"
       />
     </section>
   );

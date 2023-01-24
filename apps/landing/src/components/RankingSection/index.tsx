@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 export default function RankingSection(): JSX.Element {
   return (
     <section className="w-full h-[487px] bg-gradient-to-b from-[#221B00] to-[#4E3D00] z-10">
-      <div className="w-full h-full grid grid-cols-autoColumn items-center justify-center p-3 gap-y-6 gap-x-1 lg:gap-x-20">
+      <div className="w-full h-full grid grid-cols-autoColumn items-center justify-center px-3 sm:px-20 py-3 gap-y-6 gap-x-1 lg:gap-x-20 2xl:gap-x-40">
         <div className="ratingContainer">
           <div className="ratingImageContainer ">
             <Image

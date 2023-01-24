@@ -82,7 +82,7 @@
       @apply col-span-2 rounded-none bg-base-200 focus:outline-none placeholder:text-primary-content w-full h-12;
     }
     .sectionTitle {
-      @apply text-2xl font-normal text-base-300 2xl:text-3xl 2xl:mb-5;
+      @apply text-2xl mb-3 font-normal text-base-300 2xl:text-3xl 2xl:mb-5;
     }
     .sectionDescription {
       @apply text-3xl font-medium leading-10 2xl:leading-[58px] mb-5 2xl:text-5xl;
@@ -97,7 +97,7 @@
       @apply text-white text-left;
     }
     .ratingContainer {
-      @apply flex flex-col gap-4;
+      @apply flex flex-col items-start justify-evenly min-h-[200px] min-w-max mx-auto my-0;
     }
     .ratingImageContainer {
       @apply bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center;

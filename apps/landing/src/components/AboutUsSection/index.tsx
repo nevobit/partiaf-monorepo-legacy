@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Idea from "public/images/ideas.png";
 
 export default function AboutUsSection(): JSX.Element {
@@ -17,7 +17,11 @@ export default function AboutUsSection(): JSX.Element {
           "Restaurantes, Bares y Discotecas" que mas les guste!
         </p>
       </div>
-      <Image src={Idea} alt="idea image" />
+      <Image
+        src={Idea}
+        alt="idea image"
+        className="2xl:w-[657px] 2xl:h-[984px]"
+      />
     </section>
   );
 }

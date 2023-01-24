@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero(): JSX.Element {
@@ -15,28 +15,30 @@ export default function Hero(): JSX.Element {
             INOLVIDABLES
           </h1>
           <div className="flex flex-col gap-4 w-full items-center justify-center  md:flex-row">
-            <div className="flex gap-2 badge bg-transparent border-primary w-56 border h-16">
+            <div className="flex gap-2 badge bg-transparent border-primary w-56 border h-16 2xl:w-[313.1px] 2xl:h-[91.69px]">
               <Image
                 src="/icons/appleIcon.svg"
                 alt="play store icon"
                 width={37.84}
                 height={42.35}
+                className="2xl:w-14 2xl:h-14"
               />
               <div className="flex-1">
-                <p className="text-sm">Download on the</p>
-                <p className="text-2xl">App Store</p>
+                <p className="text-sm 2xl:text-lg">Download on the</p>
+                <p className="text-2xl 2xl:text-4xl">App Store</p>
               </div>
             </div>
-            <div className="flex gap-2 badge bg-transparent border-primary w-56 border h-16">
+            <div className="flex gap-2 badge bg-transparent border-primary w-56 border h-16 2xl:w-[313.1px] 2xl:h-[91.69px]">
               <Image
                 src="/icons/playStoreIcon.svg"
                 alt="play store icon"
                 width={37.84}
                 height={42.35}
+                className="2xl:w-14 2xl:h-14"
               />
               <div className="flex-1">
-                <p className="text-sm">Download on the</p>
-                <p className="text-2xl">App Store</p>
+                <p className="text-sm 2xl:text-lg">Download on the</p>
+                <p className="text-2xl 2xl:text-4xl">App Store</p>
               </div>
             </div>
           </div>

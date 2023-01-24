@@ -14,6 +14,7 @@ exports.CoverSchemaMongo = new mongoose_1.Schema({
     hour: { type: String },
     price: { type: Number },
     date: { type: Date },
+    status: { type: Boolean }
 }, {
     versionKey: false,
     timestamps: true

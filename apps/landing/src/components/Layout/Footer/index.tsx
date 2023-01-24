@@ -65,8 +65,8 @@ export default function Footer(): JSX.Element {
               </Link>
             </div>
           </section>
-          <section className="md:w-4/12 md:mt-5 text-base">
-            <p className="mb-5 text-lg">Dirección de la oficina</p>
+          <section className="md:mt-5  md:w-fit">
+            <p className="mb-5 text-lg 2xl:text-xl">Dirección de la oficina</p>
             <div className="flex flex-col gap-5 mb-7">
               <div className="flex items-center gap-2 ">
                 <Image
@@ -75,7 +75,7 @@ export default function Footer(): JSX.Element {
                   width={22}
                   height={29}
                 />
-                <p className="flex-1">+57-321-534345</p>
+                <p className="flex-1 text-sm 2xl:text-lg">+57-321-534345</p>
               </div>
               <div className="flex items-center gap-2">
                 <Image
@@ -85,7 +85,9 @@ export default function Footer(): JSX.Element {
                   width={22}
                   height={29}
                 />
-                <p className="flex-1">Calle 23 Carrera 20 Floresta </p>
+                <p className="flex-1 text-sm 2xl:text-lg">
+                  Calle 23 Carrera 20 Floresta{" "}
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <Image
@@ -95,13 +97,13 @@ export default function Footer(): JSX.Element {
                   height={29}
                   className="w-auto h-auto"
                 />
-                <p className="flex-1 ">info@partiaf.com</p>
+                <p className="flex-1 text-sm 2xl:text-lg">info@partiaf.com</p>
               </div>
             </div>
           </section>
           <section className="md:w-4/12 md:mt-5">
-            <p className="text-lg">Newsletter</p>
-            <p className="text-base leading-6 my-3">
+            <p className="text-lg 2xl:text-xl">Newsletter</p>
+            <p className="text-sm leading-6 my-3 2xl:text-lg">
               Suscríbase a nuestro boletín para recibir nuestra última
               actualización y novedades.
             </p>
@@ -123,7 +125,7 @@ export default function Footer(): JSX.Element {
           </section>
         </div>
       </div>
-      <div className="bg-[#111000] h-[87px] z-20 text-secondary flex justify-center items-center">
+      <div className="bg-[#111000] h-[87px] z-20 text-secondary flex justify-center items-center text-lg">
         <p>© 2023 Partiaf. All rights reserved</p>
       </div>
     </footer>
