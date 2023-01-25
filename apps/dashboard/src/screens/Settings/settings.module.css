@@ -124,6 +124,9 @@
 .image_input img{
   border-radius: 50%;
   height: 19.9rem;
+  width: 19.9rem;
+
+  border: 1px solid #333;
 }
 
 

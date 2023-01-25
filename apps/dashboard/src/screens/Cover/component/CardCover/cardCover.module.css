@@ -1,22 +1,24 @@
 .container_cover {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   background-color: #fff;
-  padding: 2rem;
+  width:45rem;
+  /* padding: 2rem; */
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  min-height: 14rem;
+  min-height: 25rem;
 }
 
 .image_cover {
-  height: 14rem;
+  height: 30rem;
   overflow: hidden;
   width: 20rem;
+  width: 100%;
 }
 
 .image_cover img {
-  height: 14rem;
+  height: 100%;
   width: 100%;
   border-radius: 0.2rem;
 }
@@ -26,25 +28,40 @@
   flex-direction: column;
   gap: 1rem;
   justify-content: space-between;
+  
+  padding: 0 1rem;
 }
 
+
+.info_cover_container{
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .info_cover p {
   font-size: 1.2rem;
   text-align: justify;
-  color: rgba(0, 0, 0, 0.7);
-  
+  color: rgba(0, 0, 0, 0.7); 
+}
+
+.data_cover_price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .data_cover {
   display: flex;
   justify-content: space-between;
-
   width: 100%;
+  flex-direction: column;
+  gap: .5rem;
 }
 
 .data_cover h2 {
   color: rgba(0, 0, 0, 0.7);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .data_cover span {
@@ -58,30 +75,54 @@
 .icon_cover {
   display: flex;
   gap: 1rem;
-  justify-content: right;
+  justify-content: space-between;
+  padding: 1rem;
   width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .card_btn_status_active {
-  width: 8rem;
+  width: 100%;
   background: #86c8bc;
-  padding: 0.6rem;
+  /* padding: 0.1rem; */
   border-radius: 0.4rem;
+  color: #333;
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
 .card_btn_status_inactive {
-  width: 8rem;
+  width: 100%;
   background: #9c254d;
-  padding: 0.6rem;
   border-radius: 0.4rem;
   color: #fff;
+  text-transform: capitalize;
+
 }
 
 .btn_icon_card_cover {
   background-color: transparent;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+
+.btn_icon_card_cover_delete {
+  background-color: transparent;
+  width: 100%;
+  border-radius: .5rem;
+  padding: .5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.icon_cover .btn_icon_card_cover_delete i{
+  color: #9c254d ;
+  font-size: 1.4rem;
 }
 
 .icon_cover button i {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }

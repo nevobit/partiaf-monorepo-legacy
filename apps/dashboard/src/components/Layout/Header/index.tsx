@@ -43,11 +43,14 @@ const Header = () => {
               >
                 {admin.name} {admin.lastname}
               </h3>
+              <div className={styles.user_image}>
+
               <img
-                className={styles.user_image}
                 src={admin.photo ? admin.photo : "/default.jpg"}
                 alt=""
               />
+              </div>
+
             </div>
           </div>
 

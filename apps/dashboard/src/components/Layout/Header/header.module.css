@@ -134,7 +134,8 @@ nav {
 .header_user_info {
   display: flex;
   align-items: center;
-  width: 15rem;
+  justify-content: center;
+  width: 25rem;
   height: 5rem;
   gap: 1rem;
 }
@@ -149,10 +150,16 @@ nav {
 }
 
 .user_image {
-  width: 50%;
   border-radius: 50rem;
-  height: 4rem !important;
-  width: 4rem !important;
+  height: 3.8rem;
+  width: 3.8rem;
+  object-fit: cover;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.user_image img{
+  min-width: 100%;
 }
 
 .open_menu {

@@ -92,6 +92,7 @@ export const updateAdmin = createAsyncThunk(
   async (data: Admin, thunkAPI) => {
     try {
       return await updateAdminThunks(data?.uuid, data);
+
     } catch (err) {
       console.log("ADMIN ERROR", err);
     }
@@ -152,6 +153,8 @@ export const adminsSlice = createSlice({
       .addCase(updateAdmin.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
+        localStorage.setItem("admin", JSON.stringify(action.payload));
+
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.loading = false;

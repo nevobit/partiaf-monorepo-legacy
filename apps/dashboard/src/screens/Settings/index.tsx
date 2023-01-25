@@ -10,13 +10,10 @@ import styles from "./settings.module.css";
 const Settings = () => {
   const dispatch = useDispatch();
 
-  const { admin, loading } = useSelector((state: AppStore) => state.admins);
-  const { success } = useSelector((state: AppStore) => state.admins);
-
+  const { admin, loading, success } = useSelector((state: AppStore) => state.admins);
+  
   const [imageUrl, setImageUrl] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
-  console.log("IMAGEN", imageUrl);
 
   const [adminUpdate, setAdminUpdate] = useState({
     uuid: admin.uuid,
@@ -34,8 +31,6 @@ const Settings = () => {
     password: admin.password,
     verification_code: admin.verification_code,
   });
-
-  console.log(adminUpdate);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -142,7 +137,7 @@ const Settings = () => {
 
               {view ? (
                 <>
-                  <img src={admin.photo} alt="profile picture" />
+                  <img src={admin.photo} alt="Profile Picture" />
                   <button onClick={() => setView(false)}>Cambiar</button>
                 </>
               ) : (
