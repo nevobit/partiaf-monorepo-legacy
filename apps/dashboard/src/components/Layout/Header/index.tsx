@@ -8,8 +8,12 @@ import { AppStore } from "@/redux/store";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { admin } = useSelector((state: AppStore) => state.admins);
+  //const { admin } = useSelector((state: AppStore) => state.admins);
   const dispatch = useDispatch();
+
+  const admin = localStorage.getItem("admin")
+    ? JSON.parse(localStorage.getItem("admin") || "")
+    : "";
 
   const signoutHandler = () => {
     try {

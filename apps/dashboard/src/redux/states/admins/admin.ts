@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Admin } from "@partiaf/types";
 import {
+  getAdminByIdThunks,
   logoutAdmin,
   signinAdmin,
   signupAdmin,
@@ -92,7 +93,17 @@ export const updateAdmin = createAsyncThunk(
   async (data: Admin, thunkAPI) => {
     try {
       return await updateAdminThunks(data?.uuid, data);
+    } catch (err) {
+      console.log("ADMIN ERROR", err);
+    }
+  }
+);
 
+export const getAdminByIdSlice = createAsyncThunk(
+  "admins/get",
+  async (uuid: string, thunkAPI) => {
+    try {
+      return await getAdminByIdThunks(uuid);
     } catch (err) {
       console.log("ADMIN ERROR", err);
     }
@@ -104,10 +115,22 @@ export const adminsSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      (state.loading = false),
-        (state.success = false),
-        (state.error = "")
-      //  (state.admin = EmptyadminState);
+      (state.loading = false), (state.success = false), (state.error = "");
+    },
+    loadingAdminsById: (state) => {
+      state.loading = true;
+    },
+    setAdminsById: (state, action) => {
+      state.loading = false;
+      state.admin = action.payload.admin;
+    },
+    updateAdminReducer: (state, action) => {
+      state.loading = false;
+      state.admin = action.payload.admin;
+    },
+    getAdminByIdReducer: (state, action) => {
+      state.loading = false;
+      state.admin = action.payload.admin;
     },
   },
 
@@ -154,9 +177,21 @@ export const adminsSlice = createSlice({
         state.loading = false;
         state.success = true;
         localStorage.setItem("admin", JSON.stringify(action.payload));
-
       })
       .addCase(updateAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.admin = {};
+      })
+      .addCase(getAdminByIdSlice.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAdminByIdSlice.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        localStorage.setItem("admin", JSON.stringify(action.payload));
+      })
+      .addCase(getAdminByIdSlice.rejected, (state, action) => {
         state.loading = false;
         state.error = String(action.payload);
         state.admin = {};
@@ -168,5 +203,5 @@ export const adminsSlice = createSlice({
 });
 
 export const { reset } = adminsSlice.actions;
-
-export default adminsSlice.reducer;
+export const { loadingAdminsById, setAdminsById, updateAdminReducer } =
+  adminsSlice.actions;
