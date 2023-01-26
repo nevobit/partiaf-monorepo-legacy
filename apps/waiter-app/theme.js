@@ -15,6 +15,7 @@ export const theme = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
+    marginHorizontal: 10
   },
   screenPrimary: {
     paddingHorizontal: 25,
