@@ -56,7 +56,6 @@ const Settings = () => {
             photo: imageUrl === "" ? admin.photo : imageUrl,
           }) as any
         );
-        admin.photo = imageUrl;
         localStorage.setItem('admin', JSON.stringify(admin));
         setImageUrl("");
         console.log("1=>>>>>>>>>>>", imageUrl);

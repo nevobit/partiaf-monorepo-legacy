@@ -15,4 +15,5 @@ export const PrivateRoutes = {
   SETTINGS: "/settings",
   SETTINGS_BUSINESS: "/settings-business",
   VERIFICATION: "/verification",
+  COVERS_DETAILS: "/covers/:uuid"
 };

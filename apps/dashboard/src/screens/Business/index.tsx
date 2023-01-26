@@ -20,6 +20,7 @@ const Bussiness = () => {
     loading: loadingStores,
     stores = [],
     successSignin,
+    error
   } = useSelector((state: AppStore) => state.stores);
 
   const [storeSelected, setStoreSelected] = useState<PartialStore>();
@@ -47,7 +48,7 @@ const Bussiness = () => {
     dispatch(loginStore({ uuid: storeSelected?.uuid || "", password }) as any);
   };
 
-  console.log({ successSignin });
+  console.log({ error });
   useEffect(() => {
     if (admin && !admin.status) {
       navigate(PrivateRoutes.VERIFICATION);
@@ -107,7 +108,7 @@ const Bussiness = () => {
               </Button>
             </div>
             <div className={styles.content_modal}>
-              <Field>
+              <Field error={error}>
                 <Input
                   type="password"
                   value={password}

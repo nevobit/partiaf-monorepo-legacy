@@ -3,6 +3,7 @@ import { PrivateRoutes } from "@/constants-definitions/Routes";
 import { Route, Routes } from "react-router-dom";
 import Bookings from "../Bookings";
 import Cover from "../Cover";
+import CoversDetails from "../Cover/details";
 import Dashboard from "../Dashboard";
 
 import Product from "../Product";
@@ -15,6 +16,7 @@ const Private = () => {
       <Routes>
         <Route path={PrivateRoutes.BOOKINGS} element={<Bookings />} />
         <Route path={PrivateRoutes.COVERS} element={<Cover />} />
+        <Route path={PrivateRoutes.COVERS_DETAILS} element={<CoversDetails />} />
         <Route path={PrivateRoutes.PRODUCT} element={<Product />} />
         <Route path={PrivateRoutes.SETTINGS} element={<Settings />} />
         <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />

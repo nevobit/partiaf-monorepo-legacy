@@ -6,6 +6,8 @@ import { deleteCover, PartialCover, updateCover } from "@/redux/states/covers/co
 import EditCoverModal from "../../update";
 import { Cover } from "@partiaf/types";
 import { DivisaFormater } from "@/utils/DivisaFormater";
+import { Link } from "react-router-dom";
+import { PrivateRoutes } from "@/constants-definitions/Routes";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
@@ -53,6 +55,8 @@ const CardCover = (Cover: any) => {
   return (
     <>
       <div className={styles.container_cover}>
+        <Link className={styles.clickable} to={`${PrivateRoutes.COVERS}/${uuid}`}>
+        </Link>
         <div className={styles.image_cover}>
           {image ? (
             <img src={image} alt="Image" />
@@ -65,11 +69,11 @@ const CardCover = (Cover: any) => {
         <div className={styles.info_cover}>
           <div className={styles.data_cover}>
             <h4 className={styles.name_cover}>{name}</h4>
+            <p>{description}</p>
           
           </div>
 
-          <p>{description}</p>
-          <div className={styles.data_cover}>
+          <div className={styles.data_cover_list}>
             <span><strong> Cupos:</strong> {limit}</span>
             <span><strong> Fecha:</strong> {date}</span>
             <span><strong> Hora:</strong> {hour}</span>
