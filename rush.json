@@ -344,6 +344,11 @@
       "reviewCategory": "apps"
     },
     {
+      "packageName": "administrator",
+      "projectFolder": "apps/administrator",
+      "reviewCategory": "apps"
+    },
+    {
       "packageName": "@partiaf/types",
       "projectFolder": "packages/types",
       "reviewCategory": "packages"
