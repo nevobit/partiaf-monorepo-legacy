@@ -53,6 +53,10 @@ const Bookings = () => {
         </div>
         <div className={styles.booking_header}>
             <h3>Reservas</h3>
+            <div>
+            <button>Editar cantidad de sillas</button>
+              <button>Editar cantidad de mesas</button>
+            </div>
         </div>
         <div className={styles.booking_container}>
           <div className={styles.booking}>

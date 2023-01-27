@@ -1,2 +1,2 @@
-declare const _default: {};
-export default _default;
+import { RouteOptions } from "fastify";
+export declare const getGoersByIdRoute: RouteOptions;

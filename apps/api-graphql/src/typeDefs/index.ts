@@ -10,6 +10,26 @@ type Store {
     status: String
 }
 
+type Goer {
+    uuid: String
+    user: String
+    status: String
+    cost: Float
+    time: String
+    cover: String
+    amount: Int
+}
+
+input GoerInput {
+    uuid: String
+    user: String
+    status: String
+    cost: Float
+    time: String
+    cover: String
+    amount: Int
+}
+
 type User {
     uuid: String
     firstname: String
@@ -23,6 +43,7 @@ type User {
 type Query {
     getAllStores: [Store]
     getStoreById(uuid: String): Store
+    getMyTikets: [Goer]
 }
 
 type AuthPayload {
@@ -44,9 +65,12 @@ type AuthPayload {
     error: String
 }
 
+
+
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
+    createGoer(data: GoerInput): Goer    
     creating: Boolean
 
 }

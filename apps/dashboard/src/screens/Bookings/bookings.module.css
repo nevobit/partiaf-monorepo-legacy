@@ -138,5 +138,29 @@
 
 .editor{
   display: grid;
-  place-items: center;
+  place-items: center ;
+}
+
+.booking_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.booking_header h3{
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+.booking_header > div{
+  display: flex;
+  gap: 2rem;
+}
+
+.booking_header button{
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  font-weight: 500;
 }

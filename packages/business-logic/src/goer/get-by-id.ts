@@ -3,6 +3,7 @@ import { Goer, GoerSchemaMongo } from "@partiaf/types";
 
 export const getGoersById = async (uuid:string): Promise<Goer[]> => {
     const model = await getModel(Collection.GOERS, GoerSchemaMongo)
-    const goers = await model.find({cover: uuid}) as Goer[];
+    const goers = await model.find({cover: uuid}).populate('user') as Goer[];
+
     return goers;
 }
