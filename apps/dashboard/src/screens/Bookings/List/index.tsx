@@ -4,11 +4,11 @@ import UpdateBooking from "../Update";
 import styles from "./bookingList.module.css";
 
 const BookingList = (props: any) => {
-  const { dataBooking } = props;
+  const { dataBooking , setBooking} = props;
   return (
     <div className={styles.cover__list}>
       {dataBooking.map((booking: any) => (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => setBooking(booking)}>
        
           <div className={styles.card_header}>
           <span className={styles.icon}>
@@ -16,9 +16,9 @@ const BookingList = (props: any) => {
           </span>
           <div>
             <p>
-              Pedro Picasso
+              {booking.name}
             </p>
-            <h4 className={styles.chair}>MESA: 5 | SILLAS: 6</h4>
+            <h4 className={styles.chair}>MESA: {booking.table} | SILLAS: {booking.chairs}</h4>
           </div>
 
           </div>

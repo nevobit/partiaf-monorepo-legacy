@@ -1,10 +1,16 @@
 import { PARTIAF_API } from "@/api";
-import { loadingStoresById, PartialStore, setStoresById } from "./storesSlice";
+import { loadingStoresById, PartialStore, setStoreById, setStoresById } from "./storesSlice";
 
 export const getStoresById = (uuid: string) => async (dispatch: any) => {
   dispatch(loadingStoresById());
   const { data } = await PARTIAF_API.get(`/stores/${uuid}`);
   dispatch(setStoresById({ stores: data }));
+};
+
+export const getStoreById = (uuid: string) => async (dispatch: any) => {
+  dispatch(loadingStoresById());
+  const { data } = await PARTIAF_API.get(`/store/${uuid}`);
+  dispatch(setStoreById({ store: data }));
 };
 
 export const createStore = async (info: PartialStore) => {
@@ -30,6 +36,6 @@ export const signinStore = async (uuid: string, password: string) => {
 export const updateStoreThunks = async (uuid: string | undefined, info: PartialStore) => {
   const { data } = await PARTIAF_API.put(`/stores/${uuid}`, { data: info });
  // localStorage.setItem("store", JSON.stringify(data));
-  window.location.reload();
+  // window.location.reload();
   return data;
 };

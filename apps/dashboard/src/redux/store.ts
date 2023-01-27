@@ -12,6 +12,7 @@ import { Store } from "@partiaf/types";
 interface StoresSlice {
   stores:   PartialStore[];
   store: Store;
+  oneStore: PartialStore;
   loading: boolean;
   success: boolean;
   successSignin: boolean;
