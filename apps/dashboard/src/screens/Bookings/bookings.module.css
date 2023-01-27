@@ -92,3 +92,51 @@
 .button__none {
   padding: 0;
 }
+
+.booking_container{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.booking_details{
+  background-color: #fff;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+.details_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
+}
+
+.details_header button{
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  background-color: var(--main-color);
+  color: #333;
+  font-weight: 600;
+}
+
+.footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.footer button{
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+}
+
+.editor{
+  display: grid;
+  place-items: center;
+}
