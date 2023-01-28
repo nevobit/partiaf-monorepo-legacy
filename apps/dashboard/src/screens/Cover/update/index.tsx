@@ -30,7 +30,7 @@ const handleImageChange = (imageUrl: string) => {
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
     name: Cover?.name,
-    type: "General",
+    type: Cover?.type,
     price: Cover?.price,
     date: Cover?.date,
     limit: Cover?.limit,
@@ -42,6 +42,7 @@ const handleImageChange = (imageUrl: string) => {
     status: true,
   });
 
+  console.log({cover})
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement

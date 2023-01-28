@@ -11,7 +11,7 @@ import { PrivateRoutes } from "@/constants-definitions/Routes";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
-  const { name, description, limit, date, hour, price, uuid, image } =
+  const { name, description, limit, date, hour, price, uuid, type, image } =
     Cover.cover;
   const { cover } = Cover;
 
@@ -55,6 +55,7 @@ const CardCover = (Cover: any) => {
   return (
     <>
       <div className={styles.container_cover}>
+      <div className={type == "VIP"?  styles.middle_line: styles.no_middle_line}></div>
         <Link className={styles.clickable} to={`${PrivateRoutes.COVERS}/${uuid}`}>
         </Link>
         <div className={styles.image_cover}>
@@ -74,7 +75,6 @@ const CardCover = (Cover: any) => {
           <div className={styles.data_cover}>
             <h4 className={styles.name_cover}>{name}</h4>
             <p>{description}</p>
-          
           </div>
 
           <div className={styles.data_cover_list}>
@@ -83,7 +83,7 @@ const CardCover = (Cover: any) => {
             <span><strong> Hora:</strong> {hour}</span>
           </div>
           <div className={styles.data_cover_price}>
-            <h5>VIP</h5>
+            <h5>{type}</h5>
             <h4> {DivisaFormater(price)}</h4>
           </div>
         </div>

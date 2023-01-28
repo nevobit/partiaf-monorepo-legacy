@@ -35,7 +35,20 @@
   z-index: 1;
 }
 
-.container_cover::after{
+.middle_line{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.no_middle_line{
+  position: absolute;
+}
+
+.middle_line::after{
   content: '';
   position: absolute;
   width: 0;
@@ -229,4 +242,5 @@ letter-spacing: .15rem;
   position: absolute;
   height: 83%;
   width: 100%;
+  z-index: 99;
 }
