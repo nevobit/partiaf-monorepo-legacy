@@ -65,6 +65,10 @@ const CardCover = (Cover: any) => {
           )}
         </div>
         <div className={styles.info_cover_container}>
+          <span className={styles.sumer}>
+            #SUMER
+            <span>2023</span>
+          </span>
 
         <div className={styles.info_cover}>
           <div className={styles.data_cover}>
