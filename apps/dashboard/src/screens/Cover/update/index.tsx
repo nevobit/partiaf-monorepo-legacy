@@ -20,6 +20,12 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const { success } = useSelector((state: AppStore) => state.covers);
 
   const [Urlimage, setUrlImage] = useState("");
+  const [imageSelected, setImageSelected] = useState(false);
+
+const handleImageChange = (imageUrl: string) => {
+  setUrlImage(imageUrl);
+  setImageSelected(true);
+}
 
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
@@ -43,14 +49,21 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
-    setCover((prev) => ({ ...prev, image: Urlimage }));
     //setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateCover(cover) as any);
+      if (Urlimage === "") {
+        setUrlImage(Cover.image);
+      }
+      dispatch(
+        updateCover({
+          ...cover,
+          image: Urlimage === "" ? Cover.image : Urlimage,
+        }) as any
+      );
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
@@ -61,6 +74,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   useEffect(() => {
     if (success) {
+      setUrlImage(""); 
       dispatch(reset() as any);
     }
   }, [dispatch, success]);
@@ -129,7 +143,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
               </Field>
               <Field>
                 <InputCloudinary
-                  idInput="file-update"
+                  idInput="file-update-cover"
                   setImageUrl={setUrlImage}
                 />
               </Field>

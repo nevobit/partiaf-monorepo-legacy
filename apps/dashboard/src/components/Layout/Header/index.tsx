@@ -8,8 +8,12 @@ import { AppStore } from "@/redux/store";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { admin } = useSelector((state: AppStore) => state.admins);
+  //const { admin } = useSelector((state: AppStore) => state.admins);
   const dispatch = useDispatch();
+
+  const admin = localStorage.getItem("admin")
+    ? JSON.parse(localStorage.getItem("admin") || "")
+    : "";
 
   const signoutHandler = () => {
     try {
@@ -43,11 +47,14 @@ const Header = () => {
               >
                 {admin.name} {admin.lastname}
               </h3>
+              <div className={styles.user_image}>
+
               <img
-                className={styles.user_image}
                 src={admin.photo ? admin.photo : "/default.jpg"}
                 alt=""
               />
+              </div>
+
             </div>
           </div>
 

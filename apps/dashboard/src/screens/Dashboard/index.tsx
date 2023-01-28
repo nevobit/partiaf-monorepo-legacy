@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./dashboard.module.css";
 import { AppStore } from '../../redux/store';
 import { getCoverById } from "@/redux/states/covers/thunks";
+import { getGoersByIdThunks } from "@/redux/states/goers/thunks";
 
 export const DivisaFormater = (value: any) => {
   const formaterMoney = Intl.NumberFormat("es-CO", {
@@ -16,9 +17,13 @@ export const DivisaFormater = (value: any) => {
 
 const Dashboard = () => {
 
-  const {covers, success} = useSelector((state: AppStore) => state.covers);
+  const {covers, loading, success} = useSelector((state: AppStore) => state.covers);
   const {store} = useSelector((state: AppStore) => state.stores);
-
+  const {
+    goers = [],
+    success: succesGoer,
+    loading: LoadingGoer,
+  } = useSelector((state: AppStore) => state.goers);
   let monthsList = [
     { label: "Enero", value: "01", dataset: 0 },
     { label: "Febrero", value: "02", dataset: 0 },
@@ -96,10 +101,17 @@ const Dashboard = () => {
 
       const dispatch = useDispatch();
     
+      console.log(covers[covers.length - 1])
+
       useEffect(() => {
           dispatch(getCoverById(store.uuid || "") as any);
       }, [dispatch,store, success]);
-  return (
+
+      useEffect(() => {
+        dispatch(getGoersByIdThunks(covers[covers.length - 1]?.uuid) as any);
+      }, [dispatch, loading])
+
+      return (
     <>
       <div className={styles.board_screen}>
         <div className={styles.board_flex}>
@@ -120,20 +132,20 @@ const Dashboard = () => {
           <h3 className={styles.title}>Covers Efectivos</h3>
           <h4 className={styles.time}>AÑO ACTUAL</h4>
 
-          <h2>{DivisaFormater(0)}</h2>
+          <h2>{DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}</h2>
         </div>
         <div className={`${styles.board_card} ${styles.board_banks}`}>
           <i className="bx bxs-bank"></i>
           <h3 className={styles.title_center}>Balance</h3>
           <p>
-            {DivisaFormater(store.balance)}
+            {DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}
           </p>
         </div>
         <div className={`${styles.board_card} ${styles.span_2}`}>
           <h3 className={styles.title}>Resumen de ventas</h3>
           <h4 className={styles.time}>ÚLTIMOS 12 MESES</h4>
 
-          <h2>{DivisaFormater(monthsList[Number(month) - 1].dataset)}</h2>
+          <h2>{DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}</h2>
           <span className={styles.label_month}>
             {monthsList[Number(month) - 1].label.toUpperCase()} 2022
           </span>
@@ -142,12 +154,12 @@ const Dashboard = () => {
           <div className={styles.board_card}>
             <h3 className={styles.title}>En lista de espera (Covers)</h3>
             <h4 className={styles.time}>Ultimo Cover</h4>
-            <h2>{0}</h2>
+            <h2>{goers.filter((goer) => goer.status == "in line").length}</h2>
           </div>
           <div className={styles.board_card}>
             <h3 className={styles.title}>Salidas</h3>
             <h4 className={styles.time}>Ultimo Cover</h4>
-            <h2>{0}</h2>
+            <h2>{goers.filter((goer) => goer.status == "cancelled").length}</h2>
           </div>
         </div>
 
@@ -155,6 +167,7 @@ const Dashboard = () => {
           <h3 className={styles.title}>Lista de espera (Covers)</h3>
           <h4 className={styles.time}>Ultimo Covers</h4>
           <ul>
+           
           </ul>
         </div>
         {/* <div className={styles.board_card}>

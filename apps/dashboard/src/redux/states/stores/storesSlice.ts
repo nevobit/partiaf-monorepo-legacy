@@ -35,11 +35,16 @@ export interface StoreInfo {
   phone: 0;
   password: "";
   limit: 0;
+  chairs: 0,
+  tables: 0,
   photos: [];
   balance: 0;
+  max_per_table: 0,
+  min_per_table: 0,
+  chairs_per_table: 0,
 }
 
-const EmptyStoreState: StoreInfo = {
+const EmptyStoreState: PartialStore = {
   uuid: "",
   name: "",
   description: "",
@@ -48,6 +53,11 @@ const EmptyStoreState: StoreInfo = {
   email: "",
   phone: 0,
   password: "",
+  chairs: 0,
+  tables: 0,
+  max_per_table: 0,
+  min_per_table: 0,
+  chairs_per_table: 0,
   limit: 0,
   photos: [],
   balance: 0,
@@ -105,6 +115,7 @@ export const storesSlice = createSlice({
       ? JSON.parse(localStorage.getItem("store") as string)
       : EmptyStoreState,
     stores: EmptyStoresState,
+    oneStore: EmptyStoreState,
     loading: false,
     success: false,
     successSignin: false,
@@ -123,6 +134,10 @@ export const storesSlice = createSlice({
     setStoresById: (state, action) => {
       state.loading = false;
       state.stores = action.payload.stores;
+    },
+    setStoreById: (state, action) => {
+      state.loading = false;
+      state.oneStore = action.payload.store;
     },
   },
 
@@ -172,4 +187,4 @@ export const storesSlice = createSlice({
 });
 
 export const { reset } = storesSlice.actions;
-export const { loadingStoresById, setStoresById } = storesSlice.actions;
+export const { loadingStoresById, setStoresById, setStoreById } = storesSlice.actions;

@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
 
-
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();
   const { openModal, setOpenModal } = props;
@@ -15,7 +14,6 @@ const CreateCoverModal = (props: any) => {
   const { success } = useSelector((state: AppStore) => state.covers);
 
   const [imageUrl, setImageUrl] = useState("");
-  console.log("create", imageUrl);
 
   const [cover, setCover] = useState({
     name: "",
@@ -45,12 +43,17 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(createCover(cover) as any);
+      console.log({cover})
+      dispatch(createCover({...cover, image: imageUrl}) as any);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
       }
     }
+  };
+
+  const resetCloudinaryImage = () => {
+    setImageUrl("");
   };
 
   useEffect(() => {
@@ -68,7 +71,10 @@ const CreateCoverModal = (props: any) => {
             <img src="/logo-parti.svg" alt="Log Partiaf" />
             <button
               className={styles.btn_header_cover}
-              onClick={() => setOpenModal(!openModal)}
+              onClick={() => {
+                setOpenModal(!openModal);
+                reset();
+              }}
             >
               {" "}
               Cerrar
@@ -122,8 +128,11 @@ const CreateCoverModal = (props: any) => {
                   className={styles.text_area_cover}
                 ></textarea>
               </Field>
-              <Field >
-                <InputCloudinary   idInput="file" setImageUrl={setImageUrl} />
+              <Field>
+                <InputCloudinary
+                  idInput="file-create-cover"
+                  setImageUrl={setImageUrl}
+                />
               </Field>
             </div>
           </div>

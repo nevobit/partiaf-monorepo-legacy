@@ -1,5 +1,5 @@
 import { PARTIAF_API } from "@/api";
-import { loadingCoversById, PartialCover, setCoversById } from "./covers";
+import { loadingCoversById, PartialCover, setCoversById, setOneCoversById } from "./covers";
 
 export const createCoverThunks = async (info: PartialCover) => {
   const { data } = await PARTIAF_API.post("/covers", { ...info });
@@ -10,6 +10,13 @@ export const getCoverById = (uuid: string) => async (dispatch: any) => {
   dispatch(loadingCoversById());
   const { data } = await PARTIAF_API.get(`/covers/${uuid}`);
   dispatch(setCoversById({ covers: data }));
+  return data;
+};
+
+export const getOneCoverById = (uuid: string) => async (dispatch: any) => {
+  dispatch(loadingCoversById());
+  const { data } = await PARTIAF_API.get(`/cover/${uuid}`);
+  dispatch(setOneCoversById({ cover: data }));
   return data;
 };
 

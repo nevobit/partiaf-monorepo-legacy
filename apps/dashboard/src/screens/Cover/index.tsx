@@ -1,15 +1,13 @@
-import { PartialCover, reset } from "@/redux/states/covers/covers";
 import { getCoverById } from "@/redux/states/covers/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import CardCover from "./component/CardCover";
 import styles from "./cover.module.css";
 import CreateCoverModal from "./create";
-import EditCoverModal from "./update";
 
 const Cover = () => {
+  
   const dispatch = useDispatch();
   const {
     covers = [],
@@ -18,9 +16,8 @@ const Cover = () => {
   } = useSelector((state: AppStore) => state.covers);
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
- 
 
-  console.log({covers})
+  console.log({ covers });
   useEffect(() => {
     dispatch(getCoverById(store.uuid || "") as any);
   }, [dispatch, store, success]);
@@ -54,12 +51,11 @@ const Cover = () => {
         </div>
         <div className={styles.container_card_cover}>
           {covers.map((obj) => (
-            <CardCover key={obj.uuid} cover={{ ...obj }} />
+            <CardCover key={obj.uuid} cover={obj} />
           ))}
         </div>
       </div>
       <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />
-     
     </>
   );
 };

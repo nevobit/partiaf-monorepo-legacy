@@ -29,6 +29,11 @@ export interface Store {
     verification_code: number;
     last_login: Date;
     balance: number | 0;
+    tables: number | 0;
+    max_per_table: number;
+    min_per_table: number;
+    chairs_per_table: number;
+    chairs: number | 0;
     website: string | "";
     facebook: string | "";
     instagram: string | "";

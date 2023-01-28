@@ -93,6 +93,10 @@ export const coversSlice = createSlice({
       state.loading = false;
       state.covers = action.payload.covers;
     },
+    setOneCoversById: (state, action) => {
+      state.loading = false;
+      state.cover = action.payload.cover;
+    },
     deleteCoverReducer: (state, action) => {
       state.loading = false;
       state.covers = action.payload.covers;
@@ -147,6 +151,7 @@ export const { reset } = coversSlice.actions;
 export const {
   loadingCoversById,
   setCoversById,
+  setOneCoversById,
   deleteCoverReducer,
   updateCoverReducer,
 } = coversSlice.actions;

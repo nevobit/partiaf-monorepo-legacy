@@ -10,8 +10,6 @@
   display: block;
 }
 
-
-
 .header_setting {
   display: flex;
   align-items: center;
@@ -28,22 +26,14 @@
 
 .setting_grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 4fr 1fr;
   gap: 2rem;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.setting_grid > div:first-child {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  margin-right: 2rem;
 }
 
 .card {
-  display: inline-block;
-  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .card > div input[type="checkbox"] {
@@ -70,10 +60,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  padding: 0 2rem 2rem 2rem;
+  width: 100%;
+  padding: 2rem;
+
   border-radius: 0.4rem;
   background-color: #fff;
-  margin-top: 2rem;
 }
 
 .card_columns {
@@ -105,4 +96,12 @@
   object-fit: cover;
 }
 
+.image_input {
+  display: flex;
+  flex-direction: column;
+}
 
+.container_input_image_upload {
+  width: 36rem;
+  height: 36rem;
+}

@@ -23,10 +23,17 @@ const InputCloudinary = ({ idInput, setImageUrl }: Props) => {
     if (file) {
       setFile(file);
       uploader.setFile(file);
-      await uploader.upload();
-      setUploadedUrl(uploader.getUrl());
     }
+    await uploader.upload();
+    setUploadedUrl(uploader.getUrl());
   };
+
+  const handleChangeImage = () => {
+    setFile(null);
+    setUploadedUrl(null);
+  };
+
+
   return (
     <div className={styles.container_input_cloudinary}>
       {uploadedUrl ? (
@@ -37,11 +44,17 @@ const InputCloudinary = ({ idInput, setImageUrl }: Props) => {
               alt="Uploaded Image"
               style={{ objectFit: "cover" }}
             />
+             <button onClick={handleChangeImage}>Remover</button>
           </div>
         </>
       ) : (
         <div className={styles.formbold_file_input}>
-          <input type="file" name="file" id={idInput} onChange={handleChange} />
+          <input
+            type="file"
+            name={idInput}
+            id={idInput}
+            onChange={handleChange}
+          />
           <label htmlFor={idInput}>
             <div>
               <span className={styles.formbold_drop_file}>

@@ -1,5 +1,6 @@
 import { PARTIAF_API } from "@/api";
 import { Admin } from "@partiaf/types";
+import { setAdminsById } from "./admin";
 
 type PartialAdmin = Partial<Admin>;
 
@@ -30,8 +31,13 @@ export const logoutAdmin = () => {
 
 export const updateAdminThunks = async (uuid: string, info: PartialAdmin) => {
   const { data } = await PARTIAF_API.put(`/admins/${uuid}`, { data: info });
-  localStorage.setItem("admin", JSON.stringify(data));
-  window.location.reload();
+  if (data) {
+    localStorage.setItem("admin", JSON.stringify(data));
+    window.location.reload();
+  }
+
+  // window.location.href = "/settings";
+
   return data;
 };
 
@@ -41,5 +47,13 @@ export const verificationCodeAdmin = async (code: string) => {
   if (data) {
     localStorage.setItem("admin", JSON.stringify(data));
   }
+  return data;
+};
+
+export const getAdminByIdThunks = (uuid: string) => async (dispatch: any) => {
+  const { data } = await PARTIAF_API.get(`/admins/${uuid}`);
+  //localStorage.setItem("admin", JSON.stringify(data));
+  //dispatch(setAdminsById({ admin: data }));
+  //window.location.reload();
   return data;
 };

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
 import { useDispatch } from "react-redux";
-import { deleteCover, PartialCover } from "@/redux/states/covers/covers";
+import { deleteCover, PartialCover, updateCover } from "@/redux/states/covers/covers";
 import EditCoverModal from "../../update";
 import { Cover } from "@partiaf/types";
+import { DivisaFormater } from "@/utils/DivisaFormater";
+import { Link } from "react-router-dom";
+import { PrivateRoutes } from "@/constants-definitions/Routes";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ const CardCover = (Cover: any) => {
     }
   };
 
+
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [coverSelected, setCoverSelected] = useState<Cover>(Cover.cover);
 
@@ -33,9 +37,26 @@ const CardCover = (Cover: any) => {
     setIsOpenEdit(true);
   };
 
+  const submitUpdateHandler = async (e: any) => {
+    setStatus(!status);
+    e.preventDefault();
+    try {
+      dispatch(
+        updateCover({...cover, status: status,}) as any
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
+  };
+
+
   return (
     <>
       <div className={styles.container_cover}>
+        <Link className={styles.clickable} to={`${PrivateRoutes.COVERS}/${uuid}`}>
+        </Link>
         <div className={styles.image_cover}>
           {image ? (
             <img src={image} alt="Image" />
@@ -43,43 +64,52 @@ const CardCover = (Cover: any) => {
             <img src={fiesta} alt="Image" />
           )}
         </div>
+        <div className={styles.info_cover_container}>
+          <span className={styles.sumer}>
+            #SUMER
+            <span>2023</span>
+          </span>
+
         <div className={styles.info_cover}>
           <div className={styles.data_cover}>
             <h4 className={styles.name_cover}>{name}</h4>
-            <div className={styles.icon_cover}>
+            <p>{description}</p>
+          
+          </div>
+
+          <div className={styles.data_cover_list}>
+            <span><strong> Cupos:</strong> {limit}</span>
+            <span><strong> Fecha:</strong> {date}</span>
+            <span><strong> Hora:</strong> {hour}</span>
+          </div>
+          <div className={styles.data_cover_price}>
+            <h5>VIP</h5>
+            <h4> {DivisaFormater(price)}</h4>
+          </div>
+        </div>
+        <div className={styles.icon_cover}>
               <button
                 className={
                   cover.status
                     ? styles.card_btn_status_active
                     : styles.card_btn_status_inactive
                 }
-                onClick={() => setStatus(!status)}
+                onClick={submitUpdateHandler}
               >
                 {cover.status ? "activo" : "inactivo"}
               </button>
               <button className={styles.btn_icon_card_cover}>
-                <i className="bx bxs-pencil" onClick={() => editHandler()}></i>
+                <p className="" onClick={() => editHandler()}>Editar</p>
               </button>
               <button
-                className={styles.btn_icon_card_cover}
+                className={styles.btn_icon_card_cover_delete}
                 onClick={submitDeleteHandler}
               >
-                <i className="bx bx-x-circle"></i>
+                <p className="">Borrar</p>
               </button>
             </div>
-          </div>
-
-          <p>{description}</p>
-          <div className={styles.data_cover}>
-            <span>Cupos: {limit}</span>
-            <span>Fecha: {date}</span>
-            <span>Hora: {hour}</span>
-          </div>
-          <div className={styles.data_cover}>
-            <h5>VIP</h5>
-            <h4> ${price}</h4>
-          </div>
         </div>
+
       </div>
       <EditCoverModal
         openModal={isOpenEdit}

@@ -11,6 +11,11 @@ import { signinAdmin } from "@/redux/states/admins/thunks";
 import Loader from "@/components/Layout/Loader";
 import { login } from "@/redux/states/admins/admin";
 
+const ERRORS: Record<string, string>  = {
+  '103': 'Contrasena incorrecta',
+  '101': 'Usuario no existe o esta inactivo',
+}
+
 const Signin = () => {
 
   const remenberInfo =localStorage.getItem("remenberInfo")? JSON.parse(localStorage.getItem("remenberInfo") || ""): "";
@@ -59,7 +64,8 @@ const Signin = () => {
       navigate('/business', {replace: true});
     }
    }, [adminUser, error, success, navigate, dispatch])
-
+ 
+   const actualError: string = error;
   if(loading) return <Loader />
 
   return (
@@ -69,7 +75,7 @@ const Signin = () => {
         <Field label="Correo electronico">
           <Input name="email" placeholder="Introduce tu correo electronico" value={admin.email} onChange={handleChange} />
         </Field>
-        <Field label="Contrasena">
+        <Field label="Contrasena" error={ERRORS[actualError]} >
           <Input name="password" type="password" placeholder="Contrasena" value={admin.password} onChange={handleChange} />
         </Field>
         <Field>

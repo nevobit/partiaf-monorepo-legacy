@@ -50,10 +50,11 @@
 }
 
 .container_card_cover {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   width: calc(100vw - 20rem);
+  padding-bottom: 2rem;
 }
 
 .box {

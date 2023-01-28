@@ -7,10 +7,13 @@ import {
   storesSlice,
 } from "./states/stores/storesSlice";
 import { coversSlice, PartialCover } from "./states/covers/covers";
+import { Store } from "@partiaf/types";
+import { goersSlice, PartialGoer } from "./states/goers/goers";
 
 interface StoresSlice {
   stores:   PartialStore[];
-  store: PartialStore;
+  store: Store;
+  oneStore: PartialStore;
   loading: boolean;
   success: boolean;
   successSignin: boolean;
@@ -25,10 +28,18 @@ interface CoverssSlice {
   error: string;
 }
 
+interface GoerssSlice {
+  goers: PartialGoer[];
+  loading: boolean;
+  success: boolean;
+  error: string;
+}
+
 export interface AppStore {
   admins: AdminInfo;
   stores: StoresSlice;
   covers: CoverssSlice;
+  goers: GoerssSlice;
 }
 
 export default configureStore<AppStore>({
@@ -36,5 +47,6 @@ export default configureStore<AppStore>({
     admins: adminsSlice.reducer,
     stores: storesSlice.reducer,
     covers: coversSlice.reducer,
+    goers: goersSlice.reducer
   },
 });
