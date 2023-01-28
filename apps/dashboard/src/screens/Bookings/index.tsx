@@ -8,10 +8,28 @@ import styles from "./bookings.module.css";
 import CardBooking from "./Component/CardBooking";
 import BookingList from "./List";
 
+export const usersByDatabaseMook = [
+  {
+    uuid: "1234",
+    name: "Camilo Castro",
+    age: 18,
+  },
+  {
+    uuid: "2198",
+    name: "Pablo Picasso",
+    age: 50,
+  },
+  {
+    uuid: "5679",
+    name: "Pedro Palacio",
+    age: 33,
+  },
+]
+
 const Bookings = () => {
   const dataBooking = [
     {
-      id: "1",
+      uuid: "1234",
       name: "Camilo Castro",
       chairs: 5,
       table: 1,
@@ -20,7 +38,7 @@ const Bookings = () => {
       state: true,
     },
     {
-      id: "2",
+      uuid: "2198",
       name: "Pablo Picasso",
       chairs: 8,
       table: 2,
@@ -32,18 +50,18 @@ const Bookings = () => {
   ];
 
   const { store, success, oneStore } = useSelector((state: AppStore) => state.stores);
+  console.log({oneStore})
 
   const [storeUpdate, setStoreUpdate] = useState({
     uuid: store.uuid,
-    chairs: oneStore.chairs,
-    tables: oneStore.tables,
-    chairs_per_table: oneStore.chairs_per_table,
-    max_per_table: oneStore.max_per_table,
-    min_per_table: oneStore.min_per_table 
+    chairs: oneStore.chairs || store.chairs,
+    tables: oneStore.tables || store.tables,
+    chairs_per_table: oneStore.chairs_per_table || store.chairs_per_table,
+    max_per_table: oneStore.max_per_table || store.max_per_table,
+    min_per_table: oneStore.min_per_table || store.min_per_table 
   });
 
   const [openModal, setOpenModal] = useState(false);
-
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
@@ -143,7 +161,7 @@ const Bookings = () => {
       </div>
       <div className={styles.right__screen}>
         {dataBooking.map((booking) => (
-          <button key={booking.id} className={styles.button__none}>
+          <button key={booking.uuid} className={styles.button__none}>
           </button>
         ))}
       </div>
