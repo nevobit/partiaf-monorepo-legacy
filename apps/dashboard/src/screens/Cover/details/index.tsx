@@ -42,7 +42,7 @@ const CoversDetails = () => {
     goers.some((goer) => goer.user === user.uuid && goer.status === "cancelled")
   );
 
-  console.log("EL COVER", UsersInLine);
+  console.log("EL COVER", goers);
 
   useEffect(() => {
     getDataAllUsers();
@@ -60,11 +60,11 @@ const CoversDetails = () => {
             </div>
             <div className={styles.box}>
               <h3>Entradas Efectivas</h3>
-              <p>0</p>
+              <p>{goers.filter((goer) => goer.status == "in line").length}</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas no Efectivas </h3>
-              <p>0</p>
+              <p>{goers.filter((goer) => goer.status == "cancelled").length}</p>
             </div>
           </div>
           <div className={styles.screen_title}>
