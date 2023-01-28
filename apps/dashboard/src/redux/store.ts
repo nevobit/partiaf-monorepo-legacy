@@ -13,6 +13,7 @@ import { goersSlice, PartialGoer } from "./states/goers/goers";
 interface StoresSlice {
   stores:   PartialStore[];
   store: Store;
+  oneStore: PartialStore;
   loading: boolean;
   success: boolean;
   successSignin: boolean;

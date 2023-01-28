@@ -1,46 +1,119 @@
-import React from "react";
+import { Button, Field, Input } from "@/components/shared";
+import { reset, updateStore } from "@/redux/states/stores/storesSlice";
+import { getStoreById } from "@/redux/states/stores/thunks";
+import { AppStore } from "@/redux/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./bookings.module.css";
 import CardBooking from "./Component/CardBooking";
 import BookingList from "./List";
 
+export const usersByDatabaseMook = [
+  {
+    uuid: "1234",
+    name: "Camilo Castro",
+    age: 18,
+  },
+  {
+    uuid: "2198",
+    name: "Pablo Picasso",
+    age: 50,
+  },
+  {
+    uuid: "5679",
+    name: "Pedro Palacio",
+    age: 33,
+  },
+]
+
 const Bookings = () => {
   const dataBooking = [
     {
-      id: "1",
-      name: "reserva1",
-      peoples: "20",
-      type: "tipo",
-      hour: "08:00",
+      uuid: "1234",
+      name: "Camilo Castro",
+      chairs: 5,
+      table: 1,
       day: "31/12/2022",
       number: "1",
       state: true,
     },
     {
-      id: "2",
-      name: "Mesa para 2",
-      peoples: "2",
-      type: "Cena",
-      hour: "08:00",
+      uuid: "2198",
+      name: "Pablo Picasso",
+      chairs: 8,
+      table: 2,
       day: "31/12/2022",
+      hour: "08:00",
       number: "2",
       state: true,
     }
   ];
+
+  const { store, success, oneStore } = useSelector((state: AppStore) => state.stores);
+  console.log({oneStore})
+
+  const [storeUpdate, setStoreUpdate] = useState({
+    uuid: store.uuid,
+    chairs: oneStore.chairs || store.chairs,
+    tables: oneStore.tables || store.tables,
+    chairs_per_table: oneStore.chairs_per_table || store.chairs_per_table,
+    max_per_table: oneStore.max_per_table || store.max_per_table,
+    min_per_table: oneStore.min_per_table || store.min_per_table 
+  });
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const submitUpdateHandler = async (e: any) => {
+    e.preventDefault();
+    try {
+      dispatch(updateStore(storeUpdate) as any);
+      setOpenModal(!openModal);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
+  };
+
+  
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setStoreUpdate((prev) => ({ ...prev, [name]: value }));
+  };
+
+
+  const [bookingSelected, setBookingSelected] = useState<any>();
+
+  const totalBookingsTable = dataBooking.reduce((a, c) => a + c.table * 1, 0)
+  const totalBookingsChairs = dataBooking.reduce((a, c) => a + c.chairs * 1, 0)
+
+  console.log(totalBookingsTable, totalBookingsChairs)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStoreById(store.uuid) as any)
+    if (success) {
+      dispatch(reset() as any);
+    }
+  }, [dispatch, success]);
   return (
     <div className={styles.screen}>
       <div className={styles.center__screen}>
         <div className={`${styles.flex} ${styles.border}`}>
           <div className={styles.box}>
             <h3>Total Reservas</h3>
-            <p>20</p>
+            <p>{dataBooking.length}</p>
           </div>
           <div className={styles.box}>
             <h3>Sillas Disponibles</h3>
-            <p>20</p>
+            <p>{oneStore.chairs && oneStore.chairs - totalBookingsChairs}</p>
           </div>
           <div className={styles.box}>
             <h3>Mesas Disponibles</h3>
-            <p>20</p>
+            <p>{oneStore.tables && oneStore.tables - totalBookingsTable}</p>
           </div>
           <div className={styles.box}>
             <h3>Reservas Efectivas</h3>
@@ -54,24 +127,28 @@ const Bookings = () => {
         <div className={styles.booking_header}>
             <h3>Reservas</h3>
             <div>
-            <button>Editar cantidad de sillas</button>
-              <button>Editar cantidad de mesas</button>
+              <button onClick={() => setOpenModal(true)}>Configuracion</button>
             </div>
         </div>
         <div className={styles.booking_container}>
           <div className={styles.booking}>
-            <BookingList dataBooking={dataBooking} />
+            <BookingList dataBooking={dataBooking} setBooking={setBookingSelected} />
           </div>
           <div className={styles.booking_details}>
             <div className={styles.details_header}>
               <div>
-                <p>Pedro Picasso</p>
-                <h4>MESA 5 | SILLAS 6</h4>
+                <p>{bookingSelected?.name}</p>
+                <h4>MESA {bookingSelected?.table} | SILLAS {bookingSelected?.chairs}</h4>
               </div>
               <button>CHECK-IN</button>
             </div>
             <div className={styles.editor}>
+              {bookingSelected? (
               <img src="/edit.gif" alt="" />
+
+              ): (
+                <h4>No hay nignuna reserva seleccionada</h4>
+              )}
             </div>
             <div className={styles.footer}>
               <button>
@@ -84,10 +161,64 @@ const Bookings = () => {
       </div>
       <div className={styles.right__screen}>
         {dataBooking.map((booking) => (
-          <button key={booking.id} className={styles.button__none}>
+          <button key={booking.uuid} className={styles.button__none}>
           </button>
         ))}
       </div>
+      <div className={openModal ? styles.open_modal : styles.close_modal}>
+      <div className={styles.container_form}>
+        <div className={styles.form}>
+          <div className={styles.header_cover_form}>
+            <img src="/logo-parti.svg" alt="Log Partiaf" />
+            <button
+              className={styles.btn_header_cover}
+              onClick={() => setOpenModal(!openModal)}
+            >
+              {" "}
+              Cerrar
+            </button>
+          </div>
+          <div className={styles.container_fields}>
+            <Field label="Sillas disponibles">
+              <Input name="chairs" type="number" value={storeUpdate.chairs} onChange={handleChange} />
+            </Field>
+            <Field label="Mesas disponibles">
+                <Input
+                  name="tables"
+                  type="number"
+                  value={storeUpdate.tables}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Sillas por mesa">
+                <Input
+                  name="chairs_per_table"
+                  type="number"
+                  value={storeUpdate.chairs_per_table}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Maximo de mesas por mesa">
+                <Input
+                  name="max_per_table"
+                  type="number"
+                  value={storeUpdate.max_per_table}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Minimo de mesas por mesa">
+                <Input
+                  name="min_per_table"
+                  type="number"
+                  value={storeUpdate.min_per_table}
+                  onChange={handleChange}
+                />
+              </Field>
+          </div>
+          <Button onClick={submitUpdateHandler}>Actualizar Cover</Button>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
