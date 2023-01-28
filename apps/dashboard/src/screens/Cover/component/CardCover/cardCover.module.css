@@ -139,7 +139,7 @@ font-feature-settings: 'tnum' on, 'lnum' on, 'cpsp' on;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 font-variation-settings: 'slnt' -2;
-font-weight: 900;
+font-weight: 500;
 font-size: 2rem;
 margin-top: -.4rem;
 text-overflow: ellipsis;
