@@ -1,9 +1,9 @@
 import { PARTIAF_API } from "@/api";
 import { loadingGoersReducer, PartialGoer, setGoersReducer } from "./goers";
 
-export const getGoersByIdThunks = (uuid: string) => async (dispatch: any) => {
+export const getGoersByIdThunks = (uuid:any) => async (dispatch: any) => {
   dispatch(loadingGoersReducer());
-  const { data } = await PARTIAF_API.get(`/covers/${uuid}`);
+  const { data } = await PARTIAF_API.get(`/goers/${uuid}`);
   dispatch(setGoersReducer({ goers: data }));
   return data;
 };

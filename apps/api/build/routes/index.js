@@ -6,12 +6,14 @@ const admins_1 = require("./admins");
 const stores_1 = require("./stores");
 const covers_1 = require("./covers");
 const goers_1 = require("./goers");
+const users_1 = require("./users");
 const routes = [
     health_check_1.healthCheckRoute,
     ...admins_1.adminsRoutes,
     ...stores_1.storeRoutes,
     ...covers_1.coverRoutes,
-    ...goers_1.goersRoutes
+    ...goers_1.goersRoutes,
+    ...users_1.usersRoutes
 ];
 const registerRoutes = (fastify) => {
     fastify.log.warn("Registering routes", routes);
