@@ -55,7 +55,12 @@ const ApprovedCovers = ({ navigation }) => {
           <CoverCount selected={selected} data={data} />
         </View>
 
-        <Dropdown setSelected={setSelected} data={Object.values(data)} defaultOption />
+        <Dropdown
+          selected={selected}
+          setSelected={setSelected}
+          data={data}
+          defaultSelected
+        />
 
         <View style={styles.listContainer}>
           { selected && data[selected].data.map((data) => (
@@ -69,13 +74,11 @@ const ApprovedCovers = ({ navigation }) => {
         style={styles.gradient}
       />
 
-      {/* <View style={styles.buttonsContainer}> */}
-        <SearchBar
-          navigation={navigation}
-          unfolded={unfolded}
-          setUnfolded={setUnfolded}
-        />
-      {/* </View> */}
+      <SearchBar
+        navigation={navigation}
+        unfolded={unfolded}
+        setUnfolded={setUnfolded}
+      />
     </SafeAreaView>
   )
 }
@@ -120,17 +123,6 @@ const styles = StyleSheet.create({
     marginBottom: 25
   },
   gradient: theme.gradientPrimary,
-  // buttonsContainer: {
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   width: '30%',
-  //   height: 100,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignSelf: 'center',
-  //   alignItems: 'center',
-  //   margin: 'auto'
-  // }
 })
 
 export default ApprovedCovers

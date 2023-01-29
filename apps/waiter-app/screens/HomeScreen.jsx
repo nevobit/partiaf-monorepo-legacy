@@ -7,7 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import useHideHeader from '../hooks/useHideHeader';
 
 import CoverItem from '../components/CoverItem'
-import Dropdown from '../components/Dropdown'
+// import Dropdown from '../components/Dropdown2';
+import Dropdown from '../components/Dropdown';
 import CoverCount from '../components/CoverCount'
 
 import LogoIcon from '../assets/logo-partiaf-neg.svg'
@@ -18,9 +19,9 @@ import { theme, variables } from '../theme';
 import data from '../data/covers';
 
 const HomeScreen = ({ navigation }) => {
-  const [selected, setSelected] = useState(undefined)
+  const [selected, setSelected] = useState(null)
 
-  useHideHeader();
+  useHideHeader()
 
   return (
     <SafeAreaView>
@@ -34,8 +35,13 @@ const HomeScreen = ({ navigation }) => {
           </TouchableNativeFeedback>
         </View>
 
-        <Dropdown setSelected={setSelected} data={Object.values(data)} defaultOption />
-        
+        <Dropdown
+          selected={selected}
+          setSelected={setSelected}
+          data={data}
+          defaultSelected
+        />
+
         <View style={styles.body}>
           <View style={styles.head}>
             <Text style={styles.title}>Odisea</Text>
@@ -90,7 +96,8 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: 10,
-    marginBottom: 25
+    marginBottom: 25,
+    zIndex: -1
   },
   head: {
     flexDirection: 'row',

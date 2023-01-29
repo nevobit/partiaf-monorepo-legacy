@@ -1,7 +1,7 @@
 const data = {
   'majo-party': {
-    key: 'majo-party',
-    value: 'Majo Party',
+    id: 'majo-party',
+    name: 'Majo Party',
     data: [
       {
         name: 'Berlin Aldazosa',
@@ -48,8 +48,8 @@ const data = {
     ]
   },
   'after-party': {
-    key: 'after-party',
-    value: 'After Party',
+    id: 'after-party',
+    name: 'After Party',
     data: [
       {
         name: 'Alessandra De Bonis',
