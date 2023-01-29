@@ -73,7 +73,7 @@ const CardCover = (Cover: any) => {
 
         <div className={styles.info_cover}>
           <div className={styles.data_cover}>
-            <h4 className={styles.name_cover}>{name}</h4>
+            <h4 className={`${styles.name_cover} ${type == 'VIP'? styles.name_vip: ""}`}>{name}</h4>
             <p>{description}</p>
           </div>
 
