@@ -7,7 +7,7 @@ import {
   ReviewsSection,
   ContactSection,
   GraphicElements,
-} from "@/components";
+} from "@/components/People";
 
 export default function Home(): JSX.Element {
   return (

@@ -1,5 +1,5 @@
 import { Control } from "react-hook-form";
-import { FormValues } from "@/components/ContactSection";
+import { FormValues } from "@/components/People/ContactSection";
 
 export interface InputProps {
   name: "firstName" | "lastName" | "message" | "email";
