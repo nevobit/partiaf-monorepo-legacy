@@ -14,13 +14,16 @@ export default function Footer(): JSX.Element {
   return (
     <footer id="contactanos" className="footerContainer">
       <div className="bg-secondary footerGridContainer">
+        <div className="h-7 w-7 2xl:w-12 2xl:h-12 rounded-full bg-primary absolute top-3 left-10 2xl:left-28" />
+        <div className="h-12 w-12 2xl:h-24 2xl:w-24  rounded-full bg-primary absolute left-0" />
         <div className="footerGrid">
-          <section>
+          <section className="flex flex-col">
             <Image
               src="/icons/partiafLogoWhite.svg"
               alt="partiaf icon"
               width={241.6}
               height={52.6}
+              className="self-center lg:self-start 2xl:h-16 2xl:w-72"
             />
             <p className="text-lg my-7">
               Suscríbase a nuestro boletín para recibir nuestra última

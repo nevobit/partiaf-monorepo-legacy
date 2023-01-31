@@ -77,54 +77,70 @@
     --tw-text-opacity: 0.8;
   }
 
-  @layer components {
-    .formInput {
-      @apply col-span-2 rounded-none bg-base-200 focus:outline-none placeholder:text-primary-content w-full h-12;
-    }
-    .sectionTitle {
-      @apply text-2xl mb-3 font-normal text-base-300 2xl:text-3xl 2xl:mb-5;
-    }
-    .sectionDescription {
-      @apply text-3xl font-medium leading-10 2xl:leading-[58px] mb-5 2xl:text-5xl;
-    }
-    .rating {
-      @apply font-bold text-4xl 2xl:text-5xl mb-2;
-    }
-    .ratingTitle {
-      @apply text-xl 2xl:text-2xl font-light leading-5;
-    }
-    .ratingTextContainer {
-      @apply text-white text-left;
-    }
-    .ratingContainer {
-      @apply flex flex-col items-start justify-evenly min-h-[200px] min-w-max mx-auto my-0;
-    }
-    .ratingImageContainer {
-      @apply bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center;
-    }
-    .bussinesImages {
-      @apply w-full lg:w-full lg:h-[400px] h-80;
-    }
-    .bussinesTitles {
-      @apply flex flex-col items-center my-24 font-bold text-4xl leading-[51px] text-center;
-    }
-    .lineYellow {
-      @apply w-28 bg-primary h-2 rounded-xl;
-    }
-    .businessSubtitles {
-      @apply font-bold text-[28px] leading-[42px];
-    }
-    .businessDescription {
-      @apply font-normal text-lg leading-7 text-[#676767];
-    }
-    .footerGrid {
-      @apply w-11/12 place-self-center grid lg:grid-cols-4 grid-cols-1 z-30;
-    }
-    .footerGridContainer {
-      @apply grid pb-4 pt-12 w-full h-auto text-accent;
-    }
-    .footerContainer {
-      @apply h-auto w-full relative;
-    }
+  .menu {
+    @apply grid place-items-center  h-full;
+  }
+
+  .menu:hover div,
+  .menu:focus div {
+    background: theme("colors.primary");
+  }
+}
+
+@layer components {
+  .formInput {
+    @apply col-span-2 rounded-none bg-base-200 focus:outline-none placeholder:text-primary-content w-full h-12;
+  }
+  .sectionTitle {
+    @apply text-2xl mb-3 font-normal text-base-300 2xl:text-3xl 2xl:mb-5;
+  }
+  .sectionDescription {
+    @apply text-3xl font-medium leading-10 2xl:leading-[58px] mb-5 2xl:text-5xl;
+  }
+  .rating {
+    @apply font-bold text-4xl 2xl:text-5xl mb-2;
+  }
+  .ratingTitle {
+    @apply text-xl 2xl:text-2xl font-light leading-5;
+  }
+  .ratingTextContainer {
+    @apply text-white text-left;
+  }
+  .ratingContainer {
+    @apply flex flex-col items-start justify-evenly min-h-[200px] min-w-max mx-auto my-0;
+  }
+  .ratingImageContainer {
+    @apply bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center;
+  }
+  .bussinesImages {
+    @apply w-full lg:w-full lg:min-h-[400px] h-80 2xl:min-h-[675px];
+  }
+  .bussinesTitles {
+    @apply flex flex-col items-center mb-4 md:mb-16 font-bold text-4xl 2xl:text-[58px] leading-[51px] text-center;
+  }
+  .lineYellow {
+    @apply w-28 2xl:w-32 mb-1 2xl:mb-4 bg-primary h-2 rounded-xl;
+    transition: background-color 0.3s linear;
+  }
+  .businessSubtitles {
+    @apply font-bold text-[28px] 2xl:text-[42px] leading-[42px] 2xl:leading-[63px];
+  }
+  .businessDescription {
+    @apply font-normal text-lg 2xl:text-2xl leading-7 2xl:leading-9 text-[#676767];
+  }
+  .footerGrid {
+    @apply w-11/12 place-self-center grid lg:grid-cols-4 grid-cols-1 z-30;
+  }
+  .footerGridContainer {
+    @apply grid pb-4 pt-12 w-full h-auto text-accent 2xl:min-h-[560px];
+  }
+  .footerContainer {
+    @apply h-auto w-full relative;
+  }
+  .BenefitCard {
+    @apply bg-secondary grid text-center place-content-center md:h-36 md:w-36 h-28 w-28 shadow-3xl rounded-3xl gap-2 2xl:h-44 2xl:w-44 font-bold text-xs text-primary;
+  }
+  .managementIconCard {
+    @apply bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 2xl:h-40 2xl:w-40 grid place-content-center justify-items-center gap-2 font-medium text-xs;
   }
 }

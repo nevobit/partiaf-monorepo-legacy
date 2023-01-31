@@ -25,7 +25,7 @@ export default function ReviewsSection(): JSX.Element {
   );
   return (
     <div className="relative w-11/12 justify-center flex py-20">
-      <div className="w-full pb-16 max-w-3xl ">
+      <div className="w-full pb-16 max-w-3xl md:max-w-xl 2xl:max-w-6xl">
         <div className="bussinesTitles">
           <div className="lineYellow" />
           <p>Testimonials</p>

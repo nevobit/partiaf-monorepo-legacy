@@ -4,12 +4,12 @@ import men from "public/images/men.jpg";
 
 export default function GoalsSection(): JSX.Element {
   return (
-    <div className="py-32 w-11/12">
+    <div className="pt-28 w-11/12">
       <div className="bussinesTitles">
         <div className="lineYellow" />
         <p>POSICIÓNATE ENTRE LOS MEJORES</p>
       </div>
-      <div className="grid md:grid-cols-2 gap-16 justify-items-center items-center mt-6 mb-32">
+      <div className="grid md:grid-cols-2 gap-y-16 gap-x-3 justify-items-center items-center mt-6 mb-32">
         <div>
           <p className="businessSubtitles">
             Aparecer en el mapa de Partiaf te ayudará a aumentar la visibilidad
@@ -21,7 +21,7 @@ export default function GoalsSection(): JSX.Element {
           <Image src={location} alt="location" className="bussinesImages" />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-16 justify-items-center items-center lg:py-20">
+      <div className="grid md:grid-cols-2 gap-y-16 gap-x-3 justify-items-center items-center lg:py-20">
         <div className="md:col-start-2 md:col-end-3">
           <p className="businessSubtitles mb-5">Todo en un solo portal</p>
           <p className="businessDescription">

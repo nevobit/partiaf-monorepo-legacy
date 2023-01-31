@@ -15,9 +15,13 @@ export default function SingleReviewCard({
         <div className="w-full flex justify-end">
           <Quote />
         </div>
-        <p className="text-base leading-6 text-[#676767]">{review}</p>
+        <p className="text-base 2xl:text-3xl leading-6 2xl:leading-10 text-[#676767]">
+          {review}
+        </p>
         <Quote className="rotate-180" />
-        <p className="font-bold text-lg flex justify-self-end">{author}</p>
+        <p className="font-bold text-lg 2xl:text-3xl flex justify-self-end">
+          {author}
+        </p>
       </div>
     </div>
   );

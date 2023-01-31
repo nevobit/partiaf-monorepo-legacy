@@ -1,5 +1,5 @@
-import HomeIcon from "public/icons/homeIcon.svg";
 import Image from "next/image";
+import HomeIcon from "public/icons/homeIcon.svg";
 import analytics from "public/images/analytics.jpg";
 import MessageIcon from "public/icons/messagesIcon.svg";
 import CoverIcon from "public/icons/coverIcon.svg";
@@ -10,44 +10,44 @@ import ReserveIcon from "public/icons/reservesIcon.svg";
 
 export default function ManagementSection(): JSX.Element {
   return (
-    <div className="py-12 w-11/12">
+    <div className="pt-12 pb-16 w-11/12">
       <div className="bussinesTitles">
         <div className="lineYellow" />
         <p>GESTIONA DESDE UN SOLO LUGAR</p>
       </div>
-      <div className="grid gap-y-9 md:grid-cols-2 gap-x-5 justify-items-center">
+      <div className="grid gap-y-10 md:grid-cols-2 gap-x-3 justify-items-center">
         <div className="grid grid-cols-4  gap-x-4 gap-y-3 w-full justify-items-center md:justify-items-start self-end">
-          <div className="bg-primary h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+          <div className="bg-primary managementIconCard">
             <HomeIcon />
             <p className="font-medium text-xs">Analiticas</p>
           </div>
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+          <div className="managementIconCard">
             <ExpenseIcon />
-            <p className="font-medium text-xs">Gastos</p>
+            <p>Gastos</p>
           </div>
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+          <div className="managementIconCard">
             <InventoryIcon />
-            <p className="font-medium text-xs">Inventario</p>
-          </div>{" "}
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+            <p>Inventario</p>
+          </div>
+          <div className="managementIconCard">
             <ReserveIcon />
-            <p className="font-medium text-xs">Reservas</p>
-          </div>{" "}
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+            <p>Reservas</p>
+          </div>
+          <div className="managementIconCard">
             <HomeIcon />
-            <p className="font-medium text-xs">Mensajeria</p>
-          </div>{" "}
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+            <p>Mensajeria</p>
+          </div>
+          <div className="managementIconCard">
             <MessageIcon />
-            <p className="font-medium text-xs">Contactos</p>
-          </div>{" "}
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+            <p>Contactos</p>
+          </div>
+          <div className="managementIconCard">
             <PayrollIcon />
-            <p className="font-medium text-xs">Nomina</p>
-          </div>{" "}
-          <div className="bg-[#E1E1E1] h-20 w-20 lg:h-28 lg:w-28 grid place-content-center justify-items-center gap-2">
+            <p>Nomina</p>
+          </div>
+          <div className="managementIconCard">
             <CoverIcon />
-            <p className="font-medium text-xs">Cover</p>
+            <p>Cover</p>
           </div>
         </div>
         <div className="md:col-start-1 md:row-start-1 md:row-end-3 justify-self-center md:justify-self-start ">

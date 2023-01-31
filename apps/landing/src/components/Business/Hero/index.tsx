@@ -12,9 +12,9 @@ export default function Hero(): JSX.Element {
       id="inicio"
       className="hero min-h-screen w-full bg-heroBusiness-desktop flex flex-col justify-center"
     >
-      <div className="hero-content flex flex-col relative">
+      <div className="w-11/12 p-4 gap-4 grid place-content-center relative lg:mt-20">
         <div className="grid md:grid-cols-2 justify-center justify-items-center">
-          <p className="font-bold text-[34px] leading-[51px] md:self-end">
+          <p className="font-bold text-[34px] 2xl:text-[58px] leading-[51px] 2xl:leading-[70px]  md:self-end">
             Conecta con tus clientes y mejora su experiencia
           </p>
           <div>
@@ -50,7 +50,7 @@ export default function Hero(): JSX.Element {
               <Youtube />
             </Link>
           </div>
-          <button className="btn btn-primary absolute lg:right-0 lg:bottom-0  bottom-24 right-5 h-16 w-16 rounded-full grid place-content-center font-bold text-base">
+          <button className="btn btn-primary absolute lg:right-0 lg:bottom-0  bottom-24 right-5 h-16 w-16 2xl:h-24 2xl:w-24 rounded-full grid place-content-center font-bold text-base">
             FAQ
           </button>
         </div>
