@@ -1,18 +1,29 @@
+import { PrivateRoutes, PublicRoutes } from "@/constant-definitions";
+import { AppStore } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
-import { PublicRoutes } from '@/constant-definitions';
-import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
-
-const GuardRoute = () => {
-
-    const userInfo = null;
-
-
-  return (
-    <div>
-        {userInfo? <Outlet /> : <Navigate replace to={PublicRoutes} />}
-    </div>
-  )
+interface Props {
+  privateValidation: boolean;
 }
 
-export default GuardRoute
+const PrivateValidationFragment = <Outlet />;
+const PublicValidationFragment = (
+  <Navigate replace to={PrivateRoutes.PRIVATE} />
+);
+
+const GuardRoute = ({ privateValidation }: Props) => {
+  /*   const { admin } = useSelector((store: AppStore) => store.admins);
+
+  return admin.email ? (
+    privateValidation ? (
+      PrivateValidationFragment
+    ) : (
+      PublicValidationFragment
+    )
+  ) : (
+    <Navigate replace to={PublicRoutes.SIGNIN} />
+  ); */
+};
+
+export default GuardRoute;
