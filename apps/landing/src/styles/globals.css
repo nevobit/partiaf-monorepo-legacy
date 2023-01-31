@@ -102,5 +102,29 @@
     .ratingImageContainer {
       @apply bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center;
     }
+    .bussinesImages {
+      @apply w-full lg:w-full lg:h-[400px] h-80;
+    }
+    .bussinesTitles {
+      @apply flex flex-col items-center my-24 font-bold text-4xl leading-[51px] text-center;
+    }
+    .lineYellow {
+      @apply w-28 bg-primary h-2 rounded-xl;
+    }
+    .businessSubtitles {
+      @apply font-bold text-[28px] leading-[42px];
+    }
+    .businessDescription {
+      @apply font-normal text-lg leading-7 text-[#676767];
+    }
+    .footerGrid {
+      @apply w-11/12 place-self-center grid lg:grid-cols-4 grid-cols-1 z-30;
+    }
+    .footerGridContainer {
+      @apply grid pb-4 pt-12 w-full h-auto text-accent;
+    }
+    .footerContainer {
+      @apply h-auto w-full relative;
+    }
   }
 }

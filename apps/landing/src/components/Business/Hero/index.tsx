@@ -8,14 +8,17 @@ import Youtube from "public/icons/youtubeDark.svg";
 
 export default function Hero(): JSX.Element {
   return (
-    <div className="hero min-h-screen w-full bg-heroBusiness-desktop flex flex-col justify-center">
+    <div
+      id="inicio"
+      className="hero min-h-screen w-full bg-heroBusiness-desktop flex flex-col justify-center"
+    >
       <div className="hero-content flex flex-col relative">
         <div className="grid md:grid-cols-2 justify-center justify-items-center">
           <p className="font-bold text-[34px] leading-[51px] md:self-end">
             Conecta con tus clientes y mejora su experiencia
           </p>
           <div>
-            <p className="text-lg leading-7 text-base-400 md:py-5">
+            <p className="businessDescription md:py-5">
               Somos una plataforma que facilita la conexión entre negocios de
               entretenimiento y personas. Ofrecemos herramientas que permiten a
               las empresas optimizar y automatizar sus procesos diarios,

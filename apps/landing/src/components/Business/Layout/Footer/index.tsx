@@ -12,10 +12,10 @@ import ArrowWhite from "public/icons/arrowWhite.svg";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="h-auto w-full flex flex-col relative text-accent">
-      <div className="bg-secondary flex justify-center items-center pb-4 pt-12 bg-no-repeat bg-co w-full h-auto ">
-        <div className="w-11/12 md:w-4/5 h-min md:justify-between flex flex-col  md:flex-row gap-x-7 z-30">
-          <section className="md:w-4/12 ">
+    <footer id="contactanos" className="footerContainer">
+      <div className="bg-secondary footerGridContainer">
+        <div className="footerGrid">
+          <section>
             <Image
               src="/icons/partiafLogoWhite.svg"
               alt="partiaf icon"
@@ -27,7 +27,7 @@ export default function Footer(): JSX.Element {
               actualización y novedades Suscríbase a nuestro boletín para
               recibir.
             </p>
-            <div className="flex justify-around  md:justify-between items-center mb-11 z-30 pr-5">
+            <div className="flex justify-around  lg:justify-between items-center mb-11 lg:mb-2 lg:mt-16 z-30 pr-5">
               <Link href="/#">
                 <FacebookIcon />
               </Link>
@@ -42,7 +42,7 @@ export default function Footer(): JSX.Element {
               </Link>
             </div>
           </section>
-          <section className="md:mt-5  md:w-fit">
+          <section className="lg:col-start-3 lg:self-center">
             <p className="mb-5 text-lg 2xl:text-xl">Dirección de la oficina</p>
             <div className="flex flex-col gap-5 mb-7">
               <div className="flex items-center gap-2 ">
@@ -70,11 +70,11 @@ export default function Footer(): JSX.Element {
               </div>
             </div>
           </section>
-          <section className="md:w-2/5 md:mt-5">
-            <p className="text-lg 2xl:text-xl">Newsletter</p>
-            <div className="flex items-center">
-              <ArrowWhite />
-              <p className="text-sm leading-6 my-3 2xl:text-lg ml-1">
+          <section className="lg:self-center">
+            <p className="text-lg 2xl:text-xl ">Newsletter</p>
+            <div className="flex py-3">
+              <ArrowWhite className="w-8 mt-1" />
+              <p className="text-sm leading-6  2xl:text-lg">
                 Suscríbase a nuestro boletín para recibir nuestra última
                 actualización y novedades.
               </p>

@@ -6,7 +6,7 @@ import {
   ManagementSection,
   BenefitsSection,
   GoalsSection,
-  Reviews,
+  ReviewsSection,
   ArticlesSection,
 } from "../../components/Business/index";
 
@@ -19,7 +19,7 @@ export default function Businesses(): JSX.Element {
       <ManagementSection />
       <BenefitsSection />
       <GoalsSection />
-      <Reviews />
+      <ReviewsSection />
       <ArticlesSection />
     </Layout>
   );

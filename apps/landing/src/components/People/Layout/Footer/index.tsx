@@ -13,7 +13,7 @@ import PhoneIcon from "public/icons/phoneIcon.svg";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="h-auto w-full flex flex-col relative text-accent">
+    <footer className="footerContainer">
       <Image
         src={Shape}
         alt="shape"
@@ -24,9 +24,9 @@ export default function Footer(): JSX.Element {
         alt="shape"
         className="absolute h-full w-full mix-blend-exclusion hidden md:block"
       />
-      <div className="bg-footer-mobile bg-cover md:bg-footer-destop flex justify-center items-center pb-4 pt-12 bg-no-repeat bg-co w-full h-auto md:h-[479px]">
-        <div className="w-11/12 md:w-4/5 h-min md:justify-between flex flex-col  md:flex-row gap-x-7  z-30">
-          <section className="md:w-4/12 ">
+      <div className="bg-footer-mobile bg-cover md:bg-footer-destop bg-no-repeat footerGridContainer">
+        <div className="footerGrid">
+          <section>
             <Image
               src="/icons/partiafLogoWhite.svg"
               alt="partiaf icon"
@@ -38,7 +38,7 @@ export default function Footer(): JSX.Element {
               actualización y novedades Suscríbase a nuestro boletín para
               recibir.
             </p>
-            <div className="flex justify-around  md:justify-between items-center mb-11 z-30 pr-5">
+            <div className="flex justify-around lg:justify-between items-center mb-11 lg:mb-2 lg:mt-16 z-30 pr-5">
               <Link href="/#">
                 <FacebookIcon />
               </Link>
@@ -53,7 +53,7 @@ export default function Footer(): JSX.Element {
               </Link>
             </div>
           </section>
-          <section className="md:mt-5  md:w-fit">
+          <section className="lg:col-start-3 self-center">
             <p className="mb-5 text-lg 2xl:text-xl">Dirección de la oficina</p>
             <div className="flex flex-col gap-5 mb-7">
               <div className="flex items-center gap-2 ">
@@ -72,7 +72,7 @@ export default function Footer(): JSX.Element {
               </div>
             </div>
           </section>
-          <section className="md:w-4/12 md:mt-5">
+          <section className="self-center">
             <p className="text-lg 2xl:text-xl">Newsletter</p>
             <p className="text-sm leading-6 my-3 2xl:text-lg">
               Suscríbase a nuestro boletín para recibir nuestra última

@@ -5,7 +5,7 @@ export { default as Hero } from "./Hero";
 export { default as ManagementSection } from "./ManagementSection";
 export { default as BenefitsSection } from "./BenefitsSection";
 export { default as GoalsSection } from "./GoalsSection";
-export { default as Reviews } from "./Reviews";
+export { default as ReviewsSection } from "./ReviewsSection";
 export { default as ArticlesSection } from "./ArticlesSection";
 
 
