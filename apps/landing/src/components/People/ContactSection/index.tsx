@@ -82,6 +82,7 @@ export default function ContactSection(): JSX.Element {
             placeholder="Mensaje"
           />
           <button
+            aria-label="Submit contact information with message"
             disabled={!isValid}
             className="btn btn-primary font-bold text-2xl w-full col-span-2"
           >

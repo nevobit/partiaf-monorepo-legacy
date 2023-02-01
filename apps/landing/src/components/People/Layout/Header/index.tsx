@@ -46,6 +46,7 @@ export default function Header(): JSX.Element {
           </div>
           <div className="flex-none z-50 lg:hidden">
             <button
+              aria-label="open menu"
               onClick={() => {
                 setShowModal((prev) => !prev);
               }}

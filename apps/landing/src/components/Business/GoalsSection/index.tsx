@@ -5,7 +5,7 @@ import men from "public/images/men.jpg";
 export default function GoalsSection(): JSX.Element {
   return (
     <div className="pt-28 w-11/12">
-      <div className="bussinesTitles">
+      <div className="businessTitles">
         <div className="lineYellow" />
         <p>POSICIÓNATE ENTRE LOS MEJORES</p>
       </div>
@@ -18,7 +18,7 @@ export default function GoalsSection(): JSX.Element {
           </p>
         </div>
         <div className="md:justify-self-end">
-          <Image src={location} alt="location" className="bussinesImages" />
+          <Image src={location} alt="location" className="businessImages" />
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-y-16 gap-x-3 justify-items-center items-center lg:py-20">
@@ -33,7 +33,7 @@ export default function GoalsSection(): JSX.Element {
           </p>
         </div>
         <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 md:justify-self-start">
-          <Image src={men} alt="location" className="bussinesImages" />
+          <Image src={men} alt="location" className="businessImages" />
         </div>
       </div>
     </div>

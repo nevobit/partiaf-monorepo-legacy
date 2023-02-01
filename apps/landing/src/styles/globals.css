@@ -112,10 +112,10 @@
   .ratingImageContainer {
     @apply bg-accent h-24 w-24 rounded-full flex justify-center items-center self-center;
   }
-  .bussinesImages {
+  .businessImages {
     @apply w-full lg:w-full lg:min-h-[400px] h-80 2xl:min-h-[675px];
   }
-  .bussinesTitles {
+  .businessTitles {
     @apply flex flex-col items-center mb-4 md:mb-16 font-bold text-4xl 2xl:text-[58px] leading-[51px] text-center;
   }
   .lineYellow {

@@ -9,7 +9,11 @@ interface MenuProps {
 export default function MenuMobile({ onMenuClick }: MenuProps): JSX.Element {
   return (
     <div className="fixed top-0 right-0 left-0 bottom-0 bg-[#030303ED] z-50 flex justify-center px-6">
-      <button onClick={onMenuClick} className="z-50 absolute top-6 right-5">
+      <button
+        aria-label="close menu"
+        onClick={onMenuClick}
+        className="z-50 absolute top-6 right-5"
+      >
         <BurgueIcon />
       </button>
       <div className="w-full h-full">

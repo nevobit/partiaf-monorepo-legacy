@@ -39,17 +39,17 @@ export default function Footer(): JSX.Element {
               recibir.
             </p>
             <div className="flex justify-around lg:justify-between items-center mb-11 lg:mb-2 lg:mt-16 z-30 pr-5">
-              <Link href="/#">
+              <Link href="/#" aria-label="See facebook">
                 <FacebookIcon />
               </Link>
-              <Link href="#">
+              <Link href="#" aria-label="See twitter">
                 <TwitterIcon />
               </Link>
-              <Link href="/#">
+              <Link href="/#" aria-label="See instagram">
                 <InstagramIcon />
               </Link>
               <Link href="/#">
-                <YoutubeIcon />
+                <YoutubeIcon aria-label="See youtube" />
               </Link>
             </div>
           </section>
@@ -84,7 +84,10 @@ export default function Footer(): JSX.Element {
                 placeholder="Email address"
                 className="w-full text-base font-light h-full overflow-hidden input bg-accent/10 backdrop-opacity-[0.08] placeholder:text-accent placeholder:font-light text-accent pr-20"
               />
-              <button className="btn btn-primary absolute right-0 top-0 bottom-0 h-full w-[68px]">
+              <button
+                aria-label="Submit email"
+                className="btn btn-primary absolute right-0 top-0 bottom-0 h-full w-[68px]"
+              >
                 <ArrowIcon />
               </button>
             </div>

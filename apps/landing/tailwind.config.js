@@ -25,10 +25,16 @@ module.exports = {
       },
       boxShadow: {
         '3xl': '0px 0px 12px 8px rgba(46,46,46,0.95)',
+      },
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10',
       }
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('@tailwindcss/line-clamp')],
   daisyui: {
     themes: [
       {

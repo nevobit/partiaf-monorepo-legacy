@@ -11,7 +11,7 @@ import ReserveIcon from "public/icons/reservesIcon.svg";
 export default function ManagementSection(): JSX.Element {
   return (
     <div className="pt-12 pb-16 w-11/12">
-      <div className="bussinesTitles">
+      <div className="businessTitles">
         <div className="lineYellow" />
         <p>GESTIONA DESDE UN SOLO LUGAR</p>
       </div>
@@ -51,7 +51,7 @@ export default function ManagementSection(): JSX.Element {
           </div>
         </div>
         <div className="md:col-start-1 md:row-start-1 md:row-end-3 justify-self-center md:justify-self-start ">
-          <Image src={analytics} alt="analytics" className="bussinesImages" />
+          <Image src={analytics} alt="analytics" className="businessImages" />
         </div>
         <div>
           <p className="businessDescription">

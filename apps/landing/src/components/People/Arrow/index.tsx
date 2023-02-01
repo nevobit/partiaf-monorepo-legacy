@@ -13,6 +13,7 @@ export default function Arrow({
 }: ArrowProps): JSX.Element {
   return (
     <button
+      aria-label="Slide to review"
       disabled={disabled}
       data-left={left}
       data-disabled={disabled}

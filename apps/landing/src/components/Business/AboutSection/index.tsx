@@ -4,7 +4,7 @@ import PersonWriting from "public/images/personWriting.jpg";
 export default function AboutSection(): JSX.Element {
   return (
     <div id="empresas" className="w-11/12 pt-4 lg:pt-20 pb-7">
-      <div className="bussinesTitles">
+      <div className="businessTitles">
         <div className="lineYellow" />
         <p>PARTIAF</p>
       </div>
@@ -25,7 +25,7 @@ export default function AboutSection(): JSX.Element {
           <Image
             src={PersonWriting}
             alt="person writing"
-            className="bussinesImages"
+            className="businessImages"
           />
         </div>
       </div>

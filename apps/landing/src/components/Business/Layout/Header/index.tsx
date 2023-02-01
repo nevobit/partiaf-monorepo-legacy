@@ -29,7 +29,7 @@ export default function Header(): JSX.Element {
           </ul>
         </div>
         <div className="flex-none z-50 lg:hidden">
-          <button>
+          <button aria-label="open menu">
             <BurgueIcon />
           </button>
         </div>
