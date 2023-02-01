@@ -8,7 +8,7 @@ import XIcon from '../assets/x.svg'
 
 import { theme, variables } from '../theme'
 
-const SearchBar = ({ navigation, unfolded, setUnfolded }) => {
+const SearchBar = ({ navigation, unfolded, setUnfolded, searchValue, onChangeValue }) => {
   const [searchIconAnimation, setSearchIconAnimation] = useState(new Animated.Value(0));
   const [pixelsToMove, setPixelsToMove] = useState(0)
   
@@ -21,7 +21,6 @@ const SearchBar = ({ navigation, unfolded, setUnfolded }) => {
   const getPixelsToMove = (width, pageX) => {
     setPixelsToMove(windowWidth - (windowWidth * 0.1) - width - pageX)
   }
-
 
   // ANIMATION START //
 
@@ -180,9 +179,11 @@ const SearchBar = ({ navigation, unfolded, setUnfolded }) => {
           />
         </TouchableNativeFeedback>
         <TextInput
-        placeholder='Buscar...'
-        style={styles.input}
-        placeholderTextColor={variables.backgroundSecondary}
+          placeholder='Buscar...'
+          style={styles.input}
+          placeholderTextColor={variables.backgroundSecondary}
+          value={searchValue}
+          onChangeText={onChangeValue}
         />
       </Animated.View>
 

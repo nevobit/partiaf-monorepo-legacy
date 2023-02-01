@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ScrollView,
   StyleSheet,
@@ -26,8 +26,22 @@ import SearchBar from '../components/SearchBar'
 const ApprovedCovers = ({ navigation }) => {
   const [selected, setSelected] = useState(null)
   const [unfolded, setUnfolded] = useState(false)
+  const [searchValue, onChangeValue] = useState()
+  const [filter, setFilter] = useState()
 
   useHideHeader()
+
+  useEffect(() => {
+    if(searchValue) {
+      const newData = data[selected].data.filter((item) => (
+        item.name.toLowerCase().includes(searchValue.toLowerCase())
+      ))
+      setFilter(newData)
+    }
+    else if(selected) {
+      setFilter(data[selected].data)
+    }
+  }, [searchValue])
 
   return (
     <SafeAreaView>
@@ -63,9 +77,14 @@ const ApprovedCovers = ({ navigation }) => {
         />
 
         <View style={styles.listContainer}>
-          { selected && data[selected].data.map((data) => (
-            <CoverItem {...data} key={data.cc} />
-          ))}
+          { filter
+            ? filter.map((data) => (
+                <CoverItem {...data} key={data.cc} />
+              ))
+            : selected && data[selected].data.map((data) => (
+                <CoverItem {...data} key={data.cc} />
+              ))
+          }
         </View>
       </ScrollView>
 
@@ -78,6 +97,8 @@ const ApprovedCovers = ({ navigation }) => {
         navigation={navigation}
         unfolded={unfolded}
         setUnfolded={setUnfolded}
+        searchValue={searchValue}
+        onChangeValue={onChangeValue}
       />
     </SafeAreaView>
   )
