@@ -215,7 +215,7 @@ const Bookings = () => {
                 />
               </Field>
           </div>
-          <Button onClick={submitUpdateHandler}>Actualizar Cover</Button>
+          <Button onClick={submitUpdateHandler}>Guardar</Button>
         </div>
       </div>
     </div>

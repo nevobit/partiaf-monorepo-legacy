@@ -31,12 +31,24 @@
   height: 5rem;
   left: 0;
   top: 0;
-  background-color:  linear-gradient(179.88deg, rgba(39, 39, 39, 0.1512) 8.96%, rgba(255, 255, 255, 0.294) 23.64%, rgba(255, 255, 255, 0.42) 99.89%);
   opacity: .2;
   z-index: 1;
 }
 
-.container_cover::after{
+.middle_line{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.no_middle_line{
+  position: absolute;
+}
+
+.middle_line::after{
   content: '';
   position: absolute;
   width: 0;
@@ -110,7 +122,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
 }
 
@@ -119,6 +131,51 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
+.name_cover{
+  text-transform: uppercase;
+font-feature-settings: 'tnum' on, 'lnum' on, 'cpsp' on;
+  background: linear-gradient(180deg, rgba(0,0,0,.5) 43.54%, rgba(0,0,0,.7) 49.79%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+font-variation-settings: 'slnt' -2;
+font-weight: 500;
+font-size: 2rem;
+margin-top: -.4rem;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+width: 16rem;
+text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.01);
+flex: none;
+order: 0;
+flex-grow: 0;
+-webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+letter-spacing: .15rem;
+}
+
+.name_vip{
+  text-transform: uppercase;
+font-feature-settings: 'tnum' on, 'lnum' on, 'cpsp' on;
+  background: linear-gradient(180deg, var(--main-color) 43.54%, #CFAD2C 49.79%);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+font-variation-settings: 'slnt' -2;
+font-weight: 900;
+font-size: 2rem;
+margin-top: -.4rem;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+width: 16rem;
+text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.01);
+flex: none;
+order: 0;
+flex-grow: 0;
+-webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+letter-spacing: .15rem;
+}
 
 .data_cover h4{
   color: rgba(0, 0, 0, 0.8);
@@ -150,20 +207,23 @@
 
 .card_btn_status_active {
   width: 100%;
-  background: #86c8bc;
+  background: #4BB543;
   /* padding: 0.1rem; */
   border-radius: 0.4rem;
-  color: #333;
+  color: #f2f2f2;
+  letter-spacing: .1rem;
   text-transform: capitalize;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .card_btn_status_inactive {
   width: 100%;
-  background: #9c254d;
+  background: #CA0B00;
   border-radius: 0.4rem;
   color: #fff;
+  letter-spacing: .1rem;
   text-transform: capitalize;
+  font-weight: 500;
 
 }
 
@@ -191,7 +251,7 @@
 }
 
 .icon_cover .btn_icon_card_cover_delete i{
-  color: #9c254d ;
+  color: #CA0B00 ;
   font-size: 1.4rem;
 }
 
@@ -205,4 +265,5 @@
   position: absolute;
   height: 83%;
   width: 100%;
+  z-index: 99;
 }
