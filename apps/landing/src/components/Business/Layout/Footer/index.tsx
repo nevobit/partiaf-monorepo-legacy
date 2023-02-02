@@ -13,7 +13,7 @@ import ArrowWhite from "public/icons/arrowWhite.svg";
 export default function Footer(): JSX.Element {
   return (
     <footer id="contactanos" className="footerContainer">
-      <div className="bg-secondary footerGridContainer">
+      <div className="bg-secondary footerGridContainer pt-20 md:pt-12">
         <div className="h-7 w-7 2xl:w-12 2xl:h-12 rounded-full bg-primary absolute top-3 left-10 2xl:left-28" />
         <div className="h-12 w-12 2xl:h-24 2xl:w-24  rounded-full bg-primary absolute left-0" />
         <div className="footerGrid">
@@ -30,7 +30,7 @@ export default function Footer(): JSX.Element {
               actualización y novedades Suscríbase a nuestro boletín para
               recibir.
             </p>
-            <div className="flex justify-around  lg:justify-between items-center mb-11 lg:mb-2 lg:mt-16 z-30 pr-5">
+            <div className="flex justify-around  lg:justify-between items-center mb-11 lg:mb-2 lg:mt-16  pr-5">
               <Link href="/#" aria-label="See facebook">
                 <FacebookIcon />
               </Link>
@@ -60,7 +60,7 @@ export default function Footer(): JSX.Element {
                 <div className="flex gap-2 items-center">
                   <AdressIcon />
                   <p className="flex-1 text-sm 2xl:text-lg">
-                    Calle 23 Carrera 20 Floresta{" "}
+                    Calle 23 Carrera 20 Floresta
                   </p>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default function Footer(): JSX.Element {
           </section>
         </div>
       </div>
-      <div className="bg-secondary border-t border-accent h-[72px] z-20 text-accent flex justify-center items-center text-lg">
+      <div className="bg-secondary border-t border-accent h-[72px] text-accent flex justify-center items-center text-lg">
         <p>© 2023 Partiaf. All rights reserved</p>
       </div>
     </footer>

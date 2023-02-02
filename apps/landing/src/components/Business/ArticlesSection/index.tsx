@@ -27,8 +27,13 @@ export default function ArticlesSection(): JSX.Element {
   );
   return (
     <div ref={sliderRef} className="pb-16 flex keen-slider min-h-screen">
-      {ARTICLES.map(({ image, article }, i) => (
-        <SingleArticleCard key={i} image={image} articleText={article} />
+      {ARTICLES.map(({ image, article, articleUrl }, i) => (
+        <SingleArticleCard
+          key={i}
+          image={image}
+          articleText={article}
+          articleUrl={articleUrl}
+        />
       ))}
     </div>
   );

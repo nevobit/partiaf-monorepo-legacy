@@ -1,32 +1,19 @@
 import Image, { StaticImageData } from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import "keen-slider/keen-slider.min.css";
 
 interface ArticleProps {
   image: StaticImageData;
   articleText: string;
+  articleUrl: string;
 }
 
 export default function SingleArticleCard({
   image,
   articleText,
+  articleUrl,
 }: ArticleProps): JSX.Element {
-  const [showText, setShowText] = useState(false);
-  const [showButton, setShowbutton] = useState(true);
-
   const SHOW_MORE = "Leer más";
-  const SHOW_LESS = "Leer menos";
-
-  useEffect(() => {
-    const CHARACTERS = 229;
-    const numberOfCharacters = articleText.split("");
-    const show = numberOfCharacters.length > CHARACTERS;
-    setShowbutton(show);
-  }, [articleText]);
-
-  const showAndHidden = (): void => {
-    setShowText((show) => !show);
-  };
 
   return (
     <div className="keen-slider__slide w-11/12">
@@ -36,27 +23,19 @@ export default function SingleArticleCard({
             src={image}
             alt="office"
             priority
-            className="w-auto h-auto object-cover self-start"
+            className="w-full h-full object-cover self-start"
           />
         </figure>
         <div className="card-body p-4 min-h-[267px]">
-          <p
-            data-show={showText}
-            data-button={showButton}
-            className="businessDescription data-[show=false]:line-clamp-7 data-[show=true]:line-clamp-none data-[button=false]:line-clamp-none"
-          >
-            {articleText}
-          </p>
+          <p className="businessDescription line-clamp-7">{articleText}</p>
           <div className="card-actions justify-end">
-            {showButton && (
-              <button
-                aria-label={`${showText ? SHOW_LESS : SHOW_MORE} text`}
-                onClick={showAndHidden}
-                className="text-primary text-bold contents text-xl cursor-pointer"
-              >
-                {showText ? SHOW_LESS : SHOW_MORE}
-              </button>
-            )}
+            <Link
+              href={articleUrl}
+              aria-label="See more about article"
+              className="text-primary text-bold contents text-xl cursor-pointer"
+            >
+              {SHOW_MORE}
+            </Link>
           </div>
         </div>
       </div>

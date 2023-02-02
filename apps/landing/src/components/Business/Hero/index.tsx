@@ -61,7 +61,7 @@ export default function Hero(): JSX.Element {
           </div>
           <button
             aria-label="Question button"
-            className="btn btn-primary absolute lg:right-0 lg:bottom-0  bottom-24 right-5 h-16 w-16 2xl:h-24 2xl:w-24 rounded-full grid place-content-center font-bold text-base"
+            className="btn btn-primary fixed z-40 lg:right-20 lg:bottom-5  bottom-5 right-8 h-16 w-16 2xl:h-24 2xl:w-24 rounded-full grid place-content-center font-bold text-base"
           >
             FAQ
           </button>
