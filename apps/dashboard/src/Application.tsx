@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./constants-definitions/Routes";
 import GuardRoute from "./guards";
 import Business from "./screens/Business";
+import ForgotPassword from "./screens/ForgotPassword";
 
 import Private from "./screens/Private";
 import RegisterBusiness from "./screens/RegisterBusiness/Index";
@@ -15,6 +16,7 @@ const Application = () => {
       <Routes>
         <Route path={PublicRoutes.SIGNIN} element={<Signin />} />
         <Route path={PublicRoutes.SIGNUP} element={<Signup />} />
+        <Route path={PublicRoutes.FORGOT_PASSWORD_ADMIN} element={<ForgotPassword />} />
         <Route path={PrivateRoutes.VERIFICATION} element={<Verification />} />
         <Route path={PrivateRoutes.BUSINESS} element={<Business />} />
         <Route

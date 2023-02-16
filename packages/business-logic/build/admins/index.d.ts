@@ -6,3 +6,4 @@ export * from './reset-password';
 export * from './signin';
 export * from './signup';
 export * from './update';
+export * from './verification-email';

@@ -1,6 +1,7 @@
 export const PublicRoutes = {
   SIGNIN: "/",
   SIGNUP: "/signup",
+  FORGOT_PASSWORD_ADMIN: "/forgot-password-admin",
 };
 
 export const PrivateRoutes = {
@@ -15,5 +16,5 @@ export const PrivateRoutes = {
   SETTINGS: "/settings",
   SETTINGS_BUSINESS: "/settings-business",
   VERIFICATION: "/verification",
-  COVERS_DETAILS: "/covers/:uuid"
+  COVERS_DETAILS: "/covers/:uuid",
 };

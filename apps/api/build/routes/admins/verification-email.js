@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUsersRoute = void 0;
+exports.verificationEmailRoute = void 0;
 const business_logic_1 = require("@partiaf/business-logic");
-exports.getAllUsersRoute = {
-    method: "GET",
-    url: "/users",
+exports.verificationEmailRoute = {
+    method: "POST",
+    url: "/admin-verification-email",
     handler: async (request, reply) => {
+        const { body } = request;
+        const { email } = body;
         try {
-            const obj = await (0, business_logic_1.getAllUsers)();
-            reply.status(200).send(obj);
+            const admin = await (0, business_logic_1.verificationEmail)(email);
+            reply.status(200).send(admin);
         }
         catch (err) {
             if (err instanceof Error) {
@@ -18,4 +20,4 @@ exports.getAllUsersRoute = {
         }
     },
 };
-//# sourceMappingURL=get-by-id.js.map
+//# sourceMappingURL=verification-email.js.map

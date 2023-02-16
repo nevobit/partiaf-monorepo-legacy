@@ -4,6 +4,7 @@ import { getAdminByIdRoute } from "./get-by-id";
 import { signinAdminRoute } from "./signin";
 import { signupAdminRoute } from "./signup";
 import { updateAdminRoute } from "./update";
+import { verificationEmailRoute } from "./verification-email";
 
 export const adminsRoutes: RouteOptions[] = [
   signinAdminRoute,
@@ -11,4 +12,5 @@ export const adminsRoutes: RouteOptions[] = [
   activateAdminRoute,
   updateAdminRoute,
   getAdminByIdRoute,
+  verificationEmailRoute
 ];

@@ -9,4 +9,5 @@ tslib_1.__exportStar(require("./reset-password"), exports);
 tslib_1.__exportStar(require("./signin"), exports);
 tslib_1.__exportStar(require("./signup"), exports);
 tslib_1.__exportStar(require("./update"), exports);
+tslib_1.__exportStar(require("./verification-email"), exports);
 //# sourceMappingURL=index.js.map

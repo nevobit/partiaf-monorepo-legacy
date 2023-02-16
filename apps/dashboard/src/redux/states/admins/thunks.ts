@@ -50,6 +50,17 @@ export const verificationCodeAdmin = async (code: string) => {
   return data;
 };
 
+export const verificationEmailThunks = async (email: string) => {
+  const { data } = await PARTIAF_API.post("/admin-verification-email", {
+    email,
+  });
+  console.log(data);
+  if (data) {
+    localStorage.setItem("admin", JSON.stringify(data));
+  }
+  return data;
+};
+
 export const getAdminByIdThunks = (uuid: string) => async (dispatch: any) => {
   const { data } = await PARTIAF_API.get(`/admins/${uuid}`);
   //localStorage.setItem("admin", JSON.stringify(data));

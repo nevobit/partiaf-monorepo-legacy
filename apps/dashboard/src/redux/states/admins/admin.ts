@@ -7,6 +7,7 @@ import {
   signupAdmin,
   updateAdminThunks,
   verificationCodeAdmin,
+  verificationEmailThunks,
 } from "./thunks";
 
 export const EmptyadminState: Admin = {
@@ -37,6 +38,7 @@ const initialState = {
   success: false,
   successSignup: false,
   successVerification: false,
+  successVerificationEmail: false,
   loading: false,
 };
 
@@ -76,6 +78,18 @@ export const verification = createAsyncThunk(
   async (code: string, thunkAPI) => {
     try {
       return await verificationCodeAdmin(code);
+    } catch (err: any) {
+      const message = err;
+      return thunkAPI.rejectWithValue(message.response.data.message);
+    }
+  }
+);
+
+export const verificationEmail = createAsyncThunk(
+  "/verification-email",
+  async (email: string, thunkAPI) => {
+    try {
+      return await verificationEmailThunks(email);
     } catch (err: any) {
       const message = err;
       return thunkAPI.rejectWithValue(message.response.data.message);
@@ -168,6 +182,11 @@ export const adminsSlice = createSlice({
       .addCase(verification.fulfilled, (state, action) => {
         state.loading = false;
         state.successVerification = true;
+        state.admin = action.payload;
+      })
+      .addCase(verificationEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.successVerificationEmail = true;
         state.admin = action.payload;
       })
       .addCase(updateAdmin.pending, (state) => {

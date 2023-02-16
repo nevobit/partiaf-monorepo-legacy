@@ -6,5 +6,6 @@ export interface AdminInfo{
     success: boolean;
     successSignup: boolean;
     successVerification: boolean;
+    successVerificationEmail: boolean;
     error: string;
 }

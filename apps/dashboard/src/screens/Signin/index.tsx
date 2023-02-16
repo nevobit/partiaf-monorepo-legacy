@@ -89,7 +89,7 @@ const Signin = () => {
             <input type="checkbox" name="" id="" checked={remenber} onChange={({target}) => setRemenber(target.checked)} />
             Recuerdame
           </label>
-          <Link to="/">¿Has olvidado tu contraseña?</Link>
+          <Link to="/forgot-password-admin">¿Has olvidado tu contraseña?</Link>
         </div>
         <Field>
           <Button>

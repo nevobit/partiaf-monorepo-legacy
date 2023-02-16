@@ -27,15 +27,15 @@ const Cover = () => {
         <div className={styles.center__screen}>
           <div className={styles.screen_header_principal}>
             <div className={styles.box}>
-              <h3>Total Entradas</h3>
+              <h3>Total de entradas</h3>
               <p>{covers.length}</p>
             </div>
             <div className={styles.box}>
-              <h3>Entradas Efectivas</h3>
+              <h3>Entradas efectivas</h3>
               <p>0</p>
             </div>
             <div className={styles.box}>
-              <h3>Entradas no Efectivas </h3>
+              <h3>Entradas no efectivas </h3>
               <p>0</p>
             </div>
           </div>
@@ -45,7 +45,7 @@ const Cover = () => {
               className={styles.Link_create}
               onClick={() => setOpenModal(!openModal)}
             >
-              Create cover
+              Nuevo cover
             </button>
           </div>
         </div>

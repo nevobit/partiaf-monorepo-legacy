@@ -95,6 +95,4 @@ export const changePasswordEmail = async (email: string | undefined) => {
     .catch((error) => {
       console.error(error);
     });
-
- 
 };
