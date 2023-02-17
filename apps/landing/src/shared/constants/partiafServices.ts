@@ -2,7 +2,7 @@ const PARTIAF_SERVICES=[
     {
         name:"Analiticas",
         icon:"/icons/analytic.svg",
-        description:"Partiaf realiza un análisis de los comportamientos de compra de los clientes para mejorar la experiencia de compra y el servicio en los negocios de entretenimiento.",
+        description:"Partiaf realiza un análisis de los comportamientos de consumo de los clientes para mejorar la experiencia de compra y el servicio en los negocios de entretenimiento.",
         active:true
     },
     {
@@ -44,7 +44,7 @@ const PARTIAF_SERVICES=[
     {
         name:"Cover",
         icon:"/icons/coverIcon.svg",
-        description:"Con Partiaf, puedes crear tu propio ticket y compartirlo con la comunidad para que puedan acceder a él y comprarlo de manera rápida y sencilla. Sin necesidad de salir de la aplicación.",
+        description:"Con Partiaf, puedes crear y vender tus tickets de manera rápida y sencilla, ver quienes los han comprado y compartirlos con la comunidad. De esta manera, te conectamos con las personas cercanas y que forman parte de Partiaf,  para que puedan acceder a tus servicios de manera eficiente.",
         active:true
     },
 ]

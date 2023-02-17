@@ -41,7 +41,7 @@ export default function ContactSection(): JSX.Element {
   });
 
   return (
-    <section className="w-11/12 min-h-screen h-full my-28 gap-9 flex flex-col lg:flex lg:flex-row-reverse justify-center items-center z-20">
+    <section className="w-11/12 min-h-screen h-full mb-28 mt-7 gap-9 flex flex-col lg:flex lg:flex-row-reverse justify-center items-center z-20">
       <div className="mb-8 max-w-[617px] w-full">
         <p className="sectionTitle text-left mb-3">CONTACTO</p>
         <form

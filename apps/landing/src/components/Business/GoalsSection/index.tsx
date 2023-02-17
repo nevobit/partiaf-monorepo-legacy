@@ -21,10 +21,15 @@ export default function GoalsSection(): JSX.Element {
           <Image src={location} alt="location" className="businessImages" />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-y-16 gap-x-3 justify-items-center items-center lg:py-20">
-        <div className="md:col-start-2 md:col-end-3">
+      <div className="grid md:grid-cols-2 gap-y-7 md:gap-y-0 gap-x-3 justify-items-center items-center lg:py-20">
+        <div className="md:col-start-2 md:justify-self-start md:col-end-3 md:self-end">
           <p className="businessSubtitles mb-5">Todo en un solo portal</p>
-          <p className="businessDescription">
+        </div>
+        <div className="md:row-start-1 md:row-end-3 md:justify-self-start">
+          <Image src={men} alt="location" className="businessImages" />
+        </div>
+        <div className="md:self-start">
+          <p className="businessDescription  md:col-start-1 md:col-end-2">
             Maneja todas las necesidades de tu empresa. Podrás crear tickets,
             recibir reservas, gestionar pagos, analizar el comportamiento de tus
             clientes, mejorar la eficiencia de tus operaciones. Con nuestra
@@ -32,10 +37,8 @@ export default function GoalsSection(): JSX.Element {
             procesos y obtener un mejor conocimiento sobre tu negocio.
           </p>
         </div>
-        <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 md:justify-self-start">
-          <Image src={men} alt="location" className="businessImages" />
-        </div>
       </div>
+
     </div>
   );
 }

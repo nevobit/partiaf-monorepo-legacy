@@ -16,7 +16,7 @@ export default function ManagementSection(): JSX.Element {
         <p>GESTIONA DESDE UN SOLO LUGAR</p>
       </div>
       <div className="grid gap-y-10 md:grid-cols-2 gap-x-3 justify-items-center">
-        <div className="grid grid-cols-4  gap-x-4 gap-y-3 w-full justify-items-center md:justify-items-start self-end">
+        <div className="grid grid-cols-4 gap-x-4 gap-y-3 w-full justify-items-center md:justify-items-start self-end">
           {PARTIAF_SERVICES.map(({ name, active, icon, description }) => {
             return (
               <button
@@ -39,12 +39,12 @@ export default function ManagementSection(): JSX.Element {
               </button>
             );
           })}
+          <div className="col-span-4 md:px-4 mt-4">
+            <p className="businessDescription min-h-[80px]">{description}</p>
+          </div>
         </div>
         <div className="md:col-start-1 md:row-start-1 md:row-end-3 justify-self-center md:justify-self-start ">
           <Image src={analytics} alt="analytics" className="businessImages" />
-        </div>
-        <div>
-          <p className="businessDescription min-h-[80px]">{description}</p>
         </div>
       </div>
     </div>

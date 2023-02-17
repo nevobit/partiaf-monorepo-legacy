@@ -13,8 +13,7 @@ export default function AboutUsSection(): JSX.Element {
           ocio y entretenimiento!
         </p>
         <p className="sectionTitle">
-          ¡Una solución segura y exclusiva donde lo conectamos con los sitios de
-          "Restaurantes, Bares y Discotecas" que mas les guste!
+          Partiaf es una solución fácil, segura y exclusiva que conecta a las personas con los bares, discotecas y restaurantes que más les gusten.
         </p>
       </div>
       <Image

@@ -44,7 +44,7 @@ export default function Hero(): JSX.Element {
           </div>
         </section>
       </div>
-      <div className="justify-center mb-11  w-full hidden md:flex">
+      <div className="mb-11 pl-28  w-full hidden md:flex">
         <div className="flex justify-between items-center w-60 z-20">
           <Link href="/#">
             <Image
