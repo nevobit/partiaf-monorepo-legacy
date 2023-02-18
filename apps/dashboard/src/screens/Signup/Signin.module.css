@@ -11,6 +11,7 @@
 }
 
 .form {
+ 
   background-color: #fff;
   min-width: 288px;
   width: 700px;
@@ -63,4 +64,24 @@
 
   padding-left: 7rem;
   padding-right: 7rem;
+}
+
+
+.grid {
+  position: relative;
+}
+
+.pass {
+  cursor: pointer;
+  position: absolute;
+  right: 35rem;
+  top: 108%;
+  transform: translateY(-150%);
+}
+.passconfirm {
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 108%;
+  transform: translateY(-150%);
 }

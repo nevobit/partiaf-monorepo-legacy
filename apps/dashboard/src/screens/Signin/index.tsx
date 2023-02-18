@@ -11,27 +11,39 @@ import { signinAdmin } from "@/redux/states/admins/thunks";
 import Loader from "@/components/Layout/Loader";
 import { login } from "@/redux/states/admins/admin";
 
-const ERRORS: Record<string, string>  = {
-  '103': 'Contrasena incorrecta',
-  '101': 'Usuario no existe o esta inactivo',
-}
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
+const ERRORS: Record<string, string> = {
+  "103": "Contrasena incorrecta",
+  "101": "Usuario no existe o esta inactivo",
+};
 
 const Signin = () => {
+  const [showPassword, setShowPassword] = useState(false);
 
-  const remenberInfo =localStorage.getItem("remenberInfo")? JSON.parse(localStorage.getItem("remenberInfo") || ""): "";
+  const remenberInfo = localStorage.getItem("remenberInfo")
+    ? JSON.parse(localStorage.getItem("remenberInfo") || "")
+    : "";
 
   const [admin, setAdmin] = useState({
     email: remenberInfo?.email,
     password: remenberInfo?.password,
   });
 
-  const [remenber, setRemenber] = useState(remenberInfo? remenberInfo.remenber : false)
+  const [remenber, setRemenber] = useState(
+    remenberInfo ? remenberInfo.remenber : false
+  );
 
-  console.log({remenberInfo})
-  console.log({remenber})
+  console.log({ remenberInfo });
+  console.log({ remenber });
 
-  const {loading, admin: adminUser, success, error} = useSelector((state: AppStore) => state.admins)
-  
+  const {
+    loading,
+    admin: adminUser,
+    success,
+    error,
+  } = useSelector((state: AppStore) => state.admins);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,45 +51,70 @@ const Signin = () => {
     setAdmin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const onSubmit = async(e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
-    try{
+    try {
       remenberHandler();
-      dispatch(login({email: admin.email, password: admin.password}) as any);
-    }catch(err){
-      if(err instanceof Error){
-        console.log(err)
+      dispatch(login({ email: admin.email, password: admin.password }) as any);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err);
       }
     }
-  }
+  };
 
   const remenberHandler = () => {
-    if(remenber){
-      localStorage.setItem("remenberInfo", JSON.stringify({remenber: remenber, email: admin.email, password: admin.password }));
-    }else{
+    if (remenber) {
+      localStorage.setItem(
+        "remenberInfo",
+        JSON.stringify({
+          remenber: remenber,
+          email: admin.email,
+          password: admin.password,
+        })
+      );
+    } else {
       localStorage.removeItem("remenberInfo");
     }
-  }
+  };
 
   useEffect(() => {
-    if(success) {
-      navigate('/business', {replace: true});
+    if (success) {
+      navigate("/business", { replace: true });
     }
-   }, [adminUser, error, success, navigate, dispatch])
- 
-   const actualError: string = error;
-  if(loading) return <Loader />
+  }, [adminUser, error, success, navigate, dispatch]);
+
+  const actualError: string = error;
+  if (loading) return <Loader />;
 
   return (
     <div className={styles.container}>
       <div className={styles.form}>
         <img src="/logo-parti.svg" alt="Log Partiaf" />
         <Field label="Correo electronico">
-          <Input name="email" placeholder="Introduce tu correo electronico" value={admin.email} onChange={handleChange} />
+          <Input
+            name="email"
+            placeholder="Introduce tu correo electronico"
+            value={admin.email}
+            onChange={handleChange}
+          />
         </Field>
-        <Field label="Contrasena" error={ERRORS[actualError]} >
-          <Input name="password" type="password" placeholder="Contrasena" value={admin.password} onChange={handleChange} />
+        <Field label="Contrasena" error={ERRORS[actualError]}>
+          <Input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Contrasena"
+            value={admin.password}
+            onChange={handleChange}
+          />
+          <div
+            onClick={() => setShowPassword(!showPassword)}
+            className={styles.pass}
+          >
+            {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+          </div>
         </Field>
+
         <Field>
           <Button backgroundColor="#333" color="#f2f2f2" onClick={onSubmit}>
             Entrar
@@ -86,7 +123,13 @@ const Signin = () => {
 
         <div className={styles.signin_options}>
           <label>
-            <input type="checkbox" name="" id="" checked={remenber} onChange={({target}) => setRemenber(target.checked)} />
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              checked={remenber}
+              onChange={({ target }) => setRemenber(target.checked)}
+            />
             Recuerdame
           </label>
           <Link to="/">¿Has olvidado tu contraseña?</Link>

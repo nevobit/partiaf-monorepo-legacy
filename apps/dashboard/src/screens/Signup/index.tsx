@@ -13,7 +13,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Map from "../Map";
 import styles from "./Signin.module.css";
 
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
   const {
     loading,
     admin: adminUser,
@@ -24,7 +29,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [imageUrlSignup, setImageUrlSignup] = useState("");
-  console.log("si llego la url es esta ==>", imageUrlSignup)
+  console.log("si llego la url es esta ==>", imageUrlSignup);
 
   const [admin, setAdmin] = useState({
     name: "",
@@ -105,7 +110,10 @@ const Signup = () => {
 
           <div className={styles.cnt_upload_view}>
             <Field label="foto de perfil">
-              <InputCloudinary idInput="file-signup" setImageUrl={setImageUrlSignup} />
+              <InputCloudinary
+                idInput="file-signup"
+                setImageUrl={setImageUrlSignup}
+              />
             </Field>
           </div>
         </div>
@@ -175,13 +183,29 @@ const Signup = () => {
           <Field label="Ingresa una contrasena">
             <Input
               name="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Contrasena"
               value={admin.password}
               onChange={handleChange}
             />
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              className={styles.pass}
+            >
+              {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </div>
           </Field>
           <Field label="Confirmar contrasena">
-            <Input placeholder="Confirmar contrasena" />
+            <Input
+              placeholder="Confirmar contrasena"
+              type={showPasswordConfirm ? "text" : "password"}
+            />
+            <div
+              onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+              className={styles.passconfirm}
+            >
+              {showPasswordConfirm ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </div>
           </Field>
         </div>
         <div className={styles.grid}>
