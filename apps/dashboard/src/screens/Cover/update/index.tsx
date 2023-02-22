@@ -5,6 +5,7 @@ import { AppStore } from "@/redux/store";
 import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { LoadingBox } from "../component/CardCover/Loading";
 import styles from "./createcover.module.css";
 
 interface Props {
@@ -22,10 +23,10 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const [Urlimage, setUrlImage] = useState("");
   const [imageSelected, setImageSelected] = useState(false);
 
-const handleImageChange = (imageUrl: string) => {
-  setUrlImage(imageUrl);
-  setImageSelected(true);
-}
+  const handleImageChange = (imageUrl: string) => {
+    setUrlImage(imageUrl);
+    setImageSelected(true);
+  };
 
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
@@ -64,6 +65,7 @@ const handleImageChange = (imageUrl: string) => {
           image: Urlimage === "" ? Cover.image : Urlimage,
         }) as any
       );
+
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
@@ -74,7 +76,7 @@ const handleImageChange = (imageUrl: string) => {
 
   useEffect(() => {
     if (success) {
-      setUrlImage(""); 
+      setUrlImage("");
       dispatch(reset() as any);
     }
   }, [dispatch, success]);
