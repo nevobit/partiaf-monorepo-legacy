@@ -11,20 +11,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const business_logic_1 = require("@partiaf/business-logic");
 exports.default = {
+    Query: {
+        allUsers(_, args, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const users = yield (0, business_logic_1.getAllUsers)();
+                return users;
+            });
+        },
+        userById(_, { uuid, username }, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (!uuid && !username) {
+                    return new Error("Debe proporcionar un uuid o un username para buscar un usuario");
+                }
+                const user = yield (0, business_logic_1.getUserById)(uuid, username);
+                if (!user) {
+                    return new Error("No se pudo encontrar el usuario con el uuid o username proporcionado");
+                }
+                return user;
+            });
+        },
+    },
     Mutation: {
         userSignin(_, { username, password }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log(username, password);
                 const user = yield (0, business_logic_1.userSignin)({ username, password });
-                console.log({ user });
+                if (user instanceof Error) {
+                    return new Error("No se pudo iniciar sesión con el nombre de usuario y la contraseña proporcionados");
+                }
                 return user;
             });
         },
         userSignup(_, data, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                const user = yield (0, business_logic_1.userSignup)(data);
-                return user;
+                try {
+                    const user = yield (0, business_logic_1.userSignup)(data);
+                    return user;
+                }
+                catch (error) {
+                    return new Error("No se pudo registrar el usuario: " + error.message);
+                }
             });
-        }
-    }
+        },
+    },
 };

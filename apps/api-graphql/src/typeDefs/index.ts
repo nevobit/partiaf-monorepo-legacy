@@ -44,7 +44,6 @@ type Query {
     getAllStores: [Store]
     getStoreById(uuid: String): Store
     getMyTikets: [Goer]
-    getMyTikets(uuid: String!): [Goer]
 }
 
 type AuthPayload {
@@ -71,7 +70,8 @@ type AuthPayload {
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
-    createGoer(data: GoerInput): Goer    
+    createGoer(data: GoerInput): Goer
+    updateGoer(uuid: String, data: GoerInput): Goer
     creating: Boolean
 
 }
