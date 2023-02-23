@@ -1,8 +1,24 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Share,
+  TouchableOpacity,
+} from "react-native";
 import { IStore } from "../../types";
 
 const Store = ({ name, type, photos }: IStore) => {
+  const shareStore = async () => {
+    try {
+      await Share.share({
+        message: `En partiaf ${name}`,
+      });
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
   return (
     <View style={{ marginBottom: 20 }}>
       <View style={styles.header}>
@@ -83,16 +99,17 @@ const Store = ({ name, type, photos }: IStore) => {
           <Ionicons name="ios-heart-outline" style={{ fontSize: 23 }} />
           <Text style={{ marginLeft: 5, fontWeight: "500" }}>Save</Text>
         </View>
-        <View
+        <TouchableOpacity
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
           }}
+          onPress={shareStore}
         >
           <Ionicons name="ios-share-outline" style={{ fontSize: 23 }} />
           <Text style={{ marginLeft: 5, fontWeight: "500" }}>Share</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

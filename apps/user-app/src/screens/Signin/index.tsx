@@ -88,8 +88,7 @@ const Signin = ({navigation}: Props) => {
           marginTop: 15,
         }} >Inicia sesion para continuar explorando</Text>
       </View>
-<Text>{user.username}</Text>
-<Text>{user.password}</Text>
+
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10, marginTop: 100 }}>
         <TouchableOpacity
           style={{

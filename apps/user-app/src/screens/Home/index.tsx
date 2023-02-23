@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Share,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -16,22 +17,15 @@ import { GET_STORES } from "../../graphql/queries/stores";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-type HomeScreenNavigationProp = StackNavigationProp<
-RootStackParamList
->;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type Props = {
-navigation: HomeScreenNavigationProp;
+  navigation: HomeScreenNavigationProp;
 };
 
+const Home = ({ navigation }: Props) => {
+  const { data, loading } = useQuery(GET_STORES);
 
-const Home = ({navigation}: Props) => {
-
- 
-  const {data, loading} = useQuery(GET_STORES)
-  
-    console.log({data})
-  console.log({loading})
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <StatusBar animated={true} />
@@ -63,10 +57,15 @@ const Home = ({navigation}: Props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView style={{ marginBottom: 50 }}>
         {data?.getAllStores?.map((store: IStore) => {
           return (
-            <TouchableOpacity key={store.uuid}  onPress={() => navigation.navigate("Store", {store: store.uuid})}>
+            <TouchableOpacity
+              key={store.uuid}
+              onPress={() =>
+                navigation.navigate("Store", { store: store.uuid })
+              }
+            >
               <Store
                 photos={store.photos}
                 name={store.name}

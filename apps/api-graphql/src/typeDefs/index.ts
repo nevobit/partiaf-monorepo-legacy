@@ -10,6 +10,18 @@ type Store {
     status: String
 }
 
+type Cover {
+    uuid: String
+    name: String
+    description: String
+    date: String
+    hour: String
+    type: String
+    phone: String
+    photo: String
+    status: String
+}
+
 type Goer {
     uuid: String
     user: String
@@ -43,6 +55,7 @@ type User {
 type Query {
     getAllStores: [Store]
     getStoreById(uuid: String): Store
+    getCoversById(uuid: String): [Cover]
     getMyTikets: [Goer]
 }
 

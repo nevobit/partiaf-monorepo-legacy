@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, TextInput, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {KeyboardAvoidingView} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList, RootStackParamList } from '../../navigation/AppNavigator';
+import { useDispatch } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+import { REGISTER_USER } from "../../graphql/queries/user";
+import { signin } from "../../features/auth";
+
 type HomeScreenNavigationProp = StackNavigationProp<
 AuthStackParamList
 >;
@@ -13,6 +18,46 @@ type Props = {
   };
 
 const Signup = ({navigation}: Props) => {
+
+  const [register] = useMutation(REGISTER_USER);
+
+  const [error, setError] = useState("");
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    phone: '',
+    password: ''
+  });
+
+  const dispatch = useDispatch();
+
+  console.log(error)
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+       const { data } = await register({
+         variables: {
+           name: user.name,
+           username: user.username,
+           phone: user.phone,
+           password: user.password,
+         },
+       });
+
+      dispatch(signin({ ...data.userSignup }));
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+    }
+  };
+
+  if (error.length > 0) {
+    setTimeout(() => {
+      setError("");
+    }, 10000);
+  }
+
   return (
 
     <View
@@ -40,6 +85,7 @@ const Signup = ({navigation}: Props) => {
             resizeMode: "contain",
           }}
         />
+        <Text>{error}</Text>
         <Text style={{
           fontSize: 20,
           color: '#333',
@@ -121,6 +167,8 @@ const Signup = ({navigation}: Props) => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Nombre Completo"
+            value={user.name}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['name']: text }))}
           />
         </View>
         <View
@@ -143,6 +191,8 @@ const Signup = ({navigation}: Props) => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Usuario"
+            value={user.username}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['username']: text }))}
           />
         </View>
         <View
@@ -165,6 +215,8 @@ const Signup = ({navigation}: Props) => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Telefono"
+            value={user.phone}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['phone']: text }))}
           />
         </View>
         <View
@@ -187,13 +239,16 @@ const Signup = ({navigation}: Props) => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Contrasena"
+            secureTextEntry={true}
+            value={user.password}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['password']: text }))}
           />
         </View>
 
       </View>
       
-      <TouchableOpacity style={{marginTop: 20, borderRadius: 5, width: '105%', height: 50, backgroundColor: '#FFE243'}}>
-          <Text style={{width: '105%', marginTop: 10, fontSize: 20, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
+      <TouchableOpacity style={{marginTop: 20, borderRadius: 5, width: '105%', height: 50, backgroundColor: '#FFE243'}} onPress={onSubmit}>
+          <Text style={{width: '105%', marginTop: 10, fontSize: 20, fontWeight: '600', color: '#333', textAlign: 'center' }}>Registrarme</Text>
         </TouchableOpacity>
 
       <Text style={{

@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TabBar from '../components/Layout/TabBar';
+import Covers from '../screens/Covers';
 import Home from '../screens/Home'
 import Partiaf from '../screens/Partiaf';
 import Profile from '../screens/Profile';
@@ -23,6 +24,9 @@ export type RootStackParamList = {
     Store: {
         store: string | undefined;
     };
+    Covers: {
+        store: string | undefined;
+    };
 }
 
 export type AuthStackParamList = {
@@ -36,6 +40,7 @@ const HomeNavigator = () => {
     <HomeStackNavigator.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="HomeScreen" component={Home} />
         <Stack.Screen name="Store" component={Store} />
+        <Stack.Screen name="Covers" component={Covers} />
     </HomeStackNavigator.Navigator>
     )
 }
