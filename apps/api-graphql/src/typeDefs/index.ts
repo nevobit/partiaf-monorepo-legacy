@@ -17,7 +17,9 @@ type Cover {
     date: String
     hour: String
     type: String
+    price: String
     phone: String
+    limit: Int
     photo: String
     status: String
 }
@@ -54,6 +56,7 @@ type User {
 
 type Query {
     getAllStores: [Store]
+    allUsers: [AuthPayload]
     getStoreById(uuid: String): Store
     getCoversById(uuid: String): [Cover]
     getMyTikets: [Goer]

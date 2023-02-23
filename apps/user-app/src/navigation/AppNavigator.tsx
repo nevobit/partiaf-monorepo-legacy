@@ -14,6 +14,7 @@ import Shared from '../screens/Shared';
 import Signin from '../screens/Signin'
 import Signup from '../screens/Signup';
 import Store from '../screens/Store';
+import Tickets from '../screens/Tickets';
 
 const TabBarNavigator = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,6 +27,9 @@ export type RootStackParamList = {
     };
     Covers: {
         store: string | undefined;
+    };
+    Tickets: {
+        user: string | undefined;
     };
 }
 
@@ -41,6 +45,7 @@ const HomeNavigator = () => {
         <Stack.Screen name="HomeScreen" component={Home} />
         <Stack.Screen name="Store" component={Store} />
         <Stack.Screen name="Covers" component={Covers} />
+        <Stack.Screen name="Tickets" component={Tickets} />
     </HomeStackNavigator.Navigator>
     )
 }

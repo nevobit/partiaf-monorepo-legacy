@@ -13,6 +13,7 @@ import { useQuery } from "@apollo/client";
 import { GET_STORE } from "../../graphql/queries/stores";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
+import Header from "../../components/Layout/Header";
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -29,41 +30,17 @@ const Store = ({ route, navigation }: Props) => {
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <StatusBar animated={true} />
-      <View style={styles.header}>
-        <Ionicons
-          name="ios-options-outline"
-          style={{ fontWeight: "100", fontSize: 26 }}
-        />
-        <Image
-          source={{ uri: "https://i.postimg.cc/DZL8VnL4/partiaf-single.png" }}
-          style={{
-            marginLeft: 23,
-            marginTop: 4,
-            width: 120,
-            height: 20,
-            resizeMode: "contain",
-          }}
-        />
-        <View style={styles.header_left}>
-          <Ionicons
-            name={"ios-wallet-outline"}
-            style={{ fontWeight: "100", fontSize: 23, marginRight: 10 }}
-          />
-          <TouchableOpacity>
-            <Ionicons
-              name={"ios-qr-code-outline"}
-              style={{ fontWeight: "100", fontSize: 23 }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Header navigation={navigation} />
+      
+      
       <Image
-        source={{ uri: data?.getStoreById.photos[0] }}
+        source={{ uri: data?.getStoreById?.photos[0] }}
         style={{
           width: "100%",
           height: 250,
         }}
       />
+
       <View
         style={{
           width: "100%",
@@ -79,7 +56,7 @@ const Store = ({ route, navigation }: Props) => {
       >
         <View>
           <Text style={{ fontSize: 20, fontWeight: "700" }}>
-            {data?.getStoreById.name}
+            {data?.getStoreById?.name}
           </Text>
           <Text style={{ fontSize: 16, fontWeight: "500" }}>
             Santa Marta, Colombia
@@ -91,7 +68,7 @@ const Store = ({ route, navigation }: Props) => {
               color: "rgba(0,0,0,0.7)",
             }}
           >
-            {data?.getStoreById.type}
+            {data?.getStoreById?.type}
           </Text>
           <Text>
             {" "}
