@@ -19,11 +19,29 @@ exports.default = {
                 return tickets;
             });
         },
+        getStoreById(_, { id }, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const store = yield (0, business_logic_1.getStoreById)(id);
+                return store;
+            });
+        },
+        getAllStores(_, args, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const stores = yield (0, business_logic_1.getAllStores)();
+                return stores;
+            });
+        }
     },
     Mutation: {
         createGoer(_, { data }, context) {
             return __awaiter(this, void 0, void 0, function* () {
                 const goer = yield (0, business_logic_1.createGoer)(data);
+                return goer;
+            });
+        },
+        updateGoer(_, { uuid, data }, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const goer = yield (0, business_logic_1.updateGoer)(uuid, data);
                 return goer;
             });
         }

@@ -46,6 +46,7 @@ type Query {
     getAllStores: [Store]
     getStoreById(uuid: String): Store
     getMyTikets: [Goer]
+    getMyTikets(uuid: String!): [Goer]
 }
 
 type AuthPayload {

@@ -83,10 +83,11 @@ type AuthPayload {
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
-    createGoer(data: GoerInput): Goer    
+    createGoer(data: GoerInput): Goer
+    updateGoer(uuid: String, data: GoerInput): Goer
     creating: Boolean
 
 }
-`
+`;
 
 export default typeDefs;
