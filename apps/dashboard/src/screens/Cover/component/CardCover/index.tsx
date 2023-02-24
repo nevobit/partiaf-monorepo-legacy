@@ -79,16 +79,13 @@ const CardCover = (Cover: any) => {
   return (
     <>
       <div className={styles.container_cover}>
-<<<<<<< HEAD
       <div className={type == "VIP"?  styles.middle_line: styles.no_middle_line}></div>
         <Link className={styles.clickable} to={`${PrivateRoutes.COVERS}/${uuid}`}>
         </Link>
-=======
         <Link
           className={styles.clickable}
           to={`${PrivateRoutes.COVERS}/${uuid}`}
         ></Link>
->>>>>>> origin/LaraDev
         <div className={styles.image_cover}>
           {image ? (
             <img src={image} alt="Image" />
@@ -97,10 +94,8 @@ const CardCover = (Cover: any) => {
           )}
         </div>
         <div className={styles.info_cover_container}>
-<<<<<<< HEAD
           <span className={styles.sumer}>
             #SUMER
-            <span>2023</span>
           </span>
 
         <div className={styles.info_cover}>
@@ -139,15 +134,11 @@ const CardCover = (Cover: any) => {
               >
                 <p className="">Borrar</p>
               </button>
-=======
           <div className={styles.info_cover}>
             <div className={styles.data_cover}>
-              <h4 className={styles.name_cover}>{name}</h4>
               <p>{description}</p>
->>>>>>> origin/LaraDev
             </div>
 
-            <div className={styles.data_cover_list}>
               <span>
                 <strong> Cupos:</strong> {limit}
               </span>
