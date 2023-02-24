@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderTopColor: 'rgba(0, 0, 0,0.1)',
         borderTopWidth: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         padding: 10,
         paddingLeft: 30,
         paddingRight: 30,

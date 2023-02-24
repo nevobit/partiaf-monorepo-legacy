@@ -12,29 +12,35 @@ import { Text } from "react-native";
 import { useQuery } from "@apollo/client";
 import { GET_COVERS } from "../../graphql/queries/covers";
 import { DivisaFormater } from "../../utilities/divisaFormater";
-import { GET_STORE } from '../../graphql/queries/stores/index';
+import { GET_STORE } from "../../graphql/queries/stores/index";
 import Header from "../../components/Layout/Header";
+import Modal from "react-native-modal";
 
 const Covers = ({ route, navigation }: any) => {
-  const { data:store, loading:loadiingStore, error:errorStore } = useQuery(GET_STORE, {
+  const {
+    data: store,
+    loading: loadiingStore,
+    error: errorStore,
+  } = useQuery(GET_STORE, {
     variables: { uuid: route.params.store },
   });
-  
+
   const { data, loading, error } = useQuery(GET_COVERS, {
     variables: { uuid: route.params.store },
   });
-  
+
+  const [modal, setModal] = useState(false);
   const [amount, setAmount] = useState(0);
   const [coverSelected, setCoverSelected] = useState<any>({});
-  
+
   const setPeopleHandler = async (type: string, cover: any) => {
-    setCoverSelected(cover)
+    setCoverSelected(cover);
     if (type == "+") {
       if (coverSelected.uuid != cover.uuid) {
         setAmount(1);
       } else {
         if (coverSelected.limit > amount) {
-          setAmount(prev => prev + 1);
+          setAmount((prev) => prev + 1);
         }
       }
     } else {
@@ -42,7 +48,7 @@ const Covers = ({ route, navigation }: any) => {
         setAmount(0);
       } else {
         if (amount > 0) {
-          setAmount(prev => prev - 1);
+          setAmount((prev) => prev - 1);
         }
       }
     }
@@ -54,9 +60,9 @@ const Covers = ({ route, navigation }: any) => {
     //   price: coverSelected.price,
     // });
   };
-  
+
   return (
-    <View style={{ backgroundColor: "#fff" }}>
+    <View style={{ backgroundColor: "#fff", position: "relative" }}>
       <StatusBar animated={true} />
       <Header navigation={navigation} />
       <View
@@ -133,7 +139,7 @@ const Covers = ({ route, navigation }: any) => {
       <View
         style={{
           width: "100%",
-          height: '100%',
+          height: "100%",
           borderBottomColor: "rgba(0, 0, 0,.03)",
           borderBottomWidth: 1,
           padding: 10,
@@ -144,13 +150,19 @@ const Covers = ({ route, navigation }: any) => {
           alignItems: "flex-start",
         }}
       >
-        {data?.getCoversById?.length < 1 && <Text style={{
-          fontSize: 20,
-          fontWeight: '500',
-          textAlign: "center",
-          width: '100%',
-          marginTop: 10
-        }}>No hay tickets</Text>}
+        {data?.getCoversById?.length < 1 && (
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "500",
+              textAlign: "center",
+              width: "100%",
+              marginTop: 10,
+            }}
+          >
+            No hay tickets
+          </Text>
+        )}
         {data?.getCoversById?.map((cover: any) => {
           return (
             <TouchableOpacity
@@ -161,7 +173,10 @@ const Covers = ({ route, navigation }: any) => {
                 borderBottomWidth: 1,
                 width: "100%",
               }}
-              onPress={() => setCoverSelected(cover)}
+              onPress={() => {
+                setCoverSelected(cover);
+                setModal(true);
+              }}
             >
               <View
                 style={{
@@ -181,7 +196,15 @@ const Covers = ({ route, navigation }: any) => {
                 <Text style={{ fontWeight: "600" }}>{cover.name}</Text>{" "}
                 {cover.description}
               </Text>
-              <View style={{ marginTop: 15, marginBottom: 10, display: 'flex',flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View
+                style={{
+                  marginTop: 15,
+                  marginBottom: 10,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <View>
                   <Text style={{ fontSize: 16 }}>
                     <Text style={{ fontWeight: "600" }}>Cupos:</Text>{" "}
@@ -196,35 +219,42 @@ const Covers = ({ route, navigation }: any) => {
                     {cover.hour}
                   </Text>
                 </View>
-                <View style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                  <TouchableOpacity 
+                <View
                   style={{
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                    borderRadius: 5,
-                    padding: 3
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
-                  onPress={() => setPeopleHandler('-', cover)}>
+                >
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "rgba(0,0,0,0.1)",
+                      borderRadius: 5,
+                      padding: 3,
+                    }}
+                    onPress={() => setPeopleHandler("-", cover)}
+                  >
                     <Ionicons
                       name="ios-remove"
                       style={{ fontWeight: "100", fontSize: 26 }}
                     />
                   </TouchableOpacity>
                   <Text
-                   style={{
-                    padding: 15,
-                    fontSize: 18
-                  }}>{coverSelected.uuid == cover.uuid? amount : 0}</Text>
-                  <TouchableOpacity 
-                   style={{
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                    borderRadius: 5,
-                    padding: 3
-                  }}
-                  onPress={() => setPeopleHandler('+', cover)}>
+                    style={{
+                      padding: 15,
+                      fontSize: 18,
+                    }}
+                  >
+                    {coverSelected.uuid == cover.uuid ? amount : 0}
+                  </Text>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "rgba(0,0,0,0.1)",
+                      borderRadius: 5,
+                      padding: 3,
+                    }}
+                    onPress={() => setPeopleHandler("+", cover)}
+                  >
                     <Ionicons
                       name="ios-add"
                       style={{ fontWeight: "100", fontSize: 26 }}
@@ -236,23 +266,112 @@ const Covers = ({ route, navigation }: any) => {
           );
         })}
       </View>
+      {amount > 0 && (
+        <View
+          style={{
+            position: "absolute",
+            bottom: 160,
+            left: 0,
+            height: "8%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              width: "86%",
+              height: "90%",
+              backgroundColor: "#FFE243",
+              borderRadius: 20,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => navigation.navigate('Payment')}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "500",
+                letterSpacing: 1,
+                color: "rgba(0,0,0,0.8)",
+                textTransform: "uppercase",
+              }}
+            >
+              PAGAR
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      <Modal
+        onSwipeComplete={() => setModal(false)}
+        animationIn="slideInUp"
+        style={{
+          justifyContent: "flex-end",
+          margin: 0,
+        }}
+        isVisible={modal}
+        swipeDirection={["down"]}
+      >
+        <View
+          style={{
+            backgroundColor: "#fff",
+            height: "95%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 5,
+            borderColor: "rgba(0,0,0,0.1)",
+            position: "relative",
+          }}
+        >
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              padding: 0,
+              position: "relative",
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+                height: 600,
+                padding: 0,
+                backgroundColor: "#000",
+                display: 'flex',
+                flexDirection:'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start'
+              }}
+            >
+              <Image
+                source={{ uri: coverSelected.image }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resizeMode: 'stretch'
+                }}
+              />
+            </View>
+            
+            <View style={{
+              padding: 10,
+              paddingHorizontal: 20
+            }} >
+              <View>
+                <Text style={{fontSize: 18}}><Text style={{fontWeight: '600'}}>Nombre:</Text> {coverSelected.name}</Text>
+                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Cupos:</Text> {coverSelected.limit}</Text>
+                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Precio:</Text> {DivisaFormater(coverSelected.price)}</Text>
+                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Descripcion:</Text> {coverSelected.description}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 export default Covers;
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    height: 50,
-    justifyContent: "space-between",
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  header_left: {
-    display: "flex",
-    flexDirection: "row",
-  },
-});

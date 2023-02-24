@@ -69,47 +69,56 @@ const Store = ({ name, type, photos }: IStore) => {
           justifyContent: "space-between",
         }}
       >
+        <View style={{
+          display: 'flex',
+          flexDirection: "row",
+          alignItems: "center",
+          marginRight: 10
+        }}>
+
         <View
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            marginRight: 15
           }}
         >
-          <Ionicons name="ios-star-outline" style={{ fontSize: 23 }} />
-          <Text style={{ marginLeft: 5, fontWeight: "500" }}>0</Text>
+          <Ionicons name="ios-star-outline" style={{ fontSize: 27 }} />
         </View>
         <View
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            marginRight: 15
           }}
         >
-          <Ionicons name="ios-chatbubbles-outline" style={{ fontSize: 23 }} />
-          <Text style={{ marginLeft: 5, fontWeight: "500" }}>0</Text>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Ionicons name="ios-heart-outline" style={{ fontSize: 23 }} />
-          <Text style={{ marginLeft: 5, fontWeight: "500" }}>Save</Text>
+          <Ionicons name="ios-chatbubbles-outline" style={{ fontSize: 27 }} />
         </View>
         <TouchableOpacity
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            marginRight: 15
           }}
           onPress={shareStore}
         >
-          <Ionicons name="ios-share-outline" style={{ fontSize: 23 }} />
-          <Text style={{ marginLeft: 5, fontWeight: "500" }}>Share</Text>
+          <Ionicons name="ios-share-outline" style={{ fontSize: 27 }} />
         </TouchableOpacity>
+          
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Ionicons name="ios-bookmark-outline" style={{ fontSize: 27 }} />
+        </View>
+        
       </View>
     </View>
   );

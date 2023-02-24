@@ -16,7 +16,7 @@ const Header = ({ navigation }: Props) => {
 
 <View style={styles.header}>
         <Ionicons
-          name="ios-options-outline"
+          name="ios-location-outline"
           style={{ fontWeight: "100", fontSize: 26 }}
         />
         <Image

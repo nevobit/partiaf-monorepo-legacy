@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TabBar from '../components/Layout/TabBar';
 import Covers from '../screens/Covers';
+import Payment from '../screens/Covers/Payment';
 import Home from '../screens/Home'
 import Partiaf from '../screens/Partiaf';
 import Profile from '../screens/Profile';
@@ -31,6 +32,9 @@ export type RootStackParamList = {
     Tickets: {
         user: string | undefined;
     };
+    Payment: {
+        user: string | undefined;
+    };
 }
 
 export type AuthStackParamList = {
@@ -46,6 +50,8 @@ const HomeNavigator = () => {
         <Stack.Screen name="Store" component={Store} />
         <Stack.Screen name="Covers" component={Covers} />
         <Stack.Screen name="Tickets" component={Tickets} />
+        <Stack.Screen name="Payment" component={Payment} />
+    
     </HomeStackNavigator.Navigator>
     )
 }
@@ -55,8 +61,8 @@ const TabNavigator = () => {
         <TabBarNavigator.Navigator screenOptions={{tabBarHideOnKeyboard:true, headerShown:false}} tabBar={(props) => <TabBar {...props} />}>
             <TabBarNavigator.Screen name="Home" component={HomeNavigator} />
             <TabBarNavigator.Screen name="Search" component={Search} />
-            <TabBarNavigator.Screen name="Shared" component={Shared} />
-            <TabBarNavigator.Screen name="Partiaf" component={Partiaf} />
+            {/* <TabBarNavigator.Screen name="Shared" component={Shared} /> */}
+            {/* <TabBarNavigator.Screen name="Partiaf" component={Partiaf} /> */}
             <TabBarNavigator.Screen name="Profile" component={Profile} />
         </TabBarNavigator.Navigator>
     )

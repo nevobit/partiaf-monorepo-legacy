@@ -8,7 +8,7 @@ query GetCoversById($uuid: String) {
     hour
     name
     phone
-    photo
+    image
     price
     limit
     status

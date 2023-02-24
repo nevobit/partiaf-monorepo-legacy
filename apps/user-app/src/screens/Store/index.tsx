@@ -124,7 +124,7 @@ const Store = ({ route, navigation }: Props) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "flex-start",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
           }}
         >
           <TouchableOpacity
@@ -178,7 +178,7 @@ const Store = ({ route, navigation }: Props) => {
               Reservas
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               display: "flex",
               alignItems: "center",
@@ -203,7 +203,7 @@ const Store = ({ route, navigation }: Props) => {
             >
               Menu
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

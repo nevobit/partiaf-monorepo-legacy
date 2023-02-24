@@ -73,7 +73,7 @@ const Signin = ({navigation}: Props) => {
         alignItems: 'center'
       }}>
         <Image
-          source={{ uri: "https://i.postimg.cc/DZL8VnL4/partiaf-single.png" }}
+          source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}
           style={{
             // marginLeft: 23,
             marginTop: 4,
