@@ -144,6 +144,14 @@
 }
 
 .content_modal{
+  position: relative;
   padding: 2rem;
   padding-top: 0;
+}
+.pass {
+  cursor: pointer;
+  position: absolute;
+  right: 3rem;
+  top: 25%;
+  transform: translateY(-100%);
 }

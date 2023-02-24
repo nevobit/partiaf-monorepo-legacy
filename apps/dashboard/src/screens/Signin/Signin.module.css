@@ -5,6 +5,7 @@
 }
 
 .form{
+    position: relative;
     background-color: #fff;
     min-width: 288px;
     width: 550px;
@@ -45,4 +46,12 @@
     color: #ccc;
     display: block;
     margin-top: 5rem;
+}
+
+.pass {
+    cursor: pointer;
+    position: absolute;
+    right: 3rem;
+    top: 50%; 
+    transform: translateY(-150%);
 }

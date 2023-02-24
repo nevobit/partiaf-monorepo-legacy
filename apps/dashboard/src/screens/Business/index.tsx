@@ -11,16 +11,18 @@ import { getStoresById, signinStore } from "@/redux/states/stores/thunks";
 import { Field, Input } from "@/components/shared";
 import { loginStore, PartialStore } from "@/redux/states/stores/storesSlice";
 
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
 const Bussiness = () => {
   const { admin, loading } = useSelector((state: AppStore) => state.admins);
 
-
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     loading: loadingStores,
     stores = [],
     successSignin,
-    error
+    error,
   } = useSelector((state: AppStore) => state.stores);
 
   const [storeSelected, setStoreSelected] = useState<PartialStore>();
@@ -110,11 +112,17 @@ const Bussiness = () => {
             <div className={styles.content_modal}>
               <Field error={error}>
                 <Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
                   placeholder="Ingrese la contrasena del negocio"
                 />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={styles.pass}
+                >
+                  {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
               </Field>
               <Button
                 onClick={signninStoreHandler}
