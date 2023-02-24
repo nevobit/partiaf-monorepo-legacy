@@ -24,7 +24,8 @@
     "sweetalert": "~2.1.2",
     "@types/sweetalert": "~2.0.4",
     "react-sweetalert2": "~0.5.2",
-    "gapi-script": "~1.2.0"
+    "gapi-script": "~1.2.0",
+    "react-icons": "~4.7.1"
   },
   "devDependencies": {
     "@types/google-map-react": "^2.1.7",

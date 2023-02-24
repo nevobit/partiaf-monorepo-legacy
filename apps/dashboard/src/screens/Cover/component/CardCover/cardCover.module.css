@@ -6,7 +6,7 @@
   width:45rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  /* min-height: 5rem; */
+  height: 20rem; 
   position: relative;
   overflow: hidden;
   background: linear-gradient(179.88deg, rgba(39, 39, 39, 0.1512) 8.96%, rgba(255, 255, 255, 0.294) 23.64%, rgba(255, 255, 255, 0.42) 99.89%);
