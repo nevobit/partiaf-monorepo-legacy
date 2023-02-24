@@ -20,7 +20,7 @@ type Cover {
     price: String
     phone: String
     limit: Int
-    photo: String
+    image: String
     status: String
 }
 
