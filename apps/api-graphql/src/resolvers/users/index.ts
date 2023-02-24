@@ -29,6 +29,7 @@ export default {
       }
       return user;
     },
+    
   },
   Mutation: {
     async userSignin(
