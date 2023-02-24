@@ -144,7 +144,7 @@ const Covers = ({ route, navigation }: any) => {
           alignItems: "flex-start",
         }}
       >
-        {data?.getCoversById.length < 1 && <Text style={{
+        {data?.getCoversById?.length < 1 && <Text style={{
           fontSize: 20,
           fontWeight: '500',
           textAlign: "center",

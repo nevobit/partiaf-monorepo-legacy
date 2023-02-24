@@ -1,13 +1,8 @@
 import React from "react";
 import {
   StatusBar,
-  Text,
   View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
   ScrollView,
-  Share,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -34,9 +29,9 @@ const Home = ({ navigation }: Props) => {
       <ScrollView style={{ marginBottom: 50 }}>
         {data?.getAllStores?.map((store: IStore) => {
           return (
-            <TouchableOpacity
+            <View
               key={store.uuid}
-              onPress={() =>
+              onTouchEndCapture={() =>
                 navigation.navigate("Store", { store: store.uuid })
               }
             >
@@ -45,7 +40,7 @@ const Home = ({ navigation }: Props) => {
                 name={store.name}
                 type={store.type}
               />
-            </TouchableOpacity>
+            </View>
           );
         })}
       </ScrollView>
