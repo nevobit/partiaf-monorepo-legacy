@@ -4,5 +4,6 @@ export declare enum Collection {
     GOERS = "goers",
     STORES = "stores",
     USERS = "users",
-    WAITERS = "waiters"
+    WAITERS = "waiters",
+    FOLLOWS = "follows"
 }

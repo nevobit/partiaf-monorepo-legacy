@@ -12,26 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const business_logic_1 = require("@partiaf/business-logic");
 exports.default = {
     Query: {
-        getMyTikets(_, { uuid }, context) {
+        getCoversById(_, { uuid }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                const tickets = yield (0, business_logic_1.getGoersByUser)(uuid);
-                console.log({ tickets });
-                return tickets;
+                console.log({ uuid });
+                const covers = yield (0, business_logic_1.getCoversById)(uuid);
+                console.log({ covers });
+                return covers;
             });
-        },
-    },
-    Mutation: {
-        createGoer(_, { data }, context) {
-            return __awaiter(this, void 0, void 0, function* () {
-                const goer = yield (0, business_logic_1.createGoer)(data);
-                return goer;
-            });
-        },
-        updateGoer(_, { uuid, data }, context) {
-            return __awaiter(this, void 0, void 0, function* () {
-                const goer = yield (0, business_logic_1.updateGoer)(uuid, data);
-                return goer;
-            });
-        },
-    },
+        }
+    }
 };

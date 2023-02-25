@@ -12,6 +12,20 @@ type Store {
     status: String
 }
 
+type Cover {
+    uuid: String
+    name: String
+    description: String
+    date: String
+    hour: String
+    type: String
+    price: String
+    phone: String
+    limit: Int
+    photo: String
+    status: String
+}
+
 type Goer {
     uuid: String
     user: String
@@ -44,9 +58,10 @@ type User {
 
 type Query {
     getAllStores: [Store]
+    allUsers: [AuthPayload]
     getStoreById(uuid: String): Store
+    getCoversById(uuid: String): [Cover]
     getMyTikets: [Goer]
-    getMyTikets(uuid: String!): [Goer]
 }
 
 type AuthPayload {
@@ -73,7 +88,8 @@ type AuthPayload {
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
-    createGoer(data: GoerInput): Goer    
+    createGoer(data: GoerInput): Goer
+    updateGoer(uuid: String, data: GoerInput): Goer
     creating: Boolean
 
 }

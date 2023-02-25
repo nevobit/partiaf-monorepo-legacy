@@ -103,6 +103,7 @@ importers:
       react-geocode: ^0.2.3
       react-google-autocomplete: ^2.7.1
       react-google-maps: ^9.4.5
+      react-icons: ~4.7.1
       react-redux: ^8.0.5
       react-router-dom: ^6.4.4
       react-sweetalert2: ~0.5.2
@@ -122,6 +123,7 @@ importers:
       react-geocode: 0.2.3
       react-google-autocomplete: 2.7.1_react@18.2.0
       react-google-maps: 9.4.5_41ef2f6d6e35950ad10e44b80055c042
+      react-icons: 4.7.1_react@18.2.0
       react-redux: 8.0.5_413fd22576863b93ee6b19a7f7967615
       react-router-dom: 6.6.2_react-dom@18.2.0+react@18.2.0
       react-sweetalert2: 0.5.2_react-dom@18.2.0+react@18.2.0
@@ -6574,6 +6576,14 @@ packages:
       i18next: 22.4.9
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-icons/4.7.1_react@18.2.0:
+    resolution: {integrity: sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
