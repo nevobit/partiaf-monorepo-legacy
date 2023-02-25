@@ -1,38 +1,39 @@
 .container_input_cloudinary {
-  object-fit: cover;
-  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px dashed #e0e0e0;
 }
 
 .formbold_file_input {
   border-radius: 0.5rem;
-  background-color: #fff;
   font-weight: 500;
   font-size: 1.6rem;
   color: #333;
   outline: none;
-  resize: none;
-  height: 96%;
+  height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .formbold_file_input input {
   opacity: 0;
   position: absolute;
-  width: 100%;
-  height: 100%;
 }
 
 .formbold_file_input label {
   position: relative;
-  border: 1px dashed #e0e0e0;
+
   border-radius: 0.5rem;
-  min-height: 18rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4.8rem;
   text-align: center;
-  height: 95%;
 }
 
 .formbold_drop_file {
@@ -61,14 +62,37 @@
   color: #333;
 }
 
-.image_cover_form img {
+.image_cover_form {
+  position: relative;
   border-radius: 0.4rem;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
 }
 
-.image_cover_form button{
-  width: 100%;
-  margin-top: 1rem;
-  background-color: #333;
-  border-radius: .4rem;
-  color: #fff;
+.image_cover_form img {
+  border-radius: 0.4rem;
+  height: 100%;
+
+  
+  object-fit: cover;
+}
+
+.btn_remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background-color: var(--main-color);
+  color: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_remove i {
+  font-size: 4rem;
 }

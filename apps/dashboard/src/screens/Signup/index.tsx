@@ -1,4 +1,3 @@
-import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import Button from "@/components/shared/Button";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
@@ -9,11 +8,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signin.module.css";
-
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import ContainerModal from "@/components/Layout/ContainerModal";
 import TermsAndConditions from "@/components/signup/TermsAndConditions";
 import Loader from "@/components/Layout/Loader";
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
 
 const Signup = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -121,18 +120,7 @@ const Signup = () => {
                       onChange={handleChange}
                     />
                   </Field>
-                </div>
-
-                <div className={styles.cnt_upload_view}>
-                  <Field label="foto de perfil">
-                    <InputCloudinary
-                      idInput="file-signup"
-                      setImageUrl={setImageUrlSignup}
-                    />
-                  </Field>
-                </div>
-              </div>
-              <Field label="Direccion*">
+                  <Field label="Direccion*">
                 <Input
                   name="address"
                   placeholder="Ingresa tu direccion"
@@ -140,6 +128,16 @@ const Signup = () => {
                   onChange={handleChange}
                 />
               </Field>
+                </div>
+
+                <div className={styles.cnt_upload_view}>
+                  <DragCloudinary
+                    setImageUrl={setImageUrlSignup}
+                    idInput={"file-signup"}
+                  />
+                </div>
+              </div>
+             
               <div className={styles.grid}>
                 <Field label="Edad*">
                   <Input

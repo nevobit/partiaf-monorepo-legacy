@@ -1,3 +1,5 @@
+import CoverCloudinary from "@/components/cover/cloudinary";
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import Loader from "@/components/Layout/Loader";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
@@ -129,7 +131,7 @@ const CreateCoverModal = (props: any) => {
                   ></textarea>
                 </Field>
                 <Field>
-                  <InputCloudinary
+                  <DragCloudinary
                     idInput="file-create-cover"
                     setImageUrl={setImageUrl}
                   />

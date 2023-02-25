@@ -13,7 +13,7 @@
 .form {
   background-color: #fff;
   min-width: 288px;
-  width: 700px;
+  width: 58rem;
   height: 800px;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -56,13 +56,8 @@
 
 .cnt_upload_view {
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  height: 22rem;
-
-  padding-left: 7rem;
-  padding-right: 7rem;
+  margin-top: 4rem;
 }
 
 .grid {
@@ -100,6 +95,6 @@
   font-size: 1.4rem;
 }
 
-.terms .sec_terms button{
+.terms .sec_terms button {
   background-color: transparent;
 }

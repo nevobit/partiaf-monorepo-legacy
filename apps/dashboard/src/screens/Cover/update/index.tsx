@@ -1,4 +1,4 @@
-import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
@@ -152,7 +152,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
                 ></textarea>
               </Field>
               <Field>
-                <InputCloudinary
+                <DragCloudinary
                   idInput="file-update-cover"
                   setImageUrl={setUrlImage}
                 />
