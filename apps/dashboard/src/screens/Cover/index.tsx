@@ -1,3 +1,4 @@
+import Loader from "@/components/Layout/Loader";
 import { getCoverById } from "@/redux/states/covers/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -7,7 +8,6 @@ import styles from "./cover.module.css";
 import CreateCoverModal from "./create";
 
 const Cover = () => {
-  
   const dispatch = useDispatch();
   const {
     covers = [],
@@ -23,39 +23,45 @@ const Cover = () => {
   }, [dispatch, store, success]);
   return (
     <>
-      <div className={styles.screen}>
-        <div className={styles.center__screen}>
-          <div className={styles.screen_header_principal}>
-            <div className={styles.box}>
-              <h3>Total de entradas</h3>
-              <p>{covers.length}</p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={styles.screen}>
+            <div className={styles.center__screen}>
+              <div className={styles.screen_header_principal}>
+                <div className={styles.box}>
+                  <h3>Total de entradas</h3>
+                  <p>{covers.length}</p>
+                </div>
+                <div className={styles.box}>
+                  <h3>Entradas efectivas</h3>
+                  <p>0</p>
+                </div>
+                <div className={styles.box}>
+                  <h3>Entradas no efectivas </h3>
+                  <p>0</p>
+                </div>
+              </div>
+              <div className={styles.screen_title}>
+                <h3>Entradas creadas</h3>
+                <button
+                  className={styles.Link_create}
+                  onClick={() => setOpenModal(!openModal)}
+                >
+                  Nuevo cover
+                </button>
+              </div>
             </div>
-            <div className={styles.box}>
-              <h3>Entradas efectivas</h3>
-              <p>0</p>
-            </div>
-            <div className={styles.box}>
-              <h3>Entradas no efectivas </h3>
-              <p>0</p>
+            <div className={styles.container_card_cover}>
+              {covers.map((obj) => (
+                <CardCover key={obj.uuid} cover={obj} />
+              ))}
             </div>
           </div>
-          <div className={styles.screen_title}>
-            <h3>Entradas creadas</h3>
-            <button
-              className={styles.Link_create}
-              onClick={() => setOpenModal(!openModal)}
-            >
-              Nuevo cover
-            </button>
-          </div>
-        </div>
-        <div className={styles.container_card_cover}>
-          {covers.map((obj) => (
-            <CardCover key={obj.uuid} cover={obj} />
-          ))}
-        </div>
-      </div>
-      <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />
+          <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />{" "}
+        </>
+      )}
     </>
   );
 };
