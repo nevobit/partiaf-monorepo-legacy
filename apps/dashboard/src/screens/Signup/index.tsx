@@ -1,16 +1,13 @@
 import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
 import Button from "@/components/shared/Button";
 import Field from "@/components/shared/Field";
-import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
 import { PublicRoutes } from "@/constants-definitions/Routes";
 import { signup } from "@/redux/states/admins/admin";
-import { signupAdmin } from "@/redux/states/admins/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Map from "../Map";
 import styles from "./Signin.module.css";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";

@@ -2,6 +2,7 @@ import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
+import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +29,10 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     setImageSelected(true);
   };
 
+  const [price, setPrice] = useState("");
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value);
+  };
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
     name: Cover?.name,
@@ -43,7 +48,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     status: true,
   });
 
-  console.log({cover})
+  console.log({ cover });
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -56,6 +61,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
+    let PriceConvert = convertToNumber(price);
     try {
       if (Urlimage === "") {
         setUrlImage(Cover.image);
@@ -63,6 +69,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
       dispatch(
         updateCover({
           ...cover,
+          price: PriceConvert,
           image: Urlimage === "" ? Cover.image : Urlimage,
         }) as any
       );
@@ -110,9 +117,9 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
               </Field>
               <Field label="Precio">
                 <Input
-                  name="price"
-                  value={cover.price}
-                  onChange={handleChange}
+                  type="text"
+                  value={"$" + price}
+                  onChange={(e) => handlePriceChange(currencyMask(e))}
                 />
               </Field>
               <Field label="Fecha">
