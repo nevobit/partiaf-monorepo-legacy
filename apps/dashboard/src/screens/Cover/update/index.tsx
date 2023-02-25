@@ -1,12 +1,11 @@
 import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import { Button, Field, ImageInput, Input } from "@/components/shared";
+import { Button, Field, Input } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LoadingBox } from "../component/CardCover/Loading";
 import styles from "./createcover.module.css";
 
 interface Props {

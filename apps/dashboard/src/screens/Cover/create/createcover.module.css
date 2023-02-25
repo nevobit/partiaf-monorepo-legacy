@@ -79,3 +79,20 @@
 .image_create_cover {
   border-radius: 0.4rem;
 }
+
+.discount{
+  display: flex;
+  margin-top: 4rem;
+  height: 3rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.select_check{
+  height: 1rem;
+  width: 2rem;
+}
+
+.discount .sec_terms label{
+  font-size: 1.4rem;
+}

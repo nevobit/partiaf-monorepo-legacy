@@ -1,20 +1,19 @@
-import CoverCloudinary from "@/components/cover/cloudinary";
 import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
-import Loader from "@/components/Layout/Loader";
 import { Button, Field, ImageInput, Input } from "@/components/shared";
 import { createCover, reset } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
+import { Discount } from "@/utils/percentage";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
 
 const CreateCoverModal = (props: any) => {
   const dispatch = useDispatch();
+  const [discount, setDiscount] = useState(false);
   const { openModal, setOpenModal } = props;
   const { store } = useSelector((state: AppStore) => state.stores);
-  const { success, loading } = useSelector((state: AppStore) => state.covers);
+  const { success } = useSelector((state: AppStore) => state.covers);
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +29,7 @@ const CreateCoverModal = (props: any) => {
     description: "",
     image: imageUrl,
     store: store.uuid,
+    discount: 0,
     status: true,
   });
   const handleChange = (e: any) => {
@@ -43,13 +43,22 @@ const CreateCoverModal = (props: any) => {
     setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
     setCover((prev) => ({ ...prev, image: imageUrl }));
   };
+  const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDiscount(e.target.checked);
+  };
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     let PriceConvert = convertToNumber(price);
+    let percentage = Discount(PriceConvert, cover.discount);
     try {
       console.log({ cover });
       dispatch(
-        createCover({ ...cover, price: PriceConvert, image: imageUrl }) as any
+        createCover({
+          ...cover,
+          price: PriceConvert,
+          percentage: percentage,
+          image: imageUrl,
+        }) as any
       );
     } catch (error) {
       if (error instanceof Error) {
@@ -94,12 +103,11 @@ const CreateCoverModal = (props: any) => {
                     onChange={handleChange}
                   />
                 </Field>
-                <Field label="Precio">
-                  <Input
-                    type="text"
-                    value={"$" + price}
-                    onChange={(e) => handlePriceChange(currencyMask(e))}
-                  />
+                <Field label="Tipo">
+                  <select name="type" onChange={handleChange}>
+                    <option value="VIP">VIP</option>
+                    <option value="General">General</option>
+                  </select>
                 </Field>
                 <Field label="Fecha">
                   <Input type="date" name="date" onChange={handleChange} />
@@ -114,12 +122,37 @@ const CreateCoverModal = (props: any) => {
                     onChange={handleChange}
                   />
                 </Field>
-                <Field label="Tipo">
-                  <select name="type" onChange={handleChange}>
-                    <option value="VIP">VIP</option>
-                    <option value="General">General</option>
-                  </select>
+
+                <Field label="Precio">
+                  <Input
+                    type="text"
+                    value={"$" + price}
+                    onChange={(e) => handlePriceChange(currencyMask(e))}
+                  />
                 </Field>
+                {discount ? (
+                  <Field label="Ingrese el porcertaje a descontar">
+                    <Input
+                      type="number"
+                      name="discount"
+                      value={cover.discount}
+                      onChange={handleChange}
+                    />
+                  </Field>
+                ) : (
+                  <div className={styles.discount}>
+                    <input
+                      className={styles.select_check}
+                      type="checkbox"
+                      id="terms"
+                      checked={discount}
+                      onChange={handleDiscount}
+                    />
+                    <div className={styles.sec_terms}>
+                      <label htmlFor="terms">Agregar descuento</label>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className={styles.description_form}>
                 <Field label="Descripcion">
