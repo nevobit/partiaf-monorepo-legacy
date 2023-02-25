@@ -29,7 +29,7 @@ const CreateCoverModal = (props: any) => {
     description: "",
     image: imageUrl,
     store: store.uuid,
-    discount: 0,
+    percentage: 0,
     status: true,
   });
   const handleChange = (e: any) => {
@@ -49,15 +49,14 @@ const CreateCoverModal = (props: any) => {
   const submitCreateHandler = async (e: any) => {
     e.preventDefault();
     let PriceConvert = convertToNumber(price);
-    let percentage = Discount(PriceConvert, cover.discount);
+    let percentage = Discount(PriceConvert, cover.percentage);
     try {
       console.log({ cover });
       dispatch(
         createCover({
           ...cover,
           price: PriceConvert,
-          percentage: percentage,
-          image: imageUrl,
+          image: imageUrl
         }) as any
       );
     } catch (error) {
@@ -134,8 +133,8 @@ const CreateCoverModal = (props: any) => {
                   <Field label="Ingrese el porcertaje a descontar">
                     <Input
                       type="number"
-                      name="discount"
-                      value={cover.discount}
+                      name="percentage"
+                      value={cover.percentage}
                       onChange={handleChange}
                     />
                   </Field>
