@@ -14,10 +14,18 @@ import Map from "../Map";
 import styles from "./Signin.module.css";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import ContainerModal from "@/components/Layout/ContainerModal";
+import TermsAndConditions from "@/components/signup/TermsAndConditions";
 
 const Signup = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+  const HandlerOpenModal = () => {
+    setOpenModal(!openModal);
+  };
 
   const {
     loading,
@@ -54,8 +62,16 @@ const Signup = () => {
     setAdmin((prev) => ({ ...prev, image: imageUrlSignup }));
   };
 
+  const handleAcceptTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAcceptTerms(e.target.checked);
+  };
+
   const submitRegisterHandler = async (e: any) => {
     e.preventDefault();
+    if (!acceptTerms) {
+      alert("Debe aceptar los términos y condiciones para continuar");
+      return;
+    }
     try {
       dispatch(signup(admin) as any);
     } catch (error) {
@@ -75,158 +91,177 @@ const Signup = () => {
   }, [admin, successSignup, navigate]);
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={submitRegisterHandler}>
-        <div className={styles.header_image_logo}>
-          <img src="/logo-parti.svg" alt="Log Partiaf" />
-        </div>
-        <div className={styles.grid}>
-          <div>
-            <Field label="Nombre*">
+    <>
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={submitRegisterHandler}>
+          <div className={styles.header_image_logo}>
+            <img src="/logo-parti.svg" alt="Log Partiaf" />
+          </div>
+          <div className={styles.grid}>
+            <div>
+              <Field label="Nombre*">
+                <Input
+                  name="name"
+                  placeholder="Introduce tu nombre"
+                  value={admin.name}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Apellido*">
+                <Input
+                  name="lastname"
+                  placeholder="ingresa tu apellido"
+                  value={admin.lastname}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Correo electronico*">
+                <Input
+                  name="email"
+                  placeholder="Ingresa tu correo electronico"
+                  value={admin.email}
+                  onChange={handleChange}
+                />
+              </Field>
+            </div>
+
+            <div className={styles.cnt_upload_view}>
+              <Field label="foto de perfil">
+                <InputCloudinary
+                  idInput="file-signup"
+                  setImageUrl={setImageUrlSignup}
+                />
+              </Field>
+            </div>
+          </div>
+          <Field label="Direccion*">
+            <Input
+              name="address"
+              placeholder="Ingresa tu direccion"
+              value={admin.address}
+              onChange={handleChange}
+            />
+          </Field>
+          <div className={styles.grid}>
+            <Field label="Edad*">
               <Input
-                name="name"
-                placeholder="Introduce tu nombre"
-                value={admin.name}
+                name="age"
+                type="number"
+                placeholder="Ingresa tu edad"
+                value={admin.age}
                 onChange={handleChange}
               />
             </Field>
-            <Field label="Apellido*">
+            <Field label="Telefono*">
               <Input
-                name="lastname"
-                placeholder="ingresa tu apellido"
-                value={admin.lastname}
+                name="phone"
+                type="number"
+                placeholder="Ingresa tu telefono"
+                value={admin.phone}
                 onChange={handleChange}
               />
             </Field>
-            <Field label="Correo electronico*">
+
+            <Field label="Fecha de nacimiento*">
               <Input
-                name="email"
-                placeholder="Ingresa tu correo electronico"
-                value={admin.email}
+                name="birthdate"
+                type="date"
+                placeholder="Contrasena"
+                value={admin.birthdate}
+                onChange={handleChange}
+              />
+            </Field>
+            <Field label="Genero*">
+              <select name="" id="" onChange={handleChange}>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+              </select>
+            </Field>
+            <Field label="Tipo de documento*">
+              <select name="identification_type" id="" onChange={handleChange}>
+                <option value="CC">Cedula de ciudadania</option>
+                <option value="CE">Cedula de extranjeria</option>
+                <option value="PASSPORT">Pasaporte</option>
+              </select>
+            </Field>
+            <Field label="Documento*">
+              <Input
+                name="identification"
+                type="number"
+                placeholder="Ingresa tu numero de documento"
+                value={admin.identification}
                 onChange={handleChange}
               />
             </Field>
           </div>
 
-          <div className={styles.cnt_upload_view}>
-            <Field label="foto de perfil">
-              <InputCloudinary
-                idInput="file-signup"
-                setImageUrl={setImageUrlSignup}
+          <div className={styles.grid}>
+            <Field label="Ingresa una contrasena">
+              <Input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Contrasena"
+                value={admin.password}
+                onChange={handleChange}
               />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className={styles.pass}
+              >
+                {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+              </div>
+            </Field>
+            <Field label="Confirmar contrasena">
+              <Input
+                placeholder="Confirmar contrasena"
+                type={showPasswordConfirm ? "text" : "password"}
+              />
+              <div
+                onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                className={styles.passconfirm}
+              >
+                {showPasswordConfirm ? <AiFillEye /> : <AiFillEyeInvisible />}
+              </div>
             </Field>
           </div>
-        </div>
-        <Field label="Direccion*">
-          <Input
-            name="address"
-            placeholder="Ingresa tu direccion"
-            value={admin.address}
-            onChange={handleChange}
-          />
-        </Field>
-        <div className={styles.grid}>
-          <Field label="Edad*">
-            <Input
-              name="age"
-              type="number"
-              placeholder="Ingresa tu edad"
-              value={admin.age}
-              onChange={handleChange}
+          <div className={styles.terms}>
+            <input
+              className={styles.acceptTerms}
+              type="checkbox"
+              id="terms"
+              checked={acceptTerms}
+              onChange={handleAcceptTermsChange}
             />
-          </Field>
-          <Field label="Telefono*">
-            <Input
-              name="phone"
-              type="number"
-              placeholder="Ingresa tu telefono"
-              value={admin.phone}
-              onChange={handleChange}
-            />
-          </Field>
-
-          <Field label="Fecha de nacimiento*">
-            <Input
-              name="birthdate"
-              type="date"
-              placeholder="Contrasena"
-              value={admin.birthdate}
-              onChange={handleChange}
-            />
-          </Field>
-          <Field label="Genero*">
-            <select name="" id="" onChange={handleChange}>
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-              <option value="O">Otro</option>
-            </select>
-          </Field>
-          <Field label="Tipo de documento*">
-            <select name="identification_type" id="" onChange={handleChange}>
-              <option value="CC">Cedula de ciudadania</option>
-              <option value="CE">Cedula de extranjeria</option>
-              <option value="PASSPORT">Pasaporte</option>
-            </select>
-          </Field>
-          <Field label="Documento*">
-            <Input
-              name="identification"
-              type="number"
-              placeholder="Ingresa tu numero de documento"
-              value={admin.identification}
-              onChange={handleChange}
-            />
-          </Field>
-        </div>
-
-        <div className={styles.grid}>
-          <Field label="Ingresa una contrasena">
-            <Input
-              name="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Contrasena"
-              value={admin.password}
-              onChange={handleChange}
-            />
-            <div
-              onClick={() => setShowPassword(!showPassword)}
-              className={styles.pass}
-            >
-              {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            <div className={styles.sec_terms}>
+              <label htmlFor="terms">Acepto los </label>
+              <button onClick={HandlerOpenModal}>
+                <strong>términos y condiciones</strong>
+              </button>
             </div>
-          </Field>
-          <Field label="Confirmar contrasena">
-            <Input
-              placeholder="Confirmar contrasena"
-              type={showPasswordConfirm ? "text" : "password"}
-            />
-            <div
-              onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-              className={styles.passconfirm}
-            >
-              {showPasswordConfirm ? <AiFillEye /> : <AiFillEyeInvisible />}
-            </div>
-          </Field>
-        </div>
-        <div className={styles.grid}>
-          <Field>
-            <Button>
-              <Link to={PublicRoutes.SIGNIN}>Ir a iniciar sesion</Link>
-            </Button>
-          </Field>
-          <Field>
-            <Button backgroundColor="#333" color="#f2f2f2">
-              Registrarse
-            </Button>
-          </Field>
-        </div>
-
-        <span className={styles.copy}>
-          Al registrarse usted acepta los términos y condiciones del servicio de
-          PARTIA
-        </span>
-      </form>
-    </div>
+          </div>
+          <div className={styles.grid}>
+            <Field>
+              <Button>
+                <Link to={PublicRoutes.SIGNIN}>Ir a iniciar sesion</Link>
+              </Button>
+            </Field>
+            <Field>
+              <Button backgroundColor="#333" color="#f2f2f2">
+                Registrarse
+              </Button>
+            </Field>
+          </div>
+        </form>
+      </div>
+      <ContainerModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        title={"Terminos y condiciones de uso"}
+      >
+        <TermsAndConditions />
+      </ContainerModal>
+    </>
   );
 };
 
