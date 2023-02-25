@@ -130,7 +130,7 @@ const CreateCoverModal = (props: any) => {
                   />
                 </Field>
                 {discount ? (
-                  <Field label="Ingrese el porcertaje a descontar">
+                  <Field label="Ingrese el porcentaje a descontar">
                     <Input
                       type="number"
                       name="percentage"
