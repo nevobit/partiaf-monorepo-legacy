@@ -40,3 +40,7 @@ mutation Mutation($username: String!, $password: String!) {
   }
 }
 `
+
+// export const GET_USERS = gql `
+
+// `

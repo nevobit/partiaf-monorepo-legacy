@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store';
+import { StatusBar } from 'expo-status-bar';
 
 export const App = () => {
   LogBox.ignoreLogs(['Remote debugger']);

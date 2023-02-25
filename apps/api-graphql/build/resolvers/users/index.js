@@ -12,9 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const business_logic_1 = require("@partiaf/business-logic");
 exports.default = {
     Query: {
-        allUsers(_, args, context) {
+        allUsers(_, {}, context) {
             return __awaiter(this, void 0, void 0, function* () {
                 const users = yield (0, business_logic_1.getAllUsers)();
+                console.log(users);
                 return users;
             });
         },

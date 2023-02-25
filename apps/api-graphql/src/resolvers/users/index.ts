@@ -11,8 +11,9 @@ interface PartialUser extends User {
 }
 export default {
   Query: {
-    async allUsers() {
+    async allUsers(_: any, {}, context: any) {
       const users = await getAllUsers();
+      console.log(users);
       return users;
     },
     async userById(_: any, { uuid, username }: any, context: any) {

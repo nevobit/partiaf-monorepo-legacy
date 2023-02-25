@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -11,10 +11,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { signout } from "../../features/auth";
 import { useDispatch } from "react-redux";
+import Modal from 'react-native-modal'
 
-const Profile = () => {
+const Profile = ({navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
 
+  const [modal, setModal] = useState(true);
+  
   const dispatch = useDispatch();
   const exit = () => {
     dispatch(signout());
@@ -27,18 +30,24 @@ const Profile = () => {
           @{user.username}
         </Text>
         <View style={styles.header_left}>
-          <Ionicons
-            name={"ios-qr-code-outline"}
-            style={{ fontWeight: "100", fontSize: 23, marginRight: 10 }}
-          />
-          <TouchableOpacity>
+        <TouchableOpacity onPress={() =>
+              navigation.navigate("Tickets", { user: "" })
+            }
+            style={{
+              marginRight: 10
+            }}
+            >
+            <Ionicons
+              name={"ios-qr-code-outline"}
+              style={{ fontWeight: "100", fontSize: 26 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setModal(true)}>
             <Ionicons
               name={"ios-menu-outline"}
               style={{
                 fontWeight: "100",
-                width: 30,
-                fontSize: 40,
-                marginTop: -10,
+                fontSize: 38,
               }}
             />
           </TouchableOpacity>
@@ -172,6 +181,128 @@ const Profile = () => {
           <Text style={{ fontWeight: "500", fontSize: 16 }}>Salir</Text>
         </TouchableOpacity>
       </View>
+      
+      <Modal
+        onSwipeStart={() => setModal(false)}
+        style={{
+          justifyContent: "flex-end",
+          margin: 0,
+        }}
+        animationOut="slideOutDown"
+        isVisible={modal}
+        swipeDirection={["down"]}
+        onBackButtonPress={() => setModal(false)}
+        onBackdropPress={() => setModal(false)}
+      >
+        <View
+          style={{
+            backgroundColor: "#fff",
+            height: 200,
+            width: "100%",
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
+            borderTopStartRadius: 20,
+            borderTopEndRadius: 20,
+            borderColor: "rgba(0,0,0,0.1)",
+            position: "relative",
+            padding: 20,
+            paddingBottom: 0,
+          }}
+        >
+          <View
+            style={{
+              position: "absolute",
+              top: 15,
+              left: "50%",
+              width: 40,
+              height: 8,
+              backgroundColor: "rgba(0,0,0,0.8)",
+              borderRadius: 50,
+            }}
+          ></View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+            }}
+          >
+           
+            <TouchableOpacity
+              style={{
+                height: 50,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                  }}
+                  name="ios-bookmark-outline"
+                />{" "}
+                Guardados
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                height: 50,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                  }}
+                  name="ios-star-outline"
+                />{" "}
+                Favoritos
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                height: 50,
+              }}
+              
+              onPress={() => navigation.navigate('Settings')}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                  }}
+                  name="ios-cog-outline"
+                />
+                <Text style={{
+                }}>
+                Configuracion & privacidad                  
+                </Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -181,13 +312,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     justifyContent: "space-between",
-    marginTop: 15,
+    alignItems: 'center',
+    marginTop: 5,
     paddingLeft: 20,
     paddingRight: 20,
   },
   header_left: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
 });
 

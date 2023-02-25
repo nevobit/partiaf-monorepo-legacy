@@ -8,19 +8,23 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type Props = {
   navigation: HomeScreenNavigationProp;
+  openModal?: any
 };
 
-const Header = ({ navigation }: Props) => {
+const Header = ({ navigation, openModal }: Props) => {
   
     return (
 
 <View style={styles.header}>
+  <TouchableOpacity onPress={() => openModal(true)}>
         <Ionicons
           name="ios-location-outline"
           style={{ fontWeight: "100", fontSize: 26 }}
         />
+  </TouchableOpacity>
+        
         <Image
-          source={{ uri: "https://i.postimg.cc/DZL8VnL4/partiaf-single.png" }}
+          source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}
           style={{
             marginLeft: 23,
             marginTop: 4,
@@ -30,16 +34,21 @@ const Header = ({ navigation }: Props) => {
           }}
         />
         <View style={styles.header_left}>
+          <TouchableOpacity onPress={
+              () => navigation.navigate("Wallet", { user: "" })
+          }>
           <Ionicons
             name={"ios-wallet-outline"}
-            style={{ fontWeight: "100", fontSize: 23, marginRight: 10 }}
+            style={{ fontWeight: "100", fontSize: 26, marginRight: 10 }}
           />
+          </TouchableOpacity>
+          
           <TouchableOpacity onPress={() =>
               navigation.navigate("Tickets", { user: "" })
             }>
             <Ionicons
               name={"ios-qr-code-outline"}
-              style={{ fontWeight: "100", fontSize: 23 }}
+              style={{ fontWeight: "100", fontSize: 26 }}
             />
           </TouchableOpacity>
         </View>

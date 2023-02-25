@@ -1,10 +1,26 @@
 import { Animated, View, TouchableOpacity, StyleSheet } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import Ionic from "react-native-vector-icons/Ionicons";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.tabBar}>
+    <View style={{
+      flexDirection: 'row',
+      borderTopColor: 'rgba(0, 0, 0,0.1)',
+      borderTopWidth: 1,
+      borderBottomColor: 'rgba(255, 255, 255, 0)',
+      justifyContent: 'space-around',
+      paddingTop: 10,
+      paddingBottom: insets.bottom + 5,
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+    }}>
       {state.routes.map((route, index) => {
         const focused = state.index === index;
         const isActions = route.name === "Partiaf";
@@ -65,10 +81,6 @@ const styles = StyleSheet.create({
         borderTopColor: 'rgba(0, 0, 0,0.1)',
         borderTopWidth: 1,
         justifyContent: 'space-around',
-        padding: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-
     },
     tabItem: {
         width: 60

@@ -8,7 +8,12 @@ export const GoerSchemaMongo = new Schema<Goer>({
     cost: {type: Number},
     time: {type:String},
     cover: {type: String},
-    amount: {type: Number}, 
+    amount: {type: Number},
+    image: {type: String},
+    name: {type: String},
+    description: {type: String},
+    date: {type: String},
+     
 }, {
     versionKey: false,
     timestamps: true

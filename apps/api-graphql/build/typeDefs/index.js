@@ -12,6 +12,29 @@ type Store {
     status: String
 }
 
+type Comment {
+    uuid: String
+    text: String
+    store: String
+    photo: String
+    user: String
+    createdAt: String
+}
+
+type Cover {
+    uuid: String
+    name: String
+    description: String
+    date: String
+    hour: String
+    type: String
+    price: String
+    phone: String
+    limit: Int
+    image: String
+    status: String
+}
+
 type Goer {
     uuid: String
     user: String
@@ -32,6 +55,13 @@ input GoerInput {
     amount: Int
 }
 
+input CommentInput {
+    text: String
+    user: String
+    store: String
+    photo: String
+}
+
 type User {
     uuid: String
     firstname: String
@@ -44,9 +74,11 @@ type User {
 
 type Query {
     getAllStores: [Store]
+    allUsers: [AuthPayload]
     getStoreById(uuid: String): Store
-    getMyTikets: [Goer]
-    getMyTikets(uuid: String!): [Goer]
+    getCoversById(uuid: String): [Cover]
+    getMyTikets(uuid: String): [Goer]
+    getCommentsByStore(uuid: String): [Comment]
 }
 
 type AuthPayload {
@@ -73,9 +105,13 @@ type AuthPayload {
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
-    createGoer(data: GoerInput): Goer    
+    createGoer(data: GoerInput): Goer
+    updateGoer(uuid: String, data: GoerInput): Goer
     creating: Boolean
-
+    createComment(text: String,
+        user: String,
+        store: String,
+        photo: String): Comment
 }
 `;
 exports.default = typeDefs;

@@ -4,8 +4,12 @@ export interface Goer {
   status: string;
   cost: number;
   time: string;
+  date: string
   cover: string;
   amount: number;
+  image: string;
+  name: string;
+  description: string;
 }
 
 

@@ -3,8 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
+import { SafeAreaView, SafeAreaViewBase } from 'react-native';
 import { useSelector } from 'react-redux';
 import TabBar from '../components/Layout/TabBar';
+import Comments from '../screens/Comments';
 import Covers from '../screens/Covers';
 import Payment from '../screens/Covers/Payment';
 import Home from '../screens/Home'
@@ -16,7 +18,14 @@ import Signin from '../screens/Signin'
 import Signup from '../screens/Signup';
 import Store from '../screens/Store';
 import Tickets from '../screens/Tickets';
+import Wallet from '../screens/Wallet';
+import {
+    SafeAreaProvider,
+    useSafeAreaInsets,
+  } from 'react-native-safe-area-context';
+import Settings from '../screens/Settings';
 
+  
 const TabBarNavigator = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Auth = createStackNavigator();
@@ -35,6 +44,12 @@ export type RootStackParamList = {
     Payment: {
         user: string | undefined;
     };
+    Wallet: {
+        user: string | undefined;
+    };
+    Comments: {
+        store: string | undefined;
+    }
 }
 
 export type AuthStackParamList = {
@@ -51,7 +66,9 @@ const HomeNavigator = () => {
         <Stack.Screen name="Covers" component={Covers} />
         <Stack.Screen name="Tickets" component={Tickets} />
         <Stack.Screen name="Payment" component={Payment} />
-    
+        <Stack.Screen name="Wallet" component={Wallet} /> 
+        <Stack.Screen name="Comments" component={Comments} />   
+        <Stack.Screen name="Settings" component={Settings} />           
     </HomeStackNavigator.Navigator>
     )
 }
@@ -65,6 +82,7 @@ const TabNavigator = () => {
             {/* <TabBarNavigator.Screen name="Partiaf" component={Partiaf} /> */}
             <TabBarNavigator.Screen name="Profile" component={Profile} />
         </TabBarNavigator.Navigator>
+
     )
 }
 
@@ -87,11 +105,15 @@ const LoginNavigator = () => {
 const AppNavigator = () => {
     const {user} = useSelector((state:any) => state.auth);
     return (
+          <SafeAreaProvider>
+            
         <NavigationContainer>
             {user?  <TabNavigator /> : (
                     <LoginNavigator />            
             ) }
         </NavigationContainer>
+        </SafeAreaProvider>  
+
     )
 }
 

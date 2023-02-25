@@ -1,4 +1,5 @@
 export * from './admins';
+export * from './comments';
 export * from './covers';
 export * from './goer';
 export * from './helpers/email-service';

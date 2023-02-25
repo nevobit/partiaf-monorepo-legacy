@@ -4,7 +4,8 @@ import {
   View,
   ScrollView,
   Text,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -14,7 +15,7 @@ import { GET_STORES } from "../../graphql/queries/stores";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Header from "../../components/Layout/Header";
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, SafeAreaViewBase } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import Modal from "react-native-modal";
 import {useState} from 'react';
@@ -27,12 +28,18 @@ type Props = {
 
 const Home = ({ navigation }: Props) => {
   const { data, loading } = useQuery(GET_STORES);
-  const [modal, setModal] = useState(true)
-  const [location, setLocation] = useState("")
+  const [modal, setModal] = useState(false)
+  const [type, setType] = useState('')
+
+  const [location, setLocation] = useState("");
+  
+  const [store, setStore] = useState({})
+  
   return (
-    <View style={{ backgroundColor: "#fff" }}>
-      <StatusBar animated={true} />
-      <Header navigation={navigation} />
+    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight }}>
+      <View>
+        
+      <Header openModal={setModal} navigation={navigation} />
       <View style={{
         display: 'flex',
         flexDirection: 'row',
@@ -46,7 +53,9 @@ const Home = ({ navigation }: Props) => {
         <TouchableOpacity style={{
           display: 'flex',
           alignItems: 'center',
-        }}>
+        }}
+        onPress={() => setType('')}
+        >
           
         <Ionicons style={{
           fontSize: 25
@@ -55,11 +64,13 @@ const Home = ({ navigation }: Props) => {
           fontSize:16
         }}>Todo</Text>
         </TouchableOpacity>
-        
+       
         <TouchableOpacity style={{
           display: 'flex',
           alignItems: 'center',
-        }}>
+        }}
+        onPress={() => setType('bar')}
+        >
           
         <Ionicons style={{
           fontSize: 25
@@ -72,7 +83,9 @@ const Home = ({ navigation }: Props) => {
         <TouchableOpacity style={{
           display: 'flex',
           alignItems: 'center',
-        }}>
+        }}
+        onPress={() => setType('Discoteca')}
+        >
           
         <Ionicons style={{
           fontSize: 25
@@ -84,7 +97,9 @@ const Home = ({ navigation }: Props) => {
 <TouchableOpacity style={{
           display: 'flex',
           alignItems: 'center',
-        }}>
+        }}
+        onPress={() => setType('Gastrobar')}
+        >
   
         <Ionicons style={{
           fontSize: 25
@@ -95,25 +110,40 @@ const Home = ({ navigation }: Props) => {
 </TouchableOpacity>
 
       </View>
+      {data?.getAllStores?.filter((store: IStore) => store.type.toLowerCase().includes(type.toLowerCase())).length < 1 && (
+      <Text style={{
+        color: '#333',
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        height: '100%',
+        marginTop: 50
+      }}> No hay resultados </Text>  
+      )}
+      
       <ScrollView style={{ marginBottom: 50 }}>
-        {data?.getAllStores?.map((store: IStore) => {
+        {data?.getAllStores?.filter((store: IStore) => store.type.toLowerCase().includes(type.toLowerCase())).map((store: IStore) => {
           return (
-            <View
+            <TouchableOpacity
               key={store.uuid}
-              onTouchEndCapture={() =>
+              onPress={() =>
                 navigation.navigate("Store", { store: store.uuid })
               }
+              activeOpacity={1}
             >
               <Store
+                uuid={store.uuid}
                 photos={store.photos}
                 name={store.name}
                 type={store.type}
+                navigation={navigation}
               />
-            </View>
+              
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
-      
+
       <Modal
         onSwipeComplete={() => setModal(false)}
         animationIn="fadeIn"
@@ -122,12 +152,10 @@ const Home = ({ navigation }: Props) => {
         isVisible={modal}
         swipeDirection={["down"]}
       >
-        
-       
         <View
           style={{
             backgroundColor: "#fff",
-            height: "55%",
+            height: 500,
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -160,7 +188,7 @@ const Home = ({ navigation }: Props) => {
             <Text style={{
                 fontSize: 20,
                 fontWeight: '600'
-            }}>Ingresar pin</Text>
+            }}>Ingresar tu ubicacion</Text>
             
             <TouchableOpacity onPress={() => setModal(false)}>
                 <Text><Ionicons name="ios-arrow-back-outline" style={{
@@ -173,25 +201,29 @@ const Home = ({ navigation }: Props) => {
               padding: 10,
               paddingHorizontal: 20
             }} >  
-            {/* <TextInput style={{
-                height: 60,
-                borderWidth: 1,
-                borderColor: "rgba(0,0,0,0.2)",
-                borderRadius: 5,
-                padding: 10,
-                marginBottom: 20,
-                fontSize: 25
-            }} value={location} /> */}
             
             <GooglePlacesAutocomplete 
           query={{ key: 'AIzaSyATiAqIXBARofRD2apZcPQ1eEWZPH4fPV4'}}
+          onPress={(data, details = null) => {
+            console.log(data.description)
+          }}
           placeholder="Buscar direccion"
+          styles={
+            {
+              textInput: {
+                borderWidth: 1,
+                borderColor: 'rgba(0,0,0,0.2)'
+              }
+            }
+          }
         />
             </View>
           </View>
         </View>
       </Modal>
-    </View>
+      </View>
+      
+    </SafeAreaView>
   );
 };
 

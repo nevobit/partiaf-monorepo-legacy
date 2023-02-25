@@ -9,5 +9,6 @@ var Collection;
     Collection["STORES"] = "stores";
     Collection["USERS"] = "users";
     Collection["WAITERS"] = "waiters";
+    Collection["COMMENTS"] = "comments";
 })(Collection = exports.Collection || (exports.Collection = {}));
 //# sourceMappingURL=constants.js.map

@@ -1,4 +1,5 @@
 export * from './models/admin';
+export * from './models/comment';
 export * from './models/cover';
 export * from './models/goer';
 export * from './models';

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, LogBox } from 'react-native';
+import { StyleSheet, Text, View, LogBox, SafeAreaView } from 'react-native';
 
 export default function App() {
   LogBox.ignoreLogs(["Remote debugger"]);
@@ -7,7 +7,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Waiter App Partiaf</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" hidden={true} />
     </View>
   );
 }

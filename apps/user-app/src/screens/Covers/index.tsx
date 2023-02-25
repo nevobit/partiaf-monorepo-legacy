@@ -15,8 +15,12 @@ import { DivisaFormater } from "../../utilities/divisaFormater";
 import { GET_STORE } from "../../graphql/queries/stores/index";
 import Header from "../../components/Layout/Header";
 import Modal from "react-native-modal";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from "react-redux";
 
 const Covers = ({ route, navigation }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
+  
   const {
     data: store,
     loading: loadiingStore,
@@ -52,13 +56,23 @@ const Covers = ({ route, navigation }: any) => {
         }
       }
     }
-    // persistLocalStorage("coverInfo", {
-    //   store_name: data?.getStore.name,
-    //   storeId: id,
-    //   id: coverSelected._id,
-    //   people: people + 1,
-    //   price: coverSelected.price,
-    // });
+    
+    const coverInfo = {
+        store: route.params.store,
+        storeName: store?.getStoreById?.name,
+        user: user.uuid,
+        status: 'in line',
+        cost: (amount + 1) * coverSelected.price,
+        amount: amount + 1,
+        time: coverSelected.time,
+        image: coverSelected.image,
+        description: coverSelected.description,
+        cover: coverSelected.uuid,
+        name: coverSelected.name,
+        date: coverSelected.date
+    }
+    
+    await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
   };
 
   return (
