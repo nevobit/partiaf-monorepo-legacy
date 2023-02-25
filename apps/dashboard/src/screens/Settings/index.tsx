@@ -1,3 +1,4 @@
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
 import { reset, updateAdmin } from "@/redux/states/admins/admin";
@@ -5,7 +6,6 @@ import { getAdminByIdThunks } from "@/redux/states/admins/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ImageSettingsAdmin from "./component/input";
 import styles from "./settings.module.css";
 
 const Settings = () => {
@@ -146,7 +146,7 @@ const Settings = () => {
           <div className={styles.image_input}>
             <h4 className={styles.card_title}>Subir imagen</h4>
             <div className={styles.container_input_image_upload}>
-              <ImageSettingsAdmin
+              <DragCloudinary
                 idInput="file-settings"
                 setImageUrl={setImageUrl}
               />

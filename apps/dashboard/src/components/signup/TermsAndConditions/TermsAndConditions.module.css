@@ -1,0 +1,22 @@
+.info_terms{
+    font-size: 1.4rem;
+}
+
+
+
+.info_terms .welcome_message{
+    text-align: justify;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.terms{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.terms p{
+    text-align: justify;
+    padding-bottom: 1rem;
+}

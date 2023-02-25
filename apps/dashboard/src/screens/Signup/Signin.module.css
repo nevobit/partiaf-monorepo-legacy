@@ -13,7 +13,7 @@
 .form {
   background-color: #fff;
   min-width: 288px;
-  width: 700px;
+  width: 58rem;
   height: 800px;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -56,11 +56,45 @@
 
 .cnt_upload_view {
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin-top: 4rem;
+}
 
-  height: 22rem;
+.grid {
+  position: relative;
+}
 
-  padding-left: 7rem;
-  padding-right: 7rem;
+.pass {
+  cursor: pointer;
+  position: absolute;
+  right: 35rem;
+  top: 108%;
+  transform: translateY(-150%);
+}
+.passconfirm {
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 108%;
+  transform: translateY(-150%);
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.terms .acceptTerms {
+  background-color: brown;
+  width: 2rem;
+}
+
+.terms label {
+  font-size: 1.4rem;
+}
+
+.terms .sec_terms button {
+  background-color: transparent;
 }

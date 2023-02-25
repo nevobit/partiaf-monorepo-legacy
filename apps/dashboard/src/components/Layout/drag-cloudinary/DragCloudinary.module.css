@@ -1,0 +1,98 @@
+.container_input_cloudinary {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px dashed #e0e0e0;
+}
+
+.formbold_file_input {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #333;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formbold_file_input input {
+  opacity: 0;
+  position: absolute;
+}
+
+.formbold_file_input label {
+  position: relative;
+
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.8rem;
+  text-align: center;
+}
+
+.formbold_drop_file {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.formbold_or {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formbold_browse {
+  font-weight: 400;
+  font-size: 1.4rem;
+  display: inline-block;
+  padding: 0.8rem 2.8rem;
+  border-radius: 0.5rem;
+  background-color: #fbd34c;
+  color: #333;
+}
+
+.image_cover_form {
+  position: relative;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
+}
+
+.image_cover_form img {
+  border-radius: 0.4rem;
+  height: 100%;
+
+  
+  object-fit: cover;
+}
+
+.btn_remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background-color: var(--main-color);
+  color: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_remove i {
+  font-size: 4rem;
+}

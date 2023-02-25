@@ -103,6 +103,7 @@ importers:
       react-geocode: ^0.2.3
       react-google-autocomplete: ^2.7.1
       react-google-maps: ^9.4.5
+      react-icons: ~4.7.1
       react-redux: ^8.0.5
       react-router-dom: ^6.4.4
       react-sweetalert2: ~0.5.2
@@ -122,6 +123,7 @@ importers:
       react-geocode: 0.2.3
       react-google-autocomplete: 2.7.1_react@18.2.0
       react-google-maps: 9.4.5_41ef2f6d6e35950ad10e44b80055c042
+      react-icons: 4.7.1_react@18.2.0
       react-redux: 8.0.5_413fd22576863b93ee6b19a7f7967615
       react-router-dom: 6.6.2_react-dom@18.2.0+react@18.2.0
       react-sweetalert2: 0.5.2_react-dom@18.2.0+react@18.2.0
@@ -4290,6 +4292,43 @@ packages:
       recompose: 0.26.0_react@18.2.0
       scriptjs: 2.5.9
       warning: 3.0.0
+    dev: false
+
+  /react-hook-form/7.42.1_react@18.2.0:
+    resolution: {integrity: sha512-2UIGqwMZksd5HS55crTT1ATLTr0rAI4jS7yVuqTaoRVDhY2Qc4IyjskCmpnmdYqUNOYFy04vW253tb2JRVh+IQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-i18next/12.1.4_4014ad8e693a5f450dc0e3a80ea8e612:
+    resolution: {integrity: sha512-XQND7jYtgM7ht5PH3yIZljCRpAMTlH/zmngM9ZjToqa+0BR6xuu8c7QF0WIIOEjcMTB2S3iOfpN/xG/ZrAnO6g==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      html-parse-stringify: 3.0.1
+      i18next: 22.4.9
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-icons/4.7.1_react@18.2.0:
+    resolution: {integrity: sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

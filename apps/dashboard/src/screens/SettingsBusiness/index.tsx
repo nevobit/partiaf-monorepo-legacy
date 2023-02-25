@@ -1,10 +1,10 @@
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import Field from "@/components/shared/Field";
 import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
 import { reset } from "@/redux/states/admins/admin";
 import { updateStore } from "@/redux/states/stores/storesSlice";
 import { AppStore } from "@/redux/store";
-import { Store } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./settingsBusiness.module.css";
@@ -149,11 +149,35 @@ const SettingsBusiness = () => {
                 <Field label="Pais">
                   <Input />
                 </Field>
+                <Field label="Tipo de regimen">
+                  <select name="" id="">
+                    <option value="Regimen Comun">Regimen Comun</option>
+                    <option value="Regimen Simplificado">
+                      Regimen Simplificado
+                    </option>
+                    <option value="Regimen Especial">Regimen Especial</option>
+                  </select>
+                </Field>
+                <Field label="Tipo de factura">
+                  <select name="" id="">
+                    <option value="Nacional">Nacional</option>
+                    <option value="Cuenta de cobro">Cuenta de cobro</option>
+                  </select>
+                </Field>
               </div>
             </div>
             <div className={styles.card}>
               <h4 className={styles.card_title}>Terminos y condiciones</h4>
               <div className={styles.colums_card}></div>
+            </div>
+          </div>
+          <div className={styles.image_input}>
+            <h4 className={styles.card_title}>Subir imagen</h4>
+            <div className={styles.container_input_image_upload}>
+              <DragCloudinary
+                idInput="file-settings-bussiness"
+                setImageUrl={setImageUrl}
+              />
             </div>
           </div>
         </div>

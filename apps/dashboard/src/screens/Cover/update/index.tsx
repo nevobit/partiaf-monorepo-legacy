@@ -1,7 +1,8 @@
-import InputCloudinary from "@/components/Layout/InputCloudinary/InputCloudinary";
-import { Button, Field, ImageInput, Input } from "@/components/shared";
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
+import { Button, Field, Input } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
+import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,11 +23,15 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const [Urlimage, setUrlImage] = useState("");
   const [imageSelected, setImageSelected] = useState(false);
 
-const handleImageChange = (imageUrl: string) => {
-  setUrlImage(imageUrl);
-  setImageSelected(true);
-}
+  const handleImageChange = (imageUrl: string) => {
+    setUrlImage(imageUrl);
+    setImageSelected(true);
+  };
 
+  const [price, setPrice] = useState("");
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value);
+  };
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
     name: Cover?.name,
@@ -42,7 +47,7 @@ const handleImageChange = (imageUrl: string) => {
     status: true,
   });
 
-  console.log({cover})
+  console.log({ cover });
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -55,6 +60,7 @@ const handleImageChange = (imageUrl: string) => {
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
+    let PriceConvert = convertToNumber(price);
     try {
       if (Urlimage === "") {
         setUrlImage(Cover.image);
@@ -62,9 +68,11 @@ const handleImageChange = (imageUrl: string) => {
       dispatch(
         updateCover({
           ...cover,
+          price: PriceConvert,
           image: Urlimage === "" ? Cover.image : Urlimage,
         }) as any
       );
+
       setOpenModal(!openModal);
     } catch (error) {
       if (error instanceof Error) {
@@ -75,7 +83,7 @@ const handleImageChange = (imageUrl: string) => {
 
   useEffect(() => {
     if (success) {
-      setUrlImage(""); 
+      setUrlImage("");
       dispatch(reset() as any);
     }
   }, [dispatch, success]);
@@ -108,9 +116,9 @@ const handleImageChange = (imageUrl: string) => {
               </Field>
               <Field label="Precio">
                 <Input
-                  name="price"
-                  value={cover.price}
-                  onChange={handleChange}
+                  type="text"
+                  value={"$" + price}
+                  onChange={(e) => handlePriceChange(currencyMask(e))}
                 />
               </Field>
               <Field label="Fecha">
@@ -143,7 +151,7 @@ const handleImageChange = (imageUrl: string) => {
                 ></textarea>
               </Field>
               <Field>
-                <InputCloudinary
+                <DragCloudinary
                   idInput="file-update-cover"
                   setImageUrl={setUrlImage}
                 />

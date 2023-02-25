@@ -45,6 +45,7 @@ const Input = ({
         }`}
         value={value}
         placeholder={placeholder}
+        required
       />
     </div>
   );
