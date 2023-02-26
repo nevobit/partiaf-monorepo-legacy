@@ -5,10 +5,11 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
-import { Text, TextInput, ScrollView, SafeAreaView } from 'react-native';
+import { Text, TextInput, ScrollView, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_COVERS } from "../../graphql/queries/covers";
 import { DivisaFormater } from "../../utilities/divisaFormater";
@@ -165,6 +166,11 @@ const Comments = ({ route, navigation }: any) => {
             }}
           />
         </View>
+        <KeyboardAvoidingView contentContainerStyle={{flexGrow: 1}}
+      behavior='padding'
+      enabled
+      keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}>
+        
         <TextInput
           style={{
             height: 50,
@@ -175,6 +181,8 @@ const Comments = ({ route, navigation }: any) => {
           onChangeText={(text) => setComment(text)}
           placeholder="Escribe un comentario para Jenilao club"
         />
+      </KeyboardAvoidingView>
+        
         <TouchableOpacity
           style={{
             marginLeft: 45,

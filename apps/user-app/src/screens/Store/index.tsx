@@ -407,31 +407,6 @@ const Store = ({ route, navigation }: Props) => {
                 }}
               />
             </View>
-            <TextInput
-              style={{
-                height: 50,
-                fontSize: 16,
-                width: "63%",
-              }}
-              // value={comment}
-              // onChangeText={(text) => setComment(text)}
-              placeholder="Escribe un comentario para Jenilao club"
-            />
-            <TouchableOpacity
-              style={{
-                marginLeft: 45,
-              }}
-              // onPress={() => createCommentHandler()}
-            >
-              <Text
-                style={{
-                  fontWeight: "700",
-                  fontSize: 18,
-                }}
-              >
-                Publicar
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

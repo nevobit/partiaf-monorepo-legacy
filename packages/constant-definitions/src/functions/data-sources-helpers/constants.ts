@@ -6,4 +6,5 @@ export enum Collection{
     USERS = 'users',
     WAITERS = 'waiters',
     COMMENTS = 'comments',
+    FOLLOWS = 'follows'
 }

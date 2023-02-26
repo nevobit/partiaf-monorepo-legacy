@@ -91,7 +91,6 @@ const Payment = ({ route, navigation }: any) => {
             {DivisaFormater(user.balance)}
           </Text>
         </View>
-        <Text>{JSON.stringify(coverInfo)}</Text>
         <View
           style={{
             padding: 20,
