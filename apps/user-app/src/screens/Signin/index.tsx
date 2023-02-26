@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, TextInput, Image } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, Image, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {KeyboardAvoidingView} from 'react-native';
 import { LOGIN_USER } from "../../graphql/queries/user";
@@ -10,6 +10,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList, RootStackParamList } from '../../navigation/AppNavigator';
 import { useDispatch } from "react-redux";
 import { signin } from "../../features/auth";
+import colors, { mainColor } from "../../components/Layout/Theme/colors";
 type HomeScreenNavigationProp = StackNavigationProp<
 AuthStackParamList
 >;
@@ -57,7 +58,7 @@ const Signin = ({navigation}: Props) => {
 
 
   return (
-    <View
+    <SafeAreaView
       style={{
         height: '90%',
         width: "90%",
@@ -75,7 +76,6 @@ const Signin = ({navigation}: Props) => {
         <Image
           source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}
           style={{
-            // marginLeft: 23,
             marginTop: 4,
             width: 200,
             height: 40,
@@ -93,7 +93,7 @@ const Signin = ({navigation}: Props) => {
         <TouchableOpacity
           style={{
             width: "50%",
-            height: 50,
+            height: 60,
             backgroundColor: "#fff",
             margin: 10,
             padding: 10,
@@ -117,7 +117,7 @@ const Signin = ({navigation}: Props) => {
         <TouchableOpacity
           style={{
             width: "50%",
-            height: 50,
+            height: 60,
             backgroundColor: "#fff",
             margin: 10,
             padding: 10,
@@ -145,7 +145,7 @@ const Signin = ({navigation}: Props) => {
       <View>
         <View
           style={{
-            height: 50,
+            height: 60,
             width: "100%",
             padding: 10,
             marginBottom: 20,
@@ -158,10 +158,10 @@ const Signin = ({navigation}: Props) => {
         >
           <Ionicons
             name="ios-person-outline"
-            style={{ fontSize: 18, color: "#000", marginRight: 10 }}
+            style={{ fontSize: 25, color: "#000", marginRight: 10 }}
           />
           <TextInput
-            style={{ width: "100%", height: 40 }}
+            style={{ width: "100%", height: 40, fontSize: 20 }}
             placeholder="Usuario"
             value={user.username}
             onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['username']: text }))}
@@ -169,7 +169,7 @@ const Signin = ({navigation}: Props) => {
         </View>
         <View
           style={{
-            height: 50,
+            height: 60,
             width: "100%",
             padding: 10,
             marginBottom: 10,
@@ -181,11 +181,11 @@ const Signin = ({navigation}: Props) => {
           }}
         >
           <Ionicons
-            name="ios-person-outline"
-            style={{ fontSize: 18, color: "#000", marginRight: 10 }}
+            name="ios-lock-closed-outline"
+            style={{ fontSize: 25, color: "#000", marginRight: 10 }}
           />
           <TextInput
-            style={{ width: "100%", height: 40 }}
+            style={{ width: "100%", height: 60, fontSize: 20 }}
             placeholder="Contrasena"
             secureTextEntry={true}
             value={user.password}
@@ -196,17 +196,31 @@ const Signin = ({navigation}: Props) => {
       </View>
       <Text>{error}</Text>
       
-      <TouchableOpacity style={{marginTop: 20, borderRadius: 5, width: '105%', height: 50, backgroundColor: '#FFE243'}} onPress={onSubmit}>
-          <Text style={{width: '105%', marginTop: 10, fontSize: 20, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
+      <TouchableOpacity style={{marginTop: 20, borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '105%', height: 60, backgroundColor: '#FFE243'}} onPress={onSubmit}>
+          <Text style={{width: '105%', fontSize: 22, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
         </TouchableOpacity>
 
-      <Text style={{
-        fontSize: 18,
-        marginTop: 40
+        <View style={{
+        marginTop: 60,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
       }}>
-        Aun no tienes una cuenta? <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text>Registrate aqui</Text></TouchableOpacity>
+          
+      <Text style={{
+        fontSize: 20,
+        marginRight: 10
+      }}>
+        Aun no tienes una cuenta?
       </Text>
-    </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{
+          fontSize: 20,
+          fontWeight: '600'
+        }}>Registrate aqui</Text></TouchableOpacity>
+      </View>
+      
+    </SafeAreaView>
   );
 };
 

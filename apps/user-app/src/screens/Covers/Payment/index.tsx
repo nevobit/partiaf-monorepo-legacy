@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Text } from "react-native";
+import { Text, SafeAreaView } from 'react-native';
 import { useMutation, useQuery } from "@apollo/client";
 import Modal from "react-native-modal";
 import { GET_STORE } from "../../../graphql/queries/stores";
@@ -17,24 +17,39 @@ import { DivisaFormater } from "../../../utilities/divisaFormater";
 import { useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CREATE_GOER } from "../../../graphql/queries/goers";
+import { GET_USER_BALANCE, UPDATE_USER_PIN } from "../../../graphql/queries/user";
 
 const Payment = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
 
+  const { data: userBalance, loading, error, refetch } = useQuery(GET_USER_BALANCE, {
+    variables: { uuid: user.uuid },
+  });
+  
   const [modal, setModal] = useState(false);
   const [amount, setAmount] = useState(0);
   const [code, setCode] = useState("");
+  const [pin, setPin] = useState("");
+  
   const [coverInfo, setCoverInfo] = useState<any>({});
 
+  // userById
   const getInfo = async () => {
     const coverInfoHandler = await AsyncStorage.getItem("coverInfo");
     setCoverInfo(JSON.parse(coverInfoHandler || ""));
   };
   
   const [createComment] = useMutation(CREATE_GOER);
+  const [updateUser] = useMutation(UPDATE_USER_PIN);
+
   const [info, setInfo] = useState<any>();
   const createGoerHandler = async () => {
     try {
+      if(code != userBalance?.userById.pin){
+        alert("Pin incorrecto, reintentalo");
+        return;
+      }
+      
       const { data } = await createComment({
         variables:  {
           data: {
@@ -57,15 +72,41 @@ const Payment = ({ route, navigation }: any) => {
       setInfo(err);
     }
   };
+  
+  const updateUserHandler = async () => {
+    try {
+      const { data } = await updateUser({
+        variables:  {
+          data: {
+            pin: pin,
+            uuid: user.uuid,
+          }
+        }
+      });
+      
+      setInfo(data.updateUser.uuid)
+       if(data.updateUser.uuid){
+         navigation.navigate("Tickets")        
+       }
+      
 
+    } catch (err) {
+      setInfo(err);
+    }
+  };
+
+  
+
+  
 
   useEffect(() => {
+    refetch();
     getInfo();
   }, []);
   
  
   return (
-    <View style={{ backgroundColor: "#fff", position: "relative" }}>
+    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative" }}>
       <StatusBar animated={true} />
       <Header navigation={navigation} />
       <View
@@ -88,7 +129,7 @@ const Payment = ({ route, navigation }: any) => {
           </Text>
           <Text style={{ fontSize: 28, fontWeight: "600" }}>
             {" "}
-            {DivisaFormater(user.balance)}
+            {DivisaFormater(userBalance?.userById?.balance)}
           </Text>
         </View>
         <View
@@ -104,7 +145,6 @@ const Payment = ({ route, navigation }: any) => {
             {DivisaFormater(coverInfo.cost)}
           </Text>
         </View>
-
         <View
           style={{
             padding: 20,
@@ -167,28 +207,31 @@ const Payment = ({ route, navigation }: any) => {
             style={{
               width: "86%",
               height: "90%",
-              backgroundColor: "#FFE243",
+              backgroundColor: userBalance?.userById.balance >= coverInfo.cost?  "#FFE243" : '#CA0B00',
               borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
             }}
-            onPress={() => setModal(true)}
+            onPress={() => userBalance?.userById.balance >= coverInfo.cost ? setModal(true) : navigation.navigate("Wallet")}
           >
             <Text
               style={{
                 fontSize: 18,
                 fontWeight: "500",
                 letterSpacing: 1,
-                color: "rgba(0,0,0,0.8)",
+                color: userBalance?.userById.balance >= coverInfo.cost?   "rgba(0,0,0,0.8)" : "#fff",
+                
                 textTransform: "uppercase",
               }}
             >
-              PAGAR
+              {userBalance?.userById?.balance >= coverInfo.cost ? "PAGAR": 'RECARGAR'}
             </Text>
           </TouchableOpacity>
         </View>
       </View>
 
+        {userBalance?.userById?.pin ? (
+          
       <Modal
         onSwipeComplete={() => setModal(false)}
         animationIn="fadeIn"
@@ -500,7 +543,323 @@ const Payment = ({ route, navigation }: any) => {
           </View>
         </View>
       </Modal>
-    </View>
+        ): (
+          
+      
+      <Modal
+        onSwipeComplete={() => setModal(false)}
+        animationIn="fadeIn"
+        style={{}}
+        isVisible={modal}
+        swipeDirection={["down"]}
+      >
+        <View
+          style={{
+            backgroundColor: "#fff",
+            height: "55%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 5,
+            borderColor: "rgba(0,0,0,0.1)",
+            position: "relative",
+          }}
+        >
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              padding: 0,
+              position: "relative",
+            }}
+          >
+            <View
+              style={{
+                padding: 15,
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <TouchableOpacity onPress={() => setModal(false)}>
+                <Text>
+                  <Ionicons
+                    name="ios-arrow-back-outline"
+                    style={{
+                      fontSize: 40,
+                    }}
+                  />
+                </Text>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "600",
+                }}
+              >
+                Crear pin
+              </Text>
+
+              <TouchableOpacity onPress={() => setModal(false)}>
+                <Text>
+                  <Ionicons
+                    name="ios-arrow-back-outline"
+                    style={{
+                      fontSize: 40,
+                      color: "white",
+                    }}
+                  />
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                padding: 10,
+                paddingHorizontal: 20,
+              }}
+            >
+              <TextInput
+                style={{
+                  height: 60,
+                  borderWidth: 1,
+                  borderColor: "rgba(0,0,0,0.2)",
+                  borderRadius: 5,
+                  padding: 10,
+                  marginBottom: 20,
+                  fontSize: 25,
+                }}
+                value={pin}
+              />
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                  }}
+                  onPress={() => setPin((c) => c + "1")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    1
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "2")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    2
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "3")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    3
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "4")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    4
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "5")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    5
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "6")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    6
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "7")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    7
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "8")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    8
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "9")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    9
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  ></Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c + "0")}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    0
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: "30%",
+                    marginBottom: 30,
+                  }}
+                  onPress={() => setPin((c) => c.slice(0, -1))}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 25,
+                    }}
+                  >
+                    Borrar
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                style={{
+                  width: "100%",
+                  height: 50,
+                  backgroundColor: "#FFE243",
+                  borderRadius: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}
+                onPress={() => updateUserHandler()}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "500",
+                    letterSpacing: 1,
+                    color: "rgba(0,0,0,0.8)",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  CREAR Y PAGAR
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+        )}
+      
+    </SafeAreaView>
   );
 };
 

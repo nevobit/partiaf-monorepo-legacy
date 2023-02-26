@@ -77,11 +77,13 @@ const Comments = ({ route, navigation }: any) => {
         style={{
           paddingHorizontal: 15,
           paddingVertical: 10,
+          marginBottom: 70
         }}
       >
         {data?.getCommentsByStore.map((comment: any) => {
           return (
             <View
+              key={comment.uuid}
               style={{
                 flexDirection: "row",
                 marginBottom: 15,

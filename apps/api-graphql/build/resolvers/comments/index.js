@@ -27,7 +27,6 @@ exports.default = {
     Mutation: {
         createComment(_, { text, user, photo, store }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log({ text, user, photo, store });
                 const comment = yield (0, business_logic_1.createComment)({ text, user, photo, store });
                 return comment;
             });

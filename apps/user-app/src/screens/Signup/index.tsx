@@ -23,7 +23,8 @@ const Signup = ({navigation}: Props) => {
 
   const [error, setError] = useState("");
   const [user, setUser] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
     username: '',
     phone: '',
     password: ''
@@ -37,7 +38,8 @@ const Signup = ({navigation}: Props) => {
     try {
        const { data } = await register({
          variables: {
-           name: user.name,
+           firstname: user.firstname,
+           lastname: user.lastname,
            username: user.username,
            phone: user.phone,
            password: user.password,
@@ -167,8 +169,8 @@ const Signup = ({navigation}: Props) => {
           <TextInput
             style={{ width: "100%", height: 40 }}
             placeholder="Nombre Completo"
-            value={user.name}
-            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['name']: text }))}
+            value={user.firstname}
+            onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['firstname']: text }))}
           />
         </View>
         <View

@@ -19,12 +19,12 @@ import { RootStackParamList } from "../../navigation/AppNavigator";
 import Header from "../../components/Layout/Header";
 import Modal from "react-native-modal";
 import { DivisaFormater } from "../../utilities/divisaFormater";
-import DatePicker from "react-native-date-picker";
 import { GET_COMMENTS } from "../../graphql/queries/comments";
 import { useSelector } from "react-redux";
 import TimeAgo from "react-native-timeago";
 import moment from "moment";
 import "moment/locale/es";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 moment.locale("es");
 
@@ -44,12 +44,39 @@ const Store = ({ route, navigation }: Props) => {
   const [modalOptions, setModalOptions] = useState(false);
 
   const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState<any>(new Date());
+  const [amount, setAmount] = useState<any>("");
+  const [consumption, setConsumption] = useState<any>("");
+  
+
   const [open, setOpen] = useState(false);
 
   const { user } = useSelector((state: any) => state.auth);
 
   const [comment, setComment] = useState("");
+  const [show, setShow] = useState(false);
 
+  const onChangeDate = (event:any, selectedDate:any) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+  
+  const onChangeTime = (event:any, selectedDate:any) => {
+    const currentDate = selectedDate;
+    setOpen(false);
+    setDate(currentDate);
+  };
+  
+  const bookingInfo = {
+    store: route.params.store,
+    date: date,
+    time: time,
+    amount: amount,
+    consumption: consumption
+  }
+
+  
   const {
     data: comments,
     loading: loadginComments,
@@ -61,6 +88,7 @@ const Store = ({ route, navigation }: Props) => {
   });
 
   useEffect(() => {
+    refetch()
     startPolling(1000);
     return () => {
       stopPolling();
@@ -321,6 +349,7 @@ const Store = ({ route, navigation }: Props) => {
             {comments?.getCommentsByStore.map((comment: any) => {
               return (
                 <TouchableOpacity
+                key={comment.uuid}
                   style={{
                     flexDirection: "row",
                     marginBottom: 15,
@@ -502,7 +531,7 @@ const Store = ({ route, navigation }: Props) => {
                     marginRight: 20,
                     width: "50%",
                   }}
-                  onPress={() => setOpen(true)}
+                  onPress={() => setShow(true)}
                 >
                   <Text>Fecha</Text>
                 </TouchableOpacity>
@@ -516,20 +545,26 @@ const Store = ({ route, navigation }: Props) => {
                   }}
                   onPress={() => setOpen(true)}
                 >
-                  <Text>Fecha</Text>
+                  <Text>Hora</Text>
                 </TouchableOpacity>
-                <DatePicker
-                  modal
-                  open={open}
-                  date={date}
-                  onConfirm={(date) => {
-                    setOpen(false);
-                    setDate(date);
-                  }}
-                  onCancel={() => {
-                    setOpen(false);
-                  }}
+                {show && (
+                  
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  onChange={onChangeDate}
                 />
+                )}
+                
+                {open && (
+                  
+                  <DateTimePicker
+                    value={time}
+                    mode="time"
+                    onChange={onChangeTime}
+                  />
+                  )}
+                
               </View>
             </View>
             <View
@@ -703,9 +738,9 @@ const Store = ({ route, navigation }: Props) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: 240,
+            height: 270,
             width: "100%",
-            justifyContent: "flex-end",
+            justifyContent: "flex-start",
             alignItems: "flex-start",
             borderTopStartRadius: 20,
             borderTopEndRadius: 20,
@@ -821,6 +856,30 @@ const Store = ({ route, navigation }: Props) => {
                   name="warning-outline"
                 />{" "}
                 Reportar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                height: 50,
+              }}
+              
+              onPress={() => setModalOptions(false)}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                  }}
+                  name="ios-exit-outline"
+                />{" "}
+                Cancelar
               </Text>
             </TouchableOpacity>
           </View>

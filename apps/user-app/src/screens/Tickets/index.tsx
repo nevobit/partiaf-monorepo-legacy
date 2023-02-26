@@ -33,7 +33,7 @@ const Tickets = ({ navigation }: Props) => {
   return (
     <View>
       <Header navigation={navigation} />
-      <View
+      <ScrollView
         style={{
           paddingHorizontal: 20,
         }}
@@ -128,7 +128,7 @@ const Tickets = ({ navigation }: Props) => {
             </View>
           ))}
         </ScrollView>
-      </View>
+      </ScrollView>
       
       <Modal
         onSwipeComplete={() => setModal(false)}

@@ -78,13 +78,15 @@ type User {
     status: String
 }
 
-type Query {
-    getAllStores: [Store]
-    allUsers: [AuthPayload]
-    getStoreById(uuid: String): Store
-    getCoversById(uuid: String): [Cover]
-    getMyTikets(uuid: String): [Goer]
-    getCommentsByStore(uuid: String): [Comment]
+input UserInput {
+    uuid: String
+    firstname: String
+    lastname: String
+    username: String
+    phone: String
+    photo: String
+    pin: String
+    status: String
 }
 
 type AuthPayload {
@@ -106,6 +108,18 @@ type AuthPayload {
     error: String
 }
 
+type Query {
+    getAllStores: [Store]
+    allUsers: [AuthPayload]
+    userById(uuid: String, username: String): AuthPayload
+    getStoreById(uuid: String): Store
+    getCoversById(uuid: String): [Cover]
+    getMyTikets(uuid: String): [Goer]
+    getCommentsByStore(uuid: String): [Comment]
+}
+
+
+
 
 
 type Mutation {
@@ -113,6 +127,7 @@ type Mutation {
     userSignin(username: String!, password: String!): AuthPayload    
     createGoer(data: GoerInput): Goer
     updateGoer(uuid: String, data: GoerInput): Goer
+    updateUser(data: UserInput): AuthPayload
     creating: Boolean
     createComment(text: String,
         user: String,

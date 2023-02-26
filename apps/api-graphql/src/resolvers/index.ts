@@ -6,6 +6,7 @@ import comments from './comments'
 
 export default {
     Query: {
+        ...users.Query,
         ...stores.Query,
         ...covers.Query,
         ...goers.Query,

@@ -15,16 +15,12 @@ exports.default = {
         getAllStores() {
             return __awaiter(this, void 0, void 0, function* () {
                 const stores = yield (0, business_logic_1.getAllStores)();
-                console.log({ stores });
                 return stores;
             });
         },
         getStoreById(_, { uuid }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log("FUNC");
-                console.log({ uuid });
                 const store = yield (0, business_logic_1.getStoreById)(uuid);
-                console.log({ store });
                 return store;
             });
         },

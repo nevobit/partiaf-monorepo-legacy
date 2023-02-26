@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
-import { Text } from "react-native";
+import { Text, SafeAreaView } from 'react-native';
 import { useQuery } from "@apollo/client";
 import { GET_COVERS } from "../../graphql/queries/covers";
 import { DivisaFormater } from "../../utilities/divisaFormater";
@@ -17,6 +17,7 @@ import Header from "../../components/Layout/Header";
 import Modal from "react-native-modal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from "react-redux";
+import {useEffect} from 'react';
 
 const Covers = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -29,7 +30,7 @@ const Covers = ({ route, navigation }: any) => {
     variables: { uuid: route.params.store },
   });
 
-  const { data, loading, error } = useQuery(GET_COVERS, {
+  const { data, loading, error, refetch } = useQuery(GET_COVERS, {
     variables: { uuid: route.params.store },
   });
 
@@ -74,9 +75,13 @@ const Covers = ({ route, navigation }: any) => {
     
     await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
   };
+  
+  useEffect(() => {
+    refetch()
+  }, [])
 
   return (
-    <View style={{ backgroundColor: "#fff", position: "relative" }}>
+    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative" }}>
       <StatusBar animated={true} />
       <Header navigation={navigation} />
       <View
@@ -384,7 +389,7 @@ const Covers = ({ route, navigation }: any) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 

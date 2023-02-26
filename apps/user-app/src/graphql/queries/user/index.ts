@@ -40,7 +40,52 @@ mutation Mutation($username: String!, $password: String!) {
   }
 }
 `
+export const GET_USER_BALANCE = gql `
+query Query($uuid: String) {
+  userById(uuid: $uuid) {
+    balance
+    biography
+    email
+    error
+    events
+    firstname
+    followers
+    following
+    gender
+    pin
+  }
+}
+`
+export const GET_USERS = gql `
+query Query {
+  allUsers {
+    balance
+    biography
+    email
+    firstname
+    gender
+    following
+    followers
+    lastname
+    phone
+    photo
+    pin
+    token
+    username
+    uuid
+    events
+  }
+}
+`
 
-// export const GET_USERS = gql `
-
-// `
+export const UPDATE_USER_PIN = gql `
+mutation Mutation($data: UserInput) {
+  updateUser(data: $data) {
+    uuid
+    pin
+    events
+    balance
+    phone
+  }
+}
+`

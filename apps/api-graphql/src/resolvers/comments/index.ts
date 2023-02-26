@@ -25,7 +25,6 @@ export default {
     
     Mutation: {
         async createComment(_:any, {text, user, photo, store}:Comment, context:any){
-            console.log({text, user, photo, store})
             const comment = await createComment({text, user, photo, store});
             return comment;
         }

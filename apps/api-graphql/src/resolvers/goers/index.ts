@@ -14,13 +14,13 @@ export default {
   Query: {
     async getMyTikets(_: any, { uuid }: Uuid, context: any) {
       const tickets = await getGoersByUser(uuid);
-      console.log({ tickets });
       return tickets;
     },
   },
 
   Mutation: {
     async createGoer(_: any, { data }: any, context: any) {
+      console.log(data)
       const goer = await createGoer(data);
       return goer;
     },

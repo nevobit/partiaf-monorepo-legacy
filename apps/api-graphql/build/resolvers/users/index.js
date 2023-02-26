@@ -14,6 +14,7 @@ exports.default = {
     Query: {
         allUsers(_, {}, context) {
             return __awaiter(this, void 0, void 0, function* () {
+                console.log("ENTRO");
                 const users = yield (0, business_logic_1.getAllUsers)();
                 console.log(users);
                 return users;
@@ -21,6 +22,7 @@ exports.default = {
         },
         userById(_, { uuid, username }, context) {
             return __awaiter(this, void 0, void 0, function* () {
+                console.log("ENTRO");
                 if (!uuid && !username) {
                     return new Error("Debe proporcionar un uuid o un username para buscar un usuario");
                 }
@@ -46,6 +48,18 @@ exports.default = {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     const user = yield (0, business_logic_1.userSignup)(data);
+                    return user;
+                }
+                catch (error) {
+                    return new Error("No se pudo registrar el usuario: " + error.message);
+                }
+            });
+        },
+        updateUser(_, data, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    console.log(data);
+                    const user = yield (0, business_logic_1.updateUser)(data.data.uuid, data.data);
                     return user;
                 }
                 catch (error) {

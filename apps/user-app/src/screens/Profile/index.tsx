@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { signout } from "../../features/auth";
 import { useDispatch } from "react-redux";
 import Modal from 'react-native-modal'
+import { SafeAreaView } from 'react-native';
 
 const Profile = ({navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -23,7 +24,7 @@ const Profile = ({navigation}: any) => {
     dispatch(signout());
   };
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar animated={true} />
       <View style={styles.header}>
         <Text style={{ fontWeight: "600", fontSize: 23 }}>
@@ -303,7 +304,7 @@ const Profile = ({navigation}: any) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 

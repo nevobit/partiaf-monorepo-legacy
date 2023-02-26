@@ -1,6 +1,7 @@
 import {
   getAllUsers,
   getUserById,
+  updateUser,
   userSignin,
   userSignup,
 } from "@partiaf/business-logic";
@@ -12,11 +13,14 @@ interface PartialUser extends User {
 export default {
   Query: {
     async allUsers(_: any, {}, context: any) {
+      console.log("ENTRO")
       const users = await getAllUsers();
       console.log(users);
       return users;
     },
     async userById(_: any, { uuid, username }: any, context: any) {
+      console.log("ENTRO")
+      
       if (!uuid && !username) {
         return new Error(
           "Debe proporcionar un uuid o un username para buscar un usuario"
@@ -49,6 +53,15 @@ export default {
     async userSignup(_: any, data: PartialUser, context: any) {
       try {
         const user = await userSignup(data);
+        return user;
+      } catch (error: any) {
+        return new Error("No se pudo registrar el usuario: " + error.message);
+      }
+    },
+    async updateUser(_: any, data: any, context: any) {
+      try {
+        console.log(data)
+        const user = await updateUser(data.data.uuid, data.data);
         return user;
       } catch (error: any) {
         return new Error("No se pudo registrar el usuario: " + error.message);

@@ -15,7 +15,6 @@ exports.default = {
         getMyTikets(_, { uuid }, context) {
             return __awaiter(this, void 0, void 0, function* () {
                 const tickets = yield (0, business_logic_1.getGoersByUser)(uuid);
-                console.log({ tickets });
                 return tickets;
             });
         },

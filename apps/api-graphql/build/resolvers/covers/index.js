@@ -14,9 +14,7 @@ exports.default = {
     Query: {
         getCoversById(_, { uuid }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log({ uuid });
                 const covers = yield (0, business_logic_1.getCoversById)(uuid);
-                console.log({ covers });
                 return covers;
             });
         }
