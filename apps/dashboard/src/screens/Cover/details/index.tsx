@@ -30,10 +30,32 @@ const CoversDetails = () => {
     setAllUsers(data);
   };
 
-  const UsersInLine = allUsers?.filter((user: User) =>
-    goers.some((goer) => goer.user === user.uuid && goer.status === "in line")
+  // const UsersInLine = allUsers?.filter((user: User) =>
+  //   goers.some((goer) => goer.cover === uuid && goer.status === "in line")
+  // );
+  
+  const UsersInLine =  allUsers?.filter((user: User) => goers?.some((goer) => goer.user == user.uuid && goer.cover === uuid && goer.status === "in line" )
   );
-
+  
+  const usersList = () => {
+    let newUser = {}
+    const usersFiltered:any = [];
+    
+    const users = allUsers?.map((user:any) => {
+        goers.filter((goer:any) => {
+          if(goer.user === user.uuid && goer.cover === uuid && goer.status === "in line"){
+            newUser = {
+              gender: user.phone,
+              name: goer.name,
+              username: user.username
+            }
+            usersFiltered.push(newUser)              
+          }
+        } )
+    })
+    return usersFiltered;
+    
+  }
   const UsersJoined = allUsers?.filter((user: User) =>
     goers.some((goer) => goer.user === user.uuid && goer.status === "joined")
   );
@@ -42,13 +64,14 @@ const CoversDetails = () => {
     goers.some((goer) => goer.user === user.uuid && goer.status === "cancelled")
   );
 
-  console.log("EL COVER", goers);
-
   useEffect(() => {
     getDataAllUsers();
     dispatch(getOneCoverById(uuid || "") as any);
     dispatch(getGoersByIdThunks(uuid) as any);
+    usersList();
   }, [dispatch, success]);
+  
+  
   return (
     <>
       <div className={styles.screen}>
@@ -74,14 +97,14 @@ const CoversDetails = () => {
           <div className={styles.list_container}>
             <div className={styles.list}>
               <h3>En cola</h3>
-              {UsersInLine?.map((user: User) => (
+              {usersList()?.map((user: any) => (
                 <div className={styles.queue_cards}>
                   <div className={`${styles.card_queue} cola}`}>
                     <div className={styles.image_section}>
                       <img src={"/default.jpg"} alt="" />
                       <div>
                         <h3>{user.username}</h3>
-                        <p>Masculino</p>
+                        <p>{user.gender}</p>
                       </div>
                     </div>
 

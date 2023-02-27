@@ -1,4 +1,5 @@
 export * from './admin';
+export * from './booking';
 export * from './comment';
 export * from './cover';
 export * from './follow';

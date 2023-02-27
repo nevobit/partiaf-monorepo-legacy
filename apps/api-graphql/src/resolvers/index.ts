@@ -3,6 +3,7 @@ import covers from './covers'
 import goers from './goers'
 import users from './users'
 import comments from './comments'
+import bookings from './bookings'
 
 export default {
     Query: {
@@ -15,6 +16,7 @@ export default {
     Mutation: {
         ...users.Mutation,
         ...goers.Mutation,
-        ...comments.Mutation
+        ...comments.Mutation,
+        ...bookings.Mutation
     }
 }

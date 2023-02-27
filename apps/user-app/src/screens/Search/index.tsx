@@ -69,14 +69,16 @@ const Search = ({navigation}: any) => {
                 {search.length > 0 && data?.allUsers.filter((user:any) => user.username.toLowerCase().includes(search.toLowerCase()) || user?.firstname?.toLowerCase().includes(search.toLowerCase()) ).map((user:any) => {
                     return (
                         
-                    <View 
+                    <TouchableOpacity 
                     key={user.uuid}
                     style={{
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
                         marginBottom: 10
-                    }}>
+                    }}
+                    onPress={() => navigation.navigate("OtherProfile", {uuid: user.uuid})}
+                    >
                         <View 
                         style={{
                             height: 60,
@@ -109,7 +111,7 @@ const Search = ({navigation}: any) => {
                         {user.username}
                             
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                     )
                     
                 })}

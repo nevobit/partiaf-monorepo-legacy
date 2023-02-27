@@ -63,6 +63,29 @@ input GoerInput {
     date: String
 }
 
+type Booking {
+    uuid: String
+    name: String
+    chairs: String
+    table: String
+    tables: String
+    date: String
+    time: String
+    store: String
+    user: String
+    status: String
+}
+input BookingInput {
+    name: String
+    chairs: String
+    date: String
+    time: String
+    consumption: String
+    store: String
+    user: String
+    status: String
+}
+
 input CommentInput {
     text: String
     user: String
@@ -120,14 +143,11 @@ type Query {
     getCommentsByStore(uuid: String): [Comment]
 }
 
-
-
-
-
 type Mutation {
     userSignup(name:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
     createGoer(data: GoerInput): Goer
+    createBooking(data: BookingInput): Booking
     updateGoer(uuid: String, data: GoerInput): Goer
     updateUser(data: UserInput): AuthPayload
     creating: Boolean

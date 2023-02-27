@@ -13,6 +13,7 @@ import { signout } from "../../features/auth";
 import { useDispatch } from "react-redux";
 import Modal from 'react-native-modal'
 import { SafeAreaView } from 'react-native';
+import { mainColor } from "../../components/Layout/Theme/colors";
 
 const Profile = ({navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -74,6 +75,10 @@ const Profile = ({navigation}: any) => {
           <Text style={{ fontWeight: "700", fontSize: 20 }}>0</Text>
           <Text style={{ fontSize: 15 }}>Seguidores</Text>
         </View>
+        <View style={{
+          position: 'relative'
+        }}>
+          
         <Image
           source={{
             uri:
@@ -88,6 +93,28 @@ const Profile = ({navigation}: any) => {
             resizeMode: "cover",
           }}
         />
+        <View style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          height: 30,
+          width: 30,
+          display: 'flex',
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: mainColor,
+          borderRadius: 50,
+          borderColor: "#f2f2f2",
+          borderWidth: 2
+        }}>
+          <Ionicons name="ios-add" style={{
+            fontSize: 25,
+            color: '#f2f2f2',
+            textAlign: 'center'
+          }}/>
+        </View>
+        </View>
+        
         <View
           style={{
             marginLeft: 20,
@@ -163,23 +190,6 @@ const Profile = ({navigation}: any) => {
             source={{ uri: "https://i.postimg.cc/Hn6R798t/instagram.png" }}
             style={{ height: 25, width: 25, resizeMode: "cover" }}
           />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={exit}
-          style={{
-            marginLeft: 10,
-            backgroundColor: "rgba(0,0,0,.005)",
-            borderColor: "rgba(0,0,0,.1)",
-            borderWidth: 1,
-            width: 50,
-            borderRadius: 5,
-            height: 45,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ fontWeight: "500", fontSize: 16 }}>Salir</Text>
         </TouchableOpacity>
       </View>
       

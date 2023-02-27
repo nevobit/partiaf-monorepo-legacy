@@ -24,6 +24,7 @@ import {
     useSafeAreaInsets,
   } from 'react-native-safe-area-context';
 import Settings from '../screens/Settings';
+import OtherProfile from '../screens/OtherProfile';
 
   
 const TabBarNavigator = createBottomTabNavigator();
@@ -50,6 +51,9 @@ export type RootStackParamList = {
     Comments: {
         store: string | undefined;
     }
+    OtherProfile: {
+        user: string | undefined;
+    };
 }
 
 export type AuthStackParamList = {
@@ -68,7 +72,9 @@ const HomeNavigator = () => {
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Wallet" component={Wallet} /> 
         <Stack.Screen name="Comments" component={Comments} />   
-        <Stack.Screen name="Settings" component={Settings} />           
+        <Stack.Screen name="Settings" component={Settings} />   
+        <Stack.Screen name="OtherProfile" component={OtherProfile} />           
+                
     </HomeStackNavigator.Navigator>
     )
 }

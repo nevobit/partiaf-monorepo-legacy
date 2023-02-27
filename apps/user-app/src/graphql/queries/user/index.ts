@@ -48,6 +48,8 @@ query Query($uuid: String) {
     email
     error
     events
+    photo
+    username
     firstname
     followers
     following

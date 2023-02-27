@@ -22,6 +22,7 @@ exports.default = {
     Mutation: {
         createGoer(_, { data }, context) {
             return __awaiter(this, void 0, void 0, function* () {
+                console.log(data);
                 const goer = yield (0, business_logic_1.createGoer)(data);
                 return goer;
             });

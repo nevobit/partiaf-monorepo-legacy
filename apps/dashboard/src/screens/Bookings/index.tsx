@@ -2,6 +2,7 @@ import { Button, Field, Input } from "@/components/shared";
 import { reset, updateStore } from "@/redux/states/stores/storesSlice";
 import { getStoreById } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./bookings.module.css";
@@ -50,7 +51,6 @@ const Bookings = () => {
   ];
 
   const { store, success, oneStore } = useSelector((state: AppStore) => state.stores);
-  console.log({oneStore})
 
   const [storeUpdate, setStoreUpdate] = useState({
     uuid: store.uuid,
@@ -91,10 +91,18 @@ const Bookings = () => {
   const totalBookingsTable = dataBooking.reduce((a, c) => a + c.table * 1, 0)
   const totalBookingsChairs = dataBooking.reduce((a, c) => a + c.chairs * 1, 0)
 
-  console.log(totalBookingsTable, totalBookingsChairs)
   const dispatch = useDispatch();
+  
+  const [bookings, setBookings] = useState([]);
+  const getBookings = async () => {
+    const {data} = await axios.get(`http://localhost:5000/api/v3/bookings/${store.uuid}`)
+    console.log(data)
+    setBookings(data)
+  }
+  
   useEffect(() => {
-    dispatch(getStoreById(store.uuid) as any)
+    dispatch(getStoreById(store.uuid) as any);
+    getBookings();
     if (success) {
       dispatch(reset() as any);
     }
@@ -132,19 +140,29 @@ const Bookings = () => {
         </div>
         <div className={styles.booking_container}>
           <div className={styles.booking}>
-            <BookingList dataBooking={dataBooking} setBooking={setBookingSelected} />
+            <BookingList dataBooking={bookings} setBooking={setBookingSelected} />
           </div>
           <div className={styles.booking_details}>
             <div className={styles.details_header}>
               <div>
                 <p>{bookingSelected?.name}</p>
-                <h4>MESA {bookingSelected?.table} | SILLAS {bookingSelected?.chairs}</h4>
+                <h4>MESA {bookingSelected?.tables} | SILLAS {bookingSelected?.chairs}</h4>
               </div>
               <button>CHECK-IN</button>
             </div>
             <div className={styles.editor}>
               {bookingSelected? (
-              <img src="/edit.gif" alt="" />
+              <div>
+                <ul>
+                  <li>Nombre: {bookingSelected.name}</li>
+                  <li>Mesa #: {bookingSelected.table}</li>
+                  <li>Mesas: {bookingSelected.tables}</li>
+                  <li>Sillas: {bookingSelected.chairs}</li>
+                  <li>Hora: {bookingSelected.time}</li>
+                  <li>Fecha: {bookingSelected.date.substring(0,10)}</li>
+                  <li>Fecha de creacion: {bookingSelected.createdAt.substring(0,10)}</li>
+                </ul>
+              </div>
 
               ): (
                 <h4>No hay nignuna reserva seleccionada</h4>
@@ -198,7 +216,7 @@ const Bookings = () => {
                   onChange={handleChange}
                 />
               </Field>
-              <Field label="Maximo de mesas por mesa">
+              <Field label="Maximo de sillas por mesa">
                 <Input
                   name="max_per_table"
                   type="number"
@@ -206,7 +224,7 @@ const Bookings = () => {
                   onChange={handleChange}
                 />
               </Field>
-              <Field label="Minimo de mesas por mesa">
+              <Field label="Minimo de sillas por mesa">
                 <Input
                   name="min_per_table"
                   type="number"

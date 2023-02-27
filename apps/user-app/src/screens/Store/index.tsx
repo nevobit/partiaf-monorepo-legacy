@@ -12,7 +12,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
 import { Text } from "react-native";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_STORE } from "../../graphql/queries/stores";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
@@ -25,6 +25,7 @@ import TimeAgo from "react-native-timeago";
 import moment from "moment";
 import "moment/locale/es";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { CREATE_BOOKING } from "../../graphql/queries/bookings";
 
 moment.locale("es");
 
@@ -36,6 +37,7 @@ type Props = {
 };
 
 const Store = ({ route, navigation }: Props) => {
+  
   const { data, loading, error } = useQuery(GET_STORE, {
     variables: { uuid: route.params.store },
   });
@@ -45,15 +47,15 @@ const Store = ({ route, navigation }: Props) => {
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState<any>(new Date());
-  const [amount, setAmount] = useState<any>("");
-  const [consumption, setConsumption] = useState<any>("");
+  const [amount, setAmount] = useState<number>(1);
+  const [consumption, setConsumption] = useState<number>(10000);
   
 
   const [open, setOpen] = useState(false);
 
   const { user } = useSelector((state: any) => state.auth);
 
-  const [comment, setComment] = useState("");
+  const [info, setInfo] = useState("");
   const [show, setShow] = useState(false);
 
   const onChangeDate = (event:any, selectedDate:any) => {
@@ -68,13 +70,45 @@ const Store = ({ route, navigation }: Props) => {
     setDate(currentDate);
   };
   
-  const bookingInfo = {
-    store: route.params.store,
-    date: date,
-    time: time,
-    amount: amount,
-    consumption: consumption
-  }
+  const [createBooking] = useMutation(CREATE_BOOKING);
+  
+  const createBookingHandler = async () => {
+    try {
+      const { data } = await createBooking({
+        variables: {
+          data:{
+            chairs: amount.toString(),
+            consumption: consumption.toString(),  
+            date: date,
+            time: time.toString().substring(16, 21),
+            name: user.username,
+            status: 'in list',
+            store: route.params.store,
+            user: user.uuid
+          }
+        },
+      });
+      
+      alert("Reserva realizada exitosamente!");
+      setModal(false)
+
+    } catch (err:any) {
+      setInfo(err)
+      console.log(err);
+    }
+    refetch();
+  };
+  
+  // const bookingInfo = {
+  //   chairs: amount,
+  //   consumption: consumption,  
+  //   date: date,
+  //   time: time,
+  //   name: user.username,
+  //   status: 'in list',
+  //   store: route.params.store,
+  //   user: user.uuid
+  // }
 
   
   const {
@@ -190,7 +224,7 @@ const Store = ({ route, navigation }: Props) => {
           </View>
         </TouchableOpacity>
       </View>
-
+    
       <ScrollView style={{
         height: '100%', 
       }}>
@@ -439,7 +473,7 @@ const Store = ({ route, navigation }: Props) => {
           </View>
         </View>
       </ScrollView>
-
+                
       <Modal
         onSwipeStart={() => setModal(false)}
         style={{
@@ -467,6 +501,7 @@ const Store = ({ route, navigation }: Props) => {
             paddingBottom: 0,
           }}
         >
+          
           <View
             style={{
               position: "absolute",
@@ -599,19 +634,20 @@ const Store = ({ route, navigation }: Props) => {
                     borderRadius: 5,
                     padding: 3,
                   }}
+                  onPress={() => amount > 1 && setAmount((prev) => prev - 1)}
                 >
                   <Ionicons
                     name="ios-remove"
-                    style={{ fontWeight: "100", fontSize: 26 }}
+                    style={{ fontWeight: "100", fontSize: 30 }}
                   />
                 </TouchableOpacity>
                 <Text
                   style={{
                     padding: 15,
-                    fontSize: 18,
+                    fontSize: 22,
                   }}
                 >
-                  0
+                  {amount}
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -619,10 +655,12 @@ const Store = ({ route, navigation }: Props) => {
                     borderRadius: 5,
                     padding: 3,
                   }}
+                  
+                  onPress={() => setAmount((prev) => prev + 1)}
                 >
                   <Ionicons
                     name="ios-add"
-                    style={{ fontWeight: "100", fontSize: 26 }}
+                    style={{ fontWeight: "100", fontSize: 30 }}
                   />
                 </TouchableOpacity>
               </View>
@@ -660,19 +698,20 @@ const Store = ({ route, navigation }: Props) => {
                     borderRadius: 5,
                     padding: 3,
                   }}
+                  onPress={() => consumption > 10000 && setConsumption((prev) => prev - 10000)}
                 >
                   <Ionicons
                     name="ios-remove"
-                    style={{ fontWeight: "100", fontSize: 26 }}
+                    style={{ fontWeight: "100", fontSize: 30 }}
                   />
                 </TouchableOpacity>
                 <Text
                   style={{
                     padding: 15,
-                    fontSize: 18,
+                    fontSize: 22,
                   }}
                 >
-                  {DivisaFormater(50000)}
+                  {DivisaFormater(consumption)}
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -680,10 +719,11 @@ const Store = ({ route, navigation }: Props) => {
                     borderRadius: 5,
                     padding: 3,
                   }}
+                  onPress={() => setConsumption((prev) => prev + 10000)}
                 >
                   <Ionicons
                     name="ios-add"
-                    style={{ fontWeight: "100", fontSize: 26 }}
+                    style={{ fontWeight: "100", fontSize: 30 }}
                   />
                 </TouchableOpacity>
               </View>
@@ -706,6 +746,7 @@ const Store = ({ route, navigation }: Props) => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => createBookingHandler()}
             >
               <Text
                 style={{

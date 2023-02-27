@@ -89,16 +89,16 @@ const Signin = ({navigation}: Props) => {
         }} >Inicia sesion para continuar explorando</Text>
       </View>
 
-      <View style={{ display: "flex", flexDirection: "row", marginBottom: 10, marginTop: 100 }}>
+      <View style={{ display: "flex", flexDirection: "row", alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginTop: 100, width: '100%' }}>
         <TouchableOpacity
           style={{
-            width: "50%",
             height: 60,
+            width: '50%',
             backgroundColor: "#fff",
-            margin: 10,
             padding: 10,
             paddingTop: 10,
             borderRadius: 5,
+            marginRight: 10,
             display: 'flex',
             alignItems: "center",
             justifyContent: "center",
@@ -116,11 +116,11 @@ const Signin = ({navigation}: Props) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            width: "50%",
             height: 60,
             backgroundColor: "#fff",
-            margin: 10,
             padding: 10,
+            marginLeft: 10,
+            width: '50%',
             paddingTop: 10,
             borderRadius: 5,
             display: 'flex',
@@ -142,10 +142,12 @@ const Signin = ({navigation}: Props) => {
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View style={{
+        width: '100%',
+      }}>
         <View
           style={{
-            height: 60,
+            height: 50,
             width: "100%",
             padding: 10,
             marginBottom: 20,
@@ -161,7 +163,8 @@ const Signin = ({navigation}: Props) => {
             style={{ fontSize: 25, color: "#000", marginRight: 10 }}
           />
           <TextInput
-            style={{ width: "100%", height: 40, fontSize: 20 }}
+            style={{ width: "100%", height: 40, fontSize: 18}}
+            
             placeholder="Usuario"
             value={user.username}
             onChangeText={(text) =>  setUser((prev) => ({ ...prev, ['username']: text }))}
@@ -169,7 +172,7 @@ const Signin = ({navigation}: Props) => {
         </View>
         <View
           style={{
-            height: 60,
+            height: 50,
             width: "100%",
             padding: 10,
             marginBottom: 10,
@@ -185,7 +188,7 @@ const Signin = ({navigation}: Props) => {
             style={{ fontSize: 25, color: "#000", marginRight: 10 }}
           />
           <TextInput
-            style={{ width: "100%", height: 60, fontSize: 20 }}
+            style={{ width: "100%", height: 60, fontSize: 18 }}
             placeholder="Contrasena"
             secureTextEntry={true}
             value={user.password}
@@ -197,7 +200,7 @@ const Signin = ({navigation}: Props) => {
       <Text>{error}</Text>
       
       <TouchableOpacity style={{marginTop: 20, borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '105%', height: 60, backgroundColor: '#FFE243'}} onPress={onSubmit}>
-          <Text style={{width: '105%', fontSize: 22, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
+          <Text style={{width: '100%', fontSize: 22, fontWeight: '600', color: '#333', textAlign: 'center' }}>Iniciar Sesion</Text>
         </TouchableOpacity>
 
         <View style={{

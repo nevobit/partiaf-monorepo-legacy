@@ -8,7 +8,6 @@ import { store } from './src/app/store';
 import { StatusBar } from 'expo-status-bar';
 
 export const App = () => {
-  LogBox.ignoreLogs(['Remote debugger']);
   return (
     <Provider store={store}>
     <ApolloProvider client={client}>

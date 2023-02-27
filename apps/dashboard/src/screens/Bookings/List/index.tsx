@@ -16,7 +16,7 @@ const BookingList = (props: any) => {
   return (
     <div className={styles.cover__list}>
       {dataBooking.map((booking: any) => (
-        <div className={styles.card} onClick={() => setBooking(booking)}>
+        <div key={booking.uuid} className={styles.card} onClick={() => setBooking(booking)}>
        
           <div className={styles.card_header}>
           <span className={styles.icon}>
@@ -31,8 +31,8 @@ const BookingList = (props: any) => {
 
           </div>
           <ul>
-            <li>Hora: {booking.hour}</li>
-            <li>Fecha: {booking.day}</li>
+            <li>Hora: {booking.time}</li>
+            <li>Fecha: {booking.date.substring(0,10)}</li>
           </ul>
         </div>
       ))}
