@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CREATE_GOER } from "../../../graphql/queries/goers";
 import { GET_USER_BALANCE, UPDATE_USER_PIN } from "../../../graphql/queries/user";
+import { Dimensions } from 'react-native'
 
 const Payment = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -98,6 +99,7 @@ const Payment = ({ route, navigation }: any) => {
   
 
   
+  const halfWindowsHeight = Dimensions.get('window').height
 
   useEffect(() => {
     refetch();
@@ -106,9 +108,9 @@ const Payment = ({ route, navigation }: any) => {
   
  
   return (
-    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative" }}>
+    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative", height: halfWindowsHeight }}>
       <StatusBar animated={true} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} back={true} />
       <View
         style={{
           position: "relative",

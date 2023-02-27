@@ -180,8 +180,8 @@ const Comments = ({ route, navigation }: any) => {
             width: "63%",
           }}
           value={comment}
-          onChangeText={(text) => setComment(text)}
           placeholder="Escribe un comentario para Jenilao club"
+          onChangeText={(text) => setComment(text)}
         />
       </KeyboardAvoidingView>
         

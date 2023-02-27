@@ -132,7 +132,7 @@ const Store = ({ route, navigation }: Props) => {
   return (
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <StatusBar animated={true} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} back={true} />
 
       <Image
         source={{ uri: data?.getStoreById?.photos[0] }}
@@ -525,8 +525,8 @@ const Store = ({ route, navigation }: Props) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <View
@@ -554,7 +554,7 @@ const Store = ({ route, navigation }: Props) => {
                   alignItems: "center",
                   justifyContent: "center",
                   width: "100%",
-                  marginVertical: 8,
+                  paddingVertical: 8,
                 }}
               >
                 <TouchableOpacity

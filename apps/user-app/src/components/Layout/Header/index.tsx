@@ -9,19 +9,30 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 type Props = {
   navigation: HomeScreenNavigationProp;
   openModal?: any
+  back?: boolean;
 };
 
-const Header = ({ navigation, openModal }: Props) => {
+const Header = ({ navigation, openModal, back }: Props) => {
   
     return (
 
 <View style={styles.header}>
-  <TouchableOpacity onPress={() => openModal(true)}>
+      {back ? (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Ionicons
+          name="ios-arrow-back"
+          style={{ fontWeight: "100", fontSize: 26 }}
+        />
+  </TouchableOpacity>
+      ): (
+        <TouchableOpacity onPress={() => openModal(true)}>
         <Ionicons
           name="ios-location-outline"
           style={{ fontWeight: "100", fontSize: 26 }}
         />
   </TouchableOpacity>
+      )}
+  
         
         <Image
           source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}

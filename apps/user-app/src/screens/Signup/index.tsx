@@ -252,13 +252,29 @@ const Signup = ({navigation}: Props) => {
       <TouchableOpacity style={{marginTop: 20, borderRadius: 5, width: '105%', height: 50, backgroundColor: '#FFE243'}} onPress={onSubmit}>
           <Text style={{width: '105%', marginTop: 10, fontSize: 20, fontWeight: '600', color: '#333', textAlign: 'center' }}>Registrarme</Text>
         </TouchableOpacity>
-
+      
+      <View style={{
+        marginTop: 60,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+          
       <Text style={{
         fontSize: 18,
-        marginTop: 40
+        marginRight: 10
       }}>
-        Ya tienes una cuenta? <TouchableOpacity onPress={() => navigation.navigate('Signin')}><Text>Inicia sesión</Text></TouchableOpacity>
+        Ya tienes una cuenta?
       </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Signin')}><Text style={{
+          fontSize: 18,
+          fontWeight: '600'
+        }}>Inicia sesión</Text></TouchableOpacity>
+      </View>
+      
+ 
+
     </View>
   );
 };

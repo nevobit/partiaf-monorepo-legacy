@@ -1,6 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
 import Header from "../../components/Layout/Header";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import QRCode from "react-native-qrcode-svg";
@@ -31,7 +31,7 @@ const Tickets = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <View>
+    <SafeAreaView>
       <Header navigation={navigation} />
       <ScrollView
         style={{
@@ -196,7 +196,7 @@ const Tickets = ({ navigation }: Props) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 

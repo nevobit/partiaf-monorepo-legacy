@@ -212,13 +212,13 @@ const Signin = ({navigation}: Props) => {
       }}>
           
       <Text style={{
-        fontSize: 20,
+        fontSize: 18,
         marginRight: 10
       }}>
         Aun no tienes una cuenta?
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: '600'
         }}>Registrate aqui</Text></TouchableOpacity>
       </View>

@@ -19,6 +19,7 @@ import { TouchableOpacity, SafeAreaViewBase } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import Modal from "react-native-modal";
 import {useState} from 'react';
+import { Dimensions } from 'react-native'
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -34,10 +35,10 @@ const Home = ({ navigation }: Props) => {
   const [location, setLocation] = useState("");
   
   const [store, setStore] = useState({})
-  
+
+const halfWindowsHeight = Dimensions.get('window').height
   return (
-    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight }}>
-      <View>
+    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight, height: halfWindowsHeight }}>
         
       <Header openModal={setModal} navigation={navigation} />
       <View style={{
@@ -121,11 +122,12 @@ const Home = ({ navigation }: Props) => {
       }}> No hay resultados </Text>  
       )}
       
-      <ScrollView style={{ marginBottom: 50 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ marginBottom: 50 }}>
         {data?.getAllStores?.filter((store: IStore) => store.type.toLowerCase().includes(type.toLowerCase())).map((store: IStore) => {
           return (
+            <View   key={store.uuid}>
             <TouchableOpacity
-              key={store.uuid}
+            
               onPress={() =>
                 navigation.navigate("Store", { store: store.uuid })
               }
@@ -140,6 +142,7 @@ const Home = ({ navigation }: Props) => {
               />
               
             </TouchableOpacity>
+            </View>
           );
         })}
       </ScrollView>
@@ -221,7 +224,6 @@ const Home = ({ navigation }: Props) => {
           </View>
         </View>
       </Modal>
-      </View>
       
     </SafeAreaView>
   );

@@ -18,6 +18,7 @@ import Modal from "react-native-modal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from "react-redux";
 import {useEffect} from 'react';
+import { Dimensions } from 'react-native'
 
 const Covers = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -76,14 +77,17 @@ const Covers = ({ route, navigation }: any) => {
     await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
   };
   
+const halfWindowsHeight = Dimensions.get('window').height
+  
+  
   useEffect(() => {
     refetch()
   }, [])
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative" }}>
+    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative", height: halfWindowsHeight }}>
       <StatusBar animated={true} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} back={true} />
       <View
         style={{
           width: "100%",
@@ -289,7 +293,7 @@ const Covers = ({ route, navigation }: any) => {
         <View
           style={{
             position: "absolute",
-            bottom: 160,
+            bottom: 60,
             left: 0,
             height: "8%",
             width: "100%",
