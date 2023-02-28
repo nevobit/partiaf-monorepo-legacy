@@ -3,8 +3,8 @@ import { User, UserSchemaMongo } from "@partiaf/types";
 import twilio from 'twilio';
 import otpGenerator from 'otp-generator'
 
-const accountSid = "AC3427e300863332c60901d6618b308d23";
-const authToken = "9cf19a9c944467c89d3daef3864326fa";
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
 
 const client = new twilio.Twilio (accountSid, authToken)
 type PartialUser = Partial<User>;
