@@ -177,7 +177,8 @@ const Signin = ({ navigation }: Props) => {
         }}>
           <Text style={{
             fontWeight: '500',
-            fontSize: 15
+            fontSize: 15,
+            color: 'rgba(0,0,0,0.6)'
           }}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
         <Button color={mainColor} textColor="#333" text="Iniciar sesión" onPress={onSubmit} />

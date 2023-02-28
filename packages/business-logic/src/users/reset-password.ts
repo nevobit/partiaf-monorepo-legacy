@@ -3,7 +3,7 @@ import { User, UserSchemaMongo } from "@partiaf/types";
 import twilio from 'twilio';
 import otpGenerator from 'otp-generator'
 
-const accountSid = process.env.ACCOUNT_SID;
+const accountSid = process.env.ACCOUNT_SID || "AC3427e300863332c60901d6618b308d23";
 const authToken = process.env.AUTH_TOKEN;
 
 const client = new twilio.Twilio (accountSid, authToken)
