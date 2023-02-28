@@ -67,6 +67,17 @@ exports.default = {
                 }
             });
         },
+        validationCode(_, data, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const user = yield (0, build_1.resetPassword)(data);
+                    return user;
+                }
+                catch (error) {
+                    return new Error("Telefono incorrecto: " + error.message);
+                }
+            });
+        },
         updateUser(_, data, context) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {

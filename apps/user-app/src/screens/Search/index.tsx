@@ -8,10 +8,12 @@ import {
   ScrollView,
   Image,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { GET_STORES } from "../../graphql/queries/stores";
 import { Ionicons } from "@expo/vector-icons";
 import { GET_USERS } from "../../graphql/queries/user";
+import { Dimensions } from 'react-native'
 
 const Search = ({ navigation }: any) => {
   const [search, setSearch] = useState("");
@@ -23,9 +25,10 @@ const Search = ({ navigation }: any) => {
     loading: loadingStores,
     refetch: refetchStores,
   } = useQuery(GET_STORES);
+  const halfWindowsHeight = Dimensions.get('window').height
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight, height: halfWindowsHeight }} >
       <View
         style={{
           display: "flex",
@@ -153,10 +156,7 @@ const Search = ({ navigation }: any) => {
 
       {type == "users" ? (
         <ScrollView
-          style={{
-            height: "100%",
-            padding: 20,
-          }}
+        contentContainerStyle={{ flexGrow: 1 }}
         >
           {search.length > 0 &&
             data?.allUsers
@@ -219,10 +219,12 @@ const Search = ({ navigation }: any) => {
         </ScrollView>
       ) : (
         <ScrollView
-          style={{
-            height: "100%",
-            padding: 20,
-          }}
+        style={{
+          paddingBottom: 30,
+          paddingTop: 10,
+          paddingHorizontal: 20
+        }}
+        contentContainerStyle={{ flexGrow: 1 }}
         >
           {stores?.getAllStores
             ?.filter((user: any) =>

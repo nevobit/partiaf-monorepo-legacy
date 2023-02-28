@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const REGISTER_USER = gql `
-mutation Mutation($firtsname: String, $lastname: String, $phone: String, $username: String, $password: String) {
+mutation Mutation($firstname: String, $lastname: String, $phone: String, $username: String, $password: String) {
   userSignup(firstname: $firstname, lastname: $lastname, phone: $phone, username: $username, password: $password) {
     biography
     balance

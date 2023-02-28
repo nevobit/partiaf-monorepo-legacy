@@ -2,7 +2,7 @@ import { Collection, getModel } from "@partiaf/constant-definitions";
 import { Admin, AdminSchemaMongo } from "@partiaf/types";
 import { changePasswordEmail } from "../helpers/email-service";
 import bcrypt from 'bcrypt';
-export const changePassword = async (email:string, password: string) : Promise<Admin | Error> => {
+export const changePasswordAdmin = async (email:string, password: string) : Promise<Admin | Error> => {
     const model = await getModel(Collection.ADMINS, AdminSchemaMongo);
     const admin = await model.findOne({email:email});
 

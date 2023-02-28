@@ -20,6 +20,7 @@ import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import Modal from "react-native-modal";
 import {useState} from 'react';
 import { Dimensions } from 'react-native'
+import { mainColor } from '../../components/Layout/Theme/colors';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -49,7 +50,6 @@ const halfWindowsHeight = Dimensions.get('window').height
         paddingVertical: 10,
         borderBottomColor: 'rgba(0,0,0,0.1)',
         borderBottomWidth: 1,
-        marginTop: 5,
       }} >
         <TouchableOpacity style={{
           display: 'flex',
@@ -59,10 +59,13 @@ const halfWindowsHeight = Dimensions.get('window').height
         >
           
         <Ionicons style={{
-          fontSize: 25
+          fontSize: 25,
+          color: type=='' ? mainColor : "#333",
+          
         }} name="ios-grid-outline" />
         <Text style={{
-          fontSize:16
+          fontSize:16,
+          color: type=='' ? mainColor : "#333",
         }}>Todo</Text>
         </TouchableOpacity>
        
@@ -74,10 +77,12 @@ const halfWindowsHeight = Dimensions.get('window').height
         >
           
         <Ionicons style={{
-          fontSize: 25
+          fontSize: 25,
+          color: type=='bar' ? mainColor : "#333",
         }} name="ios-wine-outline" />
         <Text style={{
-          fontSize:16
+          fontSize:16,
+          color: type=='bar' ? mainColor : "#333",
         }}>Bares</Text>
         </TouchableOpacity>
         
@@ -89,10 +94,12 @@ const halfWindowsHeight = Dimensions.get('window').height
         >
           
         <Ionicons style={{
-          fontSize: 25
+          fontSize: 25,
+          color: type=='Discoteca' ? mainColor : "#333",
         }} name="ios-disc-outline" />
         <Text style={{
-          fontSize:16
+          fontSize:16,
+          color: type=='Discoteca' ? mainColor : "#333",
         }}>Disoctecas</Text>
         </TouchableOpacity>
 <TouchableOpacity style={{
@@ -103,10 +110,12 @@ const halfWindowsHeight = Dimensions.get('window').height
         >
   
         <Ionicons style={{
-          fontSize: 25
+          fontSize: 25,
+          color: type=='Gastrobar' ? mainColor : "#333",
         }} name="ios-beer-outline" />
         <Text style={{
-          fontSize:16
+          fontSize:16,
+          color: type=='Gastrobar' ? mainColor : "#333",
         }}>Gastrobares</Text>
 </TouchableOpacity>
 

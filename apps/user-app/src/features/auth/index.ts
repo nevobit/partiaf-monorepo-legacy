@@ -12,7 +12,6 @@ export const UserKey = 'user';
 
 const loginUser = async (action:any) => {
     await AsyncStorage.setItem(UserKey, JSON.stringify(action.payload));
-    
 }
 
 let state:any = {} 

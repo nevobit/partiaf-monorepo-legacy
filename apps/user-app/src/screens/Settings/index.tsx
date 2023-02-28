@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -29,7 +30,7 @@ const Settings = ({ route, navigation }: any) => {
       dispatch(signout());
     };
   return (
-    <View style={{ backgroundColor: "#fff", position: "relative" }}>
+    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative" }}>
       <StatusBar animated={true} />
       <Header navigation={navigation} back={true} />
       <View style={{
@@ -126,7 +127,7 @@ const Settings = ({ route, navigation }: any) => {
       
       
       
-    </View>
+    </SafeAreaView>
   );
 };
 

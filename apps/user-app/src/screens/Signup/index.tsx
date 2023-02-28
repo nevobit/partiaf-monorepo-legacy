@@ -51,6 +51,7 @@ const Signup = ({ navigation }: Props) => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      
       if(!terms){
         return;
       }

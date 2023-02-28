@@ -1,9 +1,11 @@
 import {
+  changePassword,
   getAllUsers,
   getUserById,
   updateUser,
   userSignin,
   userSignup,
+  validationCode,
 } from "@partiaf/business-logic";
 import {resetPassword} from "@partiaf/business-logic/build"
 
@@ -64,6 +66,23 @@ export default {
     async resetPassword(_: any, data: PartialUser, context: any) {
       try {
         const user = await resetPassword(data);
+        return user;
+      } catch (error: any) {
+        return new Error("Telefono incorrecto: " + error.message);
+      }
+    },
+    
+    async validationCode(_: any, {uuid, code}: any, context: any) {
+      try {
+        const user = await validationCode(uuid, code);
+        return user;
+      } catch (error: any) {
+        return new Error("Telefono incorrecto: " + error.message);
+      }
+    },
+    async changePassword(_: any, {uuid, paswword}: any, context: any) {
+      try {
+        const user = await changePassword(uuid, paswword);
         return user;
       } catch (error: any) {
         return new Error("Telefono incorrecto: " + error.message);

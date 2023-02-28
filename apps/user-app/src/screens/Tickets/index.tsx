@@ -1,6 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, TextInput, StatusBar } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, TextInput, StatusBar, Platform } from "react-native";
 import Header from "../../components/Layout/Header";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import QRCode from "react-native-qrcode-svg";
@@ -38,13 +38,16 @@ const Tickets = ({ navigation }: Props) => {
 const halfWindowsHeight = Dimensions.get('window').height
   
 const [openModalQr, setOpenModalQr] = useState(false);
-  useEffect(() => {
+  
+useEffect(() => {
     refetch();
     refetchBookings();
   }, []);
 
   return (
     <SafeAreaView style={{backgroundColor: "#fff", marginTop: StatusBar.currentHeight, height: halfWindowsHeight }} >
+      {Platform.OS == 'web' && <StatusBar hidden={false} backgroundColor={'#000'} /> }
+      {Platform.OS == 'ios' && <StatusBar hidden={false} backgroundColor={'#000'} /> }
       <Header navigation={navigation} back={true} ticket={true} />
       <View
         style={{
@@ -171,7 +174,7 @@ const [openModalQr, setOpenModalQr] = useState(false);
             height: '100%'
           }}
         >
-          {type == 'tickets' && data?.getMyTikets.filter((ticket:any) => ticket.name.toLowerCase().includes(search.toLowerCase()) ).map((ticket: any) => (
+          {type == 'tickets' && data?.getMyTikets?.filter((ticket:any) => ticket.name.toLowerCase().includes(search.toLowerCase()) ).map((ticket: any) => (
             <View
               key={ticket.uuid}
               style={{

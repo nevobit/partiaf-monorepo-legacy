@@ -30,7 +30,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
         let iconName = "";
         switch (route.name) {
           case "Home":
-            iconName = focused ? "home" : "ios-home-outline";
+            iconName = focused ? "ios-home" : "ios-home-outline";
             break;
           case "Search":
             iconName = focused ? "ios-search" : "ios-search-outline";
@@ -63,7 +63,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           <Animated.View key={route.name}>
             <TouchableOpacity onPress={onPress}>
               <View style={{ alignItems: "center" }}>
-                <Ionic name={iconName} size={25} color={itemColor} />
+                <Ionic name={iconName} size={26} color={itemColor} />
               </View>
             </TouchableOpacity>
           </Animated.View>

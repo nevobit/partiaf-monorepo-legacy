@@ -162,7 +162,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: 350,
+            height: 400,
             width: "100%",
             justifyContent: "flex-end",
             alignItems: "flex-start",
@@ -196,7 +196,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               }}>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -204,7 +204,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="logo-whatsapp"
@@ -212,12 +212,12 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
                 Whatsapp
               </Text>
             </TouchableOpacity>
-              <TouchableOpacity style={{
+            <TouchableOpacity onPress={() => Linking.openURL(`https://goo.gl/maps/gtko7vCmR1dBhLWNA`)} style={{
                 height: 50
               }}>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -225,7 +225,28 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
+                    marginRight: 5
+                  }}
+                  name="ios-location-outline"
+                />{" "}
+                Ubicación
+              </Text>
+            </TouchableOpacity>
+              <TouchableOpacity style={{
+                height: 50
+              }}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="ios-star-outline"
@@ -238,7 +259,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               }}>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -246,7 +267,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="ios-information-circle-outline"
@@ -259,7 +280,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               }}>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -267,7 +288,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="eye-off-outline"
@@ -280,7 +301,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               }}>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -289,7 +310,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="warning-outline"
@@ -304,7 +325,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -313,7 +334,7 @@ const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     marginRight: 5
                   }}
                   name="ios-exit-outline"
