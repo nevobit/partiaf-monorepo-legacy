@@ -49,6 +49,10 @@ const ResetPassword = ({ navigation }: Props) => {
           phone: phone,
         },
       });
+      
+      if(data){
+        navigation.navigate("Validation")
+      }
 
     } catch (err) {
       if (err instanceof Error) {

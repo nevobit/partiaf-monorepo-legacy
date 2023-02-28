@@ -24,7 +24,7 @@ export const resetPassword = async ({phone}: PartialUser): Promise<any> => {
         user.verification_code = code;
         await user.save();
         client.messages.create({body: `Tu codigo de verificacion es ${code}`, from: "+12763294616", to: `+57${phone}`}).then(message => console.log(message.sid))
-        return "Codigo enviado"
+        return user.uuid
     }else{
         throw new Error("Usuario no encontrado")
     }

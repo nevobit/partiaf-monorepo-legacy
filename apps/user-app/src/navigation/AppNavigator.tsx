@@ -27,6 +27,8 @@ import Settings from "../screens/Settings";
 import OtherProfile from "../screens/OtherProfile";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ResetPassword from "../screens/ResetPassword";
+import ValidationCode from "../screens/ValidationCode";
+import ChangePassword from "../screens/ChangePassword";
 
 const TabBarNavigator = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,6 +62,10 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Signin: undefined;
   Signup: undefined;
+  Reset: undefined;
+  Validation: undefined;
+  Change: undefined;
+  
 };
 const HomeStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
@@ -117,6 +123,23 @@ const LoginNavigator = () => {
       <Stack.Screen
         name="Reset"
         component={ResetPassword}
+        options={{
+          presentation: "modal",
+          animationTypeForReplace: "push",
+        }}
+        />
+        
+        <Stack.Screen
+        name="Validation"
+        component={ValidationCode}
+        options={{
+          presentation: "modal",
+          animationTypeForReplace: "push",
+        }}
+        />
+          <Stack.Screen
+        name="Change"
+        component={ChangePassword}
         options={{
           presentation: "modal",
           animationTypeForReplace: "push",
