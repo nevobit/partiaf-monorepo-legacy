@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -15,16 +15,137 @@ import Modal from 'react-native-modal'
 import { SafeAreaView } from 'react-native';
 import { mainColor } from "../../components/Layout/Theme/colors";
 import {Dimensions} from 'react-native';
+import CloudinaryUploader from "../../utilities/uploadImage";
+import {launchImageLibrary} from 'react-native-image-picker';
+import axios from "axios";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_USER_BALANCE, UPDATE_USER_PIN } from "../../graphql/queries/user";
+import Input from "../../components/Shared/Input/Input";
+import Button from "../../components/Shared/Button/Input";
 
 const Profile = ({navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
-
-  const [modal, setModal] = useState(false);
+  const [uploader] = useState<CloudinaryUploader>(new CloudinaryUploader());
+  const [photo, setPhoto] = useState<any | null>(null);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [modalBio, setModalBio] = useState<boolean>(false);
+  const [bio, setBio] = useState<string>("");
   
-  const dispatch = useDispatch();
-  const exit = () => {
-    dispatch(signout());
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  
+  const { data, loading, error,refetch } = useQuery(GET_USER_BALANCE, {
+    variables: { uuid: user.uuid },
+  });
+
+  
+  const handleChange = async () => {
+    
+    // const file = e.target.files?.item(0);
+    console.log({photo})
+    const file = photo.assets[0].uri; 
+    if (file) {
+      setFile(file);
+      uploader.setFile(file);
+    }
+    await uploader.upload();
+    setUploadedUrl(uploader.getUrl());
   };
+  
+  const [updateUser] = useMutation(UPDATE_USER_PIN);
+  
+  const updateUserHandler = async (p:string) => {
+    try {
+      setLoader(true)
+      const { data } = await updateUser({
+        variables:  {
+          data: {
+            photo: [...user.photo, p],
+            uuid: user.uuid,
+          }
+        }
+      });
+      
+      setLoader(false)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChoosePhoto = async() => {
+    const options = {
+      title: 'Seleccionar foto de perfil',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary({mediaType: 'photo'}, (response) => {
+      if(response.didCancel){
+        console.log("User cancelled image picker")
+      }else if(response.errorMessage){
+        console.log("Error: " + response?.errorMessage)
+      }
+    }).then(response => {
+      const uri = response.assets? response.assets[0].uri : '';
+        const type = response.assets? response.assets[0].type : '';
+        const name = response.assets? response.assets[0].fileName : "";
+        const source = {
+          uri,
+          type,
+          name
+        }
+        
+        console.log("Image ", source)
+        cloudinaryUpload(source.uri)
+      
+    });
+    
+    const cloudinaryUpload = async(photo:any) => {
+      const data = new FormData()
+      data.append('file', photo)
+      data.append('upload_preset', 'r9rqkvzr')
+      data.append("cloud_name", "r9rqkvzr")
+      
+      const res:any = await axios.post(
+        "https://api.cloudinary.com/v1_1/matosr96/image/upload",
+        data
+      );
+      
+      console.log(res.data.secure_url)
+      setUploadedUrl(res.data.secure_url)
+      updateUserHandler(res.data.secure_url)
+    }
+    // const result = await launchImageLibrary({mediaType: 'photo'});
+    // setPhoto(result)
+    // handleChange();
+    // console.log({result});
+  };
+  
+  const [modal, setModal] = useState(false);
+ 
+  const updateUserBioHandler = async (p:string) => {
+    try {
+      setLoader(true)
+      const { data } = await updateUser({
+        variables:  {
+          data: {
+            biography: bio,
+            uuid: user.uuid,
+          }
+        }
+      });
+      
+      setLoader(false)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  useEffect(() => {
+    refetch();
+    setModalBio(false)
+  }, [uploadedUrl, loader]);
   
 const halfWindowsHeight = Dimensions.get('window').height
   
@@ -79,16 +200,18 @@ const halfWindowsHeight = Dimensions.get('window').height
           <Text style={{ fontWeight: "700", fontSize: 20 }}>0</Text>
           <Text style={{ fontSize: 15 }}>Seguidores</Text>
         </View>
-        <View style={{
+        <TouchableOpacity style={{
           position: 'relative'
-        }}>
+        }}
+        onPress={handleChoosePhoto}
+        >
           
         <Image
           source={{
-            uri:
-              user?.photo?.length <= 0
+            uri: loader &&
+            data?.userById?.photo?.length <= 0
                 ? "https://i.postimg.cc/0jMMGxbs/default.jpg"
-                : user.photo,
+                : data?.userById?.photo[0],
           }}
           style={{
             height: 110,
@@ -99,10 +222,10 @@ const halfWindowsHeight = Dimensions.get('window').height
         />
         <View style={{
           position: "absolute",
-          bottom: 0,
-          right: 0,
-          height: 30,
-          width: 30,
+          bottom: 5,
+          right: 5,
+          height: 20,
+          width: 20,
           display: 'flex',
           alignItems: "center",
           justifyContent: "center",
@@ -112,12 +235,12 @@ const halfWindowsHeight = Dimensions.get('window').height
           borderWidth: 2
         }}>
           <Ionicons name="ios-add" style={{
-            fontSize: 25,
+            fontSize: 20,
             color: '#f2f2f2',
             textAlign: 'center'
           }}/>
         </View>
-        </View>
+        </TouchableOpacity>
         
         <View
           style={{
@@ -149,7 +272,13 @@ const halfWindowsHeight = Dimensions.get('window').height
         >
           {user.firstname} {user.lastname}
         </Text>
-        <Text>Click para anadir una biografia</Text>
+        <TouchableOpacity onPress={ () => setModalBio(true)}>
+          {data?.userById?.biography ? (
+            <Text>{data.userById.biography}</Text>
+          ) : (
+            <Text>Click para anadir una biografia</Text>                    
+          )}
+        </TouchableOpacity>
       </View>
 
       <View
@@ -241,17 +370,20 @@ const halfWindowsHeight = Dimensions.get('window').height
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "flex-start",
+              width: "100%",
             }}
           >
            
             <TouchableOpacity
               style={{
                 height: 50,
+                width: '100%',
+                
               }}
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -259,7 +391,8 @@ const halfWindowsHeight = Dimensions.get('window').height
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
+                    marginRight: 5
                   }}
                   name="ios-bookmark-outline"
                 />{" "}
@@ -269,11 +402,13 @@ const halfWindowsHeight = Dimensions.get('window').height
             <TouchableOpacity
               style={{
                 height: 50,
+                width: '100%',
+                
               }}
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -281,7 +416,8 @@ const halfWindowsHeight = Dimensions.get('window').height
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
+                    marginRight: 5
                   }}
                   name="ios-star-outline"
                 />{" "}
@@ -291,13 +427,14 @@ const halfWindowsHeight = Dimensions.get('window').height
             <TouchableOpacity
               style={{
                 height: 50,
+                width: '100%',
               }}
               
               onPress={() => {setModal(false); navigation.navigate('Settings')}}
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 14,
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -305,16 +442,101 @@ const halfWindowsHeight = Dimensions.get('window').height
               >
                 <Ionicons
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
+                    marginRight: 5
                   }}
                   name="ios-cog-outline"
                 />
                 <Text style={{
                 }}>
-                Configuracion & privacidad                  
+                 Configuracion & privacidad                  
                 </Text>
               </Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      
+      <Modal
+        onSwipeComplete={() => setModalBio(false)}
+        animationIn="fadeIn"
+        style={{
+        }}
+        isVisible={modalBio}
+        swipeDirection={["down"]}
+        onBackdropPress={() => setModalBio(false)}
+      >
+        <View
+          style={{
+            backgroundColor: "#fff",
+            height: 220,
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 5,
+            borderColor: "rgba(0,0,0,0.1)",
+            position: "relative",
+          }}
+        >
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              padding: 0,
+              position: "relative",
+            }}
+          >
+           
+           <View style={{
+            padding: 15,
+            display: 'flex',
+            flexDirection: "row",
+            alignItems: 'center',
+            justifyContent: 'space-between',
+           }}>
+            <TouchableOpacity onPress={() => setModalBio(false)}>
+                <Text><Ionicons name="ios-arrow-back-outline" style={{
+                    fontSize: 40
+                }} /></Text>
+            </TouchableOpacity>
+            <Text style={{
+                fontSize: 20,
+                fontWeight: '600'
+            }}>Editar Biografia</Text>
+            
+            <TouchableOpacity onPress={() => setModal(false)}>
+                <Text><Ionicons name="ios-arrow-back-outline" style={{
+                    fontSize: 40,
+                    color: "white"
+                }} /></Text>
+            </TouchableOpacity>
+           </View>
+            <View style={{
+              padding: 10,
+              paddingHorizontal: 20
+            }} >  
+               <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width:'100%',
+                  height:'100%'
+                }}
+                
+              >
+                <View style={{
+                  width: '100%',
+                  height: 100
+                }}>
+                  <Input placeholder="Ingresa tu biografia" value={bio} onChangeText={setBio} />
+                  <Button text="Guardar" color={mainColor} onPress={updateUserBioHandler} />
+                
+                </View>
+                </View>
+                
+            </View>
           </View>
         </View>
       </Modal>

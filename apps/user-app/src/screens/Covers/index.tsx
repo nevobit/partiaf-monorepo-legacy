@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -19,13 +20,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from "react-redux";
 import {useEffect} from 'react';
 import { Dimensions } from 'react-native'
+import ModalStore from "../../components/ModalStore";
 
 const Covers = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   
   const {
     data: store,
-    loading: loadiingStore,
+    loading: loadingStore,
     error: errorStore,
   } = useQuery(GET_STORE, {
     variables: { uuid: route.params.store },
@@ -36,50 +38,70 @@ const Covers = ({ route, navigation }: any) => {
   });
 
   const [modal, setModal] = useState(false);
+  const [modalOptions, setModalOptions] = useState(false);
+  
   const [amount, setAmount] = useState(0);
   const [coverSelected, setCoverSelected] = useState<any>({});
+  const [coverSelectedPrev, setCoverSelectedPrev] = useState<any>({});
 
-  const setPeopleHandler = async (type: string, cover: any) => {
-    setCoverSelected(cover);
-    if (type == "+") {
-      if (coverSelected.uuid != cover.uuid) {
-        setAmount(1);
-      } else {
-        if (coverSelected.limit > amount) {
-          setAmount((prev) => prev + 1);
-        }
-      }
-    } else {
-      if (coverSelected.uuid != cover.uuid) {
-        setAmount(0);
-      } else {
-        if (amount > 0) {
-          setAmount((prev) => prev - 1);
-        }
-      }
-    }
-    
+  const setPeopleHandler = async ( cover: any) => {
+    setCoverSelectedPrev(cover);
+ 
     const coverInfo = {
-        store: route.params.store,
-        storeName: store?.getStoreById?.name,
-        user: user.uuid,
-        status: 'in line',
-        cost: (amount + 1) * coverSelected.price,
-        amount: amount + 1,
-        time: coverSelected.time,
-        image: coverSelected.image,
-        description: coverSelected.description,
-        cover: coverSelected.uuid,
-        name: coverSelected.name,
-        date: coverSelected.date
-    }
+      store: route.params.store,
+      storeName: store?.getStoreById?.name,
+      user: user.uuid,
+      status: 'in line',
+      cost: amount  * Number(coverSelected.price),
+      amount: amount,
+      time: coverSelected.time,
+      image: coverSelected.image,
+      description: coverSelected.description,
+      cover: coverSelected.uuid,
+      name: coverSelected.name,
+      date: coverSelected.date
+  }
+  
+  await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
+  
+    console.log({coverSelected})
     
-    await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
   };
   
 const halfWindowsHeight = Dimensions.get('window').height
   
+const setCoverState = async(type: string, cover:any) => {
   
+  setCoverSelected(cover)
+  
+  if (type == "+") {
+    console.log(coverSelected.uuid)
+    console.log(cover.uuid)
+    if (coverSelectedPrev.uuid != cover.uuid) {
+      console.log("Please select")
+      setAmount(1);
+    } else {
+      if (coverSelected.limit > amount) {
+      console.log("No more items selected")
+        setAmount((prev) => prev + 1);
+      }
+    }
+  } else {
+    if (coverSelected.uuid != cover.uuid) {
+      setCoverSelected({});
+      setCoverSelectedPrev({});
+      setAmount(0);
+    } else {
+      if (amount > 0) {
+        setAmount((prev) => prev - 1);
+      }
+    }
+  }
+
+}
+  
+console.log({amount});
+
   useEffect(() => {
     refetch()
   }, [])
@@ -126,21 +148,12 @@ const halfWindowsHeight = Dimensions.get('window').height
             4.24
           </Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setModalOptions(true)}>
           <View style={{ display: "flex" }}>
             <View
               style={{
-                height: 5,
-                width: 5,
-                backgroundColor: "rgba(0,0,0,.7)",
-                borderRadius: 50,
-                margin: 3,
-              }}
-            ></View>
-            <View
-              style={{
-                height: 5,
-                width: 5,
+                height: 3,
+                width: 3,
                 backgroundColor: "rgba(0,0,0,.8)",
                 borderRadius: 50,
                 margin: 3,
@@ -148,8 +161,17 @@ const halfWindowsHeight = Dimensions.get('window').height
             ></View>
             <View
               style={{
-                height: 5,
-                width: 5,
+                height: 3,
+                width: 3,
+                backgroundColor: "rgba(0,0,0,.8)",
+                borderRadius: 50,
+                margin: 3,
+              }}
+            ></View>
+            <View
+              style={{
+                height: 3,
+                width: 3,
                 backgroundColor: "rgba(0,0,0,.8)",
                 borderRadius: 50,
                 margin: 3,
@@ -255,7 +277,8 @@ const halfWindowsHeight = Dimensions.get('window').height
                       borderRadius: 5,
                       padding: 3,
                     }}
-                    onPress={() => setPeopleHandler("-", cover)}
+                    onPressIn={() => setCoverState("-", cover)}
+                    onPress={() => setPeopleHandler( cover)}
                   >
                     <Ionicons
                       name="ios-remove"
@@ -276,7 +299,8 @@ const halfWindowsHeight = Dimensions.get('window').height
                       borderRadius: 5,
                       padding: 3,
                     }}
-                    onPress={() => setPeopleHandler("+", cover)}
+                    onPressIn={() => setCoverState("+",cover)}
+                    onPress={() => setPeopleHandler(cover)}
                   >
                     <Ionicons
                       name="ios-add"
@@ -432,6 +456,9 @@ const halfWindowsHeight = Dimensions.get('window').height
           </View>
         </View>
       </Modal>
+      
+      
+      <ModalStore modal={modalOptions} setModal={setModalOptions} phone={data?.getStoreById?.phone} />
     </SafeAreaView>
   );
 };

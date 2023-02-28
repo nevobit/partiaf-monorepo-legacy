@@ -52,7 +52,7 @@ const Settings = ({ route, navigation }: any) => {
       </View>
       
       <Text style={{
-        fontSize: 18,
+        fontSize: 16,
         marginTop: 10,
         padding: 20,
         fontWeight: '500',
@@ -70,7 +70,7 @@ const Settings = ({ route, navigation }: any) => {
           paddingVertical: 15
         }}
         ><Text style={{
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: '600'
         }}>Cuenta</Text></TouchableOpacity>
         <TouchableOpacity
@@ -79,7 +79,7 @@ const Settings = ({ route, navigation }: any) => {
           paddingVertical: 15
         }}
         ><Text style={{
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: '600'
         }}>Privacidad</Text></TouchableOpacity>
         <TouchableOpacity
@@ -88,7 +88,7 @@ const Settings = ({ route, navigation }: any) => {
           paddingVertical: 15
         }}
         ><Text style={{
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: '600'
         }}>Seguridad</Text></TouchableOpacity>
         
@@ -96,7 +96,7 @@ const Settings = ({ route, navigation }: any) => {
       
       
       <Text style={{
-        fontSize: 18,
+        fontSize: 16,
         marginTop: 10,
         padding: 20,
         fontWeight: '500',
@@ -117,7 +117,7 @@ const Settings = ({ route, navigation }: any) => {
         }}
         onPress={exit}
         ><Text style={{
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: '600'
         }}>Cerrar sesion</Text></TouchableOpacity>
         

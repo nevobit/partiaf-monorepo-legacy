@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
@@ -26,6 +27,7 @@ import moment from "moment";
 import "moment/locale/es";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { CREATE_BOOKING } from "../../graphql/queries/bookings";
+import ModalStore from "../../components/ModalStore";
 
 moment.locale("es");
 
@@ -196,8 +198,8 @@ const Store = ({ route, navigation }: Props) => {
           >
             <View
               style={{
-                height: 5,
-                width: 5,
+                height: 3,
+                width: 3,
                 backgroundColor: "rgba(0,0,0,.7)",
                 borderRadius: 50,
                 margin: 3,
@@ -205,8 +207,8 @@ const Store = ({ route, navigation }: Props) => {
             ></View>
             <View
               style={{
-                height: 5,
-                width: 5,
+                height: 3,
+                width: 3,
                 backgroundColor: "rgba(0,0,0,.8)",
                 borderRadius: 50,
                 margin: 3,
@@ -214,8 +216,8 @@ const Store = ({ route, navigation }: Props) => {
             ></View>
             <View
               style={{
-                height: 5,
-                width: 5,
+                height: 3,
+                width: 3,
                 backgroundColor: "rgba(0,0,0,.8)",
                 borderRadius: 50,
                 margin: 3,
@@ -489,7 +491,7 @@ const Store = ({ route, navigation }: Props) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: 400,
+            height: 430,
             width: "100%",
             justifyContent: "flex-end",
             alignItems: "flex-start",
@@ -527,6 +529,7 @@ const Store = ({ route, navigation }: Props) => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              width: "100%",
             }}
           >
             <View
@@ -764,168 +767,8 @@ const Store = ({ route, navigation }: Props) => {
         </View>
       </Modal>
 
-      <Modal
-        onSwipeStart={() => setModalOptions(false)}
-        style={{
-          justifyContent: "flex-end",
-          margin: 0,
-        }}
-        animationOut="slideOutDown"
-        isVisible={modalOptions}
-        swipeDirection={["down"]}
-        onBackButtonPress={() => setModalOptions(false)}
-        onBackdropPress={() => setModalOptions(false)}
-      >
-        <View
-          style={{
-            backgroundColor: "#fff",
-            height: 270,
-            width: "100%",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            borderTopStartRadius: 20,
-            borderTopEndRadius: 20,
-            borderColor: "rgba(0,0,0,0.1)",
-            position: "relative",
-            padding: 20,
-            paddingBottom: 0,
-          }}
-        >
-          <View
-            style={{
-              position: "absolute",
-              top: 15,
-              left: "50%",
-              width: 40,
-              height: 8,
-              backgroundColor: "rgba(0,0,0,0.8)",
-              borderRadius: 50,
-            }}
-          ></View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                height: 50,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  style={{
-                    fontSize: 30,
-                  }}
-                  name="ios-star-outline"
-                />{" "}
-                Agregar a favoritos
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 50,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  style={{
-                    fontSize: 30,
-                  }}
-                  name="ios-information-circle-outline"
-                />{" "}
-                Porque estoy viendo este negocio
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 50,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  style={{
-                    fontSize: 30,
-                  }}
-                  name="eye-off-outline"
-                />{" "}
-                Ocultar
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 50,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  color: "red",
-                }}
-              >
-                <Ionicons
-                  style={{
-                    fontSize: 30,
-                  }}
-                  name="warning-outline"
-                />{" "}
-                Reportar
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 50,
-              }}
-              
-              onPress={() => setModalOptions(false)}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  style={{
-                    fontSize: 30,
-                  }}
-                  name="ios-exit-outline"
-                />{" "}
-                Cancelar
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <ModalStore modal={modalOptions} setModal={setModalOptions} phone={data?.getStoreById.phone} />
+
     </SafeAreaView>
   );
 };

@@ -97,6 +97,7 @@ type User {
     lastname: String
     username: String
     phone: String
+    biography: String
     photo: String
     status: String
 }
@@ -107,7 +108,8 @@ input UserInput {
     lastname: String
     username: String
     phone: String
-    photo: String
+    biography: String
+    photo: [String]
     pin: String
     status: String
 }

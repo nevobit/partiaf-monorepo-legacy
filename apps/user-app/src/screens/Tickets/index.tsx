@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, TextInput, StatusBar, Platform } from "react-native";
 import Header from "../../components/Layout/Header";
 import { RootStackParamList } from "../../navigation/AppNavigator";
-import QRCode from "react-native-qrcode-svg";
 import { GET_MY_TICKETS } from "../../graphql/queries/goers";
 import { useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import { DivisaFormater } from "../../utilities/divisaFormater";
 import { Ionicons } from '@expo/vector-icons';
 import { Dimensions } from 'react-native'
 import { GET_MY_BOOKINGS } from "../../graphql/queries/bookings";
+import QRCode from 'react-native-qrcode-svg';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -39,6 +39,8 @@ const halfWindowsHeight = Dimensions.get('window').height
   
 const [openModalQr, setOpenModalQr] = useState(false);
   
+let logo = require('../../assets/favicon.png')
+
 useEffect(() => {
     refetch();
     refetchBookings();
@@ -208,10 +210,11 @@ useEffect(() => {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  marginRight: 10
                 }}
-                onPress={() => setOpenModalQr(true)}
+                onPress={() => {setCoverSelected(ticket); setOpenModalQr(true)}}
               >
-                <Image
+                {/* <Image
                   style={{
                     width: 80,
                     height: 80,
@@ -220,8 +223,18 @@ useEffect(() => {
                   source={{
                     uri: "https://i.postimg.cc/nr7G2hzm/qr-code-bc94057f452f4806af70fd34540f72ad.png",
                   }}
-                />
-                <View>
+                /> */}
+                 <QRCode
+                 size={80}
+                 logo={logo}
+                 logoSize={25}
+                 logoBackgroundColor="#000"
+                 logoBorderRadius={50}
+      value={JSON.stringify(ticket)}
+    />
+                <View style={{
+                  marginLeft: 10
+                }}>
                   <Text>
                     <Text style={{ fontWeight: "600" }}>Nombre:</Text> {ticket.name}
                   </Text>
@@ -283,18 +296,17 @@ useEffect(() => {
                   flexDirection: "row",
                   alignItems: "center",
                 }}
-                onPress={() => setOpenModalQr(true)}
+                onPress={() => {setCoverSelected(ticket); setModal(true)} }
               >
-                <Image
-                  style={{
-                    width: 80,
-                    height: 80,
-                    marginRight: 10,
-                  }}
-                  source={{
-                    uri: "https://i.postimg.cc/nr7G2hzm/qr-code-bc94057f452f4806af70fd34540f72ad.png",
-                  }}
-                />
+                
+                <QRCode
+                 size={80}
+                 logo={logo}
+                 logoSize={25}
+                 logoBackgroundColor="#000"
+                 logoBorderRadius={50}
+      value={JSON.stringify(ticket)}
+    />
                 <View>
                   <Text>
                     <Text style={{ fontWeight: "600" }}>Mesa:</Text> {ticket.table}
@@ -460,15 +472,14 @@ useEffect(() => {
                 }}
                 
               >
-                <Image
-                  style={{
-                    width: 200,
-                    height: 200,
-                  }}
-                  source={{
-                    uri: "https://i.postimg.cc/nr7G2hzm/qr-code-bc94057f452f4806af70fd34540f72ad.png",
-                  }}
-                />
+                 <QRCode
+                  size={250}
+                  logo={logo}
+                  logoSize={150}
+                  logoBackgroundColor="#000"
+                  logoBorderRadius={50}
+                  value={JSON.stringify(coverSelected)}
+                  />
                 <View>
                 </View>
                   

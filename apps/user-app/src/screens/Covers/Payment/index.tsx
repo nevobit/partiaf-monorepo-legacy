@@ -191,7 +191,7 @@ const Payment = ({ route, navigation }: any) => {
           <Text style={{
             fontSize: 22,
             fontWeight: '600'
-          }}>{DivisaFormater(coverInfo.cost / coverInfo.amount)}</Text>
+          }}>{DivisaFormater(coverInfo.cost)}</Text>
         </View>
 
         <View
@@ -209,19 +209,19 @@ const Payment = ({ route, navigation }: any) => {
             style={{
               width: "86%",
               height: "90%",
-              backgroundColor: userBalance?.userById.balance >= coverInfo.cost?  "#FFE243" : '#CA0B00',
+              backgroundColor: userBalance?.userById?.balance >= coverInfo.cost?  "#FFE243" : '#CA0B00',
               borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
             }}
-            onPress={() => userBalance?.userById.balance >= coverInfo.cost ? setModal(true) : navigation.navigate("Wallet")}
+            onPress={() => userBalance?.userById?.balance >= coverInfo.cost ? setModal(true) : navigation.navigate("Wallet")}
           >
             <Text
               style={{
                 fontSize: 18,
                 fontWeight: "500",
                 letterSpacing: 1,
-                color: userBalance?.userById.balance >= coverInfo.cost?   "rgba(0,0,0,0.8)" : "#fff",
+                color: userBalance?.userById?.balance >= coverInfo.cost?   "rgba(0,0,0,0.8)" : "#fff",
                 
                 textTransform: "uppercase",
               }}

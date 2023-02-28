@@ -157,6 +157,11 @@ const Search = ({ navigation }: any) => {
       {type == "users" ? (
         <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
+        style={{
+          paddingBottom: 30,
+          paddingTop: 10,
+          paddingHorizontal: 20
+        }}
         >
           {search.length > 0 &&
             data?.allUsers
@@ -181,8 +186,8 @@ const Search = ({ navigation }: any) => {
                   >
                     <View
                       style={{
-                        height: 60,
-                        width: 60,
+                        height: 50,
+                        width: 50,
                         borderRadius: 50,
                         overflow: "hidden",
                         display: "flex",
