@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const business_logic_1 = require("@partiaf/business-logic");
+const build_1 = require("@partiaf/business-logic/build");
 exports.default = {
     Query: {
         allUsers(_, {}, context) {
@@ -52,6 +53,17 @@ exports.default = {
                 }
                 catch (error) {
                     return new Error("No se pudo registrar el usuario: " + error.message);
+                }
+            });
+        },
+        resetPassword(_, data, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const user = yield (0, build_1.resetPassword)(data);
+                    return user;
+                }
+                catch (error) {
+                    return new Error("Telefono incorrecto: " + error.message);
                 }
             });
         },

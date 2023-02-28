@@ -11,6 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const build_1 = require("@partiaf/business-logic/build");
 exports.default = {
+    Query: {
+        getMyBookings(_, { uuid }, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const tickets = yield (0, build_1.getBookingsByUser)(uuid);
+                return tickets;
+            });
+        },
+    },
     Mutation: {
         createBooking(_, { data }, context) {
             return __awaiter(this, void 0, void 0, function* () {

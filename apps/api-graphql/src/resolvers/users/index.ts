@@ -5,6 +5,8 @@ import {
   userSignin,
   userSignup,
 } from "@partiaf/business-logic";
+import {resetPassword} from "@partiaf/business-logic/build"
+
 import { User } from "@partiaf/types";
 
 interface PartialUser extends User {
@@ -56,6 +58,15 @@ export default {
         return user;
       } catch (error: any) {
         return new Error("No se pudo registrar el usuario: " + error.message);
+      }
+    },
+    
+    async resetPassword(_: any, data: PartialUser, context: any) {
+      try {
+        const user = await resetPassword(data);
+        return user;
+      } catch (error: any) {
+        return new Error("Telefono incorrecto: " + error.message);
       }
     },
     async updateUser(_: any, data: any, context: any) {

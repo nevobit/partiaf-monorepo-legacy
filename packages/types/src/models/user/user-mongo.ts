@@ -10,6 +10,7 @@ export const UserSchemaMongo = new Schema<User>({
     email: {type: String, unique: true},
     type: {type: String},
     verified: {type: Boolean},
+    verification_code: {type: Number},
     password: {type: String},
     phone: {type: String},
     photo: [{type: String}],

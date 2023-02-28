@@ -42,6 +42,7 @@ const Comments = ({ route, navigation }: any) => {
   const [info, setInfo] = useState<any>();
   const createCommentHandler = async () => {
     try {
+      if(comment.trim().length <= 0){return;}
       const { data } = await createComment({
         variables: {
           user: user.username,
@@ -64,8 +65,6 @@ const Comments = ({ route, navigation }: any) => {
       stopPolling();
     };
   }, [startPolling, stopPolling]);
-
-  const [modal, setModal] = useState(false);
 
   return (
     <SafeAreaView

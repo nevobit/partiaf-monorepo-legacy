@@ -225,7 +225,7 @@ const Store = ({ route, navigation }: Props) => {
         </TouchableOpacity>
       </View>
     
-      <ScrollView style={{
+      <View style={{
         height: '100%', 
       }}>
         <View
@@ -472,7 +472,7 @@ const Store = ({ route, navigation }: Props) => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </View>
                 
       <Modal
         onSwipeStart={() => setModal(false)}

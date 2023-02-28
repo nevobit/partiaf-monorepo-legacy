@@ -1,17 +1,16 @@
-import {LogBox} from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-// import 'react-native-gesture-handler';
 import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
 import { Provider } from 'react-redux';
-import { store } from './src/app/store';
-import { StatusBar } from 'expo-status-bar';
-
+import { store, persistor } from './src/app/store';
+import { PersistGate } from 'redux-persist/integration/react';
 export const App = () => {
   return (
     <Provider store={store}>
     <ApolloProvider client={client}>
-      <AppNavigator />
+      <PersistGate loading={null} persistor={persistor} >
+      <AppNavigator />        
+      </PersistGate>
     </ApolloProvider>
     </Provider>
 

@@ -19,7 +19,8 @@
     "otp-generator": "^4.0.0",
     "uuid": "^9.0.0",
     "@partiaf/types": "workspace:*",
-    "@partiaf/constant-definitions": "workspace:*"
+    "@partiaf/constant-definitions": "workspace:*",
+    "twilio": "~4.8.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

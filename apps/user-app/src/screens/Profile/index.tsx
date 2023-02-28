@@ -14,18 +14,22 @@ import { useDispatch } from "react-redux";
 import Modal from 'react-native-modal'
 import { SafeAreaView } from 'react-native';
 import { mainColor } from "../../components/Layout/Theme/colors";
+import {Dimensions} from 'react-native';
 
 const Profile = ({navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   
   const dispatch = useDispatch();
   const exit = () => {
     dispatch(signout());
   };
+  
+const halfWindowsHeight = Dimensions.get('window').height
+  
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight, height: halfWindowsHeight }}>
       <StatusBar animated={true} />
       <View style={styles.header}>
         <Text style={{ fontWeight: "600", fontSize: 23 }}>
@@ -289,7 +293,7 @@ const Profile = ({navigation}: any) => {
                 height: 50,
               }}
               
-              onPress={() => navigation.navigate('Settings')}
+              onPress={() => {setModal(false); navigation.navigate('Settings')}}
             >
               <Text
                 style={{

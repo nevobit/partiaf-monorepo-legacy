@@ -138,6 +138,7 @@ const halfWindowsHeight = Dimensions.get('window').height
                 photos={store.photos}
                 name={store.name}
                 type={store.type}
+                phone={store.phone}
                 navigation={navigation}
               />
               

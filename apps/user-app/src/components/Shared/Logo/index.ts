@@ -1,0 +1,1 @@
+export const Logo = "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png"

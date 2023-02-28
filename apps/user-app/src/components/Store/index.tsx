@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Modal from "react-native-modal";
-
+import {A} from "@expo/html-elements"
+import { Linking } from 'react-native';
 import { IStore } from "../../types";
 
-const Store = ({ uuid, name, type, photos, navigation }: any) => {
+const Store = ({ uuid, name, type, photos, phone, navigation }: any) => {
   const [modal, setModal] = useState(false);
   const [bookmark, setBookmark] = useState(false);
   const [star, setStar] = useState(false);
@@ -161,7 +162,7 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: 240,
+            height: 350,
             width: "100%",
             justifyContent: "flex-end",
             alignItems: "flex-start",
@@ -170,13 +171,13 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
             borderColor: "rgba(0,0,0,0.1)",
             position: "relative",
             padding: 20,
-            paddingBottom: 0
+            paddingBottom: 10
           }}
         >
           <View style={{
             position: 'absolute',
             top: 15,
-            left: '50%',
+            left: '45%',
             width: 40,
             height: 8,
             backgroundColor: 'rgba(0,0,0,0.8)',
@@ -190,6 +191,27 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
           }}>
+               <TouchableOpacity onPress={() => Linking.openURL(`https://wa.me/57${phone}`)} style={{
+                height: 50
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                    marginRight: 5
+                  }}
+                  name="logo-whatsapp"
+                />{" "}
+                Whatsapp
+              </Text>
+            </TouchableOpacity>
               <TouchableOpacity style={{
                 height: 50
               }}>
@@ -204,6 +226,7 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
                 <Ionicons
                   style={{
                     fontSize: 30,
+                    marginRight: 5
                   }}
                   name="ios-star-outline"
                 />{" "}
@@ -224,6 +247,7 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
                 <Ionicons
                   style={{
                     fontSize: 30,
+                    marginRight: 5
                   }}
                   name="ios-information-circle-outline"
                 />{" "}
@@ -244,6 +268,7 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
                 <Ionicons
                   style={{
                     fontSize: 30,
+                    marginRight: 5
                   }}
                   name="eye-off-outline"
                 />{" "}
@@ -265,10 +290,35 @@ const Store = ({ uuid, name, type, photos, navigation }: any) => {
                 <Ionicons
                   style={{
                     fontSize: 30,
+                    marginRight: 5
                   }}
                   name="warning-outline"
                 />{" "}
                 Reportar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{
+                height: 50
+              }}
+              onPress={() => setModal(false)}
+              >
+              <Text
+                style={{
+                  fontSize: 18,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                
+              >
+                <Ionicons
+                  style={{
+                    fontSize: 30,
+                    marginRight: 5
+                  }}
+                  name="ios-exit-outline"
+                />{" "}
+                Cancelar
               </Text>
             </TouchableOpacity>
           </View>

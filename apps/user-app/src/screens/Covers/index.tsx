@@ -337,10 +337,11 @@ const halfWindowsHeight = Dimensions.get('window').height
         isVisible={modal}
         swipeDirection={["down"]}
       >
+        
         <View
           style={{
             backgroundColor: "#fff",
-            height: "95%",
+            height: "100%",
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -357,6 +358,44 @@ const halfWindowsHeight = Dimensions.get('window').height
               position: "relative",
             }}
           >
+            
+<View style={styles.header}>
+        <TouchableOpacity onPress={() => setModal(false)}>
+        <Ionicons
+          name="ios-arrow-back"
+          style={{ fontWeight: "100", fontSize: 26 }}
+        />
+  </TouchableOpacity>
+      
+  
+        
+        <Image
+          source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}
+          style={{
+            marginLeft: 23,
+            marginTop: 4,
+            width: 120,
+            height: 20,
+            resizeMode: "contain",
+          }}
+        />
+        <View style={styles.header_left}>
+              <TouchableOpacity >
+            
+            </TouchableOpacity>
+          
+        
+              <TouchableOpacity 
+              style={{
+                marginLeft: 10,
+                
+              }}>
+            
+            </TouchableOpacity>
+        
+        </View>
+      </View>
+      
             <View
               style={{
                 width: "100%",
@@ -396,5 +435,20 @@ const halfWindowsHeight = Dimensions.get('window').height
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    height: 50,
+    justifyContent: "space-between",
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  header_left: {
+    display: "flex",
+    flexDirection: "row",
+  },
+});
 
 export default Covers;

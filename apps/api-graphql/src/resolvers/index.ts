@@ -11,7 +11,8 @@ export default {
         ...stores.Query,
         ...covers.Query,
         ...goers.Query,
-        ...comments.Query
+        ...comments.Query,
+        ...bookings.Query
     },
     Mutation: {
         ...users.Mutation,

@@ -10,9 +10,11 @@ type Props = {
   navigation: HomeScreenNavigationProp;
   openModal?: any
   back?: boolean;
+  wallet?: boolean;
+  ticket?: boolean;
 };
 
-const Header = ({ navigation, openModal, back }: Props) => {
+const Header = ({ navigation, openModal, back, wallet, ticket }: Props) => {
   
     return (
 
@@ -32,6 +34,7 @@ const Header = ({ navigation, openModal, back }: Props) => {
         />
   </TouchableOpacity>
       )}
+      
   
         
         <Image
@@ -45,23 +48,32 @@ const Header = ({ navigation, openModal, back }: Props) => {
           }}
         />
         <View style={styles.header_left}>
-          <TouchableOpacity onPress={
-              () => navigation.navigate("Wallet", { user: "" })
-          }>
-          <Ionicons
-            name={"ios-wallet-outline"}
-            style={{ fontWeight: "100", fontSize: 26, marginRight: 10 }}
-          />
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={() =>
-              navigation.navigate("Tickets", { user: "" })
+          {!wallet ? (
+              <TouchableOpacity onPress={
+                () => navigation.navigate("Wallet", { user: "" })
             }>
             <Ionicons
-              name={"ios-qr-code-outline"}
+              name={"ios-wallet-outline"}
               style={{ fontWeight: "100", fontSize: 26 }}
             />
-          </TouchableOpacity>
+            </TouchableOpacity>
+          ): null}
+        
+          {!ticket ? (
+              <TouchableOpacity onPress={() =>
+                navigation.navigate("Tickets", { user: "" })
+                
+              }
+              style={{
+                marginLeft: 10
+              }}>
+              <Ionicons
+                name={"ios-qr-code-outline"}
+                style={{ fontWeight: "100", fontSize: 26 }}
+              />
+            </TouchableOpacity>
+          ): null}
+        
         </View>
       </View>
       

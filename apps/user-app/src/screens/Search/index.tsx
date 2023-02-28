@@ -24,62 +24,65 @@ const Search = ({ navigation }: any) => {
     refetch: refetchStores,
   } = useQuery(GET_STORES);
 
-  // allUsers
   return (
-    <SafeAreaView>
-        
-        <View style={{
-            display:'flex',
-            flexDirection: 'row',
-            alignContent: 'center',
-            padding: 5,
-            marginTop: 10
-        }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Ionicons
-          name="ios-arrow-back"
-          style={{ fontWeight: "100", fontSize: 26 }}
-        />
-  </TouchableOpacity>
+    <SafeAreaView >
       <View
         style={{
-          justifyContent: "center",
+          display: "flex",
+          flexDirection: "row",
           alignItems: "center",
+          padding: 10,
+          marginTop: 5,
           width: "100%",
-          paddingVertical: 10,
-          position: "relative",
         }}
       >
-        <Ionicons
-          name="ios-search-outline"
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{
+          marginRight: 5
+        }}>
+          <Ionicons
+            name="ios-arrow-back"
+            style={{ fontWeight: "100", fontSize: 26 }}
+          />
+        </TouchableOpacity>
+        <View
           style={{
-            fontSize: 18,
-            opacity: 0.7,
-            position: "absolute",
-            zIndex: 1,
-            left: 25,
-          }}
-        />
-
-        <TextInput
-          style={{
-            width: "94%",
-            backgroundColor: "#EBEBEB",
-            borderRadius: 5,
+            flexDirection: "row",
+            justifyContent: "flex-start",
             alignItems: "center",
-            justifyContent: "center",
-            fontSize: 15,
-            padding: 4,
-            paddingLeft: 40,
+            height: 40,
+            backgroundColor: "#EBEBEB",
+            padding: 10,
+            borderRadius: 10,
+            width: '90%'
           }}
-          value={search}
-          placeholder="Buscar"
-          placeholderTextColor="#909090"
-          onChangeText={(text) => setSearch(text)}
-        />
+        >
+          <Ionicons
+            name="ios-search-outline"
+            style={{
+              fontSize: 18,
+              opacity: 0.7,
+              zIndex: 1,
+              marginRight: 5,
+            }}
+          />
+
+          <TextInput
+            style={{
+              borderRadius: 5,
+              height: 40,
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 16,
+              width: '100%'
+            }}
+            value={search}
+            placeholder="Buscar"
+            placeholderTextColor="#909090"
+            onChangeText={(text) => setSearch(text)}
+          />
+        </View>
       </View>
-      </View>
-      
+
       <View
         style={{
           display: "flex",
@@ -135,7 +138,7 @@ const Search = ({ navigation }: any) => {
         </View>
       </View>
 
-      {search.length == 0 ? (
+      {search.length == 0 && type == "users" ? (
         <View
           style={{
             display: "flex",
@@ -221,71 +224,70 @@ const Search = ({ navigation }: any) => {
             padding: 20,
           }}
         >
-          {search.length > 0 &&
-            stores?.getAllStores
-              ?.filter((user: any) =>
-                user.name.toLowerCase().includes(search.toLowerCase())
-              )
-              .map((user: any) => {
-                return (
-                  <TouchableOpacity
+          {stores?.getAllStores
+            ?.filter((user: any) =>
+              user.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((user: any) => {
+              return (
+                <TouchableOpacity
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                  key={user.uuid}
+                  onPress={() =>
+                    navigation.navigate("Store", { store: user.uuid })
+                  }
+                >
+                  <View
                     style={{
+                      height: 60,
+                      width: 60,
+                      borderRadius: 50,
+                      overflow: "hidden",
                       display: "flex",
-                      flexDirection: "row",
                       alignItems: "center",
-                      marginBottom: 10,
+                      justifyContent: "center",
+                      marginRight: 10,
                     }}
-                    key={user.uuid}
-                    onPress={() =>
-                      navigation.navigate("Store", { store: user.uuid })
-                    }
                   >
-                    <View
+                    <Image
                       style={{
-                        height: 60,
-                        width: 60,
+                        width: "100%",
+                        height: "100%",
                         borderRadius: 50,
-                        overflow: "hidden",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginRight: 10,
+                        resizeMode: "cover",
+                      }}
+                      source={{
+                        uri: user.photos[0]
+                          ? user.photos[0]
+                          : "https://i.postimg.cc/0jMMGxbs/default.jpg",
+                      }}
+                    />
+                  </View>
+                  <View>
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 16,
                       }}
                     >
-                      <Image
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: 50,
-                          resizeMode: "cover",
-                        }}
-                        source={{
-                          uri: user.photos[0]
-                            ? user.photos[0]
-                            : "https://i.postimg.cc/0jMMGxbs/default.jpg",
-                        }}
-                      />
-                    </View>
-                    <View>
-                      <Text
-                        style={{
-                          fontWeight: "600",
-                          fontSize: 16,
-                        }}
-                      >
-                        {user.name}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 16,
-                        }}
-                      >
-                        {user.type}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
+                      {user.name}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                      }}
+                    >
+                      {user.type}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
         </ScrollView>
       )}
     </SafeAreaView>

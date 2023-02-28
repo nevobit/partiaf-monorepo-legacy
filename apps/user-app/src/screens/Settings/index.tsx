@@ -31,7 +31,7 @@ const Settings = ({ route, navigation }: any) => {
   return (
     <View style={{ backgroundColor: "#fff", position: "relative" }}>
       <StatusBar animated={true} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} back={true} />
       <View style={{
         flexDirection: 'row',
         marginVertical: 10,

@@ -16,10 +16,11 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
       borderTopWidth: 1,
       borderBottomColor: 'rgba(255, 255, 255, 0)',
       justifyContent: 'space-around',
-      paddingTop: 10,
+      paddingTop: 8,
       paddingBottom: insets.bottom + 5,
       paddingLeft: insets.left,
       paddingRight: insets.right,
+      position: 'relative'
     }}>
       {state.routes.map((route, index) => {
         const focused = state.index === index;
@@ -27,7 +28,6 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
         const itemColor = "#111111";
 
         let iconName = "";
-        console.log({ focused });
         switch (route.name) {
           case "Home":
             iconName = focused ? "home" : "ios-home-outline";

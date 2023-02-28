@@ -15,6 +15,7 @@ import Modal from 'react-native-modal'
 import { SafeAreaView } from 'react-native';
 import { useQuery } from "@apollo/client";
 import { GET_USER_BALANCE } from "../../graphql/queries/user";
+import {Dimensions} from 'react-native';
 
 const OtherProfile = ({route, navigation}: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -24,9 +25,10 @@ const OtherProfile = ({route, navigation}: any) => {
   });
 
   const [modal, setModal] = useState(false);
+const halfWindowsHeight = Dimensions.get('window').height
   
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#fff", marginTop: StatusBar.currentHeight, height: halfWindowsHeight }}>
       <StatusBar animated={true} />
       <View style={styles.header}>
         <View style={{

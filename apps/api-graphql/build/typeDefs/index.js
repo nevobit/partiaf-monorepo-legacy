@@ -140,12 +140,14 @@ type Query {
     getStoreById(uuid: String): Store
     getCoversById(uuid: String): [Cover]
     getMyTikets(uuid: String): [Goer]
+    getMyBookings(uuid: String): [Booking]
     getCommentsByStore(uuid: String): [Comment]
 }
 
 type Mutation {
-    userSignup(name:String, phone:String, username:String, password:String): AuthPayload
+    userSignup(firstname:String, lastname:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
+    resetPassword(phone:String): String
     createGoer(data: GoerInput): Goer
     createBooking(data: BookingInput): Booking
     updateGoer(uuid: String, data: GoerInput): Goer
