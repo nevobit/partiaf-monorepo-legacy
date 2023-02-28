@@ -20,7 +20,8 @@
     "uuid": "^9.0.0",
     "@partiaf/types": "workspace:*",
     "@partiaf/constant-definitions": "workspace:*",
-    "twilio": "~4.8.0"
+    "twilio": "~4.8.0",
+    "dotenv": "~16.0.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

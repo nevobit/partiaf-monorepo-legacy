@@ -2,6 +2,9 @@ import { Collection, getModel } from "@partiaf/constant-definitions";
 import { User, UserSchemaMongo } from "@partiaf/types";
 import twilio from 'twilio';
 import otpGenerator from 'otp-generator'
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const accountSid = process.env.ACCOUNT_SID || "AC3427e300863332c60901d6618b308d23";
 const authToken = process.env.AUTH_TOKEN;
