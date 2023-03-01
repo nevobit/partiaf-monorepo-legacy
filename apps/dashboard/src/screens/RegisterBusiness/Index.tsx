@@ -1,4 +1,4 @@
-import { ImageInput, Input } from "@/components/shared";
+import { ImageInput, Input, MapForLocation } from "@/components/shared";
 import Button from "@/components/shared/Button";
 import Field from "@/components/shared/Field";
 import { uploadHandler } from "@/hooks/upload-image";
@@ -182,7 +182,7 @@ const RegisterBusiness = () => {
                     <option value="Gastrobar">Gastrobar</option>
                   </select>
                 </Field>
-               
+
               </div>
             </div>
             <p>Ingresa una contraseña</p>
@@ -202,6 +202,10 @@ const RegisterBusiness = () => {
                   onChange={({ target }) => setConfirmPassword(target.value)}
                 />
               </Field>
+            </div>
+            <div className={styles.containerMap}>
+              <p>Mapa</p>
+              <MapForLocation />
             </div>
             <Field>
               <Button onClick={nextScreen} backgroundColor="#333" color="#ccc">

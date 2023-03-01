@@ -90,6 +90,7 @@ importers:
       '@reduxjs/toolkit': ^1.9.1
       '@types/google-map-react': ^2.1.7
       '@types/googlemaps': ~3.43.3
+      '@types/leaflet': ~1.9.1
       '@types/react': ^18.0.24
       '@types/react-dom': ^18.0.8
       '@types/react-geocode': ^0.2.1
@@ -98,12 +99,14 @@ importers:
       axios: ^1.2.0
       gapi-script: ~1.2.0
       google-map-react: ^2.2.0
+      leaflet: ~1.9.3
       react: ^18.2.0
       react-dom: ^18.2.0
       react-geocode: ^0.2.3
       react-google-autocomplete: ^2.7.1
       react-google-maps: ^9.4.5
       react-icons: ~4.7.1
+      react-leaflet: ~4.2.1
       react-redux: ^8.0.5
       react-router-dom: ^6.4.4
       react-sweetalert2: ~0.5.2
@@ -114,16 +117,19 @@ importers:
     dependencies:
       '@partiaf/types': link:../../packages/types
       '@reduxjs/toolkit': 1.9.1_react-redux@8.0.5+react@18.2.0
+      '@types/leaflet': 1.9.1
       '@types/sweetalert': 2.0.4
       axios: 1.2.2
       gapi-script: 1.2.0
       google-map-react: 2.2.0_react-dom@18.2.0+react@18.2.0
+      leaflet: 1.9.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-geocode: 0.2.3
       react-google-autocomplete: 2.7.1_react@18.2.0
       react-google-maps: 9.4.5_41ef2f6d6e35950ad10e44b80055c042
       react-icons: 4.7.1_react@18.2.0
+      react-leaflet: 4.2.1_c607359e437343003bd5355563d75952
       react-redux: 8.0.5_413fd22576863b93ee6b19a7f7967615
       react-router-dom: 6.6.2_react-dom@18.2.0+react@18.2.0
       react-sweetalert2: 0.5.2_react-dom@18.2.0+react@18.2.0
@@ -1687,6 +1693,18 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
+  /@react-leaflet/core/2.1.0_c607359e437343003bd5355563d75952:
+    resolution: {integrity: sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      leaflet: 1.9.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@reduxjs/toolkit/1.9.1_react-redux@8.0.5+react@18.2.0:
     resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
     peerDependencies:
@@ -1789,6 +1807,10 @@ packages:
       '@types/serve-static': 1.15.0
     dev: false
 
+  /@types/geojson/7946.0.10:
+    resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
+    dev: false
+
   /@types/google-map-react/2.1.7:
     resolution: {integrity: sha512-7pquMUU20kVwbfEV91iAWXjApSkqoODkfUwTSmJpU9Tgd+ecX+MrQnplCqrSqKrPF1VjfvyWnDEicdoSd0G5qA==}
     dependencies:
@@ -1812,6 +1834,12 @@ packages:
     dependencies:
       '@types/node': 18.11.18
     dev: true
+
+  /@types/leaflet/1.9.1:
+    resolution: {integrity: sha512-lYawM3I3lLO6rmBASaqdGgY6zUL4YHr3H79/axx7FNYyPXuj0P1DZHbkNo8Itbv0i7Y9EryLWtDXXROMygXhRA==}
+    dependencies:
+      '@types/geojson': 7946.0.10
+    dev: false
 
   /@types/long/4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
@@ -3686,6 +3714,10 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
+  /leaflet/1.9.3:
+    resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
+    dev: false
+
   /levn/0.3.0:
     resolution: {integrity: sha512-0OO4y2iOHix2W6ujICbKIaEQXvFQHue65vUG3pb5EUomzPI90z9hsA1VsO/dbIIpC53J8gxM9Q4Oho0jrCM/yA==}
     engines: {node: '>= 0.8.0'}
@@ -4328,6 +4360,19 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-leaflet/4.2.1_c607359e437343003bd5355563d75952:
+    resolution: {integrity: sha512-p9chkvhcKrWn/H/1FFeVSqLdReGwn2qmiobOQGO3BifX+/vV/39qhY8dGqbdcPh1e6jxh/QHriLXr7a4eLFK4Q==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@react-leaflet/core': 2.1.0_c607359e437343003bd5355563d75952
+      leaflet: 1.9.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-redux/8.0.5_413fd22576863b93ee6b19a7f7967615:
