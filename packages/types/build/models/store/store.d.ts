@@ -22,7 +22,7 @@ export interface Store {
     email: string;
     password: string;
     phone: number;
-    location?: Location;
+    location?: Location | LatLngExpression;
     limit: number;
     photos: string[];
     status: string;

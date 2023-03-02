@@ -100,6 +100,7 @@ importers:
       gapi-script: ~1.2.0
       google-map-react: ^2.2.0
       leaflet: ~1.9.3
+      leaflet-control-geocoder: ~2.4.0
       react: ^18.2.0
       react-dom: ^18.2.0
       react-geocode: ^0.2.3
@@ -123,6 +124,7 @@ importers:
       gapi-script: 1.2.0
       google-map-react: 2.2.0_react-dom@18.2.0+react@18.2.0
       leaflet: 1.9.3
+      leaflet-control-geocoder: 2.4.0_leaflet@1.9.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-geocode: 0.2.3
@@ -3714,6 +3716,16 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
+  /leaflet-control-geocoder/2.4.0_leaflet@1.9.3:
+    resolution: {integrity: sha512-b2QlxuFd40uIDbnoUI3U9fzfnB4yKUYlmsXjquJ2d2YjoJqnyVYcIJeErAVv3kPvX3nI0gzvBq1XHMgSVFrGkQ==}
+    peerDependencies:
+      leaflet: ^1.6.0
+    dependencies:
+      leaflet: 1.9.3
+    optionalDependencies:
+      open-location-code: 1.0.3
+    dev: false
+
   /leaflet/1.9.3:
     resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
     dev: false
@@ -4069,6 +4081,11 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+
+  /open-location-code/1.0.3:
+    resolution: {integrity: sha512-DBm14BSn40Ee241n80zIFXIT6+y8Tb0I+jTdosLJ8Sidvr2qONvymwqymVbHV2nS+1gkDZ5eTNpnOIVV0Kn2fw==}
+    dev: false
+    optional: true
 
   /optionator/0.8.3:
     resolution: {integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==}

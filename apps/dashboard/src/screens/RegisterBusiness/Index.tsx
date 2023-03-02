@@ -7,13 +7,11 @@ import {
   PartialStore,
   reset,
 } from "@/redux/states/stores/storesSlice";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./registerBusiness.module.css";
 import { PrivateRoutes } from "../../constants-definitions/Routes/index";
-import { createStore } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/matosr96/image/upload";
@@ -33,6 +31,7 @@ const RegisterBusiness = () => {
     type: "Discoteca",
     description: "",
     photos: [],
+    location: [0, 0],
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
@@ -182,7 +181,6 @@ const RegisterBusiness = () => {
                     <option value="Gastrobar">Gastrobar</option>
                   </select>
                 </Field>
-
               </div>
             </div>
             <p>Ingresa una contraseña</p>
@@ -203,10 +201,9 @@ const RegisterBusiness = () => {
                 />
               </Field>
             </div>
-            <div className={styles.containerMap}>
-              <p>Mapa</p>
-              <MapForLocation />
-            </div>
+            <Field label="Ubicación del establecimiento">
+              <MapForLocation setState={setStore} />
+            </Field>
             <Field>
               <Button onClick={nextScreen} backgroundColor="#333" color="#ccc">
                 Siguiente
