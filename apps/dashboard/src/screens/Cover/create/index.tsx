@@ -1,9 +1,16 @@
 import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import { Button, Field, ImageInput, Input } from "@/components/shared";
+import {
+  Button,
+  Field,
+  ImageInput,
+  Input,
+  MapForLocation,
+} from "@/components/shared";
 import { createCover, reset } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 import { Discount } from "@/utils/percentage";
+import { LatLngExpression } from "leaflet";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./createcover.module.css";
@@ -31,7 +38,9 @@ const CreateCoverModal = (props: any) => {
     store: store.uuid,
     percentage: 0,
     status: true,
+    location: { lat: 4.6871722714242, lng: -74.05391727207545 },
   });
+  console.log({ cover }, "cover desde createcover");
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     if (name === "price") {
@@ -56,7 +65,7 @@ const CreateCoverModal = (props: any) => {
         createCover({
           ...cover,
           price: PriceConvert,
-          image: imageUrl
+          image: imageUrl,
         }) as any
       );
     } catch (error) {
@@ -169,6 +178,15 @@ const CreateCoverModal = (props: any) => {
                   />
                 </Field>
               </div>
+            </div>
+            <div className={styles.location_form}>
+              <Field label="Ubicacion del evento">
+                <MapForLocation
+                  setState={setCover}
+                  state={cover.location}
+                  className={styles.location_map}
+                />
+              </Field>
             </div>
             <Button onClick={submitCreateHandler}>Crear Cover</Button>
           </div>

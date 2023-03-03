@@ -74,13 +74,9 @@ const DragCloudinary = ({ idInput, setImageUrl }: Props) => {
       {uploadedUrl ? (
         <>
           <div className={styles.image_cover_form}>
-            <img
-              src={uploadedUrl}
-              alt="Uploaded Image"
-              
-            />
+            <img src={uploadedUrl} alt="Uploaded Image" />
             <button className={styles.btn_remove} onClick={handleChangeImage}>
-            <i className='bx bx-x-circle'></i>
+              <i className="bx bx-x-circle"></i>
             </button>
           </div>
         </>
@@ -89,6 +85,7 @@ const DragCloudinary = ({ idInput, setImageUrl }: Props) => {
           <input
             type="file"
             name={idInput}
+            hidden
             id={idInput}
             onChange={handleChange}
           />

@@ -11,4 +11,5 @@ export interface Cover {
     image: string;
     store: string;
     status: boolean;
+    location: LocationProps
 }
