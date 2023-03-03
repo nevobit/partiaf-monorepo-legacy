@@ -9,7 +9,6 @@ import {
 import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 import {
   Icon,
-  type LatLngExpression,
   type LeafletEventHandlerFnMap,
   type Marker as LeafletMarker,
   type LeafletMouseEventHandlerFn,
@@ -23,12 +22,11 @@ import styles from "./mapForLocation.module.css";
 
 import markeIcon from "../../assets/markeIcon.svg";
 
-export interface LocationProps {
-  lat: number;
-  lng: number;
-}
+import type { Cover } from "@partiaf/types";
 
-const INITIAL_LOCATION: LocationProps = {
+type Location = Cover["location"];
+
+const INITIAL_LOCATION: Location = {
   lat: 4.6871722714242,
   lng: -74.05391727207545,
 };
@@ -36,13 +34,11 @@ const INITIAL_LOCATION: LocationProps = {
 interface Props {
   setState: Dispatch<SetStateAction<any>>;
   className?: string;
-  state?: LocationProps;
+  state?: Location;
 }
 
 export default function MapForLocation({ setState, className, state }: Props) {
-  const [position, setPosition] = useState<LocationProps>(
-    state ?? INITIAL_LOCATION
-  );
+  const [position, setPosition] = useState<Location>(state ?? INITIAL_LOCATION);
 
   const markerRef = useRef<LeafletMarker<any> | null>(null);
 

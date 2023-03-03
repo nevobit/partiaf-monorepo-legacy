@@ -31,7 +31,7 @@ const RegisterBusiness = () => {
     type: "Discoteca",
     description: "",
     photos: [],
-    location: [0, 0],
+    location: { lat: 0, lng: 0 },
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
