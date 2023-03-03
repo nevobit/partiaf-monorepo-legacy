@@ -22,14 +22,28 @@ import MapEvents from "./MapEvents";
 import styles from "./mapForLocation.module.css";
 
 import markeIcon from "../../assets/markeIcon.svg";
-import { PartialStore } from "@/redux/states/stores/storesSlice";
 
-const INITIAL_LOCATION: LatLngExpression = [4.6985467, -74.1182006];
+export interface LocationProps {
+  lat: number;
+  lng: number;
+}
 
-type SetState = Dispatch<SetStateAction<PartialStore>>;
+const INITIAL_LOCATION: LocationProps = {
+  lat: 4.6871722714242,
+  lng: -74.05391727207545,
+};
 
-export default function MapForLocation({ setState }: { setState: SetState }) {
-  const [position, setPosition] = useState<LatLngExpression>(INITIAL_LOCATION);
+interface Props {
+  setState: Dispatch<SetStateAction<any>>;
+  className?: string;
+  state?: LocationProps;
+}
+
+export default function MapForLocation({ setState, className, state }: Props) {
+  const [position, setPosition] = useState<LocationProps>(
+    state ?? INITIAL_LOCATION
+  );
+
   const markerRef = useRef<LeafletMarker<any> | null>(null);
 
   const handleMapClick: LeafletMouseEventHandlerFn = ({ latlng }) => {
@@ -37,8 +51,8 @@ export default function MapForLocation({ setState }: { setState: SetState }) {
   };
 
   useEffect(() => {
-    setState((prev) => {
-      return { ...prev, location: position };
+    setState((prev: unknown) => {
+      return { ...(prev as object), location: position };
     });
   }, [position]);
 
@@ -63,8 +77,8 @@ export default function MapForLocation({ setState }: { setState: SetState }) {
 
   return (
     <MapContainer
-      className={styles.leaflet_container}
-      center={position}
+      className={`${styles.leaflet_container} ${className}`}
+      center={[position.lat, position.lng]}
       zoom={13}
       scrollWheelZoom
     >
@@ -77,7 +91,7 @@ export default function MapForLocation({ setState }: { setState: SetState }) {
         icon={addressIcon}
         draggable
         eventHandlers={eventHandlers}
-        position={position}
+        position={[position.lat, position.lng]}
       >
         <Popup>Estas aquí</Popup>
         <Tooltip>Estas aquí</Tooltip>

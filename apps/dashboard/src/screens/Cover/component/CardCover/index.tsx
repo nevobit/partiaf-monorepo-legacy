@@ -16,9 +16,21 @@ import swal from "sweetalert";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
-  const { name, description, limit, date, hour, price, uuid, type, image } =
-    Cover.cover;
+  const {
+    name,
+    description,
+    limit,
+    date,
+    hour,
+    price,
+    uuid,
+    type,
+    image,
+    location,
+  } = Cover.cover;
   const { cover } = Cover;
+
+  console.log(location, "location desde card cover");
 
   const [status, setStatus] = useState(false);
 

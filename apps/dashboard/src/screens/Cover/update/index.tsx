@@ -1,5 +1,5 @@
 import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import { Button, Field, Input } from "@/components/shared";
+import { Button, Field, Input, MapForLocation } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
@@ -45,9 +45,12 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     image: Urlimage,
     store: store.uuid || "",
     status: true,
+    location: Cover?.location,
   });
 
-  console.log({ cover });
+  console.log(store, "store desde update");
+
+  console.log({ cover }, "cover desde update");
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -55,7 +58,6 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   ) => {
     const { name, value } = e.target;
     setCover((prev) => ({ ...prev, [name]: value }));
-    //setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
   };
 
   const submitUpdateHandler = async (e: any) => {
@@ -154,6 +156,15 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
                 <DragCloudinary
                   idInput="file-update-cover"
                   setImageUrl={setUrlImage}
+                />
+              </Field>
+            </div>
+            <div className={styles.location_form}>
+              <Field label="Ubicacion del evento">
+                <MapForLocation
+                  state={cover.location}
+                  setState={setCover}
+                  className={styles.location_map}
                 />
               </Field>
             </div>

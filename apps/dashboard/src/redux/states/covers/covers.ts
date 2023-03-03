@@ -21,6 +21,7 @@ export const EmptyCoversState: PartialCover[] = [
     description: "",
     image: "",
     store: "",
+    location:{},
     status: false,
   },
 ];
@@ -37,6 +38,7 @@ export const EmptyCoverState: PartialCover = {
   description: "",
   image: "",
   store: "",
+  location:{},
   status: false,
 };
 
