@@ -16,6 +16,11 @@ interface Location {
     geo: Geo;
 }
 
+export interface StoreLocation {
+    lat: number;
+    lng: number;
+}
+
 export interface Store {
     uuid: string;
     name: string;
@@ -25,7 +30,7 @@ export interface Store {
     email: string;
     password: string;
     phone: number;
-    location?: Location;
+    location?: StoreLocation;
     limit: number;
     photos: string[];
     status: string;

@@ -1,17 +1,6 @@
-type Address = {
-    street: string;
-    city: string;
-    state: string;
-    zipcode: string;
-};
-type Geo = {
-    caract: string;
-    latitud: string;
-    longitud: string;
-};
-interface Location {
-    address: Address;
-    geo: Geo;
+export interface StoreLocation {
+    lat: number;
+    lng: number;
 }
 export interface Store {
     uuid: string;
@@ -22,7 +11,7 @@ export interface Store {
     email: string;
     password: string;
     phone: number;
-    location?: Location;
+    location?: StoreLocation;
     limit: number;
     photos: string[];
     status: string;
@@ -44,4 +33,3 @@ export interface Store {
     employe_code: number;
     admin: string;
 }
-export {};
