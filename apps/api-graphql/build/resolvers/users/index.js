@@ -67,10 +67,21 @@ exports.default = {
                 }
             });
         },
-        validationCode(_, data, context) {
+        validationCode(_, { uuid, code }, context) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const user = yield (0, build_1.resetPassword)(data);
+                    const user = yield (0, business_logic_1.validationCode)(uuid, code);
+                    return user;
+                }
+                catch (error) {
+                    return new Error("Telefono incorrecto: " + error.message);
+                }
+            });
+        },
+        changePassword(_, { uuid, paswword }, context) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const user = yield (0, business_logic_1.changePassword)(uuid, paswword);
                     return user;
                 }
                 catch (error) {

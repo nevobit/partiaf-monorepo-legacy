@@ -1,3 +1,7 @@
+export interface Location {
+    lat: number;
+    lng: number;
+}
 export interface Cover {
     uuid: string;
     name: string;
@@ -11,5 +15,5 @@ export interface Cover {
     image: string;
     store: string;
     status: boolean;
-    location: LocationProps
+    location: Location;
 }
