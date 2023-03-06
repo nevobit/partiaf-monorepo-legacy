@@ -29,7 +29,7 @@ const BookingList = (props: any) => {
 
           </div>
           <ul>
-            <li>Hora: {booking.time}</li>
+            <li>Hora: {booking.time} {booking.time.substring(0,2) > 12?  'PM' : 'AM'} </li>
             <li>Fecha: {booking.date.substring(0,10)}</li>
           </ul>
         </div>

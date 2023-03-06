@@ -5,6 +5,7 @@ export * from './models/cover';
 export * from './models/follow';
 export * from './models/goer';
 export * from './models';
+export * from './models/reported';
 export * from './models/store';
 export * from './models/user';
 export * from './models/waiter';

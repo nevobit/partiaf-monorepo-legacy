@@ -23,4 +23,7 @@ export const UserSchemaMongo = new Schema<User>({
     balance: {type: Number},
     events: {type: Number},
     pin: {type: Number},
+}, {
+    versionKey: false,
+    timestamps: true
 })

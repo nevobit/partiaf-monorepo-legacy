@@ -12,5 +12,6 @@ var Collection;
     Collection["COMMENTS"] = "comments";
     Collection["FOLLOWS"] = "follows";
     Collection["BOOKINGS"] = "bookings";
+    Collection["REPORTED"] = "reported";
 })(Collection = exports.Collection || (exports.Collection = {}));
 //# sourceMappingURL=constants.js.map

@@ -138,7 +138,7 @@ const Dashboard = () => {
           <i className="bx bxs-bank"></i>
           <h3 className={styles.title_center}>Balance</h3>
           <p>
-            {DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}
+            {DivisaFormater(store.balance)}
           </p>
         </div>
         <div className={`${styles.board_card} ${styles.span_2}`}>

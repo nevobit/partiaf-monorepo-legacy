@@ -8,4 +8,5 @@ export enum Collection{
     COMMENTS = 'comments',
     FOLLOWS = 'follows',
     BOOKINGS = 'bookings',
+    REPORTED = 'reported'
 }

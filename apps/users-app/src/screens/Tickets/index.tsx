@@ -412,7 +412,7 @@ const Tickets = ({ navigation }: Props) => {
                 }}>{DivisaFormater(coverSelected?.cost)}</Text>
               </DefaultView>
               )}
-              {coverSelected?.chairs && (
+              {coverSelected?.chairs&& (
                 
                 <DefaultView style={{
                   flexDirection: 'row',
@@ -429,6 +429,25 @@ const Tickets = ({ navigation }: Props) => {
                       color: colors[theme].text,
                       marginLeft: 10
                   }}>{coverSelected.chairs}</Text>
+                </DefaultView>
+                )}
+                         {coverSelected?.amount && (
+                
+                <DefaultView style={{
+                  flexDirection: 'row',
+                  alignItems: "center",
+                  justifyContent: 'flex-start',
+                  marginTop: 10
+                  
+                }}>
+                  <Ionicons name="people-outline" style={{
+                    color: colors[theme].text,
+                    fontSize: 24,
+                  }} />
+                  <Text style={{
+                      color: colors[theme].text,
+                      marginLeft: 10
+                  }}>{coverSelected?.amount}</Text>
                 </DefaultView>
                 )}
                  {coverSelected?.table && (

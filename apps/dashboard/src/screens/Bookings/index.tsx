@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./bookings.module.css";
 import CardBooking from "./Component/CardBooking";
 import BookingList from "./List";
+import swal from "sweetalert";
 
 export const usersByDatabaseMook = [
   {
@@ -93,11 +94,32 @@ const Bookings = () => {
 
   const dispatch = useDispatch();
   
+  const [successDelete, setSuccesDelete] = useState(false);
   const [bookings, setBookings] = useState([]);
   const getBookings = async () => {
     const {data} = await axios.get(`http://localhost:5000/api/v3/bookings/${store.uuid}`)
-    console.log(data)
     setBookings(data)
+  }
+  
+  const deleteBookings = async () => {
+      try {
+        swal({
+          text: "¿Está seguro que desea eliminar la reserva?",
+          icon: "warning",
+          buttons: ["Cancelar", "Eliminar"],
+          dangerMode: true,
+        }).then(async (willDelete: any) => {
+          if (willDelete) {
+            const {data} = await axios.delete(`http://localhost:5000/api/v3/bookings/${bookingSelected.uuid}`)
+            setSuccesDelete(data)
+            setBookingSelected({})
+          }
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error);
+        }
+      }
   }
   
   useEffect(() => {
@@ -106,7 +128,10 @@ const Bookings = () => {
     if (success) {
       dispatch(reset() as any);
     }
-  }, [dispatch, success]);
+    if (successDelete) {
+      dispatch(reset() as any);
+    }
+  }, [dispatch, success, successDelete]);
   return (
     <div className={styles.screen}>
       <div className={styles.center__screen}>
@@ -148,7 +173,7 @@ const Bookings = () => {
                 <p>{bookingSelected?.name}</p>
                 <h4>MESA {bookingSelected?.tables} | SILLAS {bookingSelected?.chairs}</h4>
               </div>
-              <button>CHECK-IN</button>
+              {/* <button>CHECK-IN</button> */}
             </div>
             <div className={styles.editor}>
               {bookingSelected? (
@@ -159,8 +184,8 @@ const Bookings = () => {
                   <li>Mesas: {bookingSelected.tables}</li>
                   <li>Sillas: {bookingSelected.chairs}</li>
                   <li>Hora: {bookingSelected.time}</li>
-                  <li>Fecha: {bookingSelected.date.substring(0,10)}</li>
-                  <li>Fecha de creacion: {bookingSelected.createdAt.substring(0,10)}</li>
+                  <li>Fecha: {bookingSelected?.date?.substring(0,10)}</li>
+                  <li>Fecha de creacion: {bookingSelected?.createdAt?.substring(0,10)}</li>
                 </ul>
               </div>
 
@@ -169,10 +194,10 @@ const Bookings = () => {
               )}
             </div>
             <div className={styles.footer}>
-              <button>
+              <button onClick={deleteBookings}>
                 ELIMINAR RESERVA
               </button>
-              <button>CHECK-OUT</button>
+              {/* <button>CHECK-OUT</button> */}
             </div>
           </div>
         </div>

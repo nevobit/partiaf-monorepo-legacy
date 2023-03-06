@@ -23,5 +23,8 @@ exports.UserSchemaMongo = new mongoose_1.Schema({
     balance: { type: Number },
     events: { type: Number },
     pin: { type: Number },
+}, {
+    versionKey: false,
+    timestamps: true
 });
 //# sourceMappingURL=user-mongo.js.map
