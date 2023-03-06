@@ -1,66 +1,95 @@
-import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import {
-  Button,
-  Field,
-  ImageInput,
-  Input,
-  MapForLocation,
-} from "@/components/shared";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import { createCover, reset } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
+
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
+import { Button, Field, Input, MapForLocation } from "@/components/shared";
+
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 import { Discount } from "@/utils/percentage";
-import { LatLngExpression } from "leaflet";
-import React, { ReactNode, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./createcover.module.css";
 
-const CreateCoverModal = (props: any) => {
-  const dispatch = useDispatch();
-  const [discount, setDiscount] = useState(false);
-  const { openModal, setOpenModal } = props;
+interface CreateCoverModalProps {
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const INITIAL_COVER = {
+  name: "",
+  type: "General",
+  date: "",
+  limit: 0,
+  initial_limit: 0,
+  hour: "",
+  description: "",
+  percentage: 0,
+  status: true,
+  location: { lat: 4.6871722714242, lng: -74.05391727207545 },
+};
+
+function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
+
+  const [discount, setDiscount] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value);
+
+  const dispatch = useDispatch();
+
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(event.target.value);
   };
+
   const [cover, setCover] = useState({
-    name: "",
-    type: "General",
-    date: "",
-    limit: 0,
-    initial_limit: 0,
-    hour: "",
-    description: "",
+    ...INITIAL_COVER,
     image: imageUrl,
     store: store.uuid,
-    percentage: 0,
-    status: true,
-    location: { lat: 4.6871722714242, lng: -74.05391727207545 },
   });
-  console.log({ cover }, "cover desde createcover");
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+
+  const handleChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = event.target;
+
     if (name === "price") {
-      const formattedPrice = currencyMask(e);
+      const formattedPrice = currencyMask(
+        event as ChangeEvent<HTMLInputElement>
+      );
       setCover((prev) => ({ ...prev, [name]: formattedPrice }));
     } else {
       setCover((prev) => ({ ...prev, [name]: value }));
     }
-    setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
-    setCover((prev) => ({ ...prev, image: imageUrl }));
+    setCover((prev) => ({
+      ...prev,
+      initial_limit: prev.limit,
+      image: imageUrl,
+    }));
   };
-  const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDiscount(e.target.checked);
+
+  const handleDiscount = (event: ChangeEvent<HTMLInputElement>) => {
+    setDiscount(event.target.checked);
   };
-  const submitCreateHandler = async (e: any) => {
-    e.preventDefault();
-    let PriceConvert = convertToNumber(price);
-    let percentage = Discount(PriceConvert, cover.percentage);
+
+  const submitCreateHandler = async (
+    event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    event.preventDefault();
+    const PriceConvert = convertToNumber(price);
+    const percentage = Discount(PriceConvert, cover.percentage);
+
     try {
-      console.log({ cover });
       dispatch(
         createCover({
           ...cover,
@@ -74,6 +103,7 @@ const CreateCoverModal = (props: any) => {
       }
     }
   };
+
   useEffect(() => {
     if (success) {
       setOpenModal(false);
@@ -95,7 +125,6 @@ const CreateCoverModal = (props: any) => {
                   reset();
                 }}
               >
-                {" "}
                 Cerrar
               </button>
             </div>
@@ -135,7 +164,7 @@ const CreateCoverModal = (props: any) => {
                   <Input
                     type="text"
                     value={"$" + price}
-                    onChange={(e) => handlePriceChange(currencyMask(e))}
+                    onChange={(event) => handlePriceChange(currencyMask(event))}
                   />
                 </Field>
                 {discount ? (
@@ -194,6 +223,6 @@ const CreateCoverModal = (props: any) => {
       </div>
     </>
   );
-};
+}
 
 export default CreateCoverModal;

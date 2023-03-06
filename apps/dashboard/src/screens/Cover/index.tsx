@@ -17,8 +17,6 @@ const Cover = () => {
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
 
-  console.log({ covers }, "covers desde lista de covers");
-
   useEffect(() => {
     dispatch(getCoverById(store.uuid || "") as any);
   }, [dispatch, store, success]);
@@ -61,7 +59,7 @@ const Cover = () => {
               ))}
             </div>
           </div>
-          <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />{" "}
+          <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />
         </>
       )}
     </>
