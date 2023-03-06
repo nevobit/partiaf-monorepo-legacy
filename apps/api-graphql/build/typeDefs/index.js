@@ -21,6 +21,14 @@ type Comment {
     createdAt: String
 }
 
+type Reported {
+    uuid: String
+    store: String
+    user: String
+    reason: String
+}
+
+
 type Cover {
     uuid: String
     name: String
@@ -99,6 +107,7 @@ type User {
     lastname: String
     username: String
     phone: String
+    biography: String
     photo: String
     status: String
 }
@@ -109,7 +118,8 @@ input UserInput {
     lastname: String
     username: String
     phone: String
-    photo: String
+    biography: String
+    photo: [String]
     pin: String
     status: String
 }
@@ -148,6 +158,8 @@ type Mutation {
     userSignup(firstname:String, lastname:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
     resetPassword(phone:String): String
+    validationCode(uuid:String, code:String): String
+    changePassword(uuid:String, password:String): AuthPayload
     createGoer(data: GoerInput): Goer
     createBooking(data: BookingInput): Booking
     updateGoer(uuid: String, data: GoerInput): Goer
@@ -157,6 +169,9 @@ type Mutation {
         user: String,
         store: String,
         photo: String): Comment
+    createReported(store: String,
+            user: String,
+            reason: String): Reported
 }
 `;
 exports.default = typeDefs;

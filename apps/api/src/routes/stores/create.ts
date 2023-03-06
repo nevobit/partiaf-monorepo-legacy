@@ -1,4 +1,4 @@
-import {createStore, signupAdmins} from '@partiaf/business-logic'
+import {createStore, createReported} from '@partiaf/business-logic'
 import { Store } from '@partiaf/types';
 import { RouteOptions } from 'fastify'
 

@@ -19,6 +19,14 @@ type Comment {
     createdAt: String
 }
 
+type Reported {
+    uuid: String
+    store: String
+    user: String
+    reason: String
+}
+
+
 type Cover {
     uuid: String
     name: String
@@ -159,6 +167,9 @@ type Mutation {
         user: String,
         store: String,
         photo: String): Comment
+    createReported(store: String,
+            user: String,
+            reason: String): Reported
 }
 `;
 

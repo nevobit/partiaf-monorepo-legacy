@@ -51,7 +51,6 @@ const CreateCoverModal = (props: any) => {
     let PriceConvert = convertToNumber(price);
     let percentage = Discount(PriceConvert, cover.percentage);
     try {
-      console.log({ cover });
       dispatch(
         createCover({
           ...cover,

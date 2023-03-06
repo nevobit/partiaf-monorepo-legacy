@@ -66,13 +66,32 @@ const Payment = ({ route, navigation }: any) => {
           }
         }
       });
-      
+      setModal(false)
       navigation.navigate("Tickets")
+      alert("Ticket comprado exitosamente");
 
     } catch (err) {
       setInfo(err);
     }
   };
+  
+  const createGoerFunc = async() => {
+    const { data } = await createComment({
+      variables:  {
+        data: {
+          amount: coverInfo.amount,
+          cost: coverInfo.cost,
+          cover: coverInfo.cover,
+          status: coverInfo.status,
+          time: coverInfo.time,
+          user: coverInfo.user,
+          name: coverInfo.name,
+          description: coverInfo.description,
+          image: coverInfo.image,            
+        }
+      }
+    });
+  }
   
   const updateUserHandler = async () => {
     try {
@@ -85,9 +104,12 @@ const Payment = ({ route, navigation }: any) => {
         }
       });
       
-      setInfo(data.updateUser.uuid)
+      
        if(data.updateUser.uuid){
-         navigation.navigate("Tickets")        
+      createGoerFunc();
+           setModal(false)
+      navigation.navigate("Tickets")
+      alert("Ticket comprado exitosamente");       
        }
       
 
@@ -244,7 +266,7 @@ const Payment = ({ route, navigation }: any) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: "55%",
+            height: 500,
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -558,7 +580,7 @@ const Payment = ({ route, navigation }: any) => {
         <View
           style={{
             backgroundColor: "#fff",
-            height: "55%",
+            height: 500,
             width: "100%",
             justifyContent: "center",
             alignItems: "center",

@@ -8,9 +8,7 @@ const BookingList = (props: any) => {
   const { dataBooking , setBooking} = props;
 
   const getUserData:any = (uuid: string) => {
-    // Axios
     const user = usersByDatabaseMook.filter((user) => user.uuid === uuid);
-    console.log({user});
     return user;
   }
   return (

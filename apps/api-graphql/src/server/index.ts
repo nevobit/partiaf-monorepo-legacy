@@ -28,5 +28,5 @@ server.listen(PORT, async () => {
     await initDataSources({ mongoose: {
         mongoUrl: MONGODB_URL
     }});
-    console.log(`Server running at https://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });

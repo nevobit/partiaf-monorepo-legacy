@@ -9,22 +9,22 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { IStore } from "../../types";
-import { Text, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView } from "react-native";
 import { useQuery } from "@apollo/client";
 import { GET_COVERS } from "../../graphql/queries/covers";
 import { DivisaFormater } from "../../utilities/divisaFormater";
 import { GET_STORE } from "../../graphql/queries/stores/index";
 import Header from "../../components/Layout/Header";
 import Modal from "react-native-modal";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector } from "react-redux";
-import {useEffect} from 'react';
-import { Dimensions } from 'react-native'
+import { useEffect } from "react";
+import { Dimensions } from "react-native";
 import ModalStore from "../../components/ModalStore";
 
 const Covers = ({ route, navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
-  
+
   const {
     data: store,
     loading: loadingStore,
@@ -39,75 +39,78 @@ const Covers = ({ route, navigation }: any) => {
 
   const [modal, setModal] = useState(false);
   const [modalOptions, setModalOptions] = useState(false);
-  
+
   const [amount, setAmount] = useState(0);
   const [coverSelected, setCoverSelected] = useState<any>({});
   const [coverSelectedPrev, setCoverSelectedPrev] = useState<any>({});
 
-  const setPeopleHandler = async ( cover: any) => {
+  const setPeopleHandler = async (cover: any) => {
     setCoverSelectedPrev(cover);
- 
+
     const coverInfo = {
       store: route.params.store,
       storeName: store?.getStoreById?.name,
       user: user.uuid,
-      status: 'in line',
-      cost: amount  * Number(coverSelected.price),
+      status: "in line",
+      cost: amount * Number(coverSelected.price),
       amount: amount,
       time: coverSelected.time,
       image: coverSelected.image,
       description: coverSelected.description,
       cover: coverSelected.uuid,
       name: coverSelected.name,
-      date: coverSelected.date
-  }
-  
-  await AsyncStorage.setItem('coverInfo', JSON.stringify(coverInfo))
-  
-    console.log({coverSelected})
-    
-  };
-  
-const halfWindowsHeight = Dimensions.get('window').height
-  
-const setCoverState = async(type: string, cover:any) => {
-  
-  setCoverSelected(cover)
-  
-  if (type == "+") {
-    console.log(coverSelected.uuid)
-    console.log(cover.uuid)
-    if (coverSelectedPrev.uuid != cover.uuid) {
-      console.log("Please select")
-      setAmount(1);
-    } else {
-      if (coverSelected.limit > amount) {
-      console.log("No more items selected")
-        setAmount((prev) => prev + 1);
-      }
-    }
-  } else {
-    if (coverSelected.uuid != cover.uuid) {
-      setCoverSelected({});
-      setCoverSelectedPrev({});
-      setAmount(0);
-    } else {
-      if (amount > 0) {
-        setAmount((prev) => prev - 1);
-      }
-    }
-  }
+      date: coverSelected.date,
+    };
 
-}
-  
-console.log({amount});
+    await AsyncStorage.setItem("coverInfo", JSON.stringify(coverInfo));
+
+    console.log({ coverSelected });
+  };
+
+  const halfWindowsHeight = Dimensions.get("window").height;
+
+  const setCoverState = async (type: string, cover: any) => {
+    setCoverSelected(cover);
+
+    if (type == "+") {
+      console.log(coverSelected.uuid);
+      console.log(cover.uuid);
+      if (coverSelectedPrev.uuid != cover.uuid) {
+        console.log("Please select");
+        setAmount(1);
+      } else {
+        if (coverSelected.limit > amount) {
+          console.log("No more items selected");
+          setAmount((prev) => prev + 1);
+        }
+      }
+    } else {
+      if (coverSelected.uuid != cover.uuid) {
+        setCoverSelected({});
+        setCoverSelectedPrev({});
+        setAmount(0);
+      } else {
+        if (amount > 0) {
+          setAmount((prev) => prev - 1);
+        }
+      }
+    }
+  };
+
+  console.log({ amount });
 
   useEffect(() => {
-    refetch()
-  }, [])
+    refetch();
+  }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#fff", position: "relative", height: halfWindowsHeight }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: "#fff",
+        position: "relative",
+        height: halfWindowsHeight,
+      }}
+    >
       <StatusBar animated={true} />
       <Header navigation={navigation} back={true} />
       <View
@@ -278,7 +281,7 @@ console.log({amount});
                       padding: 3,
                     }}
                     onPressIn={() => setCoverState("-", cover)}
-                    onPress={() => setPeopleHandler( cover)}
+                    onPress={() => setPeopleHandler(cover)}
                   >
                     <Ionicons
                       name="ios-remove"
@@ -299,7 +302,7 @@ console.log({amount});
                       borderRadius: 5,
                       padding: 3,
                     }}
-                    onPressIn={() => setCoverState("+",cover)}
+                    onPressIn={() => setCoverState("+", cover)}
                     onPress={() => setPeopleHandler(cover)}
                   >
                     <Ionicons
@@ -334,7 +337,7 @@ console.log({amount});
               justifyContent: "center",
               alignItems: "center",
             }}
-            onPress={() => navigation.navigate('Payment')}
+            onPress={() => navigation.navigate("Payment")}
           >
             <Text
               style={{
@@ -361,104 +364,121 @@ console.log({amount});
         isVisible={modal}
         swipeDirection={["down"]}
       >
-        
-        <View
+        <SafeAreaView
           style={{
             backgroundColor: "#fff",
-            height: "100%",
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 5,
-            borderColor: "rgba(0,0,0,0.1)",
             position: "relative",
+            height: halfWindowsHeight,
           }}
         >
           <View
             style={{
-              width: "100%",
+              backgroundColor: "#fff",
               height: "100%",
-              padding: 0,
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 5,
+              borderColor: "rgba(0,0,0,0.1)",
               position: "relative",
             }}
           >
-            
-<View style={styles.header}>
-        <TouchableOpacity onPress={() => setModal(false)}>
-        <Ionicons
-          name="ios-arrow-back"
-          style={{ fontWeight: "100", fontSize: 26 }}
-        />
-  </TouchableOpacity>
-      
-  
-        
-        <Image
-          source={{ uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png" }}
-          style={{
-            marginLeft: 23,
-            marginTop: 4,
-            width: 120,
-            height: 20,
-            resizeMode: "contain",
-          }}
-        />
-        <View style={styles.header_left}>
-              <TouchableOpacity >
-            
-            </TouchableOpacity>
-          
-        
-              <TouchableOpacity 
-              style={{
-                marginLeft: 10,
-                
-              }}>
-            
-            </TouchableOpacity>
-        
-        </View>
-      </View>
-      
             <View
               style={{
                 width: "100%",
-                height: 600,
+                height: "100%",
                 padding: 0,
-                backgroundColor: "#000",
-                display: 'flex',
-                flexDirection:'row',
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start'
+                position: "relative",
               }}
             >
-              <Image
-                source={{ uri: coverSelected.image }}
+              <View style={styles.header}>
+                <TouchableOpacity onPress={() => setModal(false)}>
+                  <Ionicons
+                    name="ios-arrow-back"
+                    style={{ fontWeight: "100", fontSize: 26 }}
+                  />
+                </TouchableOpacity>
+
+                <Image
+                  source={{
+                    uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png",
+                  }}
+                  style={{
+                    marginLeft: 23,
+                    marginTop: 4,
+                    width: 120,
+                    height: 20,
+                    resizeMode: "contain",
+                  }}
+                />
+                <View style={styles.header_left}>
+                  <TouchableOpacity></TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  ></TouchableOpacity>
+                </View>
+              </View>
+
+              <View
                 style={{
                   width: "100%",
-                  height: "100%",
-                  resizeMode: 'stretch'
+                  height: 600,
+                  padding: 0,
+                  backgroundColor: "#000",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
                 }}
-              />
-            </View>
-            
-            <View style={{
-              padding: 10,
-              paddingHorizontal: 20
-            }} >
-              <View>
-                <Text style={{fontSize: 18}}><Text style={{fontWeight: '600'}}>Nombre:</Text> {coverSelected.name}</Text>
-                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Cupos:</Text> {coverSelected.limit}</Text>
-                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Precio:</Text> {DivisaFormater(coverSelected.price)}</Text>
-                <Text style={{fontSize: 18}} ><Text style={{fontWeight: '600'}}>Descripcion:</Text> {coverSelected.description}</Text>
+              >
+                <Image
+                  source={{ uri: coverSelected.image }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    resizeMode: "stretch",
+                  }}
+                />
+              </View>
+
+              <View
+                style={{
+                  padding: 10,
+                  paddingHorizontal: 20,
+                }}
+              >
+                <View>
+                  <Text style={{ fontSize: 18 }}>
+                    <Text style={{ fontWeight: "600" }}>Nombre:</Text>{" "}
+                    {coverSelected.name}
+                  </Text>
+                  <Text style={{ fontSize: 18 }}>
+                    <Text style={{ fontWeight: "600" }}>Cupos:</Text>{" "}
+                    {coverSelected.limit}
+                  </Text>
+                  <Text style={{ fontSize: 18 }}>
+                    <Text style={{ fontWeight: "600" }}>Precio:</Text>{" "}
+                    {DivisaFormater(coverSelected.price)}
+                  </Text>
+                  <Text style={{ fontSize: 18 }}>
+                    <Text style={{ fontWeight: "600" }}>Descripcion:</Text>{" "}
+                    {coverSelected.description}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
-      
-      
-      <ModalStore modal={modalOptions} setModal={setModalOptions} phone={data?.getStoreById?.phone} />
+
+      <ModalStore
+        modal={modalOptions}
+        setModal={setModalOptions}
+        phone={data?.getStoreById?.phone}
+      />
     </SafeAreaView>
   );
 };

@@ -47,7 +47,6 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     status: true,
   });
 
-  console.log({ cover });
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
