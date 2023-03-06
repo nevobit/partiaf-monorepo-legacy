@@ -48,9 +48,6 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     location: Cover?.location,
   });
 
-  console.log(store, "store desde update");
-
-  console.log({ cover }, "cover desde update");
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
