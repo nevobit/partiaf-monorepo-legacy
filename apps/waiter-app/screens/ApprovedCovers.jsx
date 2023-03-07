@@ -16,8 +16,8 @@ import CoverCount from '../components/CoverCount'
 import Dropdown from '../components/Dropdown'
 import CoverItem from '../components/CoverItem'
 
-import ChevronLeftIcon from '../assets/chevronLeft.svg'
-import CheckCircleIcon from '../assets/checkCircle.svg'
+const ChevronLeftIcon =  require('../assets/chevronLeft.svg')
+const CheckCircleIcon = require('../assets/checkCircle.svg')
 
 import { theme, variables } from '../theme'
 import data from '../data/covers'

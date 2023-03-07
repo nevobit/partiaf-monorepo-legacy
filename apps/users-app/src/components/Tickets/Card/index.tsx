@@ -60,7 +60,7 @@ const Card = ({logo, setOpenModalQr, setModal, item, setCoverSelected}:any) => {
         logoSize={25}
         logoBackgroundColor="#000"
         logoBorderRadius={50}
-        value={JSON.stringify(item)}
+        value={JSON.stringify({cost:item.cost,amount:item.amount, date: item.date, time: item.time, name: item.name, status: item.status})}
       />
       <DefaultView
         style={{
@@ -183,7 +183,7 @@ export const BookingCard = ({logo, setOpenModalQr, setModal, item, setCoverSelec
         logoSize={25}
         logoBackgroundColor="#000"
         logoBorderRadius={50}
-        value={JSON.stringify(item)}
+        value={JSON.stringify({cost:item.cost,amount:item.amount, date: item.date, time: item.time, name: item.name, status: item.status})}
       />
       <DefaultView
         style={{

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, TouchableNativeFeedback } from 'react-native'
+import { Text, View, Alert, StyleSheet, TouchableNativeFeedback } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { BarCodeScanner } from 'expo-barcode-scanner'
@@ -7,10 +7,13 @@ import { BarCodeScanner } from 'expo-barcode-scanner'
 import ScannerBorderIcon from '../assets/scannerBorder.svg'
 import XIcon from '../assets/x.svg'
 import { variables } from '../theme'
+import { DivisaFormater } from '../utils/divisaFormater'
+
 
 const QrCodeScanner = () => {
   const [hasPermission, setHasPermission] = useState(null)
   const [scanned, setScanned] = useState(false)
+  const [info, setInfo] = useState({})
 
   const navigation = useNavigation()
 
@@ -29,9 +32,14 @@ const QrCodeScanner = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true)
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`)
+    setInfo(JSON.parse(data));
+    console.log(JSON.parse(data))
+    alert(`Evento: ${JSON.parse(data).name}\nValor pagado: ${JSON.parse(data)?.cost?.toLocaleString("en-US", {
+      style: 'currency',
+  currency: 'USD',
+    })}\nCantidad de personas: ${JSON.parse(data).amount}\nHora: ${JSON.parse(data).time}\nFecha: ${JSON.parse(data).date}  `)
   }
-
+  
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>
   }

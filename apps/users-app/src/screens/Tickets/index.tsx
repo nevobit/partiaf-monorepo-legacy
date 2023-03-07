@@ -348,9 +348,7 @@ const Tickets = ({ navigation }: Props) => {
               >
                 <QRCode
                   size={220}
-                  // backgroundColor={colors[theme].modal}
-
-                  value={JSON.stringify(coverSelected)}
+                  value={JSON.stringify({cost:coverSelected?.cost,amount:coverSelected?.amount, date: coverSelected?.date, time: coverSelected?.time, name: coverSelected?.name, status: coverSelected?.status})}
                 />
               </DefaultView>
               

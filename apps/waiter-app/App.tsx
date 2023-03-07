@@ -8,8 +8,8 @@ import QrCodeScanner from './screens/QrCodeScanner';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
-  LogBox.ignoreLogs(["Remote debugger"]);
+const App = () => {
+  // LogBox.ignoreLogs(["Remote debugger"]);
 
   return (
     <NavigationContainer>
@@ -23,3 +23,5 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default App;
