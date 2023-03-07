@@ -1,7 +1,7 @@
 import Button from "@/components/shared/Button";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
-import { PublicRoutes } from "@/constants-definitions/Routes";
+import { PrivateRoutes, PublicRoutes } from "@/constants-definitions/Routes";
 import { signup } from "@/redux/states/admins/admin";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -79,7 +79,8 @@ const Signup = () => {
 
   useEffect(() => {
     if (successSignup) {
-      navigate("/verification", { replace: true });
+      navigate(PrivateRoutes.BUSINESS, { replace: true });
+      // navigate("/verification", { replace: true });
     }
   }, [admin, successSignup, navigate]);
 
