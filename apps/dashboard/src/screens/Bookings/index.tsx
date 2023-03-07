@@ -97,7 +97,7 @@ const Bookings = () => {
   const [successDelete, setSuccesDelete] = useState(false);
   const [bookings, setBookings] = useState([]);
   const getBookings = async () => {
-    const {data} = await axios.get(`http://localhost:5000/api/v3/bookings/${store.uuid}`)
+    const {data} = await axios.get(`https://partiaf-api.xyz/api/v3/bookings/${store.uuid}`)
     setBookings(data)
   }
   
