@@ -7,12 +7,14 @@ const get_one_1 = require("./get-one");
 const list_bookings_1 = require("./list-bookings");
 const signin_1 = require("./signin");
 const update_1 = require("./update");
+const delete_booking_1 = require("./delete-booking");
 exports.storeRoutes = [
     create_1.createStoreRoute,
     get_by_id_1.getStoresByIdRoute,
     get_one_1.getStoreByIdRoute,
     signin_1.signinStoreRoute,
     update_1.updateStoreRoute,
-    list_bookings_1.getBookingsByIdRoute
+    list_bookings_1.getBookingsByIdRoute,
+    delete_booking_1.deleteBookingByIdRoute
 ];
 //# sourceMappingURL=index.js.map

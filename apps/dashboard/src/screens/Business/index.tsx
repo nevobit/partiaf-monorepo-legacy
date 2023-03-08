@@ -50,11 +50,11 @@ const Bussiness = () => {
     dispatch(loginStore({ uuid: storeSelected?.uuid || "", password }) as any);
   };
 
-  useEffect(() => {
-    if (admin && !admin.status) {
-      navigate(PrivateRoutes.VERIFICATION);
-    }
-  }, [navigate, dispatch]);
+  // useEffect(() => {
+    // if (admin && !admin.status) {
+    //   navigate(PrivateRoutes.VERIFICATION);
+    // }
+  // }, [navigate, dispatch]);
 
   useEffect(() => {
     dispatch(getStoresById(admin.uuid) as any);

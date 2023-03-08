@@ -54,6 +54,18 @@ const CardCover = (Cover: any) => {
     setStatus(!status);
     e.preventDefault();
     try {
+      dispatch(updateCover({ ...cover, status: cover.status }) as any);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
+  };
+  
+  const submitUpdateStatusHandler = async (e: any) => {
+    setStatus(!status);
+    e.preventDefault();
+    try {
       dispatch(updateCover({ ...cover, status: !cover.status }) as any);
     } catch (error) {
       if (error instanceof Error) {
@@ -120,7 +132,7 @@ const CardCover = (Cover: any) => {
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
-              onClick={submitUpdateHandler}
+              onClick={submitUpdateStatusHandler}
             >
               {cover.status ? "activo" : "inactivo"}
             </button>

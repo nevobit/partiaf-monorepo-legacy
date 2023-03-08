@@ -6,8 +6,12 @@ export const WaiterSchemaMongo = new Schema<Waiter>({
     firstname: {type: String},
     lastname: {type: String},
     username: {type: String},
-    email: {type: String, unique: true},
+    email: {type: String},
     code: {type: Number},
     last_login: {type: Date, default: Date.now()},
     admin: {type: String},
+    store: {type: String},
+},{
+    versionKey: false,
+    timestamps: true
 })
