@@ -1,5 +1,6 @@
-import React, { ReactElement } from "react";
+import React, { FocusEventHandler, ReactElement } from "react";
 import styles from "./Input.module.css";
+import InvalidFeedback from "../InvalidFeedback";
 
 interface Props {
   value?: string | number;
@@ -14,6 +15,9 @@ interface Props {
   fontSize?: string;
   fontWeight?: string;
   maxLength?: number;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  isError?: boolean | undefined;
+  invalidFeedback?: string;
 }
 
 const Input = ({
@@ -29,25 +33,31 @@ const Input = ({
   width,
   fontSize,
   fontWeight,
+  onBlur,
+  isError,
+  invalidFeedback,
 }: Props) => {
   return (
-    <div className={styles.input}>
-      {icon && <i className={icon}></i>}
-      <input
-        name={name}
-        type={type}
-        maxLength={maxLength}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        style={{ fontSize: fontSize, fontWeight: fontWeight, width: width }}
-        className={`${styles.input_element} ${
-          className == "none" && styles.input_none
-        }`}
-        value={value}
-        placeholder={placeholder}
-        required
-      />
-    </div>
+    <>
+      <div className={styles.input}>
+        {icon && <i className={icon}></i>}
+        <input
+          name={name}
+          type={type}
+          onBlur={onBlur}
+          maxLength={maxLength}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          style={{ fontSize: fontSize, fontWeight: fontWeight, width: width }}
+          className={`${styles.input_element} ${
+            className == "none" && styles.input_none
+          }`}
+          value={value}
+          placeholder={placeholder}
+        />
+      </div>
+      <InvalidFeedback isError={isError}>{invalidFeedback}</InvalidFeedback>
+    </>
   );
 };
 

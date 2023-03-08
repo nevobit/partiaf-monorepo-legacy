@@ -152,7 +152,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
               <Field>
                 <DragCloudinary
                   idInput="file-update-cover"
-                  setImageUrl={setUrlImage}
+                  setImageUrl={handleImageChange}
                 />
               </Field>
             </div>
