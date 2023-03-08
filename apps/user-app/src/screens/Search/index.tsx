@@ -210,6 +210,8 @@ const Search = ({ navigation }: any) => {
                         }}
                       />
                     </View>
+                    <View>
+                      
                     <Text
                       style={{
                         fontWeight: "600",
@@ -218,6 +220,11 @@ const Search = ({ navigation }: any) => {
                     >
                       {user.username}
                     </Text>
+                    <Text style={{
+                      fontSize: 14
+                    }}>{user.firstname} {user.lastname}</Text>
+                    </View>
+                  
                   </TouchableOpacity>
                 );
               })}

@@ -1,6 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, TextInput, StatusBar, Platform } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, TextInput, StatusBar, Platform } from "react-native";
 import Header from "../../components/Layout/Header";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { GET_MY_TICKETS } from "../../graphql/queries/goers";
@@ -287,7 +287,7 @@ useEffect(() => {
                   left: 0,
                   height: "100%",
                   width: 10,
-                  backgroundColor: ticket.status == 'in line'? "rgba(0,0,0,.3)" : ticket.status== 'cancelled'? 'red': 'green',
+                  backgroundColor: ticket.status == 'in list'? "rgba(0,0,0,.3)" : ticket.status== 'checkout'? 'red': 'green',
                 }}
               ></View>
               <TouchableOpacity
@@ -346,6 +346,8 @@ useEffect(() => {
         isVisible={modal}
         swipeDirection={["down"]}
       >
+        <SafeAreaView style={{ backgroundColor: "#fff", position: "relative", height: halfWindowsHeight }}>
+        
         <View
           style={{
             backgroundColor: "#fff",
@@ -358,6 +360,8 @@ useEffect(() => {
             position: "relative",
           }}
         >
+              
+
           <View
             style={{
               width: "100%",
@@ -366,6 +370,36 @@ useEffect(() => {
               position: "relative",
             }}
           >
+               <View style={styles.header}>
+                <TouchableOpacity onPress={() => setModal(false)}>
+                  <Ionicons
+                    name="ios-arrow-back"
+                    style={{ fontWeight: "100", fontSize: 26 }}
+                  />
+                </TouchableOpacity>
+
+                <Image
+                  source={{
+                    uri: "https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png",
+                  }}
+                  style={{
+                    marginLeft: 23,
+                    marginTop: 4,
+                    width: 120,
+                    height: 20,
+                    resizeMode: "contain",
+                  }}
+                />
+                <View style={styles.header_left}>
+                  <TouchableOpacity></TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  ></TouchableOpacity>
+                </View>
+              </View>
             <View
               style={{
                 width: "100%",
@@ -401,6 +435,7 @@ useEffect(() => {
             </View>
           </View>
         </View>
+        </SafeAreaView>
       </Modal>
       
       <Modal
@@ -491,5 +526,19 @@ useEffect(() => {
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    height: 50,
+    justifyContent: "space-between",
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  header_left: {
+    display: "flex",
+    flexDirection: "row",
+  },
+});
 
 export default Tickets;

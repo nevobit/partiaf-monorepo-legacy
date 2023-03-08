@@ -131,7 +131,7 @@ const halfWindowsHeight = Dimensions.get('window').height
             marginBottom: 5,
           }}
         >
-          {user.firstname} {user.lastname}
+          {data?.userById?.firstname} {data?.userById?.lastname}
         </Text>
         <Text>{data?.userById?.biography}</Text>
       </View>

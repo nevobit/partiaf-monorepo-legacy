@@ -51,6 +51,7 @@ query Query($uuid: String) {
     photo
     username
     firstname
+    lastname
     followers
     following
     gender

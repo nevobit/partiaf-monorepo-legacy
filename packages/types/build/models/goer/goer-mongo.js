@@ -18,4 +18,9 @@ exports.GoerSchemaMongo = new mongoose_1.Schema({
     versionKey: false,
     timestamps: true
 });
+exports.GoerSchemaMongo.virtual('coverDetails', {
+    ref: 'covers',
+    localField: 'covers',
+    foreignField: 'cover'
+});
 //# sourceMappingURL=goer-mongo.js.map

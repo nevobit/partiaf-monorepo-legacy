@@ -54,7 +54,7 @@ const CardCover = (Cover: any) => {
     setStatus(!status);
     e.preventDefault();
     try {
-      dispatch(updateCover({ ...cover, status: status }) as any);
+      dispatch(updateCover({ ...cover, status: !cover.status }) as any);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);

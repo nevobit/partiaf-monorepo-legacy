@@ -6,6 +6,8 @@ const types_1 = require("@partiaf/types");
 const getGoersByUser = async (uuid) => {
     const model = await (0, constant_definitions_1.getModel)(constant_definitions_1.Collection.GOERS, types_1.GoerSchemaMongo);
     const goers = await model.find({ user: uuid });
+    const goer = await model.findOne({ user: uuid }).populate("cover");
+    console.log({ goer });
     return goers;
 };
 exports.getGoersByUser = getGoersByUser;

@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import TimeAgo from "react-native-timeago";
 import moment from "moment";
 import "moment/locale/es";
+import { GET_USER_BALANCE } from "../../graphql/queries/user";
 
 moment.locale("es");
 
@@ -37,6 +38,10 @@ const Comments = ({ route, navigation }: any) => {
       variables: { uuid: route.params.store },
     }
   );
+  
+  const { data: userData, loading: loadingUser, error: erroUser } = useQuery(GET_USER_BALANCE, {
+    variables: { uuid: user.uuid },
+  });
 
   const [createComment] = useMutation(CREATE_COMMENT);
   const [info, setInfo] = useState<any>();
@@ -48,7 +53,7 @@ const Comments = ({ route, navigation }: any) => {
           user: user.username,
           store: route.params.store,
           text: comment,
-          photo: user.photo[0],
+          photo: userData?.userById?.photo[0],
         },
       });
 

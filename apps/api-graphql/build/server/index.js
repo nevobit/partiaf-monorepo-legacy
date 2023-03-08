@@ -36,5 +36,5 @@ server.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, exports.initDataSources)({ mongoose: {
             mongoUrl: MONGODB_URL
         } });
-    console.log(`Server running at https://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 }));

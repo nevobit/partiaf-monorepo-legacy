@@ -50,7 +50,6 @@ const Bussiness = () => {
     dispatch(loginStore({ uuid: storeSelected?.uuid || "", password }) as any);
   };
 
-  console.log({ error });
   useEffect(() => {
     if (admin && !admin.status) {
       navigate(PrivateRoutes.VERIFICATION);

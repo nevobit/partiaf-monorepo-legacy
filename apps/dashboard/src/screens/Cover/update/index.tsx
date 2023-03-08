@@ -20,7 +20,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
 
-  const [Urlimage, setUrlImage] = useState("");
+  const [Urlimage, setUrlImage] = useState(Cover.image);
   const [imageSelected, setImageSelected] = useState(false);
 
   const handleImageChange = (imageUrl: string) => {
@@ -28,10 +28,6 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     setImageSelected(true);
   };
 
-  const [price, setPrice] = useState("");
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value);
-  };
   const [cover, setCover] = useState<Cover>({
     uuid: Cover.uuid,
     name: Cover?.name,
@@ -42,11 +38,16 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
     initial_limit: Cover?.limit,
     hour: Cover?.hour,
     description: Cover?.description,
-    image: Urlimage,
+    image: Cover.image,
     store: store.uuid || "",
     status: true,
     location: Cover?.location,
   });
+  
+  const [price, setPrice] = useState<string>(String(cover?.price));
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -121,7 +122,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
                 />
               </Field>
               <Field label="Fecha">
-                <Input type="date" name="date" onChange={handleChange} />
+                <Input type="date" value={cover.date}  name="date" onChange={handleChange} />
               </Field>
             </div>
             <div className={styles.data_fields}>
@@ -134,7 +135,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
                 />
               </Field>
               <Field label="Tipo">
-                <select name="type" onChange={handleChange}>
+                <select name="type" value={cover.type} onChange={handleChange}>
                   <option value="VIP">VIP</option>
                   <option value="General">General</option>
                 </select>
@@ -151,6 +152,7 @@ const EditCoverModal = ({ setOpenModal, openModal, Cover }: Props) => {
               </Field>
               <Field>
                 <DragCloudinary
+                url={cover.image}
                   idInput="file-update-cover"
                   setImageUrl={handleImageChange}
                 />

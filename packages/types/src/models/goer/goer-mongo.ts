@@ -18,3 +18,9 @@ export const GoerSchemaMongo = new Schema<Goer>({
     versionKey: false,
     timestamps: true
 })
+
+GoerSchemaMongo.virtual('coverDetails', {
+    ref: 'covers',
+    localField: 'covers',
+    foreignField: 'cover'
+})
