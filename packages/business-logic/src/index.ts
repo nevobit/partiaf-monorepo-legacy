@@ -10,6 +10,8 @@ export * from './follow/unfollow';
 export * from './goer';
 export * from './helpers/email-service';
 export * from './helpers/send-password-reset-emai';
+export * from './index';
 export * from './reported';
 export * from './stores';
 export * from './users';
+export * from './waiters';

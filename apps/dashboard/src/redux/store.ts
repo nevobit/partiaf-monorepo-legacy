@@ -9,9 +9,10 @@ import {
 import { coversSlice, PartialCover } from "./states/covers/covers";
 import { Store } from "@partiaf/types";
 import { goersSlice, PartialGoer } from "./states/goers/goers";
+import { PartialWaiter, waitersSlice } from "./states/waiters/waiters";
 
 interface StoresSlice {
-  stores:   PartialStore[];
+  stores: PartialStore[];
   store: Store;
   oneStore: PartialStore;
   loading: boolean;
@@ -23,6 +24,14 @@ interface StoresSlice {
 interface CoverssSlice {
   covers: PartialCover[];
   cover: PartialCover;
+  loading: boolean;
+  success: boolean;
+  error: string;
+}
+
+interface WaiterssSlice {
+  waiters: PartialWaiter[];
+  waiter: PartialWaiter;
   loading: boolean;
   success: boolean;
   error: string;
@@ -40,6 +49,7 @@ export interface AppStore {
   stores: StoresSlice;
   covers: CoverssSlice;
   goers: GoerssSlice;
+  waiters: WaiterssSlice;
 }
 
 export default configureStore<AppStore>({
@@ -47,6 +57,7 @@ export default configureStore<AppStore>({
     admins: adminsSlice.reducer,
     stores: storesSlice.reducer,
     covers: coversSlice.reducer,
-    goers: goersSlice.reducer
+    goers: goersSlice.reducer,
+    waiters: waitersSlice.reducer
   },
 });

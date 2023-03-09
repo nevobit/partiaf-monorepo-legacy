@@ -1,0 +1,93 @@
+.screen_waiter {
+  margin-left: 17rem;
+  padding: 4rem;
+}
+
+.header_screen_waiter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_screen_waiter button {
+  background-color: var(--black);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+.thead {
+  text-align: center;
+}
+
+.thead th {
+  padding: 1rem 0.5rem;
+  font-size: 1.8rem;
+  color: var(--black);
+  font-weight: 600;
+  text-align: left;
+}
+
+.tbody {
+  text-align: left;
+}
+
+.tbody td {
+  text-align: left;
+  padding: 1rem 0.7rem;
+  font-weight: 400;
+  font-size: 1.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--black);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.btn_context {
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.context_menu {
+  display: none;
+}
+
+.actions .context_menu.active {
+  position: absolute;
+  background-color: var( --bg-main);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  top: 2rem;
+  left: 0;
+  z-index: 99;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.context_menu.active button {
+  font-size: 1.4rem;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: left;
+}
+
+.context_menu.active button:hover {
+  color: rgba(0, 0, 0, 1);
+}

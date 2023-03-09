@@ -5,6 +5,7 @@ import { storeRoutes } from "./stores";
 import { coverRoutes } from "./covers";
 import { goersRoutes } from "./goers";
 import { usersRoutes } from "./users";
+import { waitersRoutes } from "./waiters";
 
 const routes: RouteOptions[] = [
   healthCheckRoute,
@@ -12,7 +13,8 @@ const routes: RouteOptions[] = [
   ...storeRoutes,
   ...coverRoutes,
   ...goersRoutes,
-  ...usersRoutes
+  ...usersRoutes,
+  ...waitersRoutes,
 ];
 export const registerRoutes = (fastify: FastifyInstance) => {
   fastify.log.warn("Registering routes", routes);
