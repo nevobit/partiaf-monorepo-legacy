@@ -10,6 +10,9 @@ const Card = ({name, type, date}:any) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 20,
+        backgroundColor: '#f2f2f2',
+        padding: 20,
+        borderRadius: 5
     }}>
       <View>
         <Text>{name}</Text>

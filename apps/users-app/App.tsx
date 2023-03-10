@@ -14,7 +14,7 @@ import Signup from "./src/screens/Signup";
 import Home from "./src/screens/Home";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { ApolloProvider } from "@apollo/client";
-import client from './src/graphql';
+import client from "./src/graphql";
 import { Provider } from "react-redux";
 import { persistor, store } from "./src/app/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -22,24 +22,17 @@ import { PersistGate } from "redux-persist/integration/react";
 const App = () => {
   const { updateTheme } = useTheme();
   console.log(updateTheme);
-  
-  
+
   return (
     <Provider store={store}>
-      
-    <ApolloProvider client={client}>
-      <PersistGate loading={null} persistor={persistor}>
-        
-
-    <ThemeProvider>
-      <AppNavigator />
-    </ThemeProvider>
-    </PersistGate>
-
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider>
+            <AppNavigator />
+          </ThemeProvider>
+        </PersistGate>
+      </ApolloProvider>
     </Provider>
-    
-
   );
 };
 

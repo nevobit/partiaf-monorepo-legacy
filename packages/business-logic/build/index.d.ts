@@ -13,3 +13,4 @@ export * from './helpers/send-password-reset-emai';
 export * from './reported';
 export * from './stores';
 export * from './users';
+export * from './waiter';

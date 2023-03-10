@@ -16,4 +16,5 @@ tslib_1.__exportStar(require("./helpers/send-password-reset-emai"), exports);
 tslib_1.__exportStar(require("./reported"), exports);
 tslib_1.__exportStar(require("./stores"), exports);
 tslib_1.__exportStar(require("./users"), exports);
+tslib_1.__exportStar(require("./waiter"), exports);
 //# sourceMappingURL=index.js.map

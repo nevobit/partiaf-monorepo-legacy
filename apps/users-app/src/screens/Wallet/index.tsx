@@ -44,7 +44,7 @@ const { data, loading, refetch } = useQuery(GET_MY_TICKETS, {
   variables: { uuid: user.uuid },
 });
 
-const { data:userData } = useQuery(GET_USER, {
+const { data:userData, refetch: refetchUser } = useQuery(GET_USER, {
   variables: { uuid: user.uuid },
 });
 
@@ -89,6 +89,7 @@ const { data:userData } = useQuery(GET_USER, {
 
 useEffect(() => {
   refetch();
+  refetchUser();
 }, []);
   return (
     <View>

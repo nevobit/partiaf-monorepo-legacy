@@ -124,6 +124,7 @@ input UserInput {
     status: String
 }
 
+
 type AuthPayload {
     token: String
     uuid: String
@@ -143,6 +144,17 @@ type AuthPayload {
     error: String
 }
 
+type WaiterPayload {
+    token: String
+    uuid: String
+    username: String
+    firstname: String
+    lastname: String
+    email: String
+    code: String
+    store: String
+}
+
 type Query {
     getAllStores: [Store]
     allUsers: [AuthPayload]
@@ -155,6 +167,7 @@ type Query {
 }
 
 type Mutation {
+    waiterSignin(username:String, code:String): WaiterPayload
     userSignup(firstname:String, lastname:String, phone:String, username:String, password:String): AuthPayload
     userSignin(username: String!, password: String!): AuthPayload    
     resetPassword(phone:String): String

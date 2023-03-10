@@ -7,4 +7,5 @@ export interface Waiter {
     code: number;
     last_login: Date;
     admin: string;
+    store: string;
 }

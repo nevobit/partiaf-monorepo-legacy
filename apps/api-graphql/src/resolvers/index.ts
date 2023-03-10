@@ -5,6 +5,7 @@ import users from './users'
 import comments from './comments'
 import bookings from './bookings'
 import reporteds from './reporteds'
+import waiters from './waiters'
 
 export default {
     Query: {
@@ -20,6 +21,7 @@ export default {
         ...goers.Mutation,
         ...comments.Mutation,
         ...bookings.Mutation,
-        ...reporteds.Mutation
+        ...reporteds.Mutation,
+        ...waiters.Mutation,    
     }
 }

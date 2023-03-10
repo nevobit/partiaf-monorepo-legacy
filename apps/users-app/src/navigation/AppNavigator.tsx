@@ -181,6 +181,8 @@ const LoginNavigator = () => {
   );
 };
 
+
+
 const AppNavigator = () => {
   const { user } = useSelector((state: any) => state.auth);
 
