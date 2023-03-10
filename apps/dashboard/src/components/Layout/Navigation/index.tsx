@@ -39,20 +39,6 @@ const Navigation = () => {
             <h5>Covers</h5>
           </div>
         </Link>
-        {/* <Link
-          to="/products"
-          onClick={() => setActive("products")}
-          className={
-            active === "products"
-              ? `${styles.navigation__item} ${styles.active}`
-              : styles.navigation__item
-          }
-        >
-          <div className={styles.item_dash}>
-            <img src="/newAssets/icono-gastos-1.svg" alt="" />
-            <h5>Productos</h5>
-          </div>
-        </Link> */}
         <Link
           to={PrivateRoutes.BOOKINGS}
           onClick={() => setActive("bookings")}
@@ -65,6 +51,20 @@ const Navigation = () => {
           <div className={styles.item_dash}>
             <img src="/newAssets/icono-reserva.svg" alt="" />
             <h5>Reservas</h5>
+          </div>
+        </Link>
+        <Link
+          to="/waiters"
+          onClick={() => setActive("waiters")}
+          className={
+            active === "waiters"
+              ? `${styles.navigation__item} ${styles.active}`
+              : styles.navigation__item
+          }
+        >
+          <div className={styles.item_dash}>
+            <img src="/newAssets/icono-gastos-1.svg" alt="" />
+            <h5>Colaboradores</h5>
           </div>
         </Link>
       </ul>

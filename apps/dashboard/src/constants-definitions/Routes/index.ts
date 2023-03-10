@@ -17,4 +17,5 @@ export const PrivateRoutes = {
   SETTINGS_BUSINESS: "/settings-business",
   VERIFICATION: "/verification",
   COVERS_DETAILS: "/covers/:uuid",
+  WAITERS: "/waiters"
 };
