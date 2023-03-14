@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCover from "./component/CardCover";
 import styles from "./cover.module.css";
-import CreateCoverModal from "./create";
+import CoverForm from "./CoverForm";
 
 const Cover = () => {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Cover = () => {
               ))}
             </div>
           </div>
-          <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />
+          <CoverForm openModal={openModal} setOpenModal={setOpenModal} />
         </>
       )}
     </>

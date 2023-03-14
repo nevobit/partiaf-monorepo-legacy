@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 
-type onSubmit = (values:any) => void;
+type onSubmit = (values:unknown) => void;
 type formState = {
     isDirty: boolean;
     isValid: boolean;
@@ -8,9 +8,14 @@ type formState = {
     allErrors?:any;
 }
 
-export default function useForm ({initialState={}, schema={}}:any) {
+interface useFormProps{
+    initialState:object
+    schema:any
+}
+
+export default function useForm ({initialState={}, schema={}}:useFormProps) {
   const [values, setValues] = useState(initialState??{});
-  const [touched,setTouched]=useState<any>([]);
+  const [touched,setTouched]=useState<string[]>([]);
   const [formState, setFormState] = useState<formState>({
     isDirty: false,
     isValid: false,
@@ -77,7 +82,7 @@ export default function useForm ({initialState={}, schema={}}:any) {
 
 
     const handleSubmit = useCallback((onSubmit:onSubmit) => {
-      return (event:any) => {
+      return (event:FormEvent<HTMLFormElement>) => {
        event.preventDefault();
        formState.isValid && onSubmit(values)
     }

@@ -8,29 +8,32 @@ import React, {
 } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createCover, reset } from "@/redux/states/covers/covers";
+import { createCover, reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
-
-import DragCloudinary from "@/components/Layout/drag-cloudinary";
-import { Button, Field, Input, MapForLocation } from "@/components/shared";
 
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
 // import { Discount } from "@/utils/percentage";
-import styles from "./createcover.module.css";
 
 import useForm from "@/hooks/useForm";
-import type { Cover } from "@partiaf/types";
 import coverShemas from "../shemas";
+
+import type { Cover } from "@partiaf/types";
+
 import Textarea from "@/components/shared/Textarea";
 import SelectInput from "@/components/shared/SelectInput";
 import InvalidFeedback from "@/components/shared/InvalidFeedback";
+import DragCloudinary from "@/components/Layout/drag-cloudinary";
+import { Button, Field, Input, MapForLocation } from "@/components/shared";
+
+import styles from "./createcover.module.css";
 
 interface CreateCoverModalProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  editCover?: Cover;
 }
 
-const INITIAL_COVER = {
+const INITIAL_COVER: Omit<Cover, "store" | "image" | "uuid"> = {
   name: "",
   type: "General",
   date: "",
@@ -40,17 +43,21 @@ const INITIAL_COVER = {
   description: "",
   percentage: 0,
   status: true,
-  price: "$",
+  price: 0,
   location: { lat: 4.6871722714242, lng: -74.05391727207545 },
 };
 
-function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
+function CoverForm({
+  openModal,
+  setOpenModal,
+  editCover,
+}: CreateCoverModalProps) {
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
   const [urlimage, setUrlImage] = useState<string | undefined>(undefined);
 
-  const [discount, setDiscount] = useState(false);
-  const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState<boolean>(false);
+  const [price, setPrice] = useState<string>("");
 
   const dispatch = useDispatch();
 
@@ -70,11 +77,14 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
     handleChange,
     handleSubmit,
     handleBlur,
-    formState: { errors, isValid },
+    formState: { errors, isValid, allErrors },
   } = useForm({
     schema: coverShemas,
     initialState: { ...INITIAL_COVER, store: store.uuid, image: urlimage },
   });
+
+  console.log("cover", editCover, cover, "cover");
+  console.log(allErrors, "errors");
 
   const handleDiscount = (event: ChangeEvent<HTMLInputElement>) => {
     setDiscount(event.target.checked);
@@ -84,12 +94,19 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
     const PriceConvert = convertToNumber(price);
     // const percentage = Discount(PriceConvert, cover.percentage);
     try {
-      dispatch(
-        createCover({
-          ...coversValues,
-          price: PriceConvert,
-        }) as any
-      );
+      editCover
+        ? dispatch(
+            updateCover({
+              ...coversValues,
+              price: PriceConvert,
+            }) as any
+          )
+        : dispatch(
+            createCover({
+              ...coversValues,
+              price: PriceConvert,
+            }) as any
+          );
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -112,6 +129,15 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
   );
 
   const TYPE_OPTIONS = ["General", "VIP"];
+
+  useEffect(() => {
+    if (editCover) {
+      setCover(editCover);
+    }
+    if (editCover?.percentage) {
+      setDiscount(true);
+    }
+  }, [editCover]);
 
   return (
     <>
@@ -194,7 +220,7 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
                     name="price"
                     isError={hanadledIsError("price")}
                     invalidFeedback={errors.price}
-                    value={"$" + price}
+                    value={"$" + cover.price}
                     onBlur={handleBlur}
                     onChange={(event) => handlePriceChange(currencyMask(event))}
                   />
@@ -269,4 +295,4 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
   );
 }
 
-export default CreateCoverModal;
+export default CoverForm;
