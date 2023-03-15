@@ -1,0 +1,10 @@
+.conatiner{
+    margin: 4px 0 4px;
+}
+
+.message {
+    color: #FF5162;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+}

@@ -89,6 +89,7 @@ const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {
             type="file"
             name={idInput}
             hidden
+            accept=".jpg,.jpeg,.png,.svg,.webp"
             id={idInput}
             onChange={handleChange}
           />

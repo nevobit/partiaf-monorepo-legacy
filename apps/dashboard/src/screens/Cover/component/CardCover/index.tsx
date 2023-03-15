@@ -7,12 +7,12 @@ import {
   PartialCover,
   updateCover,
 } from "@/redux/states/covers/covers";
-import EditCoverModal from "../../update";
 import { Cover } from "@partiaf/types";
 import { DivisaFormater } from "@/utils/DivisaFormater";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/constants-definitions/Routes";
 import swal from "sweetalert";
+import CoverForm from "../../CoverForm";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
@@ -150,10 +150,10 @@ const CardCover = (Cover: any) => {
           </div>
         </div>
       </div>
-      <EditCoverModal
+      <CoverForm
         openModal={isOpenEdit}
         setOpenModal={setIsOpenEdit}
-        Cover={coverSelected}
+        editCover={coverSelected}
       />
     </>
   );
