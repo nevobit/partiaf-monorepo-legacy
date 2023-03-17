@@ -2,6 +2,8 @@ import { Store } from "@partiaf/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createStore,
+  dataProps,
+  deleteImageStoreThunk,
   logoutStore,
   signinStore,
   updateStoreThunks,
@@ -35,13 +37,13 @@ export interface StoreInfo {
   phone: 0;
   password: "";
   limit: 0;
-  chairs: 0,
-  tables: 0,
+  chairs: 0;
+  tables: 0;
   photos: [];
   balance: 0;
-  max_per_table: 0,
-  min_per_table: 0,
-  chairs_per_table: 0,
+  max_per_table: 0;
+  min_per_table: 0;
+  chairs_per_table: 0;
 }
 
 const EmptyStoreState: PartialStore = {
@@ -108,23 +110,33 @@ export const updateStore = createAsyncThunk(
   }
 );
 
+export const deleteImageStoreByUrl = createAsyncThunk(
+  "stores/images/delete",
+  async (info: dataProps, thunkAPI) => {
+    try {
+      return await deleteImageStoreThunk(info);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 export const storesSlice = createSlice({
   name: "stores",
   initialState: {
-    store: localStorage.getItem("store")
-      ? JSON.parse(localStorage.getItem("store") as string)
-      : EmptyStoreState,
+    store: EmptyStoreState,
     stores: EmptyStoresState,
-    oneStore: EmptyStoreState,
     loading: false,
     success: false,
     successSignin: false,
+    succesDeleteImage: false,
     error: "",
   },
   reducers: {
     reset: (state) => {
       (state.loading = false),
         (state.successSignin = false),
+        (state.succesDeleteImage = false),
         (state.success = false),
         (state.error = "");
     },
@@ -137,7 +149,7 @@ export const storesSlice = createSlice({
     },
     setStoreById: (state, action) => {
       state.loading = false;
-      state.oneStore = action.payload.store;
+      state.store = action.payload.stores;
     },
   },
 
@@ -180,11 +192,24 @@ export const storesSlice = createSlice({
         state.error = String(action.payload);
         state.store = {};
       })
+      .addCase(deleteImageStoreByUrl.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteImageStoreByUrl.fulfilled, (state, action) => {
+        state.loading = false;
+        state.succesDeleteImage = true;
+      })
+      .addCase(deleteImageStoreByUrl.rejected, (state, action) => {
+        state.loading = false;
+        state.error = String(action.payload);
+        state.store = {};
+      })
       .addCase(logoutStoreSlice.fulfilled, (state) => {
-        state.store = null;
+        state.store = {};
       });
   },
 });
 
 export const { reset } = storesSlice.actions;
-export const { loadingStoresById, setStoresById, setStoreById } = storesSlice.actions;
+export const { loadingStoresById, setStoresById, setStoreById } =
+  storesSlice.actions;

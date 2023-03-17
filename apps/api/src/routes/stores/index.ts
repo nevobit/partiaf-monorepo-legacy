@@ -5,14 +5,16 @@ import { getStoreByIdRoute } from "./get-one";
 import { getBookingsByIdRoute } from "./list-bookings";
 import { signinStoreRoute } from "./signin";
 import { updateStoreRoute } from "./update";
-import { deleteBookingByIdRoute } from './delete-booking';
+import { deleteBookingByIdRoute } from "./delete-booking";
+import { deleteImageByUrlRoute } from "./delete-image";
 
 export const storeRoutes: RouteOptions[] = [
-    createStoreRoute,
-    getStoresByIdRoute,
-    getStoreByIdRoute,
-    signinStoreRoute,
-    updateStoreRoute,
-    getBookingsByIdRoute,
-    deleteBookingByIdRoute
-]
+  createStoreRoute,
+  getStoresByIdRoute,
+  getStoreByIdRoute,
+  signinStoreRoute,
+  updateStoreRoute,
+  getBookingsByIdRoute,
+  deleteBookingByIdRoute,
+  deleteImageByUrlRoute,
+];

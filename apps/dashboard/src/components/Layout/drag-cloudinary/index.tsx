@@ -6,7 +6,6 @@ interface Props {
   setImageUrl: (url: string) => void;
   idInput: string;
   url?: string;
-  
 }
 
 const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {

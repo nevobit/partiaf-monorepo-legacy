@@ -125,3 +125,59 @@
 .container_input_image_upload {
   background-color: #fff;
 }
+
+.container_image {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.cnt_img {
+  position: relative;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 12rem;
+  border-radius: 0.4rem;
+}
+
+.cnt_img img {
+  height: 16rem;
+  border-radius: 0.4rem;
+}
+
+.cnt_img .button_show {
+  background-color: var(--black);
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4rem;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.8rem;
+}
+
+.cnt_img .button_trash {
+  position: absolute;
+  color: red;
+  top: 0;
+  right: 0;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cnt_img .button_trash:hover {
+  border: 2px solid red;
+}

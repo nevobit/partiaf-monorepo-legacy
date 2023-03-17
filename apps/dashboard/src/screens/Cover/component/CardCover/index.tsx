@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
+import { deleteCover, updateCover } from "@/redux/states/covers/covers";
+import EditCoverModal from "../../update";
+=======
 import {
   deleteCover,
   PartialCover,
   updateCover,
 } from "@/redux/states/covers/covers";
+>>>>>>> 9f311dea9b989cdb0e94967d5625c443c5a77210
 import { Cover } from "@partiaf/types";
 import { DivisaFormater } from "@/utils/DivisaFormater";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/constants-definitions/Routes";
+<<<<<<< HEAD
+import { confirmDelete } from "@/utils/swal";
+=======
 import swal from "sweetalert";
 import CoverForm from "../../CoverForm";
+>>>>>>> 9f311dea9b989cdb0e94967d5625c443c5a77210
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
@@ -24,22 +33,12 @@ const CardCover = (Cover: any) => {
 
   const submitDeleteHandler = async (e: any) => {
     e.preventDefault();
-    try {
-      swal({
-        text: "¿Está seguro que desea eliminar el cover?",
-        icon: "warning",
-        buttons: ["Cancelar", "Eliminar"],
-        dangerMode: true,
-      }).then((willDelete: any) => {
-        if (willDelete) {
-          dispatch(deleteCover(uuid) as any);
-        }
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error);
-      }
-    }
+    const message = "Estas seguro de eliminar el cover";
+    confirmDelete(
+      message,
+      (param: any) => dispatch(deleteCover(param) as any),
+      uuid
+    );
   };
 
   const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -50,18 +49,6 @@ const CardCover = (Cover: any) => {
     setIsOpenEdit(true);
   };
 
-  const submitUpdateHandler = async (e: any) => {
-    setStatus(!status);
-    e.preventDefault();
-    try {
-      dispatch(updateCover({ ...cover, status: cover.status }) as any);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error);
-      }
-    }
-  };
-  
   const submitUpdateStatusHandler = async (e: any) => {
     setStatus(!status);
     e.preventDefault();
