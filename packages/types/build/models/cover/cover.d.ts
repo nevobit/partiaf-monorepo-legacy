@@ -16,4 +16,5 @@ export interface Cover {
     store: string;
     status: boolean;
     location: Location;
+    percentage: number;
 }
