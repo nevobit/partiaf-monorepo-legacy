@@ -1,33 +1,39 @@
-import DragCloudinary from "@/components/Layout/drag-cloudinary";
+import { ImageInput } from "@/components/shared";
 import Field from "@/components/shared/Field";
-import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
-import { reset } from "@/redux/states/admins/admin";
-import { updateStore } from "@/redux/states/stores/storesSlice";
+import {
+  deleteImageStoreByUrl,
+  reset,
+  updateStore,
+} from "@/redux/states/stores/storesSlice";
+import { getStoreById } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 import styles from "./settingsBusiness.module.css";
 
 const SettingsBusiness = () => {
-  const { store } = useSelector((state: AppStore) => state.stores);
-
-  const { success } = useSelector((state: AppStore) => state.stores);
-
-  console.log(store);
-
-  const [imageUrl, setImageUrl] = useState("");
+  const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
+  const [urlPhotos, setUrlPhotos] = useState<string[] | undefined>([]);
+  const { store, success } = useSelector((state: AppStore) => state.stores);
+
+  const storeLocal = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+
+  console.log(storeLocal);
 
   const [storeUpdate, setStoreUpdate] = useState({
-    uuid: store.uuid,
-    name: store.name,
-    nit: store.nit,
-    email: store.email,
-    phone: store.phone,
-    limit: store.limit,
-    type: store.type,
-    photos: store.photos,
+    uuid: storeLocal?.uuid,
+    name: storeLocal?.name,
+    nit: storeLocal?.nit,
+    email: storeLocal?.email,
+    phone: storeLocal?.phone,
+    limit: storeLocal?.limit,
+    type: storeLocal?.type,
+    photos: [],
   });
 
   const handleChange = (
@@ -37,6 +43,35 @@ const SettingsBusiness = () => {
   ) => {
     const { name, value } = e.target;
     setStoreUpdate((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const CLOUDINARY_URL =
+    "https://api.cloudinary.com/v1_1/matosr96/image/upload";
+  const uploadHandler = async (e: any, imageField = "image") => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    bodyFormData.append("upload_preset", "r9rqkvzr");
+    bodyFormData.append("cloud_name", "matosr96");
+    console.log(bodyFormData);
+    try {
+      fetch(CLOUDINARY_URL, {
+        method: "post",
+        body: bodyFormData,
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          const image = data.url || "";
+          console.log(image);
+          const images = storeLocal.photos || [];
+          images.push(image);
+          setUrlPhotos({ ...images });
+          console.log(urlPhotos);
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const submitUpdateHandler = async (e: any) => {
@@ -52,12 +87,32 @@ const SettingsBusiness = () => {
     }
   };
 
-  const dispatch = useDispatch();
+  const submitDeleteHandler = async (url: string) => {
+    try {
+      swal({
+        text: "¿Está seguro que desea eliminar el cover?",
+        icon: "warning",
+        buttons: ["Cancelar", "Eliminar"],
+        dangerMode: true,
+      }).then((willDelete: any) => {
+        if (willDelete) {
+          dispatch(deleteImageStoreByUrl({ uuid: store.uuid, url }) as any);
+        }
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     if (success) {
       dispatch(reset() as any);
     }
-  }, [dispatch, success]);
+    setUrlPhotos(storeLocal?.photos);
+    dispatch(getStoreById(storeLocal?.uuid) as any);
+  }, [dispatch, success, store]);
 
   return (
     <div className={styles.screen}>
@@ -66,7 +121,6 @@ const SettingsBusiness = () => {
           <h2>General</h2>
           <button onClick={submitUpdateHandler}>Guardar</button>
         </div>
-
         <div className={styles.setting_grid}>
           <div>
             <div className={styles.card}>
@@ -171,13 +225,33 @@ const SettingsBusiness = () => {
               <div className={styles.colums_card}></div>
             </div>
           </div>
-          <div className={styles.image_input}>
-            <h4 className={styles.card_title}>Subir imagen</h4>
-            <div className={styles.container_input_image_upload}>
-              <DragCloudinary
-                idInput="file-settings-bussiness"
-                setImageUrl={setImageUrl}
-              />
+
+          <div className={styles.section}>
+            <div className={styles.image_input}>
+              <h4 className={styles.card_title}>Subir imagen</h4>
+              <div className={styles.container_input_image_upload}>
+                <ImageInput
+                  name="photos"
+                  onChange={(e) => uploadHandler(e, "featurephoto")}
+                />
+              </div>
+            </div>
+
+            <div className={styles.container_image}>
+              {storeLocal.photos.map((photo: string) => (
+                <div className={styles.cnt_img}>
+                  <img src={photo} alt="image" />
+                  <button className={styles.button_show}>
+                    <i className="bx bx-show-alt"></i>
+                  </button>
+                  <button
+                    className={styles.button_trash}
+                    onClick={() => submitDeleteHandler(photo)}
+                  >
+                    <i className="bx bxs-trash-alt"></i>
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -18,6 +18,7 @@ interface StoresSlice {
   loading: boolean;
   success: boolean;
   successSignin: boolean;
+  succesDeleteImage: boolean;
   error: string;
 }
 
