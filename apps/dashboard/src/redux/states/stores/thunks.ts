@@ -2,7 +2,7 @@ import { PARTIAF_API } from "@/api";
 import {
   loadingStoresById,
   PartialStore,
-  setStoreById,
+  setStoreByAdmin,
   setStoresById,
 } from "./storesSlice";
 
@@ -17,19 +17,19 @@ export const getStoresById = (uuid: string) => async (dispatch: any) => {
   dispatch(setStoresById({ stores: data }));
 };
 
-export const getStoreById = (uuid: string) => async (dispatch: any) => {
-  dispatch(loadingStoresById());
-  const { data } = await PARTIAF_API.get(`/store/${uuid}`);
-  dispatch(setStoreById({ store: data }));
-};
+export const getStoreByAdminThunk = (admin_uuid: string) => async (dispatch: any) => {
+    dispatch(loadingStoresById());
+    const { data } = await PARTIAF_API.get(`/store/${admin_uuid}`);
+    dispatch(setStoreByAdmin({ store: data }));
+  };
 
 export const createStore = async (info: PartialStore) => {
   const { data } = await PARTIAF_API.post("/stores", { ...info });
+  localStorage.setItem("store", JSON.stringify(data));
   return data;
 };
 
 export const deleteImageStoreThunk = async (info: dataProps) => {
-  console.log("EN EL REDUX", info);
   await PARTIAF_API.delete(`/stores/images/${info.uuid}`, { data: info });
   return true;
 };

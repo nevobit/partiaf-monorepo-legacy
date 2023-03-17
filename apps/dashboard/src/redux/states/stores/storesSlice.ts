@@ -147,7 +147,7 @@ export const storesSlice = createSlice({
       state.loading = false;
       state.stores = action.payload.stores;
     },
-    setStoreById: (state, action) => {
+    setStoreByAdmin: (state, action) => {
       state.loading = false;
       state.store = action.payload.stores;
     },
@@ -211,5 +211,5 @@ export const storesSlice = createSlice({
 });
 
 export const { reset } = storesSlice.actions;
-export const { loadingStoresById, setStoresById, setStoreById } =
+export const { loadingStoresById, setStoresById, setStoreByAdmin } =
   storesSlice.actions;

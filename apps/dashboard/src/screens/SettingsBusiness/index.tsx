@@ -1,31 +1,34 @@
-import { ImageInput } from "@/components/shared";
+import { ImageInput, MapForLocation } from "@/components/shared";
 import Field from "@/components/shared/Field";
 import Input from "@/components/shared/Input";
 import {
-  deleteImageStoreByUrl,
   reset,
   updateStore,
+  PartialStore,
 } from "@/redux/states/stores/storesSlice";
-import { getStoreById } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
+import { cloudinaryManyUpload } from "@/utils/Cloudinary/many";
+import { confirmDelete, showSuccessMessage } from "@/utils/swal";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import swal from "sweetalert";
 import styles from "./settingsBusiness.module.css";
+import { getStoreByAdminThunk } from "../../redux/states/stores/thunks";
 
 const SettingsBusiness = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
-  const [urlPhotos, setUrlPhotos] = useState<string[] | undefined>([]);
   const { store, success } = useSelector((state: AppStore) => state.stores);
-
   const storeLocal = localStorage.getItem("store")
     ? JSON.parse(localStorage.getItem("store") || "")
     : "";
 
-  console.log(storeLocal);
+  const photosArray = storeLocal.photos.slice();
+  const [urlPhotos, setUrlPhotos] = useState<string[]>(photosArray);
 
-  const [storeUpdate, setStoreUpdate] = useState({
+  console.log(store);
+
+  const [storeUpdate, setStoreUpdate] = useState<PartialStore>({
+    admin: storeLocal?.admin,
     uuid: storeLocal?.uuid,
     name: storeLocal?.name,
     nit: storeLocal?.nit,
@@ -33,7 +36,12 @@ const SettingsBusiness = () => {
     phone: storeLocal?.phone,
     limit: storeLocal?.limit,
     type: storeLocal?.type,
-    photos: [],
+    employes: storeLocal?.employes,
+    employe_code: storeLocal?.employe_code,
+    location: storeLocal?.location,
+    max_per_table: storeLocal?.max_per_table,
+    min_per_table: storeLocal?.min_per_table,
+    description: storeLocal.description,
   });
 
   const handleChange = (
@@ -45,60 +53,51 @@ const SettingsBusiness = () => {
     setStoreUpdate((prev) => ({ ...prev, [name]: value }));
   };
 
-  const CLOUDINARY_URL =
-    "https://api.cloudinary.com/v1_1/matosr96/image/upload";
-  const uploadHandler = async (e: any, imageField = "image") => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("file", file);
-    bodyFormData.append("upload_preset", "r9rqkvzr");
-    bodyFormData.append("cloud_name", "matosr96");
-    console.log(bodyFormData);
-    try {
-      fetch(CLOUDINARY_URL, {
-        method: "post",
-        body: bodyFormData,
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          const image = data.url || "";
-          console.log(image);
-          const images = storeLocal.photos || [];
-          images.push(image);
-          setUrlPhotos({ ...images });
-          console.log(urlPhotos);
+  const deleteHandler = (url: string) => {
+    const index = photosArray.indexOf(url);
+    if (index !== -1) {
+      const newPhotosArray = [...photosArray];
+      newPhotosArray.splice(index, 1);
+      setUrlPhotos(newPhotosArray);
+      localStorage.setItem(
+        "store",
+        JSON.stringify({
+          ...storeLocal,
+          photos: newPhotosArray,
         })
-        .catch((err) => console.log(err));
-    } catch (err) {
-      console.log(err);
+      );
     }
+  };
+
+  const submitDeleteHandler = async (url: string) => {
+    const message = "¿Está seguro que desea eliminar la imagen?";
+    confirmDelete(
+      message,
+      (param: any) => dispatch(deleteHandler(param) as any),
+      url
+    );
   };
 
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateStore(storeUpdate) as any);
-      localStorage.setItem("store", JSON.stringify(storeUpdate));
+      dispatch(
+        updateStore({
+          ...storeUpdate,
+          photos: urlPhotos,
+          location: storeUpdate.location,
+        }) as any
+      );
+      localStorage.setItem(
+        "store",
+        JSON.stringify({
+          ...storeUpdate,
+          photos: urlPhotos,
+          location: storeUpdate.location,
+        })
+      );
       setOpenModal(!openModal);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error);
-      }
-    }
-  };
-
-  const submitDeleteHandler = async (url: string) => {
-    try {
-      swal({
-        text: "¿Está seguro que desea eliminar el cover?",
-        icon: "warning",
-        buttons: ["Cancelar", "Eliminar"],
-        dangerMode: true,
-      }).then((willDelete: any) => {
-        if (willDelete) {
-          dispatch(deleteImageStoreByUrl({ uuid: store.uuid, url }) as any);
-        }
-      });
+      showSuccessMessage("Registros actualizados con éxito.");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -110,8 +109,7 @@ const SettingsBusiness = () => {
     if (success) {
       dispatch(reset() as any);
     }
-    setUrlPhotos(storeLocal?.photos);
-    dispatch(getStoreById(storeLocal?.uuid) as any);
+    dispatch(getStoreByAdminThunk(storeLocal?.uuid) as any);
   }, [dispatch, success, store]);
 
   return (
@@ -178,6 +176,27 @@ const SettingsBusiness = () => {
                     <option value="Gastrobar">Gastrobar</option>
                   </select>
                 </Field>
+
+                <Field label="Numero de empleados">
+                  <Input
+                    name="empoyes"
+                    value={storeUpdate.employes}
+                    onChange={handleChange}
+                  />
+                </Field>
+                <Field label="Codigo de empleados">
+                  <Input
+                    name="employe_code"
+                    value={storeUpdate.employe_code}
+                    onChange={handleChange}
+                  />
+                </Field>
+                <Field label="Latitud">
+                  <Input value={storeUpdate.location?.lat} />
+                </Field>
+                <Field label="Longitud">
+                  <Input value={storeUpdate.location?.lng} />
+                </Field>
               </div>
             </div>
 
@@ -185,12 +204,14 @@ const SettingsBusiness = () => {
               <h4 className={styles.card_title}>
                 Detalles de fiscales y de facturacion
               </h4>
-              <div className={styles.width_input}>
+
+              <div className={styles.colums_card}>
+                {/*
+                <div className={styles.width_input}>
                 <Field label="Direccion">
                   <Input />
                 </Field>
-              </div>
-              <div className={styles.colums_card}>
+                </div>
                 <Field label="Ciudad">
                   <Input />
                 </Field>
@@ -202,7 +223,7 @@ const SettingsBusiness = () => {
                 </Field>
                 <Field label="Pais">
                   <Input />
-                </Field>
+                </Field>*/}
                 <Field label="Tipo de regimen">
                   <select name="" id="">
                     <option value="Regimen Comun">Regimen Comun</option>
@@ -225,20 +246,25 @@ const SettingsBusiness = () => {
               <div className={styles.colums_card}></div>
             </div>
           </div>
-
           <div className={styles.section}>
             <div className={styles.image_input}>
-              <h4 className={styles.card_title}>Subir imagen</h4>
-              <div className={styles.container_input_image_upload}>
-                <ImageInput
-                  name="photos"
-                  onChange={(e) => uploadHandler(e, "featurephoto")}
-                />
-              </div>
+              <Field label="Subir imagen">
+                <div className={styles.container_input_image_upload}>
+                  <ImageInput
+                    name="photos"
+                    onChange={(e) =>
+                      cloudinaryManyUpload(e, {
+                        photosArray,
+                        setUrlPhotos,
+                        storeLocal,
+                      })
+                    }
+                  />
+                </div>
+              </Field>
             </div>
-
             <div className={styles.container_image}>
-              {storeLocal.photos.map((photo: string) => (
+              {urlPhotos.map((photo: string) => (
                 <div className={styles.cnt_img}>
                   <img src={photo} alt="image" />
                   <button className={styles.button_show}>
@@ -252,6 +278,13 @@ const SettingsBusiness = () => {
                   </button>
                 </div>
               ))}
+            </div>
+            <div className={styles.container_map_location}>
+              <Field label="Ubicacion">
+                <div className={styles.cnt_map}>
+                  <MapForLocation setState={setStoreUpdate} />
+                </div>
+              </Field>
             </div>
           </div>
         </div>

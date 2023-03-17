@@ -1,20 +1,18 @@
 import { RouteOptions } from "fastify";
 import { createStoreRoute } from "./create";
 import { getStoresByIdRoute } from "./get-by-id";
-import { getStoreByIdRoute } from "./get-one";
 import { getBookingsByIdRoute } from "./list-bookings";
 import { signinStoreRoute } from "./signin";
 import { updateStoreRoute } from "./update";
 import { deleteBookingByIdRoute } from "./delete-booking";
-import { deleteImageByUrlRoute } from "./delete-image";
+import { getStoreByAdminRoute } from "./get-by-admin";
 
 export const storeRoutes: RouteOptions[] = [
   createStoreRoute,
   getStoresByIdRoute,
-  getStoreByIdRoute,
+  getStoreByAdminRoute,
   signinStoreRoute,
   updateStoreRoute,
   getBookingsByIdRoute,
   deleteBookingByIdRoute,
-  deleteImageByUrlRoute,
 ];

@@ -23,4 +23,16 @@ export const confirmDelete = async (
   }
 };
 
-
+export const showSuccessMessage = (message: string) => {
+  try {
+    swal({
+      text: message,
+      icon: "success",
+      buttons: ["Aceptar"],
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error);
+    }
+  }
+};

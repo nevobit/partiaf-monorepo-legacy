@@ -1,6 +1,5 @@
 import { Button, Field, Input } from "@/components/shared";
 import { reset, updateStore } from "@/redux/states/stores/storesSlice";
-import { getStoreById } from "@/redux/states/stores/thunks";
 import { AppStore } from "@/redux/store";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import styles from "./bookings.module.css";
 import CardBooking from "./Component/CardBooking";
 import BookingList from "./List";
 import swal from "sweetalert";
+import { getStoreByAdminThunk } from "../../redux/states/stores/thunks";
 
 export const usersByDatabaseMook = [
   {
@@ -26,7 +26,7 @@ export const usersByDatabaseMook = [
     name: "Pedro Palacio",
     age: 33,
   },
-]
+];
 
 const Bookings = () => {
   const dataBooking = [
@@ -48,18 +48,22 @@ const Bookings = () => {
       hour: "08:00",
       number: "2",
       state: true,
-    }
+    },
   ];
 
-  const { store, success, oneStore } = useSelector((state: AppStore) => state.stores);
+  const { admin: adminUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+
+  const { store, success } = useSelector((state: AppStore) => state.stores);
 
   const [storeUpdate, setStoreUpdate] = useState({
     uuid: store.uuid,
-    chairs: oneStore.chairs || store.chairs,
-    tables: oneStore.tables || store.tables,
-    chairs_per_table: oneStore.chairs_per_table || store.chairs_per_table,
-    max_per_table: oneStore.max_per_table || store.max_per_table,
-    min_per_table: oneStore.min_per_table || store.min_per_table 
+    chairs: store.chairs || store.chairs,
+    tables: store.tables || store.tables,
+    chairs_per_table: store.chairs_per_table || store.chairs_per_table,
+    max_per_table: store.max_per_table || store.max_per_table,
+    min_per_table: store.min_per_table || store.min_per_table,
   });
 
   const [openModal, setOpenModal] = useState(false);
@@ -76,7 +80,6 @@ const Bookings = () => {
     }
   };
 
-  
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -86,44 +89,47 @@ const Bookings = () => {
     setStoreUpdate((prev) => ({ ...prev, [name]: value }));
   };
 
-
   const [bookingSelected, setBookingSelected] = useState<any>();
 
-  const totalBookingsTable = dataBooking.reduce((a, c) => a + c.table * 1, 0)
-  const totalBookingsChairs = dataBooking.reduce((a, c) => a + c.chairs * 1, 0)
+  const totalBookingsTable = dataBooking.reduce((a, c) => a + c.table * 1, 0);
+  const totalBookingsChairs = dataBooking.reduce((a, c) => a + c.chairs * 1, 0);
 
   const dispatch = useDispatch();
-  
+
   const [successDelete, setSuccesDelete] = useState(false);
   const [bookings, setBookings] = useState([]);
   const getBookings = async () => {
-    const {data} = await axios.get(`https://partiaf-api.xyz/api/v3/bookings/${store.uuid}`)
-    setBookings(data)
-  }
-  
+    const { data } = await axios.get(
+      `https://partiaf-api.xyz/api/v3/bookings/${store.uuid}`
+    );
+    setBookings(data);
+  };
+
   const deleteBookings = async () => {
-      try {
-        swal({
-          text: "¿Está seguro que desea eliminar la reserva?",
-          icon: "warning",
-          buttons: ["Cancelar", "Eliminar"],
-          dangerMode: true,
-        }).then(async (willDelete: any) => {
-          if (willDelete) {
-            const {data} = await axios.delete(`http://localhost:5000/api/v3/bookings/${bookingSelected.uuid}`)
-            setSuccesDelete(data)
-            setBookingSelected({})
-          }
-        });
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log(error);
+    try {
+      swal({
+        text: "¿Está seguro que desea eliminar la reserva?",
+        icon: "warning",
+        buttons: ["Cancelar", "Eliminar"],
+        dangerMode: true,
+      }).then(async (willDelete: any) => {
+        if (willDelete) {
+          const { data } = await axios.delete(
+            `http://localhost:5000/api/v3/bookings/${bookingSelected.uuid}`
+          );
+          setSuccesDelete(data);
+          setBookingSelected({});
         }
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
       }
-  }
-  
+    }
+  };
+
   useEffect(() => {
-    dispatch(getStoreById(store.uuid) as any);
+    dispatch(getStoreByAdminThunk(adminUUID) as any);
     getBookings();
     if (success) {
       dispatch(reset() as any);
@@ -142,11 +148,11 @@ const Bookings = () => {
           </div>
           <div className={styles.box}>
             <h3>Sillas Disponibles</h3>
-            <p>{oneStore.chairs && oneStore.chairs - totalBookingsChairs}</p>
+            <p>{store.chairs && store.chairs - totalBookingsChairs}</p>
           </div>
           <div className={styles.box}>
             <h3>Mesas Disponibles</h3>
-            <p>{oneStore.tables && oneStore.tables - totalBookingsTable}</p>
+            <p>{store.tables && store.tables - totalBookingsTable}</p>
           </div>
           <div className={styles.box}>
             <h3>Reservas Efectivas</h3>
@@ -158,45 +164,51 @@ const Bookings = () => {
           </div>
         </div>
         <div className={styles.booking_header}>
-            <h3>Reservas</h3>
-            <div>
-              <button onClick={() => setOpenModal(true)}>Configuracion</button>
-            </div>
+          <h3>Reservas</h3>
+          <div>
+            <button onClick={() => setOpenModal(true)}>Configuracion</button>
+          </div>
         </div>
         <div className={styles.booking_container}>
           <div className={styles.booking}>
-            <BookingList dataBooking={bookings} setBooking={setBookingSelected} />
+            <BookingList
+              dataBooking={bookings}
+              setBooking={setBookingSelected}
+            />
           </div>
           <div className={styles.booking_details}>
             <div className={styles.details_header}>
               <div>
                 <p>{bookingSelected?.name}</p>
-                <h4>MESA {bookingSelected?.tables} | SILLAS {bookingSelected?.chairs}</h4>
+                <h4>
+                  MESA {bookingSelected?.tables} | SILLAS{" "}
+                  {bookingSelected?.chairs}
+                </h4>
               </div>
               {/* <button>CHECK-IN</button> */}
             </div>
             <div className={styles.editor}>
-              {bookingSelected? (
-              <div>
-                <ul>
-                  <li>Nombre: {bookingSelected.name}</li>
-                  <li>Mesa #: {bookingSelected.table}</li>
-                  <li>Mesas: {bookingSelected.tables}</li>
-                  <li>Sillas: {bookingSelected.chairs}</li>
-                  <li>Hora: {bookingSelected.time}</li>
-                  <li>Fecha: {bookingSelected?.date?.substring(0,10)}</li>
-                  <li>Fecha de creacion: {bookingSelected?.createdAt?.substring(0,10)}</li>
-                </ul>
-              </div>
-
-              ): (
+              {bookingSelected ? (
+                <div>
+                  <ul>
+                    <li>Nombre: {bookingSelected.name}</li>
+                    <li>Mesa #: {bookingSelected.table}</li>
+                    <li>Mesas: {bookingSelected.tables}</li>
+                    <li>Sillas: {bookingSelected.chairs}</li>
+                    <li>Hora: {bookingSelected.time}</li>
+                    <li>Fecha: {bookingSelected?.date?.substring(0, 10)}</li>
+                    <li>
+                      Fecha de creacion:{" "}
+                      {bookingSelected?.createdAt?.substring(0, 10)}
+                    </li>
+                  </ul>
+                </div>
+              ) : (
                 <h4>No hay nignuna reserva seleccionada</h4>
               )}
             </div>
             <div className={styles.footer}>
-              <button onClick={deleteBookings}>
-                ELIMINAR RESERVA
-              </button>
+              <button onClick={deleteBookings}>ELIMINAR RESERVA</button>
               {/* <button>CHECK-OUT</button> */}
             </div>
           </div>
@@ -204,28 +216,32 @@ const Bookings = () => {
       </div>
       <div className={styles.right__screen}>
         {dataBooking.map((booking) => (
-          <button key={booking.uuid} className={styles.button__none}>
-          </button>
+          <button key={booking.uuid} className={styles.button__none}></button>
         ))}
       </div>
       <div className={openModal ? styles.open_modal : styles.close_modal}>
-      <div className={styles.container_form}>
-        <div className={styles.form}>
-          <div className={styles.header_cover_form}>
-            <img src="/logo-parti.svg" alt="Log Partiaf" />
-            <button
-              className={styles.btn_header_cover}
-              onClick={() => setOpenModal(!openModal)}
-            >
-              {" "}
-              Cerrar
-            </button>
-          </div>
-          <div className={styles.container_fields}>
-            <Field label="Sillas disponibles">
-              <Input name="chairs" type="number" value={storeUpdate.chairs} onChange={handleChange} />
-            </Field>
-            <Field label="Mesas disponibles">
+        <div className={styles.container_form}>
+          <div className={styles.form}>
+            <div className={styles.header_cover_form}>
+              <img src="/logo-parti.svg" alt="Log Partiaf" />
+              <button
+                className={styles.btn_header_cover}
+                onClick={() => setOpenModal(!openModal)}
+              >
+                {" "}
+                Cerrar
+              </button>
+            </div>
+            <div className={styles.container_fields}>
+              <Field label="Sillas disponibles">
+                <Input
+                  name="chairs"
+                  type="number"
+                  value={storeUpdate.chairs}
+                  onChange={handleChange}
+                />
+              </Field>
+              <Field label="Mesas disponibles">
                 <Input
                   name="tables"
                   type="number"
@@ -257,11 +273,11 @@ const Bookings = () => {
                   onChange={handleChange}
                 />
               </Field>
+            </div>
+            <Button onClick={submitUpdateHandler}>Guardar</Button>
           </div>
-          <Button onClick={submitUpdateHandler}>Guardar</Button>
         </div>
       </div>
-    </div>
     </div>
   );
 };

@@ -13,10 +13,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./registerBusiness.module.css";
 import { PrivateRoutes } from "../../constants-definitions/Routes/index";
 import { AppStore } from "@/redux/store";
+import { CLOUDINARY_URL } from "@/utils/Cloudinary/constants";
 
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/matosr96/image/upload";
+
 const RegisterBusiness = () => {
   const { admin } = useSelector((state: AppStore) => state.admins);
+  console.log(admin);
   const [screen, setScreen] = useState(0);
   const [store, setStore] = useState<PartialStore>({
     name: "",
@@ -65,7 +67,7 @@ const RegisterBusiness = () => {
     bodyFormData.append("file", file);
     bodyFormData.append("upload_preset", "r9rqkvzr");
     bodyFormData.append("cloud_name", "matosr96");
-    console.log(bodyFormData);
+
     try {
       fetch(CLOUDINARY_URL, {
         method: "post",
@@ -74,7 +76,7 @@ const RegisterBusiness = () => {
         .then((resp) => resp.json())
         .then((data) => {
           const image = data.url || "";
-          console.log(image);
+
           const images = store.photos || [];
           images.push(image);
           setStore((prev) => ({ ...prev, ["photos"]: images }));
@@ -162,6 +164,7 @@ const RegisterBusiness = () => {
                   tip="Inserte un codigo de 4 digitos para que sus empleados puedas usar nuestra app"
                 >
                   <Input
+                    type="number"
                     name="employe_code"
                     value={store.employe_code}
                     onChange={handleChange}

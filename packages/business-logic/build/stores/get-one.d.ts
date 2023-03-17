@@ -1,1 +1,1 @@
-export declare const getStoreById: (uuid: string) => Promise<any>;
+export declare const getOneStoreById: (uuid: string) => Promise<any>;

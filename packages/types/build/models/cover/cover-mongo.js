@@ -13,11 +13,12 @@ exports.CoverSchemaMongo = new mongoose_1.Schema({
     store: { type: String },
     hour: { type: String },
     price: { type: Number },
+    percentage: { type: Number },
     date: { type: String },
     status: { type: Boolean },
-    location: { type: { lat: Number, lng: Number } }
+    location: { type: { lat: Number, lng: Number } },
 }, {
     versionKey: false,
-    timestamps: true
+    timestamps: true,
 });
 //# sourceMappingURL=cover-mongo.js.map

@@ -16,7 +16,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
     variables: { uuid: user.uuid },
   });
 
-  console.log({user})
+
   const insets = useSafeAreaInsets();
   return (
     <View style={{

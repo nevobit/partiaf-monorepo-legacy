@@ -13,7 +13,7 @@ const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {
   const [uploader] = useState<CloudinaryUploader>(new CloudinaryUploader());
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(url || null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
-  console.log("URL", uploadedUrl)
+
 
   useEffect(() => {
     if (uploadedUrl) {

@@ -13,6 +13,7 @@ export interface Cover {
     hour: string;
     description: string;
     image: string;
+    percentage: number;
     store: string;
     status: boolean;
     location: Location;

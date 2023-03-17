@@ -5,7 +5,7 @@ export const uploadHandler = async (e:any, imageField = "image", images: any, se
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append("file", file);
-    console.log(bodyFormData);
+
     try {
       dispatch({ type: "UPLOAD_REQUEST" });
       const { data } = await axios.post(
@@ -18,7 +18,7 @@ export const uploadHandler = async (e:any, imageField = "image", images: any, se
         }
       );
       dispatch({ type: "UPLOAD_SUCCESS" });
-      console.log(data)
+    
       const image = data.secure_url;
       setImages([...images, image]);
     } catch (err) {

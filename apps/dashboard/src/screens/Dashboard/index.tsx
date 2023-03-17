@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./dashboard.module.css";
-import { AppStore } from '../../redux/store';
+import { AppStore } from "../../redux/store";
 import { getCoverById } from "@/redux/states/covers/thunks";
 import { getGoersByIdThunks } from "@/redux/states/goers/thunks";
 
@@ -16,9 +16,10 @@ export const DivisaFormater = (value: any) => {
 };
 
 const Dashboard = () => {
-
-  const {covers, loading, success} = useSelector((state: AppStore) => state.covers);
-  const {store} = useSelector((state: AppStore) => state.stores);
+  const { covers, loading, success } = useSelector(
+    (state: AppStore) => state.covers
+  );
+  const { store } = useSelector((state: AppStore) => state.stores);
   const {
     goers = [],
     success: succesGoer,
@@ -99,19 +100,17 @@ const Dashboard = () => {
       ? "0" + (date.getMonth() + 1)
       : date.getMonth() + 1;
 
-      const dispatch = useDispatch();
-    
-      console.log(covers[covers.length - 1])
+  const dispatch = useDispatch();
 
-      useEffect(() => {
-          dispatch(getCoverById(store.uuid || "") as any);
-      }, [dispatch,store, success]);
+  useEffect(() => {
+    dispatch(getCoverById(store.uuid || "") as any);
+  }, [dispatch, store, success]);
 
-      useEffect(() => {
-        dispatch(getGoersByIdThunks(covers[covers.length - 1]?.uuid) as any);
-      }, [dispatch, loading])
+  useEffect(() => {
+    dispatch(getGoersByIdThunks(covers[covers.length - 1]?.uuid) as any);
+  }, [dispatch, loading]);
 
-      return (
+  return (
     <>
       <div className={styles.board_screen}>
         <div className={styles.board_flex}>
@@ -124,7 +123,14 @@ const Dashboard = () => {
             <h3 className={styles.title}>Total Valor en Covers</h3>
             <h4 className={styles.time}>MES ACTUAL</h4>
 
-            <h2 className={styles.left}>{DivisaFormater(covers.reduce((a, c) => a + Number(c.price) * Number(c.limit), 0))}</h2>
+            <h2 className={styles.left}>
+              {DivisaFormater(
+                covers.reduce(
+                  (a, c) => a + Number(c.price) * Number(c.limit),
+                  0
+                )
+              )}
+            </h2>
           </div>
         </div>
 
@@ -132,20 +138,30 @@ const Dashboard = () => {
           <h3 className={styles.title}>Covers Efectivos</h3>
           <h4 className={styles.time}>AÑO ACTUAL</h4>
 
-          <h2>{DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}</h2>
+          <h2>
+            {DivisaFormater(
+              goers
+                .filter((goer) => goer.status == "in line")
+                .reduce((a, c: any) => a + c?.cost, 0)
+            )}
+          </h2>
         </div>
         <div className={`${styles.board_card} ${styles.board_banks}`}>
           <i className="bx bxs-bank"></i>
           <h3 className={styles.title_center}>Balance</h3>
-          <p>
-            {DivisaFormater(store.balance)}
-          </p>
+          <p>{DivisaFormater(store.balance)}</p>
         </div>
         <div className={`${styles.board_card} ${styles.span_2}`}>
           <h3 className={styles.title}>Resumen de ventas</h3>
           <h4 className={styles.time}>ÚLTIMOS 12 MESES</h4>
 
-          <h2>{DivisaFormater(goers.filter((goer) => goer.status == "in line").reduce((a, c:any) => a + c?.cost, 0))}</h2>
+          <h2>
+            {DivisaFormater(
+              goers
+                .filter((goer) => goer.status == "in line")
+                .reduce((a, c: any) => a + c?.cost, 0)
+            )}
+          </h2>
           <span className={styles.label_month}>
             {monthsList[Number(month) - 1].label.toUpperCase()} 2022
           </span>
@@ -166,9 +182,7 @@ const Dashboard = () => {
         <div className={`${styles.board_card} ${styles.board_bank_report}`}>
           <h3 className={styles.title}>Lista de espera (Covers)</h3>
           <h4 className={styles.time}>Ultimo Covers</h4>
-          <ul>
-           
-          </ul>
+          <ul></ul>
         </div>
         {/* <div className={styles.board_card}>
           <h3 className={styles.title}>Resumen de gastos</h3>

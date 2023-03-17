@@ -2,26 +2,13 @@ import React, { useState } from "react";
 import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
 import { deleteCover, updateCover } from "@/redux/states/covers/covers";
-import EditCoverModal from "../../update";
-=======
-import {
-  deleteCover,
-  PartialCover,
-  updateCover,
-} from "@/redux/states/covers/covers";
->>>>>>> 9f311dea9b989cdb0e94967d5625c443c5a77210
 import { Cover } from "@partiaf/types";
 import { DivisaFormater } from "@/utils/DivisaFormater";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/constants-definitions/Routes";
-<<<<<<< HEAD
 import { confirmDelete } from "@/utils/swal";
-=======
-import swal from "sweetalert";
-import CoverForm from "../../CoverForm";
->>>>>>> 9f311dea9b989cdb0e94967d5625c443c5a77210
+import UpdateCover from "../../update";
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
@@ -137,10 +124,10 @@ const CardCover = (Cover: any) => {
           </div>
         </div>
       </div>
-      <CoverForm
-        openModal={isOpenEdit}
+      <UpdateCover
         setOpenModal={setIsOpenEdit}
-        editCover={coverSelected}
+        openModal={isOpenEdit}
+        coverData={coverSelected}
       />
     </>
   );
