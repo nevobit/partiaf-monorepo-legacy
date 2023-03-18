@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text,SafeAreaView } from "react-native";
 import axios from "axios";
 import Card from "../../components/Card";
 import SelectDropdown from "react-native-select-dropdown";
 import { useSelector } from "react-redux";
 import { useQuery } from '@apollo/client';
 import { GET_COVERS_BY_ID } from "../../graphql/queries/covers";
+import { StatusBar } from "expo-status-bar";
 
 const List = () => {
   
@@ -35,14 +36,27 @@ const List = () => {
   //   loadCovers();
   // }, []);
   return (
-    <View
+    <SafeAreaView
       style={{
-        padding: 10,
+        paddingHorizontal: 10,
         backgroundColor: "#fff",
-        height: "100%",
+        width: '100%',
       }}
     >
+      <StatusBar hidden={true} />
       <SelectDropdown
+      buttonStyle={{
+        width: '100%',
+        borderRadius: 5
+      }}
+      dropdownStyle={{
+        width: '95%',
+      }}
+      rowTextStyle={{
+        height: 40,
+        paddingTop: 10,
+        fontWeight: '500'
+      }}
         data={data?.getCoversById}
         onSelect={(selectedItem, index) => {
           coversHandler(selectedItem)
@@ -66,7 +80,7 @@ const List = () => {
           // <Text>Cantidad: {cover.amount}</Text>
         );
       })}
-    </View>
+    </SafeAreaView>
   );
 };
 

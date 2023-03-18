@@ -1,0 +1,16 @@
+name: CI/CD Partiaf Monorepo
+
+on:
+  push:
+    brnaches: [ main ]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [16.x]
+      steps:
+        - name: Install dependencies
+          run: pnpm ci && cp .env.example .env
+        

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@apollo/client": "^3.7.10",
-    "@react-navigation/stack": "^6.3.16"
-  }
-}

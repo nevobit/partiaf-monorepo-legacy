@@ -1,12 +1,15 @@
+require('dotenv').config();
+
 import fastifyCors from "@fastify/cors";
-import fastify from "fastify";
+import fastify, {FastifyInstance} from "fastify";
 import { registerRoutes } from "../routes";
 import {initMongoose} from '@partiaf/constant-definitions'
+import { Server } from 'socket.io'
 
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-const PORT = Number(process.env.PORT) || 5000
+const { PORT } = process.env;
+const corsOptions = {
+    origin: '*',
+}
 export interface InitMongooseOptions {
     mongoUrl: string;
 }
@@ -22,28 +25,35 @@ export const initDataSources = async ( {mongoose}: InitDataSourcesOptions) => {
     }
 }
 
-(async() => {
-    const server = fastify({logger: true});
 
-    initDataSources({
+
+
+const main = async() => {
+    const server:FastifyInstance = fastify({logger: true});
+    server.register(fastifyCors, corsOptions);
+    
+    const io: Server = new Server(server.server);
+    
+    io.on('connection', () => {
+        server.log.info('Connecting to server')
+    });
+    
+    await initDataSources({
         mongoose: {
             mongoUrl: process.env.MONGODB_URL as string
         }
     })
-
-    server.register(fastifyCors, {
-        origin: true
-    });
 
     server.register((instance, options, next) => {
         registerRoutes(instance);
         next();
     }, {prefix: 'api/v3'});
 
-    const serverAddress = await server.listen({port: PORT, host: '0.0.0.0'}, () => {
-        server.log.info(`Backend App is running at http://localhost:${5000}`);
+    await server.listen({port: Number(PORT), host: '0.0.0.0'}, () => {
+        server.log.info(`Backend App is running at http://localhost:${PORT}`);
         server.log.info('Press CTRL-c to stop');
     });
 
-    server.log.info(`server succesfully started on: ${serverAddress}`);
-})();
+};
+
+void main();

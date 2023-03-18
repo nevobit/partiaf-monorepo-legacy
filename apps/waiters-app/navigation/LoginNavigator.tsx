@@ -8,7 +8,7 @@ export const LoginNavigator = () => {
   return (
     <Auth.Navigator screenOptions={{ headerShown: false }}>
       <Auth.Screen
-        name="Signin"
+        name="Login"
         component={Login}
         options={{
           presentation: "card",

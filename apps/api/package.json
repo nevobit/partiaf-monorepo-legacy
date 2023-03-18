@@ -23,6 +23,7 @@
     "fastify": "^4.11.0",
     "@partiaf/business-logic": "workspace:*",
     "@partiaf/types": "workspace:*",
-    "@partiaf/constant-definitions": "workspace:*"
+    "@partiaf/constant-definitions": "workspace:*",
+    "socket.io": "~4.6.1"
   }
 }

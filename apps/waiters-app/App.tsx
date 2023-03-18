@@ -14,9 +14,7 @@ export default function App() {
     <Provider store={store}>
       <ApolloProvider client={client}>
         <PersistGate loading={null} persistor={persistor} >
-            {/* <AppNavigator />     */}
-            {/* <List />    */}
-            <Login />           
+            <AppNavigator />    
         </PersistGate>
       </ApolloProvider>
     </Provider>
