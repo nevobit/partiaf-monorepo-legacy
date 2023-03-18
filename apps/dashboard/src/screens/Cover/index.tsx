@@ -14,11 +14,16 @@ const Cover = () => {
     success,
     loading,
   } = useSelector((state: AppStore) => state.covers);
+
+  const { uuid: coverUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    dispatch(getCoverById(store.uuid || "") as any);
+    dispatch(getCoverById(coverUUID) as any);
   }, [dispatch, store, success]);
 
   return (

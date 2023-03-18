@@ -22,6 +22,10 @@ const CreateCover = ({ openModal, setOpenModal }: Props) => {
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value);
   };
+  const { uuid: coverUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+  console.log("EN CREATE", store);
   const [cover, setCover] = useState({
     name: "",
     type: "General",
@@ -31,7 +35,7 @@ const CreateCover = ({ openModal, setOpenModal }: Props) => {
     hour: "",
     description: "",
     image: imageUrl,
-    store: store.uuid,
+    store: coverUUID,
     percentage: 0,
     status: true,
     location: { lat: 0, lng: 0 },
