@@ -58,7 +58,7 @@ const Settings = () => {
         );
         localStorage.setItem('admin', JSON.stringify(admin));
         setImageUrl("");
-        console.log("1=>>>>>>>>>>>", imageUrl);
+    
         setOpenModal(!openModal);
       } catch (error) {
         if (error instanceof Error) {

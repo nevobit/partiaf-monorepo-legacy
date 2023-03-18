@@ -33,3 +33,4 @@ export interface Store {
     employe_code: number;
     admin: string;
 }
+export type PartialStore = Partial<Store>;

@@ -1,95 +1,73 @@
-import React, {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { createCover, reset } from "@/redux/states/covers/covers";
-import { AppStore } from "@/redux/store";
-
 import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import { Button, Field, Input, MapForLocation } from "@/components/shared";
-
+import { createCover, reset } from "@/redux/states/covers/covers";
+import { AppStore } from "@/redux/store";
 import { convertToNumber, currencyMask } from "@/utils/currencyMask";
-import { Discount } from "@/utils/percentage";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./CoverCreate.module.css";
 
-import styles from "./createcover.module.css";
-
-interface CreateCoverModalProps {
+interface Props {
   openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  setOpenModal: Function;
 }
 
-const INITIAL_COVER = {
-  name: "",
-  type: "General",
-  date: "",
-  limit: 0,
-  initial_limit: 0,
-  hour: "",
-  description: "",
-  percentage: 0,
-  status: true,
-  location: { lat: 4.6871722714242, lng: -74.05391727207545 },
-};
-
-function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
+const CreateCover = ({ openModal, setOpenModal }: Props) => {
+  const dispatch = useDispatch();
+  const [discount, setDiscount] = useState(false);
   const { store } = useSelector((state: AppStore) => state.stores);
   const { success } = useSelector((state: AppStore) => state.covers);
-
-  const [discount, setDiscount] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
-
-  const dispatch = useDispatch();
-
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value);
   };
-
+  const { uuid: coverUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+  console.log("EN CREATE", store);
   const [cover, setCover] = useState({
-    ...INITIAL_COVER,
+    name: "",
+    type: "General",
+    date: "",
+    limit: 0,
+    initial_limit: 0,
+    hour: "",
+    description: "",
     image: imageUrl,
-    store: store.uuid,
+    store: coverUUID,
+    percentage: 0,
+    status: true,
+    location: { lat: 0, lng: 0 },
   });
 
-  const handleChange = (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = event.target;
-
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
     if (name === "price") {
-      const formattedPrice = currencyMask(
-        event as ChangeEvent<HTMLInputElement>
-      );
+      const formattedPrice = currencyMask(e);
       setCover((prev) => ({ ...prev, [name]: formattedPrice }));
     } else {
       setCover((prev) => ({ ...prev, [name]: value }));
     }
-    setCover((prev) => ({
-      ...prev,
-      initial_limit: prev.limit,
-      image: imageUrl,
-    }));
+    setCover((prev) => ({ ...prev, initial_limit: prev.limit }));
+    setCover((prev) => ({ ...prev, image: imageUrl }));
   };
 
-  const handleDiscount = (event: ChangeEvent<HTMLInputElement>) => {
-    setDiscount(event.target.checked);
+  const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDiscount(e.target.checked);
   };
 
-  const submitCreateHandler = async (
-    event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    event.preventDefault();
-    const PriceConvert = convertToNumber(price);
-    const percentage = Discount(PriceConvert, cover.percentage);
+  const handleExit = (e: any) => {
+    e.preventDefault();
+    setOpenModal(!openModal);
+    reset();
+  };
+  const submitCreateHandler = async (e: any) => {
+    e.preventDefault();
+    let PriceConvert = convertToNumber(price);
 
     try {
+      console.log({ cover });
       dispatch(
         createCover({
           ...cover,
@@ -103,7 +81,6 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
       }
     }
   };
-
   useEffect(() => {
     if (success) {
       setOpenModal(false);
@@ -118,111 +95,123 @@ function CreateCoverModal({ openModal, setOpenModal }: CreateCoverModalProps) {
           <div className={styles.form}>
             <div className={styles.header_cover_form}>
               <img src="/logo-parti.svg" alt="Log Partiaf" />
-              <button
-                className={styles.btn_header_cover}
-                onClick={() => {
-                  setOpenModal(!openModal);
-                  reset();
-                }}
-              >
-                Cerrar
-              </button>
             </div>
-            <div className={styles.container_fields}>
-              <Field label="Nombre del evento">
-                <Input name="name" value={cover.name} onChange={handleChange} />
-              </Field>
-              <div className={styles.data_fields}>
-                <Field label="Cupo total">
-                  <Input
-                    name="limit"
-                    value={cover.limit}
-                    onChange={handleChange}
-                  />
-                </Field>
-                <Field label="Tipo">
-                  <select name="type" onChange={handleChange}>
-                    <option value="VIP">VIP</option>
-                    <option value="General">General</option>
-                  </select>
-                </Field>
-                <Field label="Fecha">
-                  <Input type="date" name="date" onChange={handleChange} />
-                </Field>
-              </div>
-              <div className={styles.data_fields}>
-                <Field label="Hora">
-                  <Input
-                    type="time"
-                    name="hour"
-                    value={cover.hour}
-                    onChange={handleChange}
-                  />
-                </Field>
 
-                <Field label="Precio">
+            <div className={styles.grid_form_cover}>
+              <div className={styles.container_fields}>
+                <Field label="Nombre del evento">
                   <Input
-                    type="text"
-                    value={"$" + price}
-                    onChange={(event) => handlePriceChange(currencyMask(event))}
+                    name="name"
+                    value={cover.name}
+                    onChange={handleChange}
                   />
                 </Field>
-                {discount ? (
-                  <Field label="Ingrese el porcentaje a descontar">
+                <div className={styles.data_fields}>
+                  <Field label="Cupo total">
                     <Input
-                      type="number"
-                      name="percentage"
-                      value={cover.percentage}
+                      name="limit"
+                      value={cover.limit}
                       onChange={handleChange}
                     />
                   </Field>
-                ) : (
-                  <div className={styles.discount}>
-                    <input
-                      className={styles.select_check}
-                      type="checkbox"
-                      id="terms"
-                      checked={discount}
-                      onChange={handleDiscount}
+                  <Field label="Tipo">
+                    <select name="type" onChange={handleChange}>
+                      <option value="VIP">VIP</option>
+                      <option value="General">General</option>
+                    </select>
+                  </Field>
+                  <Field label="Fecha">
+                    <Input type="date" name="date" onChange={handleChange} />
+                  </Field>
+                </div>
+                <div className={styles.data_fields}>
+                  <Field label="Hora">
+                    <Input
+                      type="time"
+                      name="hour"
+                      value={cover.hour}
+                      onChange={handleChange}
                     />
-                    <div className={styles.sec_terms}>
-                      <label htmlFor="terms">Agregar descuento</label>
+                  </Field>
+
+                  <Field label="Precio">
+                    <Input
+                      type="text"
+                      value={"$" + price}
+                      onChange={(e) => handlePriceChange(currencyMask(e))}
+                    />
+                  </Field>
+                  {discount ? (
+                    <Field label="Ingrese el porcentaje a descontar">
+                      <Input
+                        type="number"
+                        name="percentage"
+                        value={cover.percentage}
+                        onChange={handleChange}
+                      />
+                    </Field>
+                  ) : (
+                    <div className={styles.discount}>
+                      <input
+                        className={styles.select_check}
+                        type="checkbox"
+                        id="terms"
+                        checked={discount}
+                        onChange={handleDiscount}
+                      />
+                      <div className={styles.sec_terms}>
+                        <label htmlFor="terms">Agregar descuento</label>
+                      </div>
                     </div>
+                  )}
+                </div>
+                <div className={styles.description_form}>
+                  <Field label="Descripcion">
+                    <textarea
+                      name="description"
+                      value={cover.description}
+                      onChange={handleChange}
+                      className={styles.text_area_cover}
+                    ></textarea>
+                  </Field>
+                  <Field>
+                    <div className={styles.container_cld}>
+                      <DragCloudinary
+                        idInput="file-create-cover"
+                        setImageUrl={setImageUrl}
+                      />
+                    </div>
+                  </Field>
+                </div>
+              </div>
+              <div className={styles.location_form}>
+                <Field label="Ubicacion del evento">
+                  <div className={styles.map_location}>
+                    <MapForLocation
+                      setState={setCover}
+                      state={cover.location}
+                      className={styles.location_map}
+                    />
                   </div>
-                )}
-              </div>
-              <div className={styles.description_form}>
-                <Field label="Descripcion">
-                  <textarea
-                    name="description"
-                    value={cover.description}
-                    onChange={handleChange}
-                    className={styles.text_area_cover}
-                  ></textarea>
-                </Field>
-                <Field>
-                  <DragCloudinary
-                    idInput="file-create-cover"
-                    setImageUrl={setImageUrl}
-                  />
                 </Field>
               </div>
             </div>
-            <div className={styles.location_form}>
-              <Field label="Ubicacion del evento">
-                <MapForLocation
-                  setState={setCover}
-                  state={cover.location}
-                  className={styles.location_map}
-                />
-              </Field>
+            <div className={styles.cnt_btn}>
+              <button
+                className={styles.submit_btn}
+                onClick={submitCreateHandler}
+              >
+                Crear Cover
+              </button>
+              <button className={styles.exit_btn} onClick={handleExit}>
+                Salir
+              </button>
             </div>
-            <Button onClick={submitCreateHandler}>Crear Cover</Button>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
-export default CreateCoverModal;
+export default CreateCover;

@@ -1,33 +1,47 @@
-import DragCloudinary from "@/components/Layout/drag-cloudinary";
+import { ImageInput, MapForLocation } from "@/components/shared";
 import Field from "@/components/shared/Field";
-import ImageInput from "@/components/shared/ImageInput";
 import Input from "@/components/shared/Input";
-import { reset } from "@/redux/states/admins/admin";
-import { updateStore } from "@/redux/states/stores/storesSlice";
+import {
+  reset,
+  updateStore,
+  PartialStore,
+} from "@/redux/states/stores/storesSlice";
 import { AppStore } from "@/redux/store";
+import { cloudinaryManyUpload } from "@/utils/Cloudinary/many";
+import { confirmDelete, showSuccessMessage } from "@/utils/swal";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./settingsBusiness.module.css";
+import { getStoreByAdminThunk } from "../../redux/states/stores/thunks";
 
 const SettingsBusiness = () => {
-  const { store } = useSelector((state: AppStore) => state.stores);
+  const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
+  const { store, success } = useSelector((state: AppStore) => state.stores);
+  const storeLocal = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
 
-  const { success } = useSelector((state: AppStore) => state.stores);
+  const photosArray = storeLocal.photos.slice();
+  const [urlPhotos, setUrlPhotos] = useState<string[]>(photosArray);
 
   console.log(store);
 
-  const [imageUrl, setImageUrl] = useState("");
-  const [openModal, setOpenModal] = useState(false);
-
-  const [storeUpdate, setStoreUpdate] = useState({
-    uuid: store.uuid,
-    name: store.name,
-    nit: store.nit,
-    email: store.email,
-    phone: store.phone,
-    limit: store.limit,
-    type: store.type,
-    photos: store.photos,
+  const [storeUpdate, setStoreUpdate] = useState<PartialStore>({
+    admin: storeLocal?.admin,
+    uuid: storeLocal?.uuid,
+    name: storeLocal?.name,
+    nit: storeLocal?.nit,
+    email: storeLocal?.email,
+    phone: storeLocal?.phone,
+    limit: storeLocal?.limit,
+    type: storeLocal?.type,
+    employes: storeLocal?.employes,
+    employe_code: storeLocal?.employe_code,
+    location: storeLocal?.location,
+    max_per_table: storeLocal?.max_per_table,
+    min_per_table: storeLocal?.min_per_table,
+    description: storeLocal.description,
   });
 
   const handleChange = (
@@ -39,12 +53,51 @@ const SettingsBusiness = () => {
     setStoreUpdate((prev) => ({ ...prev, [name]: value }));
   };
 
+  const deleteHandler = (url: string) => {
+    const index = photosArray.indexOf(url);
+    if (index !== -1) {
+      const newPhotosArray = [...photosArray];
+      newPhotosArray.splice(index, 1);
+      setUrlPhotos(newPhotosArray);
+      localStorage.setItem(
+        "store",
+        JSON.stringify({
+          ...storeLocal,
+          photos: newPhotosArray,
+        })
+      );
+    }
+  };
+
+  const submitDeleteHandler = async (url: string) => {
+    const message = "¿Está seguro que desea eliminar la imagen?";
+    confirmDelete(
+      message,
+      (param: any) => dispatch(deleteHandler(param) as any),
+      url
+    );
+  };
+
   const submitUpdateHandler = async (e: any) => {
     e.preventDefault();
     try {
-      dispatch(updateStore(storeUpdate) as any);
-      localStorage.setItem("store", JSON.stringify(storeUpdate));
+      dispatch(
+        updateStore({
+          ...storeUpdate,
+          photos: urlPhotos,
+          location: storeUpdate.location,
+        }) as any
+      );
+      localStorage.setItem(
+        "store",
+        JSON.stringify({
+          ...storeUpdate,
+          photos: urlPhotos,
+          location: storeUpdate.location,
+        })
+      );
       setOpenModal(!openModal);
+      showSuccessMessage("Registros actualizados con éxito.");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -52,12 +105,12 @@ const SettingsBusiness = () => {
     }
   };
 
-  const dispatch = useDispatch();
   useEffect(() => {
     if (success) {
       dispatch(reset() as any);
     }
-  }, [dispatch, success]);
+    dispatch(getStoreByAdminThunk(storeLocal?.uuid) as any);
+  }, [dispatch, success, store]);
 
   return (
     <div className={styles.screen}>
@@ -66,7 +119,6 @@ const SettingsBusiness = () => {
           <h2>General</h2>
           <button onClick={submitUpdateHandler}>Guardar</button>
         </div>
-
         <div className={styles.setting_grid}>
           <div>
             <div className={styles.card}>
@@ -124,6 +176,27 @@ const SettingsBusiness = () => {
                     <option value="Gastrobar">Gastrobar</option>
                   </select>
                 </Field>
+
+                <Field label="Numero de empleados">
+                  <Input
+                    name="empoyes"
+                    value={storeUpdate.employes}
+                    onChange={handleChange}
+                  />
+                </Field>
+                <Field label="Codigo de empleados">
+                  <Input
+                    name="employe_code"
+                    value={storeUpdate.employe_code}
+                    onChange={handleChange}
+                  />
+                </Field>
+                <Field label="Latitud">
+                  <Input value={storeUpdate.location?.lat} />
+                </Field>
+                <Field label="Longitud">
+                  <Input value={storeUpdate.location?.lng} />
+                </Field>
               </div>
             </div>
 
@@ -131,12 +204,14 @@ const SettingsBusiness = () => {
               <h4 className={styles.card_title}>
                 Detalles de fiscales y de facturacion
               </h4>
-              <div className={styles.width_input}>
+
+              <div className={styles.colums_card}>
+                {/*
+                <div className={styles.width_input}>
                 <Field label="Direccion">
                   <Input />
                 </Field>
-              </div>
-              <div className={styles.colums_card}>
+                </div>
                 <Field label="Ciudad">
                   <Input />
                 </Field>
@@ -148,7 +223,7 @@ const SettingsBusiness = () => {
                 </Field>
                 <Field label="Pais">
                   <Input />
-                </Field>
+                </Field>*/}
                 <Field label="Tipo de regimen">
                   <select name="" id="">
                     <option value="Regimen Comun">Regimen Comun</option>
@@ -171,13 +246,45 @@ const SettingsBusiness = () => {
               <div className={styles.colums_card}></div>
             </div>
           </div>
-          <div className={styles.image_input}>
-            <h4 className={styles.card_title}>Subir imagen</h4>
-            <div className={styles.container_input_image_upload}>
-              <DragCloudinary
-                idInput="file-settings-bussiness"
-                setImageUrl={setImageUrl}
-              />
+          <div className={styles.section}>
+            <div className={styles.image_input}>
+              <Field label="Subir imagen">
+                <div className={styles.container_input_image_upload}>
+                  <ImageInput
+                    name="photos"
+                    onChange={(e) =>
+                      cloudinaryManyUpload(e, {
+                        photosArray,
+                        setUrlPhotos,
+                        storeLocal,
+                      })
+                    }
+                  />
+                </div>
+              </Field>
+            </div>
+            <div className={styles.container_image}>
+              {urlPhotos.map((photo: string) => (
+                <div className={styles.cnt_img}>
+                  <img src={photo} alt="image" />
+                  <button className={styles.button_show}>
+                    <i className="bx bx-show-alt"></i>
+                  </button>
+                  <button
+                    className={styles.button_trash}
+                    onClick={() => submitDeleteHandler(photo)}
+                  >
+                    <i className="bx bxs-trash-alt"></i>
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className={styles.container_map_location}>
+              <Field label="Ubicacion">
+                <div className={styles.cnt_map}>
+                  <MapForLocation setState={setStoreUpdate} />
+                </div>
+              </Field>
             </div>
           </div>
         </div>

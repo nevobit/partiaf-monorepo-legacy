@@ -1,0 +1,145 @@
+.open_modal {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999999;
+}
+
+.close_modal {
+  display: none;
+}
+
+.container_form {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  height: 100%;
+  width: 120rem;
+}
+
+.form {
+  background-color: #fff;
+  min-width: 288px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header_cover_form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header_cover_form img {
+  height: 4rem;
+}
+
+.header_cover_form button {
+  background-color: var(--black);
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.data_fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.description_form {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.description_form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  height: 23rem;
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.location_form {
+  height: auto;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.location_map {
+  height: 100%;
+  width: 100%;
+}
+
+.image_create_cover {
+  border-radius: 0.4rem;
+}
+
+.discount {
+  display: flex;
+  margin-top: 4rem;
+  height: 3rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.select_check {
+  height: 1rem;
+  width: 2rem;
+}
+
+.discount .sec_terms label {
+  font-size: 1.4rem;
+}
+
+.grid_form_cover {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+}
+
+.map_location {
+  height: 45rem;
+  width: 40rem;
+}
+
+.container_cld {
+  height: 23rem;
+}
+
+.cnt_btn {
+  gap: 2rem;
+  padding: 1rem;
+  position: relative;
+  height: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cnt_btn button {
+  right: 0;
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+}
+
+.cnt_btn .exit_btn {
+  background-color: #333;
+  color: #fff;
+}

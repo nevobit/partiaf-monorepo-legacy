@@ -21,6 +21,9 @@ const Waiters = () => {
     loading,
   } = useSelector((state: AppStore) => state.waiters);
   const { store } = useSelector((state: AppStore) => state.stores);
+  const { uuid: storeUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
   const [openModal, setOpenModal] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -71,7 +74,7 @@ const Waiters = () => {
   };
 
   useEffect(() => {
-    dispatch(getWaitersByIdThunk(store.uuid) as any);
+    dispatch(getWaitersByIdThunk(storeUUID) as any);
     if (success) {
       dispatch(reset() as any);
     }

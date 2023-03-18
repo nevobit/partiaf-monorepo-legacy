@@ -20,7 +20,7 @@ exports.default = {
         },
         getStoreById(_, { uuid }, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                const store = yield (0, business_logic_1.getStoreById)(uuid);
+                const store = yield (0, business_logic_1.getOneStoreById)(uuid);
                 return store;
             });
         },

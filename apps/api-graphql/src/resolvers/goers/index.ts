@@ -1,8 +1,6 @@
 import {
   createGoer,
-  getAllStores,
   getGoersByUser,
-  getStoreById,
   updateGoer,
 } from "@partiaf/business-logic";
 
@@ -20,7 +18,7 @@ export default {
 
   Mutation: {
     async createGoer(_: any, { data }: any, context: any) {
-      console.log(data)
+      console.log(data);
       const goer = await createGoer(data);
       return goer;
     },

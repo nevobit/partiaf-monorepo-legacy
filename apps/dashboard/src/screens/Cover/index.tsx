@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCover from "./component/CardCover";
 import styles from "./cover.module.css";
-import CreateCoverModal from "./create";
+import CreateCover from "./create";
 
 const Cover = () => {
   const dispatch = useDispatch();
@@ -14,11 +14,16 @@ const Cover = () => {
     success,
     loading,
   } = useSelector((state: AppStore) => state.covers);
+
+  const { uuid: coverUUID } = localStorage.getItem("store")
+    ? JSON.parse(localStorage.getItem("store") || "")
+    : "";
+
   const { store, stores } = useSelector((state: AppStore) => state.stores);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    dispatch(getCoverById(store.uuid || "") as any);
+    dispatch(getCoverById(coverUUID) as any);
   }, [dispatch, store, success]);
 
   return (
@@ -59,7 +64,7 @@ const Cover = () => {
               ))}
             </div>
           </div>
-          <CreateCoverModal openModal={openModal} setOpenModal={setOpenModal} />
+          <CreateCover openModal={openModal} setOpenModal={setOpenModal} />
         </>
       )}
     </>

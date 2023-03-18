@@ -13,11 +13,11 @@ import { PartialWaiter, waitersSlice } from "./states/waiters/waiters";
 
 interface StoresSlice {
   stores: PartialStore[];
-  store: Store;
-  oneStore: PartialStore;
+  store: PartialStore;
   loading: boolean;
   success: boolean;
   successSignin: boolean;
+  succesDeleteImage: boolean;
   error: string;
 }
 
@@ -55,9 +55,9 @@ export interface AppStore {
 export default configureStore<AppStore>({
   reducer: {
     admins: adminsSlice.reducer,
-    stores: storesSlice.reducer,
     covers: coversSlice.reducer,
     goers: goersSlice.reducer,
-    waiters: waitersSlice.reducer
+    waiters: waitersSlice.reducer,
+    stores: storesSlice.reducer,
   },
 });

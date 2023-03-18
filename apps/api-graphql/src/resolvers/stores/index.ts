@@ -1,4 +1,4 @@
-import { getAllStores, getStoreById } from "@partiaf/business-logic";
+import { getAllStores, getOneStoreById } from "@partiaf/business-logic";
 
 interface Uuid {
   uuid: string;
@@ -11,7 +11,7 @@ export default {
       return stores;
     },
     async getStoreById(_: any, { uuid }: Uuid, context: any) {
-      const store = await getStoreById(uuid);
+      const store = await getOneStoreById(uuid);
       return store;
     },
   },

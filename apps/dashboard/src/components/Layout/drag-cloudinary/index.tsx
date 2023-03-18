@@ -6,7 +6,6 @@ interface Props {
   setImageUrl: (url: string) => void;
   idInput: string;
   url?: string;
-  
 }
 
 const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {
@@ -14,7 +13,7 @@ const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {
   const [uploader] = useState<CloudinaryUploader>(new CloudinaryUploader());
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(url || null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
-  console.log("URL", uploadedUrl)
+
 
   useEffect(() => {
     if (uploadedUrl) {
@@ -89,6 +88,7 @@ const DragCloudinary = ({ url, idInput, setImageUrl }: Props) => {
             type="file"
             name={idInput}
             hidden
+            accept=".jpg,.jpeg,.png,.svg,.webp"
             id={idInput}
             onChange={handleChange}
           />
