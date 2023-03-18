@@ -17,9 +17,11 @@ export const getStoresById = (uuid: string) => async (dispatch: any) => {
   dispatch(setStoresById({ stores: data }));
 };
 
-export const getStoreByAdminThunk = (admin_uuid: string) => async (dispatch: any) => {
+export const getStoreByAdminThunk =
+  (admin_uuid: string) => async (dispatch: any) => {
     dispatch(loadingStoresById());
     const { data } = await PARTIAF_API.get(`/store/${admin_uuid}`);
+    console.log(data);
     dispatch(setStoreByAdmin({ store: data }));
   };
 

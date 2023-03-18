@@ -149,7 +149,7 @@ export const storesSlice = createSlice({
     },
     setStoreByAdmin: (state, action) => {
       state.loading = false;
-      state.store = action.payload.stores;
+      state.store = action.payload.store;
     },
   },
 

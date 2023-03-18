@@ -5,10 +5,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./bookings.module.css";
-import CardBooking from "./Component/CardBooking";
 import BookingList from "./List";
 import swal from "sweetalert";
-import { getStoreByAdminThunk } from "../../redux/states/stores/thunks";
+import { PartialStore } from "@partiaf/types";
+import { getStoreByAdminThunk } from "@/redux/states/stores/thunks";
 
 export const usersByDatabaseMook = [
   {
@@ -57,7 +57,7 @@ const Bookings = () => {
 
   const { store, success } = useSelector((state: AppStore) => state.stores);
 
-  const [storeUpdate, setStoreUpdate] = useState({
+  const [storeUpdate, setStoreUpdate] = useState<PartialStore>({
     uuid: store.uuid,
     chairs: store.chairs || store.chairs,
     tables: store.tables || store.tables,
