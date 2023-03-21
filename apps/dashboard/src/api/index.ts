@@ -1,9 +1,7 @@
 import axios from "axios";
 
-export const PARTIAF_API = axios.create({
-  // baseURL: 'https://real-vision-api.herokuapp.com'
-  // baseURL: 'https://real-vision-api-mono.onrender.com/api/v3'
- // baseURL: "https://partiaf-api.xyz/api/v3",
-  // baseURL: "http://44.203.116.120:5000/api/v3/health-check",
+export const PARTIAF_API = import.meta.env.MODE == 'development'?  axios.create({
   baseURL: "http://localhost:8000/api/v3",
+}) : axios.create({
+  baseURL: "https://partiaf-api.xyz/api/v3",
 });

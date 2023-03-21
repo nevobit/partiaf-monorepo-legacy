@@ -57,6 +57,9 @@ const Bookings = () => {
 
   const { store, success } = useSelector((state: AppStore) => state.stores);
 
+
+  
+  console.log(store);
   const [storeUpdate, setStoreUpdate] = useState<PartialStore>({
     uuid: store.uuid,
     chairs: store.chairs || store.chairs,
@@ -105,6 +108,7 @@ const Bookings = () => {
     setBookings(data);
   };
 
+  console.log({bookings})
   const deleteBookings = async () => {
     try {
       swal({

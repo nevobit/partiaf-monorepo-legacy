@@ -1,10 +1,9 @@
-require('dotenv').config();
-
+import 'dotenv/config'
 import fastifyCors from "@fastify/cors";
 import fastify, {FastifyInstance} from "fastify";
 import { registerRoutes } from "../routes";
-import {initMongoose} from '@partiaf/constant-definitions'
-import { Server } from 'socket.io'
+import { initMongoose } from '@partiaf/constant-definitions'
+import { Server } from "socket.io";
 
 const { PORT } = process.env;
 const corsOptions = {
@@ -26,15 +25,14 @@ export const initDataSources = async ( {mongoose}: InitDataSourcesOptions) => {
 }
 
 
-
-
 const main = async() => {
     const server:FastifyInstance = fastify({logger: true});
     server.register(fastifyCors, corsOptions);
     
-    const io: Server = new Server(server.server);
+    const io = new Server(server.server, {cors: "*"});
     
-    io.on('connection', () => {
+    io.on('connection', (socket) => {
+        console.log(socket.id)
         server.log.info('Connecting to server')
     });
     

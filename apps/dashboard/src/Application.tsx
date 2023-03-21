@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./constants-definitions/Routes";
 import GuardRoute from "./guards";
@@ -11,6 +12,8 @@ import Signup from "./screens/Signup";
 import Verification from "./screens/Verification";
 
 const Application = () => {
+  const [status, setStatus] = useState();
+  
   return (
     <BrowserRouter>
       <Routes>

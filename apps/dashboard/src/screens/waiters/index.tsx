@@ -86,7 +86,7 @@ const Waiters = () => {
       ) : (
         <div className={styles.screen_waiter}>
           <div className={styles.header_screen_waiter}>
-            <h2>Colaboradores</h2>
+            <h2>Colaboradores</h2>            
             <button onClick={handlerOpenModal}>Nuevo Colaborador</button>
           </div>
           <div className={styles.container_table}>
