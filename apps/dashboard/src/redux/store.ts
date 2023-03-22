@@ -45,7 +45,7 @@ interface GoerssSlice {
 }
 
 export interface AppStore {
-  admins: AdminInfo;
+  admins: any;
   stores: StoresSlice;
   covers: CoverssSlice;
   goers: GoerssSlice;
