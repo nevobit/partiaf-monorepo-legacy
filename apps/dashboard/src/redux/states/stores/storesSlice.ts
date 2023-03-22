@@ -124,7 +124,9 @@ export const deleteImageStoreByUrl = createAsyncThunk(
 export const storesSlice = createSlice({
   name: "stores",
   initialState: {
-    store: EmptyStoreState,
+    store: localStorage.getItem("store")
+      ? JSON.parse(localStorage.getItem("store") as string)
+      : EmptyStoreState,
     stores: EmptyStoresState,
     loading: false,
     success: false,
@@ -205,7 +207,7 @@ export const storesSlice = createSlice({
         state.store = {};
       })
       .addCase(logoutStoreSlice.fulfilled, (state) => {
-        state.store = {};
+        state.store = null;
       });
   },
 });

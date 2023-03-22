@@ -31,7 +31,9 @@ export const EmptyadminState: PartialAdmin = {
 export const AdminKey = "admin";
 
 const initialState = {
-  admin: EmptyadminState,
+  admin: localStorage.getItem("admin")
+    ? JSON.parse(localStorage.getItem("admin") as string)
+    : EmptyadminState,
   error: "",
   success: false,
   successSignup: false,
@@ -212,7 +214,7 @@ export const adminsSlice = createSlice({
         state.admin = {};
       })
       .addCase(logout.fulfilled, (state) => {
-        state.admin = {};
+        state.admin = null;
       });
   },
 });
