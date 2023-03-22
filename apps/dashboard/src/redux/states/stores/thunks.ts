@@ -56,7 +56,5 @@ export const updateStoreThunks = async (
   info: PartialStore
 ) => {
   const { data } = await PARTIAF_API.put(`/stores/${uuid}`, { data: info });
-  // localStorage.setItem("store", JSON.stringify(data));
-  // window.location.reload();
   return data;
 };

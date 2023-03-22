@@ -15,7 +15,7 @@ export const CoverSchemaMongo = new Schema<Cover>(
     price: { type: Number },
     percentage: { type: Number },
     date: { type: String },
-    status: { type: Boolean },
+    status: { type: String },
     location: { type: { lat: Number, lng: Number } },
   },
   {

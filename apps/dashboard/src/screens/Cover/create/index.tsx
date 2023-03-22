@@ -37,7 +37,7 @@ const CreateCover = ({ openModal, setOpenModal }: Props) => {
     image: imageUrl,
     store: coverUUID,
     percentage: 0,
-    status: true,
+    status: "",
     location: { lat: 0, lng: 0 },
   });
 
@@ -116,8 +116,8 @@ const CreateCover = ({ openModal, setOpenModal }: Props) => {
                   </Field>
                   <Field label="Tipo">
                     <select name="type" onChange={handleChange}>
-                      <option value="VIP">VIP</option>
                       <option value="General">General</option>
+                      <option value="VIP">VIP</option>
                     </select>
                   </Field>
                   <Field label="Fecha">

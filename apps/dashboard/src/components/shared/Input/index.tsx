@@ -18,6 +18,8 @@ interface Props {
   onBlur?: FocusEventHandler<HTMLInputElement>;
   isError?: boolean | undefined;
   invalidFeedback?: string;
+  pattern?: string;
+  required?: boolean;
 }
 
 const Input = ({
@@ -36,6 +38,8 @@ const Input = ({
   onBlur,
   isError,
   invalidFeedback,
+  pattern,
+  required = true,
 }: Props) => {
   return (
     <>
@@ -44,6 +48,7 @@ const Input = ({
         <input
           name={name}
           type={type}
+          pattern={pattern}
           onBlur={onBlur}
           maxLength={maxLength}
           defaultValue={defaultValue}
@@ -54,6 +59,7 @@ const Input = ({
           }`}
           value={value}
           placeholder={placeholder}
+          required={required}
         />
       </div>
       <InvalidFeedback isError={isError}>{invalidFeedback}</InvalidFeedback>

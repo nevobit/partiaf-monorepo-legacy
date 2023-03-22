@@ -110,7 +110,7 @@ const SettingsBusiness = () => {
       dispatch(reset() as any);
     }
     dispatch(getStoreByAdminThunk(storeLocal?.uuid) as any);
-  }, [dispatch, success, store]);
+  }, [dispatch, success]);
 
   return (
     <div className={styles.screen}>
@@ -140,11 +140,7 @@ const SettingsBusiness = () => {
                 </Field>
 
                 <Field label="Correo Electronico">
-                  <Input
-                    name="email"
-                    value={storeUpdate.email}
-                    onChange={handleChange}
-                  />
+                  <Input value={storeUpdate.email} />
                 </Field>
 
                 <Field label="Telefono">
@@ -179,7 +175,7 @@ const SettingsBusiness = () => {
 
                 <Field label="Numero de empleados">
                   <Input
-                    name="empoyes"
+                    name="employes"
                     value={storeUpdate.employes}
                     onChange={handleChange}
                   />

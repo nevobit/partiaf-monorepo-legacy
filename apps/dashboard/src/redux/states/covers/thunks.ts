@@ -1,5 +1,6 @@
 import { PARTIAF_API } from "@/api";
-import { loadingCoversById, PartialCover, setCoversById, setOneCoversById } from "./covers";
+import { PartialCover } from "@partiaf/types";
+import { loadingCoversById, setCoversById, setOneCoversById } from "./covers";
 
 export const createCoverThunks = async (info: PartialCover) => {
   const { data } = await PARTIAF_API.post("/covers", { ...info });

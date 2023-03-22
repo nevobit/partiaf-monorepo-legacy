@@ -143,3 +143,29 @@
   background-color: #333;
   color: #fff;
 }
+
+.quit_image {
+  position: relative;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.quit_image img {
+  object-fit: cover;
+  height: 23rem;
+}
+
+.quit_image button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 5rem;
+  width: 5rem;
+  background-color: #bb6464;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

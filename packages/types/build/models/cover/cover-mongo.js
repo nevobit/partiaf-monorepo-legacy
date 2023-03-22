@@ -15,7 +15,7 @@ exports.CoverSchemaMongo = new mongoose_1.Schema({
     price: { type: Number },
     percentage: { type: Number },
     date: { type: String },
-    status: { type: Boolean },
+    status: { type: String },
     location: { type: { lat: Number, lng: Number } },
 }, {
     versionKey: false,

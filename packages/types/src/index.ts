@@ -1,3 +1,4 @@
+export * from './common';
 export * from './models/admin';
 export * from './models/booking';
 export * from './models/comment';

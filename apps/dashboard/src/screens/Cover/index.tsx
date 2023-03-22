@@ -54,7 +54,7 @@ const Cover = () => {
                   className={styles.Link_create}
                   onClick={() => setOpenModal(!openModal)}
                 >
-                  Nuevo cover
+                  Nuevo ticket
                 </button>
               </div>
             </div>

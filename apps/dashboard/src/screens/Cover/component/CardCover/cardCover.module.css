@@ -207,7 +207,7 @@ letter-spacing: .15rem;
 
 
 .card_btn_status_active {
-  width: 100%;
+  width: 120%;
   background: #4BB543;
   /* padding: 0.1rem; */
   border-radius: 0.4rem;
@@ -218,14 +218,18 @@ letter-spacing: .15rem;
 }
 
 .card_btn_status_inactive {
-  width: 100%;
-  background: #CA0B00;
+  width: 150%;
+  background: #BB6464;
   border-radius: 0.4rem;
   color: #fff;
   letter-spacing: .1rem;
   text-transform: capitalize;
   font-weight: 500;
 
+}
+
+.card_btn_status_inactive:hover{
+  background: #CA0B00;
 }
 
 .btn_icon_card_cover {

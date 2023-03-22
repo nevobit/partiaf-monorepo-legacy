@@ -68,14 +68,11 @@
   overflow: hidden;
   height: 100%;
   width: 100%;
-  background-color: aqua;
 }
 
 .image_cover_form img {
   border-radius: 0.4rem;
   height: 100%;
-
-  
   object-fit: cover;
 }
 

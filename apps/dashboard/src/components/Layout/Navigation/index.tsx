@@ -27,16 +27,16 @@ const Navigation = () => {
         </Link>
         <Link
           to="/covers"
-          onClick={() => setActive("covers")}
+          onClick={() => setActive("tickets")}
           className={
-            active === "covers"
+            active === "tickets"
               ? `${styles.navigation__item} ${styles.active}`
               : styles.navigation__item
           }
         >
           <div className={styles.item_dash}>
             <img src="/newAssets/icono-cover.svg" alt="" />
-            <h5>Covers</h5>
+            <h5>Tickets</h5>
           </div>
         </Link>
         <Link

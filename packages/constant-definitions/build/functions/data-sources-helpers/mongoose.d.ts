@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-import { Collection } from './constants';
+import mongoose, { Schema } from "mongoose";
+import { Collection } from "./constants";
 export interface InitMongooseOptions {
     mongoUrl?: string;
 }

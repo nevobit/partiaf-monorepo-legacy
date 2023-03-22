@@ -96,13 +96,47 @@
   object-fit: cover;
 }
 
-.image_input {
-  display: flex;
-  flex-direction: column;
-}
-
 .container_input_image_upload {
   width: 36rem;
   height: 36rem;
   background-color: #fff;
+}
+
+.container_cld {
+  height: 23rem;
+  
+}
+
+.quit_image {
+  position: relative;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.quit_image img {
+  object-fit: cover;
+  margin-top: 2rem;
+  height: 35.5rem;
+  border-radius: .4rem;
+}
+
+.quit_image button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 5rem;
+  width: 5rem;
+  background-color: #bb6464;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.image_settings_upload{
+  background-color: #fff;
+  height: 35.5rem;
 }

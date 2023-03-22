@@ -10,7 +10,7 @@ import {
   verificationEmailThunks,
 } from "./thunks";
 
-export const EmptyadminState: Admin = {
+export const EmptyadminState: PartialAdmin = {
   uuid: "",
   name: "",
   lastname: "",
@@ -31,9 +31,7 @@ export const EmptyadminState: Admin = {
 export const AdminKey = "admin";
 
 const initialState = {
-  admin: localStorage.getItem("admin")
-    ? JSON.parse(localStorage.getItem("admin") as string)
-    : EmptyadminState,
+  admin: EmptyadminState,
   error: "",
   success: false,
   successSignup: false,
@@ -161,7 +159,7 @@ export const adminsSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.error = String(action.payload);
-        state.admin = null;
+        state.admin = {};
       })
       .addCase(signup.pending, (state) => {
         state.loading = true;
@@ -174,7 +172,7 @@ export const adminsSlice = createSlice({
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
         state.error = String(action.payload);
-        state.admin = null;
+        state.admin = {};
       })
       .addCase(verification.pending, (state) => {
         state.loading = true;
@@ -195,7 +193,6 @@ export const adminsSlice = createSlice({
       .addCase(updateAdmin.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        localStorage.setItem("admin", JSON.stringify(action.payload));
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.loading = false;
@@ -208,7 +205,6 @@ export const adminsSlice = createSlice({
       .addCase(getAdminByIdSlice.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        localStorage.setItem("admin", JSON.stringify(action.payload));
       })
       .addCase(getAdminByIdSlice.rejected, (state, action) => {
         state.loading = false;
@@ -216,7 +212,7 @@ export const adminsSlice = createSlice({
         state.admin = {};
       })
       .addCase(logout.fulfilled, (state) => {
-        state.admin = null;
+        state.admin = {};
       });
   },
 });

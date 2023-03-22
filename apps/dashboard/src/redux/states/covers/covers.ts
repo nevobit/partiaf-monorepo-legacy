@@ -1,12 +1,10 @@
-import { Cover } from "@partiaf/types";
+import { Cover, PartialCover } from "@partiaf/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createCoverThunks,
   deleteCoverByIdThunks,
   updateCoverThunks,
 } from "./thunks";
-
-export type PartialCover = Partial<Cover>;
 
 export const EmptyCoversState: PartialCover[] = [
   {
@@ -21,8 +19,8 @@ export const EmptyCoversState: PartialCover[] = [
     description: "",
     image: "",
     store: "",
-    location:{lat:0, lng:0},
-    status: false,
+    location: { lat: 0, lng: 0 },
+    status: "",
   },
 ];
 
@@ -38,8 +36,8 @@ export const EmptyCoverState: PartialCover = {
   description: "",
   image: "",
   store: "",
-  location:{lat:0, lng:0},
-  status: false,
+  location: { lat: 0, lng: 0 },
+  status: "",
 };
 
 export const createCover = createAsyncThunk(

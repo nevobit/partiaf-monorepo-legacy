@@ -36,3 +36,28 @@ export const showSuccessMessage = (message: string) => {
     }
   }
 };
+
+export const confirmStatusDeleted = async (
+  message: string,
+  onDelete: Function,
+  deleteParam: any
+) => {
+  try {
+    swal({
+      text: message,
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    }).then((willDelete: any) => {
+      if (willDelete) {
+        onDelete(deleteParam);
+      }
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error);
+    }
+  }
+};
+
+

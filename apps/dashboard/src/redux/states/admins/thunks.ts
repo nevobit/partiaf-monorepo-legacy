@@ -30,13 +30,6 @@ export const logoutAdmin = () => {
 
 export const updateAdminThunks = async (uuid: string, info: PartialAdmin) => {
   const { data } = await PARTIAF_API.put(`/admins/${uuid}`, { data: info });
-  if (data) {
-    localStorage.setItem("admin", JSON.stringify(data));
-    window.location.reload();
-  }
-
-  // window.location.href = "/settings";
-
   return data;
 };
 

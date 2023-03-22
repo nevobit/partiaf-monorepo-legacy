@@ -15,6 +15,7 @@ export interface Cover {
     image: string;
     percentage: number;
     store: string;
-    status: boolean;
+    status: string;
     location: Location;
 }
+export type PartialCover = Partial<Cover>;

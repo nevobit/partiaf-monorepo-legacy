@@ -6,8 +6,8 @@ import {
   StoreInfo,
   storesSlice,
 } from "./states/stores/storesSlice";
-import { coversSlice, PartialCover } from "./states/covers/covers";
-import { Store } from "@partiaf/types";
+import { coversSlice } from "./states/covers/covers";
+import { PartialCover } from "@partiaf/types";
 import { goersSlice, PartialGoer } from "./states/goers/goers";
 import { PartialWaiter, waitersSlice } from "./states/waiters/waiters";
 

@@ -2,7 +2,12 @@ import DragCloudinary from "@/components/Layout/drag-cloudinary";
 import { Field, Input, MapForLocation } from "@/components/shared";
 import { reset, updateCover } from "@/redux/states/covers/covers";
 import { AppStore } from "@/redux/store";
-import { convertToNumber, currencyMask } from "@/utils/currencyMask";
+import {
+  convertToNumber,
+  currencyMask,
+  currencyMaskString,
+  percentageMask,
+} from "@/utils/currencyMask";
 import { Cover } from "@partiaf/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,16 +22,26 @@ interface Props {
 const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
   const { success } = useSelector((state: AppStore) => state.covers);
   const [imageUrl, setImageUrl] = useState("");
-  const [price, setPrice] = useState("");
+  const [percentage, setPercentage] = useState("");
+  const [price, setPrice] = useState(
+    String(currencyMaskString(String(coverData.price)))
+  );
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value);
   };
+
+  const handlePercentageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const maskedValue = percentageMask(e.target.value);
+    setPercentage(maskedValue);
+  };
+
   const [cover, setCover] = useState({
     uuid: coverData.uuid,
     name: coverData.name,
-    type: "General",
+    type: coverData.type,
     date: coverData.date,
     limit: coverData.limit,
     initial_limit: coverData.initial_limit,
@@ -34,9 +49,9 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
     description: coverData.description,
     image: coverData.image,
     store: coverData.store,
-    percentage: coverData.percentage,
-    status: true,
+    status: coverData.status,
     price: coverData.price,
+    percentage: coverData.percentage,
     location: coverData.location,
   });
 
@@ -70,8 +85,8 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
       dispatch(
         updateCover({
           ...cover,
-          price: PriceConvert,
-          image: imageUrl,
+          image: imageUrl == "" ? coverData.image : imageUrl,
+          price: price == "" ? coverData.price : PriceConvert,
         }) as any
       );
     } catch (error) {
@@ -91,7 +106,7 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
     <>
       <div className={openModal ? styles.open_modal : styles.close_modal}>
         <div className={styles.container_form}>
-          <div className={styles.form}>
+          <form className={styles.form}>
             <div className={styles.header_cover_form}>
               <img src="/logo-parti.svg" alt="Log Partiaf" />
             </div>
@@ -115,12 +130,17 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
                   </Field>
                   <Field label="Tipo">
                     <select name="type" onChange={handleChange}>
-                      <option value="VIP">VIP</option>
                       <option value="General">General</option>
+                      <option value="VIP">VIP</option>
                     </select>
                   </Field>
                   <Field label="Fecha">
-                    <Input type="date" name="date" onChange={handleChange} />
+                    <Input
+                      type="date"
+                      name="date"
+                      value={cover.date}
+                      onChange={handleChange}
+                    />
                   </Field>
                 </div>
                 <div className={styles.data_fields}>
@@ -143,10 +163,9 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
                   {discount ? (
                     <Field label="Ingrese el porcentaje a descontar">
                       <Input
-                        type="number"
-                        name="percentage"
-                        value={cover.percentage}
-                        onChange={handleChange}
+                        type="text"
+                        value={percentage}
+                        onChange={handlePercentageChange}
                       />
                     </Field>
                   ) : (
@@ -175,10 +194,22 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
                   </Field>
                   <Field>
                     <div className={styles.container_cld}>
-                      <DragCloudinary
-                        idInput="file-create-cover"
-                        setImageUrl={setImageUrl}
-                      />
+                      {imageUrl == "" && !isChanged ? (
+                        <div className={styles.quit_image}>
+                          <img
+                            src={coverData.image}
+                            alt={coverData.description}
+                          />
+                          <button onClick={() => setIsChanged(!isChanged)}>
+                            <i className="bx bxs-trash-alt"></i>
+                          </button>
+                        </div>
+                      ) : (
+                        <DragCloudinary
+                          idInput="file-create-cover"
+                          setImageUrl={setImageUrl}
+                        />
+                      )}
                     </div>
                   </Field>
                 </div>
@@ -206,7 +237,7 @@ const UpdateCover = ({ openModal, setOpenModal, coverData }: Props) => {
                 Salir
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </>

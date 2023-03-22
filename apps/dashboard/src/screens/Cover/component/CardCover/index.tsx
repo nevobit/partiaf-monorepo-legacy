@@ -1,51 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./cardCover.module.css";
 import fiesta from "../../../../assets/fiesta.webp";
 import { useDispatch } from "react-redux";
-import { deleteCover, updateCover } from "@/redux/states/covers/covers";
+import { updateCover } from "@/redux/states/covers/covers";
 import { Cover } from "@partiaf/types";
 import { DivisaFormater } from "@/utils/DivisaFormater";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/constants-definitions/Routes";
-import { confirmDelete } from "@/utils/swal";
 import UpdateCover from "../../update";
+import { ChangeStatus } from "@/utils/changeStatus";
+
+enum StatusType {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  ARCHIVED = "archived",
+  DELETED = "deleted",
+}
 
 const CardCover = (Cover: any) => {
   const dispatch = useDispatch();
   const { name, description, limit, date, hour, price, uuid, type, image } =
     Cover.cover;
   const { cover } = Cover;
-
-  const [status, setStatus] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [coverSelected, setCoverSelected] = useState<Cover>(Cover.cover);
 
   const submitDeleteHandler = async (e: any) => {
     e.preventDefault();
-    const message = "Estas seguro de eliminar el cover";
-    confirmDelete(
-      message,
-      (param: any) => dispatch(deleteCover(param) as any),
-      uuid
+    ChangeStatus(
+      dispatch,
+      updateCover,
+      { ...cover, status: StatusType.DELETED },
+      "Estas seguro de eliminar el cover",
+      "Eliminar"
     );
   };
 
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [coverSelected, setCoverSelected] = useState<Cover>(Cover.cover);
+  const submitUpdateStatusHandler = async (e: any) => {
+    e.preventDefault();
+    ChangeStatus(
+      dispatch,
+      updateCover,
+      cover.status == "active"
+        ? { ...cover, status: StatusType.INACTIVE }
+        : { ...cover, status: StatusType.ACTIVE },
+
+      cover.status == "active"
+        ? "Se desactivara el cover"
+        : "Se activara el cover",
+      "Aceptar"
+    );
+  };
 
   const editHandler = () => {
     setCoverSelected(cover);
     setIsOpenEdit(true);
-  };
-
-  const submitUpdateStatusHandler = async (e: any) => {
-    setStatus(!status);
-    e.preventDefault();
-    try {
-      dispatch(updateCover({ ...cover, status: !cover.status }) as any);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error);
-      }
-    }
   };
 
   return (
@@ -102,13 +111,13 @@ const CardCover = (Cover: any) => {
           <div className={styles.icon_cover}>
             <button
               className={
-                cover.status
+                cover.status == "active"
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
               onClick={submitUpdateStatusHandler}
             >
-              {cover.status ? "activo" : "inactivo"}
+              {cover.status == "active" ? "Activo" : "Desactivado"}
             </button>
             <button className={styles.btn_icon_card_cover}>
               <p className="" onClick={() => editHandler()}>

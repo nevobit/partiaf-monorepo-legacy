@@ -4,6 +4,5 @@ export const DivisaFormater = (value: any) => {
     currency: "COP",
     minimumFractionDigits: 0,
   });
-
   return formaterMoney.format(value);
 };
