@@ -7,6 +7,8 @@ import { useTheme } from '../../../contexts/ThemeContext';
 const Card = ({logo, setOpenModalQr, setModal, item, setCoverSelected}:any) => {
   const {theme} = useTheme();
     return (
+      <DefaultView>
+        
     <DefaultView
     key={item.uuid}
     style={{
@@ -16,7 +18,6 @@ const Card = ({logo, setOpenModalQr, setModal, item, setCoverSelected}:any) => {
       borderRadius: 5,
       marginBottom: 10,
       position: "relative",
-      overflow: "hidden",
       paddingLeft: 15,
       paddingRight: 15,
       display: "flex",
@@ -124,6 +125,8 @@ const Card = ({logo, setOpenModalQr, setModal, item, setCoverSelected}:any) => {
       <Text>Detalles</Text>
     </TouchableOpacity>
   </DefaultView>
+  </DefaultView>
+  
   )
 }
 

@@ -58,7 +58,7 @@ const Tickets = ({ navigation }: Props) => {
           alignItems: "center",
           padding: 10,
           marginTop: 5,
-          width: "100%",
+          width: "100%"
         }}
       >
         <DefaultView
@@ -102,18 +102,7 @@ const Tickets = ({ navigation }: Props) => {
         </DefaultView>
       </DefaultView>
 
-      <Select theme={theme} type={type} setType={setType} />
-      {type ? (
-        <DefaultView>
-          {ticket}
-        </DefaultView>
-      ): (
-        <DefaultView>
-          {booking}
-        </DefaultView>
-        
-      )}
-      {/* <Text
+ {/* <Text
         style={{
           fontWeight: "600",
           fontSize: 16,
@@ -131,6 +120,26 @@ const Tickets = ({ navigation }: Props) => {
            
            )
       </Text> */}
+      {/* <Select theme={theme} type={type} setType={setType} /> */}
+       {type ? (
+        <DefaultView style={
+          {
+          flex: 1
+          }
+        }>
+          {ticket}
+        </DefaultView>
+      ): (
+        <DefaultView style={
+          {
+          flex: 1
+          }
+        }>
+          {booking}
+        </DefaultView>
+        
+      )} 
+     
       
       <Modal
         onSwipeComplete={() => setModal(false)}

@@ -8,6 +8,7 @@ import {
   Linking,
   ActivityIndicator,
   Alert,
+  FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, SafeAreaView } from "react-native";
@@ -51,10 +52,6 @@ const Covers = ({ route, navigation }: any) => {
   const [coverSelected, setCoverSelected] = useState<any>({});
   const [coverSelectedPrev, setCoverSelectedPrev] = useState<any>({});
 
-  Alert.alert(
-    "Recarga",
-    "Recuerda recargar tu billetera para poder comprar tus covers"
-  );
   const setPeopleHandler = async (cover: any) => {
     setCoverSelectedPrev(cover);
 
@@ -109,7 +106,6 @@ const Covers = ({ route, navigation }: any) => {
 
   useEffect(() => {
     refetch();
-    alert("Recuerda recargar tu billetera para poder comprar tus covers");
   }, []);
 
   return (
@@ -126,7 +122,7 @@ const Covers = ({ route, navigation }: any) => {
           display: "flex",
           flexDirection: "row",
           alignItems: "flex-start",
-          justifyContent: "space-between",
+          justifyContent: "space-between"
         }}
       >
         <DefaultView>
@@ -176,19 +172,16 @@ const Covers = ({ route, navigation }: any) => {
         </DefaultView>
         <ButtonOptionsDots onPress={() => setModalOptions(true)} />
       </DefaultView>
-      {loading && <ActivityIndicator color={colors[theme].text} />}
+      {loading ? <ActivityIndicator color={colors[theme].text} /> : null}
       <DefaultView
         style={{
           width: "100%",
-          height: "100%",
           borderBottomColor: "rgba(0, 0, 0,.03)",
           borderBottomWidth: 1,
           padding: 10,
           paddingHorizontal: 20,
-          display: "flex",
-
-          flexDirection: "column",
-          alignItems: "flex-start",
+          flex: 1,
+          height: 50
         }}
       >
         {data?.getCoversById?.length < 1 && (
@@ -205,9 +198,11 @@ const Covers = ({ route, navigation }: any) => {
             No hay tickets
           </Text>
         )}
-        {data?.getCoversById?.map((cover: any) => {
-          return (
-            <TouchableOpacity
+        
+        <FlatList 
+          data={data?.getCoversById}
+            renderItem={({item: cover}) => (
+              <TouchableOpacity
               key={cover.uuid}
               style={{
                 marginBottom: 10,
@@ -361,8 +356,21 @@ const Covers = ({ route, navigation }: any) => {
                 )}
               </DefaultView>
             </TouchableOpacity>
-          );
-        })}
+            )}
+            style={{
+              paddingBottom: 60
+            }}
+            keyExtractor={(item) => item.uuid}
+        />
+       
+       {/* <Image source={{uri: cover.image}} 
+              style={{
+                width: 80,
+                height: '100%',
+                resizeMode: "contain"
+              }}
+              /> */}
+           
       </DefaultView>
       {amount > 0 && (
         <DefaultView

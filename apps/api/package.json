@@ -24,6 +24,6 @@
     "@partiaf/business-logic": "workspace:*",
     "@partiaf/types": "workspace:*",
     "@partiaf/constant-definitions": "workspace:*",
-    "socket.io": "~4.6.1"
+    "socket.io": "4.6.1"
   }
 }

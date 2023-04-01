@@ -343,21 +343,14 @@ const Store = ({ route, navigation }: Props) => {
               Tickets
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               display: "flex",
               alignItems: "center",
             }}
             onPress={() => setModal(true)}
           >
-            {/* <Image
-              source={{ uri: "https://i.postimg.cc/xjP284X5/menu-disco.png" }}
-              style={{
-                width: 25,
-                height: 25,
-                resizeMode: "contain",
-              }}
-            /> */}
+           
             <Ionicons
               style={{
                 fontSize: 30,
@@ -374,7 +367,7 @@ const Store = ({ route, navigation }: Props) => {
             >
               Reservas
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* <TouchableOpacity
             style={{
               display: "flex",
