@@ -20,7 +20,7 @@ exports.UserSchemaMongo = new mongoose_1.Schema({
     followers: [{ type: String }],
     following: [{ type: String }],
     interests: [{ type: String }],
-    balance: { type: Number },
+    balance: { type: Number, default: 20000 },
     events: { type: Number },
     pin: { type: Number },
 }, {

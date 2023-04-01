@@ -20,7 +20,7 @@ export const UserSchemaMongo = new Schema<User>({
     followers: [{type: String}],
     following: [{type: String}],
     interests: [{type: String}],
-    balance: {type: Number},
+    balance: {type: Number, default: 20000},
     events: {type: Number},
     pin: {type: Number},
 }, {

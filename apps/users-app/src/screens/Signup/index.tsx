@@ -25,6 +25,7 @@ const Signup = ({navigation}: any) => {
     username: "",
     phone: "",
     password: "",
+    balance: 20000
   });
   
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const Signup = ({navigation}: any) => {
           lastname: user.lastname,
           username: user.username,
           phone: user.phone,
-          password: user.password,
+          password: user.password
         },
       });
 

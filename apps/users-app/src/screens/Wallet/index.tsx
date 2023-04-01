@@ -48,42 +48,28 @@ const { data:userData, refetch: refetchUser } = useQuery(GET_USER, {
   variables: { uuid: user.uuid },
 });
 
+
+const [result, setResult] = useState(null);
+
+const handleRedirect = async (event:any) => {
+  console.log(event)
+  WebBrowser.dismissBrowser();
+  const { url } = event;
+  
+  const transactionId = url.split('/').pop();
+  setResult(transactionId);
+};
+
   const rechargeAccountWompi = async() => {
-    const result = await WebBrowser.openBrowserAsync(`https://checkout.wompi.co/p/?public-key=pub_prod_HEeZTO0P2f9Kc8AK2pt3kqZx4MlV3ONP&amount-in-cents=${Number(amount) * 100}&reference=fgjhe${user.username}dnfsjyfgefen3u${amount}4tn4iu3jng&currency=COP&customer-data-email=${user.username}&user-data-full-name=${user.firstname + ' ' + user.lastname}&user-data-phone-number=${user.phone}&redirect-url=https://http://localhost:19006`)
-    console.log(result)
-    // Linking.openURL(`https://checkout.wompi.co/p/?public-key=pub_prod_HEeZTO0P2f9Kc8AK2pt3kqZx4MlV3ONP&amount-in-cents=${Number(amount) * 100}&reference=fgjhe${user.username}dnfsdfvefen3u${amount}4tn4iu3jng&currency=COP&customer-data-email=${user.username}&user-data-full-name=${user.firstname + ' ' + user.lastname}&user-data-phone-number=${user.phone}`)
-    
-    // const {data} = await axios.get('https://checkout.wompi.co/p/', {
-    //   params: {
-    //     'amount-in-cents': Number(amount * 100),
-    //     'reference': 'fgjhednfien3u4tn4iu3jng',
-    //     'customer-data-email': user.username,
-    //     'user-data-full-name': user.firstname + ' ' + user.lastname,
-    //     'user-data-phone-number': user.phone,
-    //   },
-    //   headers: {
-    //     'public-key': "pub_prod_rxioPTJAxHjcXVi5KvbCvKAfZYLTnbeH",
-    //   }
-    // })
+    const result = await WebBrowser.openBrowserAsync(`https://checkout.wompi.co/p/?public-key=pub_prod_HEeZTO0P2f9Kc8AK2pt3kqZx4MlV3ONP&amount-in-cents=${Number(amount) * 100}&reference=fgjhe${user.username}dnfsjyfgefen3u${amount}4tn4iu3jng&currency=COP&customer-data-email=${user.username}&user-data-full-name=${user.firstname + ' ' + user.lastname}&user-data-phone-number=${user.phone}&redirect-url=http://localhost:19006`)
   }
+  console.log(result)
+  
   
   const rechargeAccountMercadoPago = async() => {
     console.log("enter")
     
     Linking.openURL(`https://prooving-api-production-ac13.up.railway.app/api/v1/mercadopago?title=Recarga Partiaf&price=${Number(amount)}`)
-    
-    // const {data} = await axios.get('https://checkout.wompi.co/p/', {
-    //   params: {
-    //     'amount-in-cents': Number(amount * 100),
-    //     'reference': 'fgjhednfien3u4tn4iu3jng',
-    //     'customer-data-email': user.username,
-    //     'user-data-full-name': user.firstname + ' ' + user.lastname,
-    //     'user-data-phone-number': user.phone,
-    //   },
-    //   headers: {
-    //     'public-key': "pub_prod_rxioPTJAxHjcXVi5KvbCvKAfZYLTnbeH",
-    //   }
-    // })
   }
 
 
