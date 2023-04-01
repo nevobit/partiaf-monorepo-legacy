@@ -28,7 +28,7 @@ export const signupAdmins = async (data: AdminPartial): Promise<AdminSignup | Er
 
     await admin.save();
     
-    return {token, ...admin._doc};
+    return {token, ...admin._doc, uuid};
 
     
 }
