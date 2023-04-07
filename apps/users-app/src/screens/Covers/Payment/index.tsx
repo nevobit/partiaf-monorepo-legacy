@@ -71,15 +71,18 @@ const Payment = ({ route, navigation }: any) => {
   const [info, setInfo] = useState<any>();
   const createGoerHandler = async () => {
     try {
-      if (code != userBalance?.userById.pin) {
-        Alert.alert("Pin incorrecto", "Porfavor intentalo nuevamente");
-        alert(
-          "Pin incorrecto, Porfavor intentalo nuevamente"
-        );
-        return;
-      }
-      setModal(false);
+      // if (code != userBalance?.userById.pin) {
+      //   Alert.alert("Pin incorrecto", "Porfavor intentalo nuevamente");
+      //   alert(
+      //     "Pin incorrecto, Porfavor intentalo nuevamente"
+      //   );
+      //   return;
+      // }
+      // setModal(false);
+      // setLoader(true);
+      
       setLoader(true);
+      
 
       const { data } = await createComment({
         variables: {
@@ -358,7 +361,7 @@ const Payment = ({ route, navigation }: any) => {
             }}
             onPress={() =>
               userBalance?.userById?.balance >= coverInfo.cost
-                ? setModal(true)
+                ? createGoerHandler()
                 : navigation.navigate("Wallet")
             }
           >
@@ -375,7 +378,6 @@ const Payment = ({ route, navigation }: any) => {
               }}
             >
                     
-              
               {userBalance?.userById?.balance >= coverInfo.cost
                 ? loader? <ActivityIndicator color="#333" />  : 'PAGAR' 
                 : "RECARGAR"}

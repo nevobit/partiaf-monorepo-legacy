@@ -14,6 +14,7 @@ mutation Mutation($firstname: String, $lastname: String, $phone: String, $userna
     gender
     phone
     photo
+    uuid
     lastname
     pin
     token

@@ -104,7 +104,12 @@ const Covers = ({ route, navigation }: any) => {
     }
   };
 
+  const initialCoverInfo = async() => {
+    await AsyncStorage.setItem("coverInfo", JSON.stringify({}));    
+  }
+  
   useEffect(() => {
+    initialCoverInfo();
     refetch();
   }, []);
 
