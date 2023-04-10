@@ -53,7 +53,7 @@ const Covers = ({ route, navigation }: any) => {
   const [coverSelectedPrev, setCoverSelectedPrev] = useState<any>({});
 
   const setPeopleHandler = async (cover: any) => {
-    setCoverSelectedPrev(cover);
+    setCoverSelectedPrev((prev:any) => cover);
 
     const coverInfo = {
       store: route.params.store,
@@ -76,34 +76,109 @@ const Covers = ({ route, navigation }: any) => {
 
   const halfWindowsHeight = Dimensions.get("window").height;
 
+  console.log("Amount", amount)
+  
+  const [type, setType] = useState("");
+  
   const setCoverState = async (type: string, cover: any) => {
-    setCoverSelected(cover);
-
-    if (type == "+") {
-      if (coverSelectedPrev.uuid != cover.uuid) {
-        if (coverSelected.limit > 0) {
-          setAmount(1);
+    setCoverSelected((prevCover:any) => {
+      // Actualizamos el valor del estado antes de ejecutar las condiciones
+      const newCover = cover;
+      // Realizamos las condiciones usando newCover en lugar de coverSelected
+      if (type == "+") {
+        if (coverSelectedPrev.uuid != newCover.uuid) {
+          if (newCover.limit > 0) {
+            setAmount(1);
+          }
+        } else {
+          if (newCover.limit > amount) {
+            if (newCover.limit > 0) {
+              setAmount((prev) => prev + 1);
+            }
+          }
         }
       } else {
-        if (coverSelected.limit > amount) {
-          if (coverSelected.limit > 0) {
-            setAmount((prev) => prev + 1);
+        if (newCover.uuid != prevCover.uuid) {
+          setCoverSelected({});
+          setCoverSelectedPrev({});
+          setAmount(0);
+        } else {
+          if (amount > 0) {
+            setAmount((prev) => prev - 1);
           }
         }
       }
-    } else {
-      if (coverSelected.uuid != cover.uuid) {
-        setCoverSelected({});
-        setCoverSelectedPrev({});
-        setAmount(0);
-      } else {
-        if (amount > 0) {
-          setAmount((prev) => prev - 1);
-        }
-      }
-    }
+      // Devolvemos el nuevo valor del estado
+      return newCover;
+    });
   };
+  
+  // const setCoverState = async (type: string, cover: any) => {
+  //   setCoverSelected((prevCover:any) => {
+  //   const newCover = cover;
+  //   // Realizamos las condiciones usando newCover en lugar de coverSelected
+  //   if (type == "+") {
+  //     if (coverSelectedPrev.uuid != newCover.uuid) {
+  //       if (newCover.limit > 0) {
+  //         setAmount(1);
+  //       }
+  //     } else {
+  //       if (newCover.limit > amount) {
+  //         if (newCover.limit > 0) {
+  //           setAmount((prev) => prev + 1);
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     if (newCover.uuid != prevCover.uuid) {
+  //       setCoverSelected({});
+  //       setCoverSelectedPrev({});
+  //       setAmount(0);
+  //     } else {
+  //       if (amount > 0) {
+  //         setAmount((prev) => prev - 1);
+  //       }
+  //     }
+  //   }
+  //   // Devolvemos el nuevo valor del estado
+  //   return newCover;
+  //   // let am = amount;
+  //   // setCoverSelected((prev:any) => cover);
+  //   // setType(type)
+  //   // if (type == "+") {
+  //   //   console.log("Enter to add cover first if")
+  //   //   if (coverSelectedPrev.uuid != cover.uuid) {
+  //   //   } else {
+  //   //     if (coverSelected.limit > amount) {
+  //   //       if (coverSelected.limit > 0) {
+  //   //         console.log("Enter to add cover third if add amount")      
+            
+  //   //       }
+  //   //     }
+  //   //   }
+  //   // } else {
+  //   //   if (coverSelected.uuid != cover.uuid) {
+  //   //     setCoverSelected({});
+  //   //     setCoverSelectedPrev({});
+  //   //     setAmount(0);
+  //   //   } else {
+  //   //     if (amount > 0) {
+  //   //       setAmount((prev) => prev - 1);
+  //   //     }
+  //   //   }
+  //   // }
+  //   });
 
+  // useEffect(() => {
+  //   if (type === "+" && coverSelectedPrev.uuid !== coverSelected.uuid && coverSelected.limit > 0) {
+  //     console.log("entro")
+  //     setAmount(1);
+  //   } else if (type === "+" && coverSelectedPrev.uuid === coverSelected.uuid && coverSelected.limit > amount) {
+  //     console.log("entro Otra vez")
+  //     setAmount((prevAmount) => prevAmount + 1);
+  //   }
+  // }, [coverSelected, coverSelectedPrev, type]);
+  
   const initialCoverInfo = async() => {
     await AsyncStorage.setItem("coverInfo", JSON.stringify({}));    
   }

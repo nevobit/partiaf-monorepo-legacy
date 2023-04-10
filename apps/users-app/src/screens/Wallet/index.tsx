@@ -61,6 +61,10 @@ const handleRedirect = async (event:any) => {
 };
 
   const rechargeAccountWompi = async() => {
+    await axios.post('https://express-api-production-887c.up.railway.app/payment', {
+      user: user.username,
+      amount
+    })
     const result = await WebBrowser.openBrowserAsync(`https://checkout.wompi.co/p/?public-key=pub_prod_HEeZTO0P2f9Kc8AK2pt3kqZx4MlV3ONP&amount-in-cents=${Number(amount) * 100}&reference=fgjhe${user.username}dnfsjyfgefen3u${amount}4tn4iu3jng&currency=COP&customer-data-email=${user.username}&user-data-full-name=${user.firstname + ' ' + user.lastname}&user-data-phone-number=${user.phone}&redirect-url=http://localhost:19006`)
   }
   console.log(result)
