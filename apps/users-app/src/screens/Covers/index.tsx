@@ -73,6 +73,26 @@ const Covers = ({ route, navigation }: any) => {
 
     await AsyncStorage.setItem("coverInfo", JSON.stringify(coverInfo));
   };
+  
+  const setPeopleInfo = async () => {
+    const coverInfo = {
+      store: route.params.store,
+      storeName: store?.getStoreById?.name,
+      user: user.uuid,
+      status: "in line",
+      cost: amount * Number(coverSelected.price),
+      amount: amount,
+      time: coverSelected.hour,
+      date: coverSelected.date,
+      phone: user.phone,
+      image: coverSelected.image,
+      description: coverSelected.description,
+      cover: coverSelected.uuid,
+      name: coverSelected.name,
+    };
+
+    await AsyncStorage.setItem("coverInfo", JSON.stringify(coverInfo));
+  };
 
   const halfWindowsHeight = Dimensions.get("window").height;
 
@@ -81,6 +101,7 @@ const Covers = ({ route, navigation }: any) => {
   const [type, setType] = useState("");
   
   const setCoverState = async (type: string, cover: any) => {
+    setType(type)
     setCoverSelected((prevCover:any) => {
       // Actualizamos el valor del estado antes de ejecutar las condiciones
       const newCover = cover;
@@ -169,15 +190,9 @@ const Covers = ({ route, navigation }: any) => {
   //   // }
   //   });
 
-  // useEffect(() => {
-  //   if (type === "+" && coverSelectedPrev.uuid !== coverSelected.uuid && coverSelected.limit > 0) {
-  //     console.log("entro")
-  //     setAmount(1);
-  //   } else if (type === "+" && coverSelectedPrev.uuid === coverSelected.uuid && coverSelected.limit > amount) {
-  //     console.log("entro Otra vez")
-  //     setAmount((prevAmount) => prevAmount + 1);
-  //   }
-  // }, [coverSelected, coverSelectedPrev, type]);
+   useEffect(() => {
+    setPeopleInfo()
+   }, [coverSelected, coverSelectedPrev, type]);
   
   const initialCoverInfo = async() => {
     await AsyncStorage.setItem("coverInfo", JSON.stringify({}));    
