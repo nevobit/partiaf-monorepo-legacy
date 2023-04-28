@@ -20,7 +20,7 @@ const signupAdmins = async (data) => {
         return new Error('101');
     const token = await jsonwebtoken_1.default.sign({ uuid: admin.uuid }, JWT_SECRET_KEY, { expiresIn: '12h' });
     await admin.save();
-    return { token, ...admin._doc };
+    return { token, ...admin._doc, uuid };
 };
 exports.signupAdmins = signupAdmins;
 //# sourceMappingURL=signup.js.map
